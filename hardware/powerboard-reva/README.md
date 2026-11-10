@@ -6,7 +6,7 @@ Open `powerboard-reva.kicad_pro` or root `powerboard-reva.kicad_sch` in KiCad 9.
 
 ## Current MCU milestone (supersedes counts and missing-MCU statements below)
 
-See [MCU milestone](../../docs/design/mcu-milestone.md): real STM32G474VET6 circuit, 15 pages, 199 components, 642 connected endpoints and 45 explicit NC pins. Native ERC: four unresolved errors, zero warnings. Firmware, fast overcurrent trip, protected entry, storage acceptance and sequencing remain blockers. Historical sections below are not current status.
+See [MCU integration review](../../docs/design/mcu-integration-review.md) for reproduced checks, pending cross-family approval and prioritized next circuit blockers. [MCU milestone](../../docs/design/mcu-milestone.md): real STM32G474VET6 circuit, 15 pages, 199 components, 642 connected endpoints and 45 explicit NC pins. Native ERC: four unresolved errors, zero warnings. Firmware, fast overcurrent trip, protected entry, storage acceptance and sequencing remain blockers. Historical sections below are not current status.
 
 ## Current protection integration — UNSAFE DRAFT
 
