@@ -516,5 +516,93 @@ print()
 
 # ----------------------------------------------------------------------------
 print("=" * 78)
+print("14. THE PARALLEL HYBRID: WHAT IT ACTUALLY COSTS")
+print("=" * 78)
+# Parallel hybrid: pedals -> chain -> wheel (mechanical), and
+#                  battery -> controller -> hub motor -> wheel (electric).
+# The two paths are INDEPENDENT. Rider watts never enter the electric chain.
+ETA_CHAIN_WAXED = 0.961     # [CITED] CyclingAbout on-bike measurement
+ETA_CHAIN_SS = 0.997        # [CITED] Casteel single-speed
+ETA_HUB_SYS = 0.86          # [CITED] Grin DD hub SYSTEM (ctrl+motor) @31km/h
+ETA_CTRL_ONLY = 0.95        # [ESTIMATE]
+ETA_HUB_ONLY = ETA_HUB_SYS / ETA_CTRL_ONLY   # derived
+ETA_BATT = 0.92             # [ESTIMATE] LFP round trip incl BMS
+# DD hub no-load drag (cogging + iron loss) when coasting unpowered
+DD_DRAG_W = 2.0             # [ESTIMATE] 1-4 W for a good DD hub at 25 km/h
+
+eta_motor_direct = ETA_HUB_SYS              # battery -> wheel, no storage
+eta_motor_regen_1way = ETA_HUB_SYS * ETA_BATT
+eta_motor_regen_rt = eta_motor_regen_1way ** 2
+print(f"rider path      = chain only                = {ETA_CHAIN_WAXED:.3f}"
+      f"  ({100*ETA_CHAIN_WAXED:.1f} %)")
+print(f"                  single-speed chain        = {ETA_CHAIN_SS:.3f}"
+      f"  ({100*ETA_CHAIN_SS:.1f} %)")
+print(f"motor path      = controller {ETA_CTRL_ONLY:.2f} x motor "
+      f"{ETA_HUB_ONLY:.3f}")
+print(f"                = {eta_motor_direct:.3f}  ({100*eta_motor_direct:.1f} %)"
+      f"  battery -> wheel, direct")
+print(f"regen, KE->batt = {eta_motor_regen_1way:.3f}")
+print(f"regen round trip= {eta_motor_regen_rt:.3f}  ({100*eta_motor_regen_rt:.1f} %)")
+print()
+print("*** The point: the rider's {:.0f} W never enters the electric chain. ***"
+      .format(P_HUMAN))
+p_rider_wheel = P_HUMAN * ETA_CHAIN_WAXED
+print(f"rider {P_HUMAN:.0f} W at pedals -> {p_rider_wheel:.1f} W at the wheel")
+print(f"road demand at {V_CRUISE_KMH:.0f} km/h      -> {p_flat:.1f} W")
+surplus = p_rider_wheel - p_flat
+print(f"surplus                  = {surplus:+.1f} W  "
+      f"({'rider covers cruise alone' if surplus > 0 else 'motor must help'})")
+print()
+
+# Same rider, same speed, series hybrid -> how much battery must make up?
+p_series_wheel = P_HUMAN * eta_pm
+deficit = p_flat - p_series_wheel
+batt_for_series = deficit / eta_motor_regen_rt
+print(f"series hybrid: rider {P_HUMAN:.0f} W -> {p_series_wheel:.1f} W at wheel")
+print(f"  shortfall {deficit:.1f} W -> battery must supply "
+      f"{batt_for_series:.1f} W (at {eta_motor_regen_rt:.2f} round trip)")
+print(f"parallel:      battery supplies 0 W, rider covers it")
+print(f"  -> series needs {batt_for_series:.0f} W of battery just to MATCH the")
+print(f"     parallel bike on flat ground with the same rider effort")
+print()
+
+print("DD hub drag when coasting unpowered (the tax for having regen):")
+print(f"  {DD_DRAG_W:.1f} W = {100*DD_DRAG_W/p_flat:.2f} % of cruise demand")
+print(f"  = {100*DD_DRAG_W/p_rider_wheel:.2f} % of the rider's wheel power")
+print("  [CITED] Grin: a geared hub freewheels instead and has ~0 drag, but")
+print("  then it CANNOT regen. This is the real regen trade-off, not a myth.")
+print()
+
+print("Regen at the traffic light, honest round trip:")
+print(f"  KE 2267 J x {eta_motor_regen_1way:.3f} (KE->battery) = "
+      f"{ke*eta_motor_regen_1way:.0f} J = {ke*eta_motor_regen_1way/3600:.3f} Wh stored")
+print(f"  x {eta_motor_regen_1way:.3f} (battery->wheel) = "
+      f"{ke*eta_motor_regen_rt:.0f} J = {ke*eta_motor_regen_rt/3600:.3f} Wh back at wheel")
+per_stop_wh = ke * eta_motor_regen_rt / 3600
+print(f"  {N_STOPS} stops -> {N_STOPS*per_stop_wh:.1f} Wh usable "
+      f"= {100*N_STOPS*per_stop_wh/e_flat_wh:.1f} % of the 10 km trip energy")
+print("  NOTE: the study's 8.2 Wh used 65% as KE->battery in one hop. The")
+print("        honest two-hop figure above supersedes it; both are single-digit Wh.")
+print()
+
+# BOM energy check: does 480 Wh actually get you anywhere?
+RANGE_WH = 480.0
+e_per_km_wh = p_flat * (1000 / V_CRUISE) / 3600
+print(f"range sanity: {e_per_km_wh:.1f} Wh/km at the wheel at {V_CRUISE_KMH:.0f} km/h")
+print("  battery draw depends entirely on how much the motor helps:")
+print(f"  {'motor share':>12s} {'Wh/km from batt':>16s} {'range on 480 Wh':>16s}")
+for share in (0.30, 0.50, 0.70, 0.90):
+    draw = e_per_km_wh * share / eta_motor_direct
+    print(f"  {share:11.0%} {draw:15.2f} {RANGE_WH/draw:14.0f} km")
+print("  Real 480 Wh commuter packs give 25-40 km, NOT 83-248 km. The gap is")
+print("  the model's own optimism, stated plainly: this is a FLAT, still-air,")
+print("  constant-25-km/h, no-hill, no-stop calculation. Real commuting adds")
+print("  hills (each 1 % grade at 94 kg is +9.2 W per km/h), stop-starts,")
+print("  headwind, cold battery, and a heavier bike. Treat the table as the")
+print("  IDEAL ceiling and expect roughly 2-3x worse in practice.")
+print()
+
+# ----------------------------------------------------------------------------
+print("=" * 78)
 print("DONE")
 print("=" * 78)
