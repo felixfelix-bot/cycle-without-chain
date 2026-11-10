@@ -16,6 +16,9 @@ CTRL_CAP_W = 0.8       # separate pack-side acceptance envelope
 ETA_SINK = 0.60        # ASSUMPTION; retained R78HB light-load efficiency unqualified
 RESERVE_W = 0.30       # historical input reserve, not a physical load
 PROOF_ALLOWANCE_W = 0.10  # unimplemented main proof analog, not fitted BOM
+BUS_MAX_V = 58.4          # top of the provisional 36-58.4 V screening range
+IVDRAIN_TYP_A = 1.9e-3    # TI DRV8353 SLVSDV2 IVDRAIN, VVM=VVDRAIN=48V, ENABLE=3.3V, INHx/INLx=0V
+IVDRAIN_MAX_A = 4.0e-3    # same table, MAX column
 Q13_QG_TYP_C = 48e-9   # TI CSD19532Q5B SLPS414B section 5.1, 10V/50V/17A
 Q13_QG_MAX_C = 62e-9   # same test, NOT a bound at 12V
 
@@ -55,6 +58,10 @@ def ledger():
         Load('MCU rail monitor 2k/10k', 'LOGIC3V3_EXT', v*v/12000, 'nominal'),
         Load('WDI, ARM, RESET, dump PWM, NRST loads', 'LOGIC3V3_EXT', v*v*(1/1000+4/10000), 'screening high GPIO plus asserted NRST; dynamics excluded'),
         Load('U501 feedback 453k/49k9', 'DRIVE12', 12**2/502900, 'nominal; other conversion losses belong to efficiency'),
+        # U1.4/U2.4 VDRAIN stay on DC_LINK (bus-connected, always on) even though VM moved
+        # to delayed DRIVE12. Omitting this hid 0.13-0.47 W of always-on bus load.
+        Load('U1/U2 VDRAIN operating current', 'DC_LINK',
+             2*IVDRAIN_MAX_A*BUS_MAX_V, 'DRV8353 MAX at 58.4V x2 devices; typ 1.9mA = %.3f W' % (2*IVDRAIN_TYP_A*BUS_MAX_V)),
     ]
 
 
@@ -68,7 +75,8 @@ def calculate(oc_on_safety=False) -> dict[str, Any]:
     rows = ledger()
     if oc_on_safety:
         rows = [Load(r.name, 'SAFETY3V3' if r.name.startswith(('U18-', 'OC_LOW', 'Q14-')) else r.rail, r.watts, r.basis) for r in rows]
-    totals = {rail: sum(r.watts for r in rows if r.rail == rail) for rail in ('SINK12','SAFETY3V3','LOGIC3V3_EXT','DRIVE12')}
+    totals = {rail: sum(r.watts for r in rows if r.rail == rail)
+              for rail in ('SINK12','SAFETY3V3','LOGIC3V3_EXT','DRIVE12','DC_LINK')}
     safety_a = totals['SAFETY3V3']/LOGIC_V
     ldo_in = 12*(safety_a+.005)  # TLV760 5mA no-load max used as allowance, loaded unknown
     sink_out = totals['SINK12']+ldo_in+PROOF_ALLOWANCE_W
@@ -78,6 +86,9 @@ def calculate(oc_on_safety=False) -> dict[str, Any]:
                 sink_output_with_proof_allowance_w=sink_out,
                 sink_input_screening_w=sink_input,
                 sink_cap_margin_w=EARLY_SINK_CAP_W-sink_input,
+                # Always-on bus load that bypasses the sink rail entirely; the 1.1 W
+                # sink envelope does NOT bound it and it must be budgeted separately.
+                direct_bus_always_w=totals['DC_LINK'],
                 ctrl_separate_pack_input_cap_w=CTRL_CAP_W,
                 oc_on_safety=oc_on_safety,
                 qualified=False,
@@ -87,17 +98,37 @@ def calculate(oc_on_safety=False) -> dict[str, Any]:
                           'logic/OC/FSR switching and input transition currents',
                           'R78HB efficiency, startup, loaded TLV760 ground current',
                           'Qg at 12V and actual dump frequency/duty',
-                          'bus TVS/leakage and inactive domain backfeed'])
+                          'bus TVS/leakage and inactive domain backfeed',
+                          'VDRAIN slew 2 V/us and its interaction with precharge dV/dt'])
+
+
+def _check(condition, message):
+    """Explicit failure so `python3 -O` cannot make this self-test vacuous.
+
+    `assert` is stripped under -O, which previously let a corrupted ledger
+    print "self-test: PASS" with rc=0. Everything here raises instead.
+    """
+    if not condition:
+        raise RuntimeError('self-test failed: ' + message)
 
 
 def self_test():
-    assert len(ledger()) == 24
-    assert math.isclose(gate_power(48e-9, 12, 20000, .5), .01872)
-    assert math.isclose(gate_power(62e-9, 12, 20000, .5), .02208)
+    _check(len(ledger()) == 25, 'ledger row count')
+    _d = calculate()
+    _check(_d['direct_bus_always_w'] > 0.4,
+           'DRV8353 VDRAIN always-on bus load must be budgeted (2x4mA at 58.4V)')
+    _check(_d['direct_bus_always_w'] < 0.5, 'DRV8353 VDRAIN envelope sanity')
+    _check(_d['direct_bus_always_w'] > _d['subtotals_w']['SINK12'],
+           'VDRAIN bus load exceeds SINK12 subtotal and cannot be omitted')
+    _check(math.isclose(gate_power(48e-9, 12, 20000, .5), .01872), 'gate_power 48nC')
+    _check(math.isclose(gate_power(62e-9, 12, 20000, .5), .02208), 'gate_power 62nC')
     a, b = calculate(), calculate(True)
-    assert b['sink_input_screening_w'] > a['sink_input_screening_w']
-    assert a['qualified'] is False and a['ctrl_separate_pack_input_cap_w'] == .8
-    assert math.isclose(a['subtotals_w']['SINK12'], .2030553191489362)
+    _check(b['sink_input_screening_w'] > a['sink_input_screening_w'],
+           'OC-on-safety must raise sink input power')
+    _check(a['qualified'] is False, 'unsourced rail must never self-report qualified')
+    _check(a['ctrl_separate_pack_input_cap_w'] == .8, 'CTRL cap must stay separate from sink')
+    _check(math.isclose(a['subtotals_w']['SINK12'], .2030553191489362),
+           'SINK12 subtotal drifted')
     for args in [(-1,12,1,.5),(1,12,1,2),(1,12,float('nan'),0)]:
         try:
             gate_power(*args)

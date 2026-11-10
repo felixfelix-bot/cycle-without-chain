@@ -44,7 +44,7 @@ loss-of-sink supply and MAIN proof remain blockers. Mechanical brakes mandatory.
 
 ## Outcome
 
-The intended partition retains **U3 R-78HB12-0.5**, renamed from AUX12V to **SINK12**, always powered by DC_LINK. **U501 LM5164** supplies delayed DRIVE12. **U502 AP63203** takes **DRIVE12**, not SINK12, and supplies the existing **LOGIC3V3_EXT** net (MCU3V3 is a descriptive alias, not a second disconnected rail). U510 requires CTRL_PG AND MAIN_PROVEN_IN; fitted R519 0-ohm inhibit keeps the latter low. All independent safety loads remain downstream of SINK12/U4 SAFETY3V3. There is no implemented MAIN conduction detector or PGOOD sequencer.
+The intended partition retains **U3 R-78HB12-0.5**, renamed from AUX12V to **SINK12**, always powered by DC_LINK. **U501 LM5164** supplies delayed DRIVE12. **U502 AP63203** takes **DRIVE12**, not SINK12, and supplies the existing **LOGIC3V3_EXT** net (MCU3V3 is a descriptive alias, not a second disconnected rail). U510 requires CTRL_PG AND MAIN_PROVEN_IN; fitted R519 0-ohm inhibit keeps the latter low. **Not** all safety loads are on SINK12/U4 SAFETY3V3: the U18-U23 TLV3202 comparators and both OC reference ladders are on LOGIC3V3_EXT, which is downstream of the delayed DRIVE12 cascade (see the OC-supply note below, which supersedes any "all safety loads always on" reading of this paragraph). Only the OC_OK pullup is on SAFETY3V3. There is no implemented MAIN conduction detector or PGOOD sequencer.
 
 **J5 stays SAFETY3V3 → normally closed emergency-stop/thermal chain → FAULT_CHAIN. It is a sense loop, not an external accessory power connector.** Disconnecting it to save power would break the safety contract. Its known board-side demand is included below; arbitrary external power draw is forbidden, not allocated.
 
