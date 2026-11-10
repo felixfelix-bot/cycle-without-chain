@@ -101,10 +101,11 @@ KiCad does not propagate a power-output pin through the passive inductor.
 No PWR_FLAG, waiver or pin-type falsification was added to hide this.
 `ctrl-before-erc.json` and `ctrl-supply-erc.json` preserve the actual delta.
 
-The full existing 41-test run initially had four failures from stale verifier-count
-fixtures (all other tests passed). Those fixtures were updated for the actual
-addition and the verifier suite rerun successfully. This is not a claim of an
-additional full-suite run. Incidental unrelated simulation-log changes were discarded.
+The full initial 41-test run had four stale verifier-count fixture failures.
+After those fixtures were updated, independent full-suite reruns passed all **41
+normal and 41 optimized tests** (90.787s / 78.794s), recorded in
+`exports/ctrl-full-tests.log` and `exports/ctrl-full-tests-O.log`.
+Incidental unrelated simulation-log changes were discarded.
 Supply-page PDF rendering was inspected: no obvious overlap/clipping; small text
 requires vector zoom. No whole-project fresh visual approval is claimed.
 
