@@ -29,10 +29,10 @@ class ExportVerifierTests(unittest.TestCase):
                     self.assertEqual(result.returncode, 0, result.stderr)
                     self.assertIn('PARTIAL_NOT_SAFE_TO_ENERGIZE', result.stdout)
                     summary = json.loads(result.stdout)
-                    for key, count in {'components': 257, 'nets': 157,
-                                       'verified_pin_assignments': 808, 'explicit_nc_endpoints': 45, 'mosfets': 25,
+                    for key, count in {'components': 294, 'nets': 172,
+                                       'verified_pin_assignments': 901, 'explicit_nc_endpoints': 40, 'mosfets': 25,
                                        'drivers': 2, 'erc_errors': 4, 'erc_warnings': 0,
-                                       'svg_pages': 19}.items():
+                                       'svg_pages': 23}.items():
                         self.assertEqual(summary[key], count)
                 else:
                     self.assertNotEqual(result.returncode, 0, result.stdout)
@@ -78,15 +78,15 @@ class ExportVerifierTests(unittest.TestCase):
         def mutate_net(root, mode):
             p = root / 'exports/powerboard-reva.net'
             text = p.read_text()
-            pattern = r'\(node \(ref "U17"\) \(pin "25"\)[^\n]*'
+            pattern = r'\(node \(ref "U17"\) \(pin "38"\)[^\n]*'
             match = re.search(pattern, text)
             self.assertIsNotNone(match)
             original = match.group()
             replacements = {
                 'missing': '',
-                'changed': original.replace('(pin "25")', '(pin "101")'),
+                'changed': original.replace('(pin "38")', '(pin "101")'),
                 'not_nc': original.replace('+no_connect', ''),
-                'not_singleton': original + '\n' + original.replace('(pin "25")', '(pin "101")'),
+                'not_singleton': original + '\n' + original.replace('(pin "38")', '(pin "101")'),
             }
             p.write_text(text.replace(original, replacements[mode], 1))
         for mode in ('missing', 'changed', 'not_nc', 'not_singleton'):

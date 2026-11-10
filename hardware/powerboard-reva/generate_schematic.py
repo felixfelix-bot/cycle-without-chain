@@ -151,7 +151,7 @@ connector('MCU_SUPPLY_EXT',['LOGIC3V3_EXT','PGND'],63.5,83.82)
 for j,prefix in enumerate(['GEN','HUB']):
     x=177.8+j*116.84
     connector(prefix+'_MACHINE_PHASES',[prefix+'_PHASE_'+p for p in 'ABC'],x,48.26)
-connector('SAFETY_BRAKE_LOOP_NC',['SAFETY3V3','BRAKE_LOOP'],63.5,137.16)
+connector('SAFETY_FAULT_CHAIN_NC',['SAFETY3V3','FAULT_CHAIN'],63.5,137.16)
 passive(s,'C','100u 100V provisional',63.5,190.5,'DC_LINK','PGND')
 s.text('Missing: source fuse, reverse blocking, precharge, DC contactor, bus current sensor and discharge.',20.32,228.6)
 s.text('Populated: OV chopper, fault latch, brake loop, watchdog, aux supply. Added: raw CSA window trip; timing/coverage unqualified.',20.32,236.22)
@@ -167,6 +167,8 @@ from fast_oc_circuit import populate as populate_oc
 populate_oc(globals())
 from entry_circuit import populate as populate_entry
 populate_entry(globals())
+from brake_intent_circuit import populate as populate_brake
+populate_brake(globals())
 local_symbols=[local_drv]
 for a in custom_symbols:
     b=parse(dump(a));b[1]=q(val(b[1]).split(':')[1]);local_symbols.append(b)

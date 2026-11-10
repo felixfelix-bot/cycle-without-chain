@@ -17,7 +17,7 @@ def populate(g):
     s.text('BOOT0 low; keep NRST function and configure boot option bytes before use. No firmware supplied.',20.32,22.86)
     a=stock('MCU_ST_STM32G4','STM32G474VETx')
     mapping: dict[str, str | None]={num:None for num,*_ in pins(a)}
-    fixed={39:'GEN_INLA',40:'GEN_INHA',41:'GEN_INLB',42:'GEN_INHB',43:'GEN_INLC',44:'GEN_INHC',65:'HUB_INHA',66:'HUB_INHB',67:'HUB_INHC',29:'HUB_INLA',32:'HUB_INLB',33:'HUB_INLC',46:'TIMER_BREAK_OK',84:'TIMER_BREAK_OK',27:'DRV_SCK',28:'DRV_MISO',92:'DRV_MOSI',62:'GEN_nSCS',45:'HUB_nSCS',1:'MCU_ARM',2:'WDI',3:'RESET_REQUEST',61:'BRAKE_SENSE',14:'MCU_NRST',95:'MCU_BOOT0',76:'SWDIO',77:'SWCLK',93:'ENC_A',94:'ENC_B'}
+    fixed={39:'GEN_INLA',40:'GEN_INHA',41:'GEN_INLB',42:'GEN_INHB',43:'GEN_INLC',44:'GEN_INHC',65:'HUB_INHA',66:'HUB_INHB',67:'HUB_INHC',29:'HUB_INLA',32:'HUB_INLB',33:'HUB_INLC',46:'TIMER_BREAK_OK',84:'TIMER_BREAK_OK',27:'DRV_SCK',28:'DRV_MISO',92:'DRV_MOSI',62:'GEN_nSCS',45:'HUB_nSCS',1:'MCU_ARM',2:'WDI',3:'RESET_REQUEST',61:'FAULT_CHAIN_SENSE',18:'LEFT_HALL_ADC',25:'RIGHT_HALL_ADC',26:'LEFT_SWITCH_ADC',34:'RIGHT_SWITCH_ADC',50:'BRAKE_DUMP_PWM',14:'MCU_NRST',95:'MCU_BOOT0',76:'SWDIO',77:'SWCLK',93:'ENC_A',94:'ENC_B'}
     for p,n in fixed.items():mapping[str(p)]=n
     for p in [24,49,64,75,100,6]:mapping[str(p)]='LOGIC3V3_EXT'
     for p in [23,48,63,74,99,35]:mapping[str(p)]='PGND'
@@ -50,10 +50,10 @@ def populate(g):
     for i,n in enumerate(['GEN_SOA','GEN_SOB','GEN_SOC','HUB_SOA','HUB_SOB','HUB_SOC']):
         x=63.5+(i%3)*116.84;y=60.96+(i//3)*76.2
         r(s,'100R 1%',x,y,n,n+'_ADC');c(s,'1n C0G',x,y+30.48,n+'_ADC','PGND')
-    r(s,'10k brake sense',63.5,218.44,'BRAKE_LOOP','BRAKE_SENSE')
-    r(s,'100k brake default',177.8,218.44,'BRAKE_SENSE','PGND')
-    c(s,'1n brake filter',292.1,218.44,'BRAKE_SENSE','PGND')
-    s.text('BRAKE_SENSE is status ONLY. Brake comparator and fault path do not depend on firmware.',20.32,261.62)
+    r(s,'10k brake sense',63.5,218.44,'FAULT_CHAIN','FAULT_CHAIN_SENSE')
+    r(s,'100k brake default',177.8,218.44,'FAULT_CHAIN_SENSE','PGND')
+    c(s,'1n brake filter',292.1,218.44,'FAULT_CHAIN_SENSE','PGND')
+    s.text('FAULT_CHAIN_SENSE is status ONLY. E-stop / thermal comparator and fault path do not depend on firmware.',20.32,261.62)
     save(s)
     s=Sheet('mcu-sensors','3V3 Hall interfaces and optional quadrature encoder')
     s.text('3V3 ONLY: open-collector Hall / encoder or compatible 3V3 outputs. NO 5V tolerance claim.',20.32,15.24)

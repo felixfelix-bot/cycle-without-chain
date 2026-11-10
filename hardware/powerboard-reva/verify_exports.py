@@ -14,8 +14,8 @@ import sys
 P = Path(__file__).resolve().parent
 # Independent physical-pin contract, matching tests/test_mcu_connectivity.py.
 UNUSED_MCU_PINS = {
-    4, 5, 7, 8, 9, 10, 11, 12, 13, 18, 19, 25, 26, 30, 31, 34,
-    38, 47, 50, 51, 52, 53, 54, 68, 69, 70, 71, 72, 73, 78, 79,
+    4, 5, 7, 8, 9, 10, 11, 12, 13, 19, 30, 31,
+    38, 47, 51, 52, 53, 54, 68, 69, 70, 71, 72, 73, 78, 79,
     80, 81, 82, 83, 85, 86, 87, 88, 89, 90, 91, 96, 97, 98,
 }
 EXPECTED_NC = {('U17', str(pin)) for pin in UNUSED_MCU_PINS}
@@ -78,12 +78,12 @@ def rows(path, fields, count):
 
 def verify(root=P):
     expected = {}
-    for row in rows(root / 'pin-net-map.csv', ['ref', 'pin', 'pin_name', 'net', 'sheet'], 808):
+    for row in rows(root / 'pin-net-map.csv', ['ref', 'pin', 'pin_name', 'net', 'sheet'], 901):
         key = (row['ref'], row['pin'])
         require(all(row.values()) and key not in expected, 'empty or duplicate expected endpoint')
         expected[key] = row['net']
     bom = {}
-    for row in rows(root / 'review-bom.csv', ['reference', 'value', 'footprint', 'sheet'], 257):
+    for row in rows(root / 'review-bom.csv', ['reference', 'value', 'footprint', 'sheet'], 294):
         ref = row['reference']
         require(ref and row['value'] and row['sheet'] and ref not in bom, 'empty or duplicate expected part')
         bom[ref] = (row['value'], row['footprint'])
@@ -100,7 +100,7 @@ def verify(root=P):
         footprint = value(comp, 'footprint') if footprints else ''
         actual_bom[ref] = (value(comp, 'value'), footprint)
     require(actual_bom == bom, 'component reference/value/footprint mismatch')
-    require(sum(ref.startswith('Q') for ref in bom) == 25 and sum(ref.startswith('U') for ref in bom) == 23, 'expected 25 Q references and 23 U references')
+    require(sum(ref.startswith('Q') for ref in bom) == 25 and sum(ref.startswith('U') for ref in bom) == 25, 'expected 25 Q references and 25 U references')
     actual, names, codes, nc = {}, set(), set(), {}
     seen_endpoints = set()
     for entry in children(child(net, 'nets'), 'net'):
@@ -126,7 +126,7 @@ def verify(root=P):
                 actual[key] = name
     require(set(nc) == EXPECTED_NC, 'explicit NC endpoint set mismatch')
     names -= set(nc.values())
-    require(names == set(expected.values()) and len(names) == 157, 'net identity/count mismatch')
+    require(names == set(expected.values()) and len(names) == 172, 'net identity/count mismatch')
     schematic = parse((root / 'mcu-core.kicad_sch').read_text())
     require(schematic[0] == 'kicad_sch', 'invalid MCU schematic')
     markers = children(schematic, 'no_connect')

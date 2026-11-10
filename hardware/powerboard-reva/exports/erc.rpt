@@ -1,4 +1,4 @@
-ERC report (2026-11-10T13:32:09+0100, Encoding UTF8)
+ERC report (2026-11-10T13:54:10+0100, Encoding UTF8)
 Report includes: Errors, Warnings
 
 ***** Sheet /
@@ -50,5 +50,13 @@ Report includes: Errors, Warnings
 ***** Sheet /Ratiometric OC window and wired sink fault/
 
 ***** Sheet /Bounded bench DC entry - manual dead-circuit sequencing only/
+
+***** Sheet /LEFT rider Hall and supervised binary interface/
+
+***** Sheet /RIGHT rider Hall and supervised binary interface/
+
+***** Sheet /Rider dump PWM OR independent emergency overvoltage/
+
+***** Sheet /OFFBOARD supervised switch end-of-line network - candidate/
 
  ** ERC messages: 4  Errors 4  Warnings 0
