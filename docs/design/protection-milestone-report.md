@@ -1,5 +1,9 @@
 # Autonomous protection circuit milestone — NOT SAFE TO ENERGIZE
 
+> Superseded electrical verdict: [independent integration review](protection-integration-review.md).
+> UNSAFE DRAFT. In particular the 0.4 V comparator corner assumption below is
+> insufficient over temperature; published threshold extrema are not qualified limits.
+
 ## Delivered and bounded
 
 10 native hierarchical sheets, 130 placed components, 452 mapped pins (previously 6/84/308). Four real circuit sheets now supply the safety rail, compare bus/rail/brake signals, retain a hardware fault and drive a bus-connected brake chopper. No PCB/routing. Human-powered conversion with a short buffer only; no range target. Bus 36–58.4 V remains provisional. **This is a reviewable circuit increment, not safety approval.**

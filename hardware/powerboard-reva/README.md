@@ -2,9 +2,18 @@
 
 **NOT SAFE TO ENERGIZE. NOT FABRICATION-READY. No PCB, routing, procurement or riding authorization.**
 
-Open `powerboard-reva.kicad_pro` or root `powerboard-reva.kicad_sch` in KiCad 9. The root references five real child sheets. Nets join electrically through explicitly named global labels; GEN_ and HUB_ prefixes separate bridge/control signals. This is not a block-diagram-only drawing or connector substitution for ICs.
+Open `powerboard-reva.kicad_pro` or root `powerboard-reva.kicad_sch` in KiCad 9. The root references nine real child sheets. Nets join electrically through explicitly named global labels; GEN_ and HUB_ prefixes separate bridge/control signals. This is not a block-diagram-only drawing or connector substitution for ICs.
 
-## Implemented
+## Current protection integration — UNSAFE DRAFT
+
+The sections below record the **earlier six-page milestone**, not current counts.
+Current integration has 10 pages, 130 components, 104 nets and 452 endpoints;
+VM now uses bus-fed AUX12V. Four added protection sheets remain unqualified.
+See [independent integration review](../../docs/design/protection-integration-review.md)
+for current evidence and prioritized blockers. ERC still has three errors
+(U1.24 VREF, U1.25 AGND, U3.1 DC_LINK). No release approval.
+
+## Implemented (historical six-page milestone)
 
 - Two **DRV8353SRTAT** SPI drivers, 40 signal pins plus exposed pad, from TI SLVSDY6A pp6–7.
 - Twelve **CSD19532Q5B** MOSFETs using embedded, inheritance-resolved stock KiCad symbols; three half-bridges per machine.

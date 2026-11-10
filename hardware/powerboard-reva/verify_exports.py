@@ -71,12 +71,12 @@ def rows(path, fields, count):
 
 def verify(root=P):
     expected = {}
-    for row in rows(root / 'pin-net-map.csv', ['ref', 'pin', 'pin_name', 'net', 'sheet'], 308):
+    for row in rows(root / 'pin-net-map.csv', ['ref', 'pin', 'pin_name', 'net', 'sheet'], 452):
         key = (row['ref'], row['pin'])
         require(all(row.values()) and key not in expected, 'empty or duplicate expected endpoint')
         expected[key] = row['net']
     bom = {}
-    for row in rows(root / 'review-bom.csv', ['reference', 'value', 'footprint', 'sheet'], 84):
+    for row in rows(root / 'review-bom.csv', ['reference', 'value', 'footprint', 'sheet'], 130):
         ref = row['reference']
         require(ref and row['value'] and row['sheet'] and ref not in bom, 'empty or duplicate expected part')
         bom[ref] = (row['value'], row['footprint'])
@@ -93,7 +93,7 @@ def verify(root=P):
         footprint = value(comp, 'footprint') if footprints else ''
         actual_bom[ref] = (value(comp, 'value'), footprint)
     require(actual_bom == bom, 'component reference/value/footprint mismatch')
-    require(sum(ref.startswith('Q') for ref in bom) == 12 and sum(ref.startswith('U') for ref in bom) == 2, 'expected 12 MOSFET references and 2 driver references')
+    require(sum(ref.startswith('Q') for ref in bom) == 13 and sum(ref.startswith('U') for ref in bom) == 10, 'expected 13 Q references and 10 U references')
     actual, names, codes = {}, set(), set()
     for entry in children(child(net, 'nets'), 'net'):
         name, code = value(entry, 'name'), value(entry, 'code')
@@ -106,7 +106,7 @@ def verify(root=P):
             key = (value(node, 'ref'), value(node, 'pin'))
             require(key not in actual, f'duplicate endpoint {key}')
             actual[key] = name
-    require(names == set(expected.values()) and len(names) == 80, 'net identity/count mismatch')
+    require(names == set(expected.values()) and len(names) == 104, 'net identity/count mismatch')
     require(actual == expected, 'endpoint set or net assignment mismatch')
 
     report = (root / 'exports/erc.rpt').read_text()
@@ -124,12 +124,12 @@ def verify(root=P):
         ref, pin, label = pins[0]
         identities.append((ref, pin, label, actual.get((ref, pin))))
     require(sorted(identities) == sorted([
-        ('U1', '3', 'VM', 'AUX12V_EXT'),
+        ('U3', '1', 'IN', 'DC_LINK'),
         ('U1', '24', 'VREF', 'LOGIC3V3_EXT'),
         ('U1', '25', 'AGND', 'PGND'),
     ]), 'ERC identity/net mismatch (not an approved waiver)')
     return {'components': len(bom), 'nets': len(names), 'verified_pin_assignments': len(actual),
-            'mosfets': 12, 'drivers': 2, 'erc_errors': 3, 'erc_warnings': 0,
+            'mosfets': 13, 'drivers': 2, 'erc_errors': 3, 'erc_warnings': 0,
             'erc_reason': 'Three known undriven supply errors remain unresolved, NOT waived.',
             'status': 'PARTIAL_NOT_SAFE_TO_ENERGIZE',
             'svg_pages': len(list((root / 'exports/svg').glob('*.svg')))}

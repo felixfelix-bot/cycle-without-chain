@@ -1,12 +1,12 @@
 {
-  "components": 84,
-  "nets": 80,
-  "verified_pin_assignments": 308,
-  "mosfets": 12,
+  "components": 130,
+  "nets": 104,
+  "verified_pin_assignments": 452,
+  "mosfets": 13,
   "drivers": 2,
   "erc_errors": 3,
   "erc_warnings": 0,
-  "erc_reason": "External AUX12V_EXT, LOGIC3V3_EXT, PGND supplies not modeled as power outputs. No PWR_FLAG used to hide unfinished supply boundary.",
+  "erc_reason": "Three known undriven supply errors remain unresolved, NOT waived.",
   "status": "PARTIAL_NOT_SAFE_TO_ENERGIZE",
-  "svg_pages": 6
+  "svg_pages": 10
 }
