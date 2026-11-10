@@ -36,6 +36,16 @@ chain" is shown to be a *vehicle range* figure that only holds at a rider
 energy share of ~12 % — not a drivetrain efficiency, and not reproducible on a
 light commuter.
 
+## Sections of the study
+
+- §0 answer first — §1 assumptions — §2 vehicle power — §3 series vs chain
+- §4 cadence — §5 buffer sizing — §6 is a buffer needed — §7 bootstrap
+- §8 sensitivity — §9 failure modes — §10 recommendation
+- §11 the two production systems (Mando, Schaeffler) reconciled
+- **§12 the recommended build, worked numbers, parts explained**
+- **§13 has anyone built this? (Stromer, Grin builds, mid-drive comparison)**
+- §14 open items — §15 scope limits
+
 ## Reproduce
 
 ```sh
