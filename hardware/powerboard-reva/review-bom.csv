@@ -256,40 +256,60 @@ C73,470u 100V UHE2A471MHD +/-20%,,dc-entry
 C74,470u 100V UHE2A471MHD +/-20%,,dc-entry
 R118,10k 1% RH02510K00FE02 always-on bleed,,dc-entry
 J43,Kelvin BUS measurement isolated instrument ONLY,,dc-entry
-J44,LEFT_LEVER_3V3_ONLY,,brake-intent-left
-R119,22R sensor supply limit,Resistor_SMD:R_0805_2012Metric,brake-intent-left
-C75,100n sensor cable supply,Capacitor_SMD:C_0805_2012Metric,brake-intent-left
-R120,10k 1% signal current limit,Resistor_SMD:R_0805_2012Metric,brake-intent-left
-R121,100k open Hall bias,Resistor_SMD:R_0805_2012Metric,brake-intent-left
-C76,10n ADC filter,Capacitor_SMD:C_0805_2012Metric,brake-intent-left
-D30,PESD3V3U1UL,Diode_SMD:D_SOD-882,brake-intent-left
-D34,BAT54S,Package_TO_SOT_SMD:SOT-23,brake-intent-left
-R122,10k 1% signal current limit,Resistor_SMD:R_0805_2012Metric,brake-intent-left
-R123,10k 1% switch bias,Resistor_SMD:R_0805_2012Metric,brake-intent-left
-C77,10n ADC filter,Capacitor_SMD:C_0805_2012Metric,brake-intent-left
+J44,LEFT_BINARY_SWITCH_ONLY,,brake-intent-left
+R119,10k 1% signal current limit,Resistor_SMD:R_0805_2012Metric,brake-intent-left
+R120,10k 1% switch bias,Resistor_SMD:R_0805_2012Metric,brake-intent-left
+C75,10n ADC filter,Capacitor_SMD:C_0805_2012Metric,brake-intent-left
 D32,PESD3V3U1UL,Diode_SMD:D_SOD-882,brake-intent-left
 D36,BAT54S,Package_TO_SOT_SMD:SOT-23,brake-intent-left
-J45,RIGHT_LEVER_3V3_ONLY,,brake-intent-right
-R124,22R sensor supply limit,Resistor_SMD:R_0805_2012Metric,brake-intent-right
-C78,100n sensor cable supply,Capacitor_SMD:C_0805_2012Metric,brake-intent-right
-R125,10k 1% signal current limit,Resistor_SMD:R_0805_2012Metric,brake-intent-right
-R126,100k open Hall bias,Resistor_SMD:R_0805_2012Metric,brake-intent-right
-C79,10n ADC filter,Capacitor_SMD:C_0805_2012Metric,brake-intent-right
-D31,PESD3V3U1UL,Diode_SMD:D_SOD-882,brake-intent-right
-D35,BAT54S,Package_TO_SOT_SMD:SOT-23,brake-intent-right
-R127,10k 1% signal current limit,Resistor_SMD:R_0805_2012Metric,brake-intent-right
-R128,10k 1% switch bias,Resistor_SMD:R_0805_2012Metric,brake-intent-right
-C80,10n ADC filter,Capacitor_SMD:C_0805_2012Metric,brake-intent-right
+J45,RIGHT_BINARY_SWITCH_ONLY,,brake-intent-right
+R121,10k 1% signal current limit,Resistor_SMD:R_0805_2012Metric,brake-intent-right
+R122,10k 1% switch bias,Resistor_SMD:R_0805_2012Metric,brake-intent-right
+C76,10n ADC filter,Capacitor_SMD:C_0805_2012Metric,brake-intent-right
 D33,PESD3V3U1UL,Diode_SMD:D_SOD-882,brake-intent-right
 D37,BAT54S,Package_TO_SOT_SMD:SOT-23,brake-intent-right
 U24,SN74LVC1G32DBVR,Package_TO_SOT_SMD:SOT-23-5,brake-dump-command
 U25,SN74LVC1G08DBVR,Package_TO_SOT_SMD:SOT-23-5,brake-dump-command
-C81,100n AND decoupling,Capacitor_SMD:C_0805_2012Metric,brake-dump-command
-R129,10k dump PWM default off,Resistor_SMD:R_0805_2012Metric,brake-dump-command
-C82,100n OR decoupling,Capacitor_SMD:C_0805_2012Metric,brake-dump-command
-R130,4k7 1% EOL OFFBOARD,Resistor_SMD:R_0805_2012Metric,brake-switch-harness
-R131,10k 1% EOL OFFBOARD,Resistor_SMD:R_0805_2012Metric,brake-switch-harness
+C77,100n AND decoupling,Capacitor_SMD:C_0805_2012Metric,brake-dump-command
+R123,10k dump PWM default off,Resistor_SMD:R_0805_2012Metric,brake-dump-command
+C78,100n OR decoupling,Capacitor_SMD:C_0805_2012Metric,brake-dump-command
+R124,4k7 1% EOL OFFBOARD,Resistor_SMD:R_0805_2012Metric,brake-switch-harness
+R125,10k 1% EOL OFFBOARD,Resistor_SMD:R_0805_2012Metric,brake-switch-harness
 SW1,NC_RELEASE_OPEN_ON_BRAKE_UNSELECTED,,brake-switch-harness
-R132,4k7 1% EOL OFFBOARD,Resistor_SMD:R_0805_2012Metric,brake-switch-harness
-R133,10k 1% EOL OFFBOARD,Resistor_SMD:R_0805_2012Metric,brake-switch-harness
+R126,4k7 1% EOL OFFBOARD,Resistor_SMD:R_0805_2012Metric,brake-switch-harness
+R127,10k 1% EOL OFFBOARD,Resistor_SMD:R_0805_2012Metric,brake-switch-harness
 SW2,NC_RELEASE_OPEN_ON_BRAKE_UNSELECTED,,brake-switch-harness
+J46,LEFT_FSR_34-00018_EXTERNAL,,fsr-left
+R128,10k 1% FSR excitation,Resistor_SMD:R_0805_2012Metric,fsr-left
+R129,1k 1% FSR return,Resistor_SMD:R_0805_2012Metric,fsr-left
+R130,10k 0.1% FSR measure,Resistor_SMD:R_0805_2012Metric,fsr-left
+C79,100n FSR sense,Capacitor_SMD:C_0805_2012Metric,fsr-left
+R131,10k 1% OPA input limit,Resistor_SMD:R_0805_2012Metric,fsr-left
+C80,100n OPA bypass,Capacitor_SMD:C_0805_2012Metric,fsr-left
+U26,OPA333AIDBVR,Package_TO_SOT_SMD:SOT-23-5,fsr-left
+U27,TMUX1511PWR,Package_SO:TSSOP-14_4.4x5mm_P0.65mm,fsr-left
+R132,1k 1% ADC isolation,Resistor_SMD:R_0805_2012Metric,fsr-left
+R133,10k 1% ADC bleed,Resistor_SMD:R_0805_2012Metric,fsr-left
+C81,100n ADC reservoir,Capacitor_SMD:C_0805_2012Metric,fsr-left
+R134,100k enable default off,Resistor_SMD:R_0805_2012Metric,fsr-left
+C82,100n mux bypass,Capacitor_SMD:C_0805_2012Metric,fsr-left
+D38,PESD3V3U1UL CANDIDATE,Diode_SMD:D_SOD-882,fsr-protection-left
+D39,PESD3V3U1UL CANDIDATE,Diode_SMD:D_SOD-882,fsr-protection-left
+D40,BAT54S CANDIDATE,Package_TO_SOT_SMD:SOT-23,fsr-protection-left
+J47,RIGHT_FSR_34-00018_EXTERNAL,,fsr-right
+R135,10k 1% FSR excitation,Resistor_SMD:R_0805_2012Metric,fsr-right
+R136,1k 1% FSR return,Resistor_SMD:R_0805_2012Metric,fsr-right
+R137,10k 0.1% FSR measure,Resistor_SMD:R_0805_2012Metric,fsr-right
+C83,100n FSR sense,Capacitor_SMD:C_0805_2012Metric,fsr-right
+R138,10k 1% OPA input limit,Resistor_SMD:R_0805_2012Metric,fsr-right
+C84,100n OPA bypass,Capacitor_SMD:C_0805_2012Metric,fsr-right
+U28,OPA333AIDBVR,Package_TO_SOT_SMD:SOT-23-5,fsr-right
+U29,TMUX1511PWR,Package_SO:TSSOP-14_4.4x5mm_P0.65mm,fsr-right
+R139,1k 1% ADC isolation,Resistor_SMD:R_0805_2012Metric,fsr-right
+R140,10k 1% ADC bleed,Resistor_SMD:R_0805_2012Metric,fsr-right
+C85,100n ADC reservoir,Capacitor_SMD:C_0805_2012Metric,fsr-right
+R141,100k enable default off,Resistor_SMD:R_0805_2012Metric,fsr-right
+C86,100n mux bypass,Capacitor_SMD:C_0805_2012Metric,fsr-right
+D41,PESD3V3U1UL CANDIDATE,Diode_SMD:D_SOD-882,fsr-protection-right
+D42,PESD3V3U1UL CANDIDATE,Diode_SMD:D_SOD-882,fsr-protection-right
+D43,BAT54S CANDIDATE,Package_TO_SOT_SMD:SOT-23,fsr-protection-right
