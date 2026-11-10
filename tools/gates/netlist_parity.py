@@ -29,8 +29,10 @@ or unparsable input, malformed or self-contradictory expected map).
 
 from __future__ import annotations
 
+import csv
 import json
 import sys
+import tempfile
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
@@ -43,6 +45,7 @@ from ._common import (
     require_inputs,
     sha256_file,
 )
+from . import expected_map, sexpr_netlist
 
 GATE = "netlist_parity"
 
@@ -63,8 +66,19 @@ def build_parser():
         description="Compare a KiCad XML netlist against an expected "
                     "reference/pin/net map with exact set semantics.",
     )
-    parser.add_argument("--netlist", required=True, help="KiCad XML netlist")
-    parser.add_argument("--expected", required=True, help="expected endpoint map (JSON)")
+    parser.add_argument("--netlist", required=True,
+                        help="KiCad XML netlist (--format kicadxml)")
+    parser.add_argument("--netlist-sexpr", dest="netlist_sexpr", default=None,
+                        help="also grade this KiCad S-expression netlist "
+                             "(plain 'sch export netlist') against the same "
+                             "expected map, and require both artifacts to agree")
+    parser.add_argument("--expected", default=None,
+                        help="expected endpoint map (JSON). One of --expected or "
+                             "--expected-from-pin-net-map is required.")
+    parser.add_argument("--expected-from-pin-net-map", dest="pin_net_map", default=None,
+                        metavar="CSV",
+                        help="derive the expected map from the board's committed "
+                             "pin-net-map.csv instead of a hand-kept JSON copy")
     parser.add_argument("--require-net", action="append", default=None,
                         dest="require_nets", metavar="NAME",
                         help="fail unless this net exists (repeatable)")
@@ -212,11 +226,88 @@ def load_expected(path):
     return endpoints, sorted(set(net_names)), nc_pins
 
 
+def load_sexpr_netlist(path, include_unconnected=False):
+    """Parse a ``sch export netlist`` S-expression into the comparable shape.
+
+    Thin alias so callers (and tests) have one obvious entry point; the reader
+    itself lives in ``sexpr_netlist`` so the gate stays about grading, not
+    parsing.
+    """
+    return sexpr_netlist.load(path, include_unconnected=include_unconnected)
+
+
+def _grade_one(parsed, expected, expected_nets, expected_nc, checks, prefix,
+               require_nets=(), allow_empty=False):
+    """Record the checks for one parsed artifact and return its comparison.
+
+    ``prefix`` is ``""`` for the XML export and ``"sexpr_"`` for the
+    S-expression one, so a failure always says *which* artifact failed.
+    """
+    wanted = set(expected)
+    wanted_nets = sorted(set(expected_nets))
+    result = {"endpoints": [], "duplicates": [], "nets": [],
+              "missing": sorted(wanted), "extra": [], "nc_violations": []}
+    if parsed is None:
+        return result
+
+    endpoints = parsed["endpoints"]
+    duplicates = parsed["duplicates"]
+    actual = set(endpoints)
+    actual_nets = sorted(set(parsed["nets"]))
+    missing = sorted(wanted - actual)
+    extra = sorted(actual - wanted)
+    nc_violations = []
+    if expected_nc:
+        connected_pairs = {(ref, pin) for ref, pin, _net in endpoints}
+        nc_violations = sorted(pin for pin in expected_nc if pin in connected_pairs)
+
+    checks.require(prefix + "duplicate_free", not duplicates,
+                   "%d duplicate/short endpoint(s)" % len(duplicates))
+    checks.require(prefix + "non_empty", bool(endpoints) or allow_empty,
+                   "%d endpoint(s) in netlist" % len(endpoints))
+    checks.require(prefix + "endpoints_match", not missing and not extra,
+                   "%d missing, %d extra" % (len(missing), len(extra)))
+    checks.require(prefix + "nets_match", actual_nets == wanted_nets,
+                   "missing nets %s, unexpected nets %s"
+                   % (sorted(set(wanted_nets) - set(actual_nets)),
+                      sorted(set(actual_nets) - set(wanted_nets))))
+    for name in require_nets or ():
+        checks.require("%snet_present:%s" % (prefix, name), name in actual_nets,
+                       "required net %r absent" % name)
+    if expected_nc:
+        checks.require(prefix + "nc_respected", not nc_violations,
+                       "NC pin(s) found on a real net: %s" % (nc_violations,))
+
+    return {"endpoints": endpoints, "duplicates": duplicates, "nets": actual_nets,
+            "missing": missing, "extra": extra, "nc_violations": nc_violations}
+
+
 def grade(argv):
     args = build_parser().parse_args(argv)
-    require_inputs(GATE, netlist=args.netlist, expected=args.expected)
+    inputs = {"netlist": args.netlist}
+    if args.expected is None and args.pin_net_map is None:
+        raise UsageError("one of --expected or --expected-from-pin-net-map is required")
+    if args.expected is not None and args.pin_net_map is not None:
+        raise UsageError("--expected and --expected-from-pin-net-map are mutually exclusive")
+    if args.expected is not None:
+        inputs["expected"] = args.expected
+    if args.netlist_sexpr is not None:
+        inputs["netlist_sexpr"] = args.netlist_sexpr
+    require_inputs(GATE, **inputs)
 
-    expected, expected_nets, expected_nc = load_expected(args.expected)
+    if args.pin_net_map is not None:
+        require_inputs(GATE, pin_net_map=args.pin_net_map)
+        try:
+            scratch = Path(tempfile.mkdtemp(prefix="parity-expected-"))
+            expected_path = expected_map.from_pin_net_map(
+                args.pin_net_map, scratch / "expected.json")
+        except (OSError, csv.Error, expected_map.PinMapError) as exc:
+            raise UsageError(
+                "cannot build the expected map from %s: %s" % (args.pin_net_map, exc))
+    else:
+        expected_path = args.expected
+
+    expected, expected_nets, expected_nc = load_expected(expected_path)
 
     checks = Checks()
     parsed = None
@@ -235,50 +326,67 @@ def grade(argv):
     checks.require("netlist_structure", not structure_error and parsed is not None,
                    structure_error or "ok")
 
-    if parsed is None:
-        endpoints = []
-        duplicates = []
-        actual_nets = []
-        missing = sorted(expected)
-        extra = []
-    else:
-        endpoints = parsed["endpoints"]
-        duplicates = parsed["duplicates"]
-        actual = set(endpoints)
-        wanted = set(expected)
-        actual_nets = sorted(set(parsed["nets"]))
-        wanted_nets = sorted(set(expected_nets))
+    xml = _grade_one(parsed, expected, expected_nets, expected_nc, checks, "",
+                     require_nets=args.require_nets, allow_empty=args.allow_empty)
+    endpoints, duplicates, actual_nets = xml["endpoints"], xml["duplicates"], xml["nets"]
+    missing, extra = xml["missing"], xml["extra"]
+    nc_violations = xml["nc_violations"]
 
-        missing = sorted(wanted - actual)
-        extra = sorted(actual - wanted)
+    # RAIL-12: the second artifact. Two exports of one design must agree with
+    # the same expectation; an injection into either one alone is a failure.
+    sexpr_parsed = None
+    sexpr_parse_error = ""
+    sexpr_structure_error = ""
+    sexpr = {"endpoints": [], "duplicates": [], "nets": [],
+             "missing": [], "extra": [], "nc_violations": []}
+    cross = None
+    if args.netlist_sexpr is not None:
+        try:
+            sexpr_parsed = load_sexpr_netlist(args.netlist_sexpr, args.include_unconnected)
+        except sexpr_netlist.SexprParseError as exc:
+            sexpr_parse_error = "S-expression netlist is not one complete expression: %s" % exc
+        except sexpr_netlist.SexprStructureError as exc:
+            sexpr_structure_error = str(exc)
+        except (OSError, ValueError) as exc:
+            sexpr_parse_error = str(exc)
 
-        checks.require("duplicate_free", not duplicates,
-                       "%d duplicate/short endpoint(s)" % len(duplicates))
-        checks.require("non_empty", bool(endpoints) or args.allow_empty,
-                       "%d endpoint(s) in netlist" % len(endpoints))
-        checks.require("endpoints_match", not missing and not extra,
-                       "%d missing, %d extra" % (len(missing), len(extra)))
-        checks.require("nets_match", actual_nets == wanted_nets,
-                       "missing nets %s, unexpected nets %s"
-                       % (sorted(set(wanted_nets) - set(actual_nets)),
-                          sorted(set(actual_nets) - set(wanted_nets))))
-        for name in args.require_nets or ():
-            checks.require("net_present:%s" % name, name in actual_nets,
-                           "required net %r absent" % name)
+        checks.require("sexpr_parseable", not sexpr_parse_error,
+                       sexpr_parse_error or "ok")
+        checks.require("sexpr_structure",
+                       not sexpr_structure_error and sexpr_parsed is not None,
+                       sexpr_structure_error or "ok")
+        sexpr = _grade_one(sexpr_parsed, expected, expected_nets, expected_nc,
+                           checks, "sexpr_", require_nets=args.require_nets,
+                           allow_empty=args.allow_empty)
 
-    nc_violations = []
-    if parsed is not None and expected_nc:
-        connected_pairs = {(ref, pin) for ref, pin, _net in endpoints}
-        nc_violations = sorted(pin for pin in expected_nc if pin in connected_pairs)
-        checks.require("nc_respected", not nc_violations,
-                       "NC pin(s) found on a real net: %s" % (nc_violations,))
+        if parsed is not None and sexpr_parsed is not None:
+            only_xml = sorted(set(endpoints) - set(sexpr["endpoints"]))
+            only_sexpr = sorted(set(sexpr["endpoints"]) - set(endpoints))
+            nets_only_xml = sorted(set(actual_nets) - set(sexpr["nets"]))
+            nets_only_sexpr = sorted(set(sexpr["nets"]) - set(actual_nets))
+            cross = {
+                "count": len(only_xml) + len(only_sexpr)
+                         + len(nets_only_xml) + len(nets_only_sexpr),
+                "endpoints_only_in_xml": [
+                    {"ref": r, "pin": p, "net": n} for r, p, n in only_xml[:100]],
+                "endpoints_only_in_sexpr": [
+                    {"ref": r, "pin": p, "net": n} for r, p, n in only_sexpr[:100]],
+                "nets_only_in_xml": nets_only_xml,
+                "nets_only_in_sexpr": nets_only_sexpr,
+            }
+            checks.require(
+                "artifacts_agree", cross["count"] == 0,
+                "%d endpoint/net difference(s) between the XML and "
+                "S-expression exports" % cross["count"])
 
     wanted_nets = sorted(set(expected_nets))
     evidence = {
         "netlist": str(Path(args.netlist).resolve()),
         "netlist_sha256": sha256_file(args.netlist),
-        "expected": str(Path(args.expected).resolve()),
-        "expected_sha256": sha256_file(args.expected),
+        "expected": str(Path(expected_path).resolve()),
+        "expected_sha256": sha256_file(expected_path),
+        "expected_source": ("pin-net-map" if args.pin_net_map is not None else "json"),
+        "artifacts_checked": ["xml"] + (["sexpr"] if args.netlist_sexpr else []),
         "endpoints": len(endpoints),
         "expected_endpoints": len(expected),
         "nets": len(actual_nets),
@@ -289,6 +397,17 @@ def grade(argv):
         "nc_violations": nc_violations,
         "unconnected_nets_ignored": len(parsed["unconnected_nets"]) if parsed else 0,
     }
+    if args.netlist_sexpr is not None:
+        evidence.update({
+            "netlist_sexpr": str(Path(args.netlist_sexpr).resolve()),
+            "sexpr_sha256": sha256_file(args.netlist_sexpr),
+            "endpoints_sexpr": len(sexpr["endpoints"]),
+            "nets_sexpr": len(sexpr["nets"]),
+            "duplicate_endpoints_sexpr": len(sexpr["duplicates"]),
+            "unconnected_nets_ignored_sexpr":
+                len(sexpr_parsed["unconnected_nets"]) if sexpr_parsed else 0,
+            "cross_artifact_diffs": cross or {"count": None},
+        })
     diffs = {
         "missing": [{"ref": r, "pin": p, "net": n} for r, p, n in missing[:100]],
         "extra": [{"ref": r, "pin": p, "net": n} for r, p, n in extra[:100]],
@@ -297,19 +416,29 @@ def grade(argv):
         "missing_truncated": len(missing) > 100,
         "extra_truncated": len(extra) > 100,
     }
+    if args.netlist_sexpr is not None:
+        diffs["sexpr_missing"] = [{"ref": r, "pin": p, "net": n}
+                                  for r, p, n in sexpr["missing"][:100]]
+        diffs["sexpr_extra"] = [{"ref": r, "pin": p, "net": n}
+                                for r, p, n in sexpr["extra"][:100]]
 
     human = []
     if parse_error:
         human.append("netlist unusable: %s" % parse_error)
     if structure_error:
         human.append("netlist structure: %s" % structure_error)
-    for dup in duplicates[:10]:
-        if "nets" in dup:
-            human.append("SHORT: %s pin %s appears on %s"
-                         % (dup["ref"], dup["pin"], ", ".join(dup["nets"])))
-        else:
-            human.append("DUPLICATE: %s pin %s twice in net %s"
-                         % (dup["ref"], dup["pin"], dup["net"]))
+    if sexpr_parse_error:
+        human.append("S-expression netlist unusable: %s" % sexpr_parse_error)
+    if sexpr_structure_error:
+        human.append("S-expression netlist structure: %s" % sexpr_structure_error)
+    for label, rows in (("", duplicates), ("SEXPR ", sexpr["duplicates"])):
+        for dup in rows[:10]:
+            if "nets" in dup:
+                human.append("%sSHORT: %s pin %s appears on %s"
+                             % (label, dup["ref"], dup["pin"], ", ".join(dup["nets"])))
+            else:
+                human.append("%sDUPLICATE: %s pin %s twice in net %s"
+                             % (label, dup["ref"], dup["pin"], dup["net"]))
     for row in diffs["missing"][:10]:
         human.append("missing: %s pin %s should be on net %s"
                      % (row["ref"], row["pin"], row["net"]))
@@ -324,6 +453,19 @@ def grade(argv):
                      % ", ".join(diffs["nets_extra"][:20]))
     for ref, pin in nc_violations[:10]:
         human.append("NC VIOLATION: %s pin %s is connected" % (ref, pin))
+    if cross is not None and cross["count"]:
+        human.append("XML and .net exports disagree on %d endpoint/net row(s)"
+                     % cross["count"])
+        for row in cross["endpoints_only_in_xml"][:10]:
+            human.append("  only in XML:   %s pin %s on net %s"
+                         % (row["ref"], row["pin"], row["net"]))
+        for row in cross["endpoints_only_in_sexpr"][:10]:
+            human.append("  only in .net:  %s pin %s on net %s"
+                         % (row["ref"], row["pin"], row["net"]))
+        for name in cross["nets_only_in_xml"][:10]:
+            human.append("  net only in XML:  %s" % name)
+        for name in cross["nets_only_in_sexpr"][:10]:
+            human.append("  net only in .net: %s" % name)
 
     return finish(GATE, checks, evidence=evidence,
                   extras={"diffs": diffs}, human_lines=human)
