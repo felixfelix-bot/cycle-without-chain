@@ -82,6 +82,8 @@ figure as a product specification. See
 **KiCad 9** schematic, native netlist, PDF and SVG. Current state:
 
 - **382 components, 218 nets, 1129 connected pins, 51 explicit NCs, 32 pages.**
+  These figures were re-measured from a fresh clone at `ae42054`, including what the
+  net/NC split actually means: [schematic figure verification](docs/design/schematic-figures-verified.md).
 - **45 hardware tests** pass, normally and under `python3 -O`.
 - Strict ERC: **10 errors, 0 warnings, exit 5** — unsuppressed and unwaived.
   Enumerated, gate-enforced and treated as open work, not silenced.
