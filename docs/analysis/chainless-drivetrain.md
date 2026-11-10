@@ -341,7 +341,102 @@ mass for the same energy, and it cannot boot the controller).
 
 ---
 
-## §11 Open items
+## §11 Reconciling with the two production systems
+
+Two series-hybrid bikes reached production. **Neither publishes a generator
+efficiency number** — which is itself informative — but one publishes a system
+claim that looks like it contradicts this analysis, so it has to be reconciled
+rather than ignored.
+
+### Schaeffler / Heinzmann "Free Drive" (2021, in fleet production since 2023)
+
+A Schaeffler representative told Electrek that Free Drive is **"approximately
+5 % less efficient than chain drives"**, repeated by BikeRadar and New Atlas as
+a 5 % range penalty [CITED]. Taken naively, that is 96 % end-to-end and would
+demolish §3.
+
+**It cannot be a drivetrain-efficiency claim.** Working backwards: 96.1 % −
+5 % = 91.1 % required end-to-end. Allowing 97 % rectifier, 97 % buffer, 97 %
+controller and 93 % motor leaves a required generator efficiency of **1.073** —
+greater than unity. **91 % is thermodynamically impossible** for two machine
+conversions plus a battery. The claim is not what it reads as.
+
+It is a **vehicle-level range claim**, and it only holds on a vehicle where the
+rider is a minority energy source:
+
+```
+penalty(r) = r·(1 − η_series/0.961) / (1 − r)      r = rider's share of traction energy
+```
+
+| r | vehicle class | battery penalty |
+|---|---|---|
+| 1.00 | rider does all the work (flat battery) | **57 % more pedal effort** |
+| 0.60 | light commuter, strong rider | 54.3 % |
+| 0.44 | cargo bike, 250 W motor + 150 W rider | 28.4 % |
+| 0.30 | motor-dominant pedelec | 15.5 % |
+| 0.12 | heavily motor-dominant | **4.9 %** ← reproduces the 5 % |
+
+Reproducing 5 % requires **r = 0.121**, i.e. the rider supplies only **12 %** of
+traction energy. That is a genuinely motor-dominant cargo vehicle. So the 5 %
+is defensible *for a loaded cargo bike and cannot be generalised* — which
+explains both why Schaeffler aimed Free Drive at cargo/velomobile rather than
+commuters, and why the same architecture failed on a light city bike.
+
+### The pedal generator itself: ≈ 42 %
+
+Schaeffler's component is a **1:29 cycloid gearbox plus an alternator**
+[CITED: Heinzmann Free Drive leaflet]. That ratio is a smart engineering choice
+— 75 rpm cadence × 29 = **2175 rpm**, which lands the alternator exactly inside
+the claw-pole sweet spot (2000–2500 rpm, 30–40 % load) where it is *least bad*.
+
+| stage | η | basis |
+|---|---|---|
+| cycloid gearbox, 1:29 | 0.75–0.85 (use 0.80) | CITED: Rice Univ. 2018 compact cycloid peak 81 %; Matec 2019 experimental 0.61–0.75 at 150–850 rpm; Blagojević 2012 0.77 at µ=0.2 |
+| alternator at 2175 rpm | 0.50–0.55 (use 0.52) | CITED: InTechOpen Lundell + Bosch/ADVISOR peak window |
+| **pedal generator unit** | **≈ 0.42** (0.38–0.47) | COMPUTED |
+| + rectifier/controller/motor | **0.322** | COMPUTED |
+
+**So the answer to "what is the efficiency of these crank alternators" is
+~40–45 % for the pedal-generator unit, and ~32 % from pedals to road.** That is
+*below* my generic series-hybrid estimate (61.3 %) because both production
+systems used automotive claw-pole machines rather than PM machines. My §3 PM
+case was the *charitable* one.
+
+### Mando Footloose (2015) — the natural experiment
+
+Mando's own product page lists **"Alternator + Regulator"** and **"ECU"** as
+automotive-derived parts [CITED: mandofootloose.co.kr], and describes the drive
+as a 系列 하이브리드 시스템 (series hybrid): 250 W motor, 36 V 8.2 Ah, 21.5 kg,
+20″ wheels.
+
+Two owner reports are direct evidence for §7:
+
+- **"Very loud (motor and pedaling generator system)"** [CITED:
+  ElectricBikeReview] — exactly what a claw-pole spinning at a multiple of
+  cadence does.
+- **"Once the battery dies, the bike is rendered completely unrideable"**
+  [CITED: idropnews] — **direct field confirmation of the bootstrap finding**.
+  A separately-excited generator cannot self-start, and with no chain there is
+  no mechanical fallback. The bicycle becomes a 21.5 kg scooter.
+
+### What this changes in the analysis, and what it does not
+
+- **Changes:** the generic series-hybrid number is *optimistic* for the two
+  real systems. Actual production hardware is ~32 % pedals-to-road, not 61 %.
+  The parallel-hybrid recommendation gets **stronger**, not weaker.
+- **Does not change:** the direction of the verdict. The best-case PM series
+  hybrid (76.2 % at every stage's peak) still loses to a chain by 19.9 points.
+  The production systems, at ~32–42 %, are much further away.
+- **Reconciles:** Schaeffler's 5 % is a *vehicle range* figure at r ≈ 0.12, not
+  a drivetrain efficiency. Read it as marketing-of-a-real-result on a narrow
+  vehicle class, not as a refutation of the physics.
+- **Confirms the architecture's niche:** Schaeffler's own pivot to cargo,
+  three- and four-wheelers and velomobiles is exactly the carve-out in §10 —
+  where a chain needs several idlers and the rider is a minority power source.
+
+---
+
+## §12 Open items
 
 - **TODO(unverified)** — 65 % regen capture efficiency (A7) is an ESTIMATE. A
   bench measurement with a Phaserunner + All-Axle at 5–25 km/h would settle it.
@@ -356,7 +451,7 @@ mass for the same energy, and it cannot boot the controller).
   obviously exist off the shelf, and that is a real reason the series hybrid is
   hard to build even if it were efficient.
 
-## §12 What this analysis is not
+## §13 What this analysis is not
 
 - Not a frame/structural design, not a mass budget for a specific build.
 - Not a legal analysis (EU 250 W / 25 km/h L1e-A limits, throttle vs pedal-assist

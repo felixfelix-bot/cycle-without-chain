@@ -436,5 +436,85 @@ print(f"{100*eta_pm_p:.1f} % typical, vs {100*0.961:.1f} % for the chain you")
 print("removed. Expect to lose about a third of your pedalling.")
 print()
 print("=" * 78)
+print("13. RECONCILING WITH THE TWO PRODUCTION SYSTEMS")
+print("=" * 78)
+print("Neither Mando nor Schaeffler publishes a generator efficiency number.")
+print("Schaeffler DOES publish a system claim: 'approximately 5 % less")
+print("efficient than chain drives' [CITED: Schaeffler rep to Electrek, 2021-08-31,")
+print("repeated by BikeRadar and New Atlas].")
+print()
+print("Test whether 5 % is reachable as a DRIVETRAIN efficiency claim:")
+print(f"  it would need eta_series = 0.961 - 0.05 = 0.911")
+need = 0.911
+print(f"  with rect 0.97, buf 0.97, ctrl 0.97, motor 0.93 -> generator alone")
+print(f"  would have to be {need/(0.97**3*0.93):.3f}  (>1.0 = impossible)")
+print("  -> 91 % end-to-end is THERMODYNAMICALLY IMPOSSIBLE for two")
+print("     machine conversions plus a battery. So the 5 % is NOT a")
+print("     drivetrain-efficiency claim. It must be a VEHICLE-level claim.")
+print()
+
+# Vehicle-level dilution: the rider's power is only PART of the traction energy.
+# r = share of wheel energy supplied by the rider
+# chain:  E_batt = E_wheel*(1-r)/eta_motorpath
+# series: E_batt = (E_wheel - E_rider*eta_series)/eta_motorpath
+# with r = E_rider*0.961/E_wheel  ->  ratio = r*(1-eta_s/0.961)/(1-r)
+print("Vehicle-level penalty as a function of the RIDER'S SHARE of traction")
+print("energy, r.  ratio = r*(1 - eta_s/0.961) / (1 - r)")
+print()
+print(f"  {'r':>6s} {'bike class':>36s} {'battery penalty':>16s}")
+rows = [
+    (1.00, "rider does all the work (flat battery)"),
+    (0.60, "light commuter, strong rider"),
+    (0.44, "cargo bike, 250 W motor + 150 W rider"),
+    (0.30, "motor-dominant pedelec"),
+    (0.12, "heavily motor-dominant (matches 5 %)"),
+]
+for r, label in rows:
+    if r >= 1.0:
+        pen = (0.961 / eta_pm) - 1.0
+        print(f"  {r:6.2f} {label:36s} {100*pen:14.0f} % MORE PEDAL EFFORT")
+    else:
+        pen = r * (1 - eta_pm / 0.961) / (1 - r)
+        print(f"  {r:6.2f} {label:36s} {100*pen:14.1f} % more battery")
+print()
+r_for_5 = 0.05 / ((1 - eta_pm / 0.961) + 0.05)
+print(f"To reproduce Schaeffler's 5 %:  r = {r_for_5:.3f}  "
+      f"(rider supplies {100*r_for_5:.1f} % of traction energy)")
+print("  That is a genuinely motor-dominant vehicle. Read the 5 % as a")
+print("  VEHICLE-range claim on a loaded cargo bike, not as drivetrain eta.")
+print("  It is ALSO not reproducible on a light commuter where the rider")
+print("  supplies most of the energy -- which is exactly the Mando case.")
+print()
+
+# Component estimate for the Schaeffler pedal generator
+print("Component-level estimate for Schaeffler's 'pedal generator':")
+print("  cycloid gearbox, ratio 1:29  [CITED: Heinzmann Free Drive leaflet]")
+print("  single-stage cycloid eta: 0.75-0.85")
+print("  [CITED: Rice Univ. thesis 2018, compact pin-in-housing cycloid peak")
+print("          81 %; Matec 2019 experimental 0.61-0.75 across 150-850 rpm;")
+print("          Blagojevic 2012: 0.77 at mu=0.2]")
+print("  alternator at 75 rpm x 29 = 2175 rpm -> INSIDE the claw-pole sweet")
+print("  spot (2000-2500 rpm, 30-40 % load) = 0.50-0.55")
+print("  => pedal generator alone = 0.80 x 0.52 = 0.42  (0.38-0.47 range)")
+print(f"  => end-to-end with rect/ctrl/motor = "
+      f"{0.80*0.52*ETA_RECTIFIER*ETA_CONTROLLER*ETA_MOTOR_HUB:.3f}")
+print("  The 1:29 step-up is a smart move: it puts the alternator exactly")
+print("  where a claw-pole is least bad. It does not make it a PM machine.")
+print()
+print("Mando Footloose (2015): Korean car-parts basis -- the manufacturer's")
+print("own product page lists 'Alternator + Regulator' and 'ECU' as")
+print("automotive-derived parts [CITED: mandofootloose.co.kr spec page].")
+print("  It used a real automotive alternator, so eta_gen = 0.42-0.53.")
+print("  Owner reports: 'very loud (motor and pedaling generator system)'")
+print("  [CITED: ElectricBikeReview] -- consistent with a claw-pole spinning")
+print("  at a multiple of cadence.")
+print("  'once the battery dies, the bike is rendered completely unrideable'")
+print("  [CITED: idropnews] -- DIRECT EVIDENCE for the section 7 bootstrap")
+print("  finding: a separately-excited generator cannot bootstrap itself,")
+print("  and the pedal path cannot carry the rider home.")
+print()
+
+# ----------------------------------------------------------------------------
+print("=" * 78)
 print("DONE")
 print("=" * 78)

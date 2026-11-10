@@ -20,7 +20,21 @@ derailleur. Supercapacitors are a power buffer, not an energy store (19× the
 mass of LFP for the same energy). LTO is the honest answer to "I want the wear
 profile of a capacitor."
 
-Read: [`docs/analysis/chainless-drivetrain.md`](docs/analysis/chainless-drivetrain.md)
+## What is in here
+
+- `docs/analysis/chainless-drivetrain.md` — the full study: assumptions,
+  cited efficiencies, buffer sizing, the battery-less bootstrap question,
+  failure modes, sensitivity analysis, and a BOM.
+- `docs/analysis/chainless_drivetrain_model.py` — stdlib-only model that
+  re-derives every number in the document.
+
+Two production systems are reconciled in §11: Mando Footloose (2015) and
+Schaeffler/Heinzmann Free Drive (2021, fleet production 2023). Both use
+automotive claw-pole alternators, giving ~40–45 % at the pedal generator and
+**~32 % pedals-to-road**. Schaeffler's widely-quoted "5 % less efficient than a
+chain" is shown to be a *vehicle range* figure that only holds at a rider
+energy share of ~12 % — not a drivetrain efficiency, and not reproducible on a
+light commuter.
 
 ## Reproduce
 
