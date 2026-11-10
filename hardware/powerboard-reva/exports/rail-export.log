@@ -1,0 +1,60 @@
++ python3 generate_schematic.py
+Generated 32 hierarchical pages, 382 components, 1129 pin assignments
++ kicad-cli sch export netlist -o exports/powerboard-reva.net powerboard-reva.kicad_sch
++ kicad-cli sch erc -o exports/erc.rpt powerboard-reva.kicad_sch
+Found 10 violations
+Saved ERC Report to exports/erc.rpt
++ kicad-cli sch export pdf -o exports/powerboard-reva.pdf powerboard-reva.kicad_sch
+Plotted to 'exports/powerboard-reva.pdf'.
+Done.
++ kicad-cli sch export svg -o exports/svg powerboard-reva.kicad_sch
+Plotted to '/home/c08r4d0r/worktrees/cycle-rail-partition/hardware/powerboard-reva/exports/svg/powerboard-reva.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-rail-partition/hardware/powerboard-reva/exports/svg/powerboard-reva-GEN DRV8353S driver and three low-side current channels.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-rail-partition/hardware/powerboard-reva/exports/svg/powerboard-reva-GEN 100 V MOSFET bridge - schematic only.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-rail-partition/hardware/powerboard-reva/exports/svg/powerboard-reva-HUB DRV8353S driver and three low-side current channels.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-rail-partition/hardware/powerboard-reva/exports/svg/powerboard-reva-HUB 100 V MOSFET bridge - schematic only.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-rail-partition/hardware/powerboard-reva/exports/svg/powerboard-reva-Unfinished safety _ control _ supply boundaries.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-rail-partition/hardware/powerboard-reva/exports/svg/powerboard-reva-Bus-fed auxiliary and independent safety supply.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-rail-partition/hardware/powerboard-reva/exports/svg/powerboard-reva-Autonomous OV chopper comparator and rail _ brake monitors.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-rail-partition/hardware/powerboard-reva/exports/svg/powerboard-reva-Release-before-rearm DFF memory.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-rail-partition/hardware/powerboard-reva/exports/svg/powerboard-reva-LVC Schmitt fault inputs without series diode offsets.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-rail-partition/hardware/powerboard-reva/exports/svg/powerboard-reva-Independent brake chopper power stage.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-rail-partition/hardware/powerboard-reva/exports/svg/powerboard-reva-STM32G474VET6 LQFP100: power, reset, debug and control.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-rail-partition/hardware/powerboard-reva/exports/svg/powerboard-reva-MCU 3V3 decoupling - external supervised rail.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-rail-partition/hardware/powerboard-reva/exports/svg/powerboard-reva-Six CSA ADC input filters and brake status sense.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-rail-partition/hardware/powerboard-reva/exports/svg/powerboard-reva-3V3 Hall interfaces and optional quadrature encoder.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-rail-partition/hardware/powerboard-reva/exports/svg/powerboard-reva-GEN independent raw CSA window trips.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-rail-partition/hardware/powerboard-reva/exports/svg/powerboard-reva-HUB independent raw CSA window trips.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-rail-partition/hardware/powerboard-reva/exports/svg/powerboard-reva-Ratiometric OC window and wired sink fault.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-rail-partition/hardware/powerboard-reva/exports/svg/powerboard-reva-Bounded bench DC entry - active pairs inhibited.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-rail-partition/hardware/powerboard-reva/exports/svg/powerboard-reva-LEFT supervised binary brake interface.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-rail-partition/hardware/powerboard-reva/exports/svg/powerboard-reva-RIGHT supervised binary brake interface.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-rail-partition/hardware/powerboard-reva/exports/svg/powerboard-reva-Rider dump PWM OR independent emergency overvoltage.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-rail-partition/hardware/powerboard-reva/exports/svg/powerboard-reva-OFFBOARD supervised switch end-of-line network - candidate.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-rail-partition/hardware/powerboard-reva/exports/svg/powerboard-reva-LEFT selected FSR low-voltage bench frontend.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-rail-partition/hardware/powerboard-reva/exports/svg/powerboard-reva-LEFT FSR candidate ESD and secondary clamps - unqualified.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-rail-partition/hardware/powerboard-reva/exports/svg/powerboard-reva-RIGHT selected FSR low-voltage bench frontend.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-rail-partition/hardware/powerboard-reva/exports/svg/powerboard-reva-RIGHT FSR candidate ESD and secondary clamps - unqualified.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-rail-partition/hardware/powerboard-reva/exports/svg/powerboard-reva-MAIN back-to-back candidate - hardware inhibited.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-rail-partition/hardware/powerboard-reva/exports/svg/powerboard-reva-PRE back-to-back candidate - hardware inhibited.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-rail-partition/hardware/powerboard-reva/exports/svg/powerboard-reva-CTRL3V3 pack-side buck - unqualified, enables inhibited.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-rail-partition/hardware/powerboard-reva/exports/svg/powerboard-reva-Rail partition: SINK12 always-on, DRIVE12_MCU3V3 delayed and inhibited.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-rail-partition/hardware/powerboard-reva/exports/svg/powerboard-reva-Rail partition passive networks - unqualified.svg'.
+Done.
++ python3 verify_exports.py
+{
+  "components": 382,
+  "nets": 218,
+  "verified_pin_assignments": 1129,
+  "explicit_nc_endpoints": 51,
+  "mosfets": 29,
+  "drivers": 4,
+  "erc_errors": 10,
+  "erc_warnings": 0,
+  "erc_reason": "Ten known undriven supply errors remain unresolved, NOT waived.",
+  "status": "PARTIAL_NOT_SAFE_TO_ENERGIZE",
+  "svg_pages": 32
+}
+Found 10 violations
+Saved ERC Report to exports/fsr-erc-strict.json
+Strict ERC exit: 5 ; nonzero violations remain release blockers

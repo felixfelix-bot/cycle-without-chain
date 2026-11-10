@@ -9,7 +9,7 @@ def validate(root):
          for net in root.findall('./nets/net') for x in net.findall('node')}
     v = {c.attrib['ref']: c.findtext('value') for c in root.findall('./components/comp')}
     expected = {
-        'U500': ['PGND','CTRL_RAW','CTRL_UVLO','CTRL_RON','CTRL_FB',None,'CTRL_BST','CTRL_SW','PGND'],
+        'U500': ['PGND','CTRL_RAW','CTRL_UVLO','CTRL_RON','CTRL_FB','CTRL_PG','CTRL_BST','CTRL_SW','PGND'],
         'D500': ['CTRL_RAW','ENTRY_FUSED'], 'L500': ['CTRL_SW','CTRL3V3'],
         'C500': ['CTRL_RAW','PGND'], 'C501': ['CTRL_RAW','PGND'],
         'C502': ['CTRL_BST','CTRL_SW'], 'C503': ['CTRL3V3','PGND'],
@@ -31,8 +31,8 @@ def validate(root):
                         'R501':'87.3k','R502':'49.9k','R503':'150k','R504':'1M','R505':'52.3k',
                         'R402':'0R','R412':'0R'}.items():
         if not v.get(ref,'').startswith(prefix): raise ValueError(f'{ref}: wrong/missing value')
-    if sum(value.startswith('LM5164') for value in v.values()) != 1:
-        raise ValueError('exactly one LM5164 in this milestone')
+    if sum(value.startswith('LM5164') for value in v.values()) != 2:
+        raise ValueError('exactly two LM5164 after partition')
     return n
 
 class CtrlSupplyTests(unittest.TestCase):
