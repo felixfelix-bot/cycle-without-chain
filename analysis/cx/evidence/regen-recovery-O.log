@@ -1,0 +1,30 @@
+CX-03 regen recovery, the chain the committed model prints.
+
+  KE(25 km/h) = 0.5 * 94 kg * 6.9444^2 m/s = 2267 J = 0.6296 Wh
+  one hop  = 0.86 gen x 0.92 batt = 0.7912
+  round trip = 0.7912^2 = 0.6260
+
+  CURRENT (two hops, the chain the model prints):
+    2267 J x 0.7912 = 1793 J = 0.4981 Wh stored
+          x 0.7912 = 1419 J = 0.3941 Wh back at the wheel
+    20 stops -> 7.88 Wh usable = 14.2 % of the 55.6 Wh trip
+
+  WITHDRAWN (one hop at 65 %, kept only to show what it was):
+    20 x 0.6296 Wh x 0.65 = 8.18 Wh
+
+  VERDICT: the current model produces 7.9 Wh, so 7.9 Wh is current and
+           the 8.2 Wh single-hop figure is superseded. Both round
+           to single-digit Wh and neither changes the verdict.
+
+{
+  "ke_j": 2266.5895061728397,
+  "ke_wh": 0.6296081961591221,
+  "one_hop": 0.7912,
+  "round_trip": 0.62599744,
+  "stored_wh_per_stop": 0.49814600480109744,
+  "back_at_wheel_wh_per_stop": 0.39413311899862835,
+  "total_wh": 7.882662379972567,
+  "trip_wh": 55.5567572016461,
+  "percent_of_trip": 14.188485392266577,
+  "single_hop_65_wh": 8.18490655006859
+}

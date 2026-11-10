@@ -1,0 +1,101 @@
+CX-01 OV trip band, LM339B, output-low limited by the full-temperature
+VOL spec (550 mV over -40...85 C, ISINK <= 4 mA, VID = -1 V).
+
+  divider          Rt = 225k, Rb = 10k, Rh = 330k, Vref = 2.5 V
+  gain 1+Rt/Rb+Rt/Rh = 24.181818
+  Rt/Rh              = 0.681818
+
+  Vbus_trip = Vref*(1+Rt/Rb+Rt/Rh) - Vout*Rt/Rh
+  nominal turn-on  (Vout = 0.2 V) = 60.31818 V
+  nominal turn-off (Vout = VOH)   = 58.20455 V
+  nominal hysteresis              = 2.11364 V
+
+  corners swept: 128 (6 independent binary limits x 2 output-low levels)
+
+  published corner, Vout low 0...0.40 V:
+    turn-on  59.41720 ... 61.22594 V
+  qualified corner, Vout low 0...0.55 V:
+    turn-on  59.31539 ... 61.22594 V
+    turn-off 57.35629 ... 59.05819 V
+
+  worst turn-on corner (minimum):
+    Rt = 224493.8 ohm  Rb = 10022.5 ohm  Rh = 330742.5 ohm
+    Vref = 2.479000 V  Vout(low) = 0.55 V
+    = 2.479000 * 24.077734 - 0.55 * 0.678757
+    = 59.31539 V
+
+  shift from the 0.40 V corner to the 0.55 V corner:
+    swept      = 0.10181 V
+    closed form (Rt/Rh)*dVout = 0.678757 * 0.15 = 0.10181 V
+    coupling output-low to the VOH corner is immaterial: True
+
+  sink current at the worst VOH with Vout = 0.55 V: 2.618 mA (limit 4 mA)
+
+  qualified minimum turn-on = 59.315 V
+  margin to the release-contract bus maximum 58.4 V = 0.915 V
+
+  NOT INCLUDED, and not claimed: VOL at small input overdrive (the
+  datasheet limit is at VID = -1 V; at threshold VID -> 0), resistor
+  tracking, ageing, reference load regulation.
+
+{
+  "divider_gain": 24.181818181818183,
+  "rt_over_rh": 0.6818181818181818,
+  "nominal": {
+    "on": 60.31818181818183,
+    "off": 58.20454545454546,
+    "hysteresis": 2.113636363636367
+  },
+  "band_0v40": {
+    "on_min": 59.41720029932652,
+    "on_max": 61.22594282590374,
+    "off_min": 57.35629200208622,
+    "off_max": 59.058190496799625,
+    "corners": 128,
+    "worst_on": {
+      "rt": 224493.75,
+      "rb": 10022.5,
+      "rh": 330742.5,
+      "vref": 2.479,
+      "voh": 3.1679999999999997,
+      "vol": 0.4,
+      "signs": [
+        -1,
+        1,
+        1,
+        -1,
+        -1,
+        -1
+      ]
+    }
+  },
+  "band_0v55": {
+    "on_min": 59.315386766139824,
+    "on_max": 61.22594282590374,
+    "off_min": 57.35629200208622,
+    "off_max": 59.058190496799625,
+    "corners": 128,
+    "worst_on": {
+      "rt": 224493.75,
+      "rb": 10022.5,
+      "rh": 330742.5,
+      "vref": 2.479,
+      "voh": 3.1679999999999997,
+      "vol": 0.55,
+      "signs": [
+        -1,
+        1,
+        1,
+        -1,
+        -1,
+        -1
+      ]
+    }
+  },
+  "shift_0v40_to_0v55": 0.10181353318669295,
+  "shift_closed_form": 0.10181353318669359,
+  "corner_coupling_is_immaterial": true,
+  "margin_to_58v4": 0.9153867661398252,
+  "sink_current_at_worst_voh": 0.0026179999999999992,
+  "sink_limit": 0.004
+}

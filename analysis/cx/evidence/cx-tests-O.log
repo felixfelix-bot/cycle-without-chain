@@ -1,0 +1,26 @@
+test_band_with_0v4_output_low_reproduces_59_417 (test_ov_threshold.OvThresholdTest.test_band_with_0v4_output_low_reproduces_59_417) ... ok
+test_band_with_0v55_output_low_is_the_qualified_minimum (test_ov_threshold.OvThresholdTest.test_band_with_0v55_output_low_is_the_qualified_minimum) ... ok
+test_divider_gain_matches_the_report (test_ov_threshold.OvThresholdTest.test_divider_gain_matches_the_report) ... ok
+test_hysteresis_survives_every_corner (test_ov_threshold.OvThresholdTest.test_hysteresis_survives_every_corner) ... ok
+test_margin_to_the_chosen_bus_maximum (test_ov_threshold.OvThresholdTest.test_margin_to_the_chosen_bus_maximum) ... ok
+test_minimum_turn_on_is_monotone_in_the_output_low_limit (test_ov_threshold.OvThresholdTest.test_minimum_turn_on_is_monotone_in_the_output_low_limit) ... ok
+test_nominal_trip_reproduces_the_published_extremes (test_ov_threshold.OvThresholdTest.test_nominal_trip_reproduces_the_published_extremes) ... ok
+test_rejects_impossible_hardware (test_ov_threshold.OvThresholdTest.test_rejects_impossible_hardware) ... ok
+test_sink_current_stays_inside_the_datasheet_test_condition (test_ov_threshold.OvThresholdTest.test_sink_current_stays_inside_the_datasheet_test_condition) ... ok
+test_the_0v55_corner_moves_down_by_the_reviewed_0_102_v (test_ov_threshold.OvThresholdTest.test_the_0v55_corner_moves_down_by_the_reviewed_0_102_v) ... ok
+test_the_band_covers_128_uncoupled_corners (test_ov_threshold.OvThresholdTest.test_the_band_covers_128_uncoupled_corners) ... ok
+test_every_withdrawn_mention_points_at_section_12 (test_regen_recovery.DocumentStatusTest.test_every_withdrawn_mention_points_at_section_12) ... ok
+test_section_12_keeps_the_current_figure (test_regen_recovery.DocumentStatusTest.test_section_12_keeps_the_current_figure) ... ok
+test_withdrawn_figure_is_still_present_and_marked (test_regen_recovery.DocumentStatusTest.test_withdrawn_figure_is_still_present_and_marked) ... ok
+test_helper_agrees_with_the_committed_model_stdout (test_regen_recovery.RegenRecoveryTest.test_helper_agrees_with_the_committed_model_stdout) ... ok
+test_kinetic_energy_matches_the_model (test_regen_recovery.RegenRecoveryTest.test_kinetic_energy_matches_the_model) ... ok
+test_rejects_impossible_inputs (test_regen_recovery.RegenRecoveryTest.test_rejects_impossible_inputs) ... ok
+test_single_hop_65_percent_reproduces_the_withdrawn_figure (test_regen_recovery.RegenRecoveryTest.test_single_hop_65_percent_reproduces_the_withdrawn_figure) ... ok
+test_trip_energy_denominator_is_the_models_55_6_wh (test_regen_recovery.RegenRecoveryTest.test_trip_energy_denominator_is_the_models_55_6_wh) ... ok
+test_two_hop_chain_is_the_models_0_791_squared (test_regen_recovery.RegenRecoveryTest.test_two_hop_chain_is_the_models_0_791_squared) ... ok
+
+----------------------------------------------------------------------
+Ran 20 tests in 0.094s
+
+OK
+exit=0
