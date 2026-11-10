@@ -29,10 +29,10 @@ class ExportVerifierTests(unittest.TestCase):
                     self.assertEqual(result.returncode, 0, result.stderr)
                     self.assertIn('PARTIAL_NOT_SAFE_TO_ENERGIZE', result.stdout)
                     summary = json.loads(result.stdout)
-                    for key, count in {'components': 246, 'nets': 153,
-                                       'verified_pin_assignments': 784, 'explicit_nc_endpoints': 45, 'mosfets': 25,
+                    for key, count in {'components': 257, 'nets': 157,
+                                       'verified_pin_assignments': 808, 'explicit_nc_endpoints': 45, 'mosfets': 25,
                                        'drivers': 2, 'erc_errors': 4, 'erc_warnings': 0,
-                                       'svg_pages': 18}.items():
+                                       'svg_pages': 19}.items():
                         self.assertEqual(summary[key], count)
                 else:
                     self.assertNotEqual(result.returncode, 0, result.stdout)

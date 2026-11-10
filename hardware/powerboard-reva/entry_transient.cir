@@ -1,0 +1,13 @@
+* Behavioral passive precharge/discharge, NOT vendor/thermal/contact proof
+Vsrc src 0 PWL(0 0 1u 58.4 1 58.4 1.000001 0)
+Vctl ctl 0 PWL(0 1 1 1 1.000001 0)
+Spre src pre ctl 0 SW
+.model SW SW(Ron=.01 Roff=1e12 Vt=.5)
+Rpre pre bus 100
+Cbus bus 0 1500u
+Rbleed bus 0 10000
+.tran 1m 40
+.meas tran bus_1s FIND v(bus) AT=.99
+.meas tran bus_39s FIND v(bus) AT=39
+.meas tran peak_i MIN i(Vsrc) FROM=0 TO=1
+.end

@@ -146,7 +146,7 @@ s.text('OFFBOARD interfaces: 3V3 supply, brake loop and protected bus entry.',20
 s.text('DO NOT ENERGIZE. Protected entry unfinished; MCU and protection remain unqualified.',20.32,22.86)
 def connector(value,nets,x,y):
     counters['J']+=1;s.part(stock('Connector_Generic','Conn_01x'+str(len(nets)).zfill(2)),'J'+str(counters['J']),value,x,y,{str(i+1):net for i,net in enumerate(nets)})
-connector('PROTECTED_DC_INPUT_EXT',['DC_LINK','PGND'],63.5,48.26)
+connector('BUS_TEST_ONLY_NOT_SOURCE_INPUT',['DC_LINK','PGND'],63.5,48.26)
 connector('MCU_SUPPLY_EXT',['LOGIC3V3_EXT','PGND'],63.5,83.82)
 for j,prefix in enumerate(['GEN','HUB']):
     x=177.8+j*116.84
@@ -165,6 +165,8 @@ from mcu_circuit import populate as populate_mcu
 populate_mcu(globals())
 from fast_oc_circuit import populate as populate_oc
 populate_oc(globals())
+from entry_circuit import populate as populate_entry
+populate_entry(globals())
 local_symbols=[local_drv]
 for a in custom_symbols:
     b=parse(dump(a));b[1]=q(val(b[1]).split(':')[1]);local_symbols.append(b)

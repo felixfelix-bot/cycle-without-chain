@@ -71,7 +71,7 @@ R36,4R7 provisional,,hub-bridge
 R37,100k G-S,,hub-bridge
 R38,2m 1% 3W WSLP2512,Resistor_SMD:R_2512_6332Metric,hub-bridge
 C20,1u 100V X7R provisional,,hub-bridge
-J1,PROTECTED_DC_INPUT_EXT,,external-boundaries
+J1,BUS_TEST_ONLY_NOT_SOURCE_INPUT,,external-boundaries
 J2,MCU_SUPPLY_EXT,,external-boundaries
 J3,GEN_MACHINE_PHASES,,external-boundaries
 J4,HUB_MACHINE_PHASES,,external-boundaries
@@ -245,3 +245,14 @@ R112,10k 0.1%,Resistor_SMD:R_0805_2012Metric,fast-oc-reference
 R113,10k 0.1%,Resistor_SMD:R_0805_2012Metric,fast-oc-reference
 R114,28k7 0.1%,Resistor_SMD:R_0805_2012Metric,fast-oc-reference
 R115,4k7 1%,Resistor_SMD:R_0805_2012Metric,fast-oc-reference
+J40,Anderson 992G1 SB50 keyed SOURCE,,dc-entry
+F1,KLKD020CN 20A 600VDC candidate AT SOURCE,,dc-entry
+J41,SB50 992G1 removable MAIN jumper DEAD ONLY,,dc-entry
+J42,SB50 992G1 removable PRECHARGE jumper,,dc-entry
+R116,100R 1% RH050100R0FE02,,dc-entry
+R117,2m 1% WSLP2512R0020FEA Kelvin,,dc-entry
+D20,STPS30100ST reverse clamp ONLY not reverse blocker,,dc-entry
+C73,470u 100V UHE2A471MHD +/-20%,,dc-entry
+C74,470u 100V UHE2A471MHD +/-20%,,dc-entry
+R118,10k 1% RH02510K00FE02 always-on bleed,,dc-entry
+J43,Kelvin BUS measurement isolated instrument ONLY,,dc-entry

@@ -1,4 +1,4 @@
-ERC report (2026-11-10T13:05:55+0100, Encoding UTF8)
+ERC report (2026-11-10T13:32:09+0100, Encoding UTF8)
 Report includes: Errors, Warnings
 
 ***** Sheet /
@@ -48,5 +48,7 @@ Report includes: Errors, Warnings
 ***** Sheet /HUB independent raw CSA window trips/
 
 ***** Sheet /Ratiometric OC window and wired sink fault/
+
+***** Sheet /Bounded bench DC entry - manual dead-circuit sequencing only/
 
  ** ERC messages: 4  Errors 4  Warnings 0
