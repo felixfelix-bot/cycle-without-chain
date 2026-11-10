@@ -1,0 +1,21 @@
+test_bucket_count_mismatch_fails (test_register_check.RegisterCheckTest.test_bucket_count_mismatch_fails) ... ok
+test_bucket_outside_abcd_fails (test_register_check.RegisterCheckTest.test_bucket_outside_abcd_fails) ... ok
+test_bucket_with_prose_fails (test_register_check.RegisterCheckTest.test_bucket_with_prose_fails) ... ok
+test_citation_without_document_fails (test_register_check.RegisterCheckTest.test_citation_without_document_fails) ... ok
+test_citation_without_section_fails (test_register_check.RegisterCheckTest.test_citation_without_section_fails) ... ok
+test_duplicate_id_fails (test_register_check.RegisterCheckTest.test_duplicate_id_fails) ... ok
+test_empty_bucket_fails (test_register_check.RegisterCheckTest.test_empty_bucket_fails) ... ok
+test_faults_still_detected_under_optimized (test_register_check.RegisterCheckTest.test_faults_still_detected_under_optimized) ... ok
+test_missing_citation_fails (test_register_check.RegisterCheckTest.test_missing_citation_fails) ... ok
+test_missing_file_is_not_run (test_register_check.RegisterCheckTest.test_missing_file_is_not_run) ... ok
+test_missing_gate_table_is_not_run (test_register_check.RegisterCheckTest.test_missing_gate_table_is_not_run) ... ok
+test_missing_summary_bucket_fails (test_register_check.RegisterCheckTest.test_missing_summary_bucket_fails) ... ok
+test_missing_summary_table_is_not_run (test_register_check.RegisterCheckTest.test_missing_summary_table_is_not_run) ... ok
+test_real_register_passes (test_register_check.RegisterCheckTest.test_real_register_passes) ... ok
+test_real_register_passes_optimized (test_register_check.RegisterCheckTest.test_real_register_passes_optimized) ... ok
+test_short_row_fails (test_register_check.RegisterCheckTest.test_short_row_fails) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.632s
+
+OK

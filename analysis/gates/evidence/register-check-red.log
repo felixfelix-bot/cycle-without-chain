@@ -1,0 +1,160 @@
+test_bucket_count_mismatch_fails (test_register_check.RegisterCheckTest.test_bucket_count_mismatch_fails) ... FAIL
+test_bucket_outside_abcd_fails (test_register_check.RegisterCheckTest.test_bucket_outside_abcd_fails) ... FAIL
+test_bucket_with_prose_fails (test_register_check.RegisterCheckTest.test_bucket_with_prose_fails) ... FAIL
+test_citation_without_document_fails (test_register_check.RegisterCheckTest.test_citation_without_document_fails) ... FAIL
+test_citation_without_section_fails (test_register_check.RegisterCheckTest.test_citation_without_section_fails) ... FAIL
+test_duplicate_id_fails (test_register_check.RegisterCheckTest.test_duplicate_id_fails) ... FAIL
+test_empty_bucket_fails (test_register_check.RegisterCheckTest.test_empty_bucket_fails) ... FAIL
+test_faults_still_detected_under_optimized (test_register_check.RegisterCheckTest.test_faults_still_detected_under_optimized) ... FAIL
+test_missing_citation_fails (test_register_check.RegisterCheckTest.test_missing_citation_fails) ... FAIL
+test_missing_file_is_not_run (test_register_check.RegisterCheckTest.test_missing_file_is_not_run) ... ok
+test_missing_gate_table_is_not_run (test_register_check.RegisterCheckTest.test_missing_gate_table_is_not_run) ... ok
+test_missing_summary_bucket_fails (test_register_check.RegisterCheckTest.test_missing_summary_bucket_fails) ... FAIL
+test_missing_summary_table_is_not_run (test_register_check.RegisterCheckTest.test_missing_summary_table_is_not_run) ... ok
+test_real_register_passes (test_register_check.RegisterCheckTest.test_real_register_passes) ... FAIL
+test_real_register_passes_optimized (test_register_check.RegisterCheckTest.test_real_register_passes_optimized) ... FAIL
+test_short_row_fails (test_register_check.RegisterCheckTest.test_short_row_fails) ... FAIL
+
+======================================================================
+FAIL: test_bucket_count_mismatch_fails (test_register_check.RegisterCheckTest.test_bucket_count_mismatch_fails)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-open-gates/analysis/gates/tests/test_register_check.py", line 135, in test_bucket_count_mismatch_fails
+    self.assert_fails(self.run_check(text), "summary count")
+  File "/home/c08r4d0r/worktrees/cycle-open-gates/analysis/gates/tests/test_register_check.py", line 77, in assert_fails
+    self.assertEqual(result.returncode, 1, result.stderr + result.stdout)
+AssertionError: 2 != 1 : /home/c08r4d0r/.hermes/hermes-agent/venv/bin/python3: can't open file '/home/c08r4d0r/worktrees/cycle-open-gates/analysis/gates/register_check.py': [Errno 2] No such file or directory
+
+
+======================================================================
+FAIL: test_bucket_outside_abcd_fails (test_register_check.RegisterCheckTest.test_bucket_outside_abcd_fails)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-open-gates/analysis/gates/tests/test_register_check.py", line 104, in test_bucket_outside_abcd_fails
+    self.assert_fails(self.run_check(text), "not one of A/B/C/D")
+  File "/home/c08r4d0r/worktrees/cycle-open-gates/analysis/gates/tests/test_register_check.py", line 77, in assert_fails
+    self.assertEqual(result.returncode, 1, result.stderr + result.stdout)
+AssertionError: 2 != 1 : /home/c08r4d0r/.hermes/hermes-agent/venv/bin/python3: can't open file '/home/c08r4d0r/worktrees/cycle-open-gates/analysis/gates/register_check.py': [Errno 2] No such file or directory
+
+
+======================================================================
+FAIL: test_bucket_with_prose_fails (test_register_check.RegisterCheckTest.test_bucket_with_prose_fails)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-open-gates/analysis/gates/tests/test_register_check.py", line 108, in test_bucket_with_prose_fails
+    self.assert_fails(self.run_check(text), "not one of A/B/C/D")
+  File "/home/c08r4d0r/worktrees/cycle-open-gates/analysis/gates/tests/test_register_check.py", line 77, in assert_fails
+    self.assertEqual(result.returncode, 1, result.stderr + result.stdout)
+AssertionError: 2 != 1 : /home/c08r4d0r/.hermes/hermes-agent/venv/bin/python3: can't open file '/home/c08r4d0r/worktrees/cycle-open-gates/analysis/gates/register_check.py': [Errno 2] No such file or directory
+
+
+======================================================================
+FAIL: test_citation_without_document_fails (test_register_check.RegisterCheckTest.test_citation_without_document_fails)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-open-gates/analysis/gates/tests/test_register_check.py", line 116, in test_citation_without_document_fails
+    self.assert_fails(self.run_check(text), "no citation")
+  File "/home/c08r4d0r/worktrees/cycle-open-gates/analysis/gates/tests/test_register_check.py", line 77, in assert_fails
+    self.assertEqual(result.returncode, 1, result.stderr + result.stdout)
+AssertionError: 2 != 1 : /home/c08r4d0r/.hermes/hermes-agent/venv/bin/python3: can't open file '/home/c08r4d0r/worktrees/cycle-open-gates/analysis/gates/register_check.py': [Errno 2] No such file or directory
+
+
+======================================================================
+FAIL: test_citation_without_section_fails (test_register_check.RegisterCheckTest.test_citation_without_section_fails)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-open-gates/analysis/gates/tests/test_register_check.py", line 120, in test_citation_without_section_fails
+    self.assert_fails(self.run_check(text), "no citation")
+  File "/home/c08r4d0r/worktrees/cycle-open-gates/analysis/gates/tests/test_register_check.py", line 77, in assert_fails
+    self.assertEqual(result.returncode, 1, result.stderr + result.stdout)
+AssertionError: 2 != 1 : /home/c08r4d0r/.hermes/hermes-agent/venv/bin/python3: can't open file '/home/c08r4d0r/worktrees/cycle-open-gates/analysis/gates/register_check.py': [Errno 2] No such file or directory
+
+
+======================================================================
+FAIL: test_duplicate_id_fails (test_register_check.RegisterCheckTest.test_duplicate_id_fails)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-open-gates/analysis/gates/tests/test_register_check.py", line 125, in test_duplicate_id_fails
+    self.assert_fails(self.run_check(text), "duplicate ID")
+  File "/home/c08r4d0r/worktrees/cycle-open-gates/analysis/gates/tests/test_register_check.py", line 77, in assert_fails
+    self.assertEqual(result.returncode, 1, result.stderr + result.stdout)
+AssertionError: 2 != 1 : /home/c08r4d0r/.hermes/hermes-agent/venv/bin/python3: can't open file '/home/c08r4d0r/worktrees/cycle-open-gates/analysis/gates/register_check.py': [Errno 2] No such file or directory
+
+
+======================================================================
+FAIL: test_empty_bucket_fails (test_register_check.RegisterCheckTest.test_empty_bucket_fails)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-open-gates/analysis/gates/tests/test_register_check.py", line 100, in test_empty_bucket_fails
+    self.assert_fails(self.run_check(text), "empty bucket")
+  File "/home/c08r4d0r/worktrees/cycle-open-gates/analysis/gates/tests/test_register_check.py", line 77, in assert_fails
+    self.assertEqual(result.returncode, 1, result.stderr + result.stdout)
+AssertionError: 2 != 1 : /home/c08r4d0r/.hermes/hermes-agent/venv/bin/python3: can't open file '/home/c08r4d0r/worktrees/cycle-open-gates/analysis/gates/register_check.py': [Errno 2] No such file or directory
+
+
+======================================================================
+FAIL: test_faults_still_detected_under_optimized (test_register_check.RegisterCheckTest.test_faults_still_detected_under_optimized)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-open-gates/analysis/gates/tests/test_register_check.py", line 162, in test_faults_still_detected_under_optimized
+    self.assert_fails(self.run_check(text, optimized=True), "not one of A/B/C/D")
+  File "/home/c08r4d0r/worktrees/cycle-open-gates/analysis/gates/tests/test_register_check.py", line 77, in assert_fails
+    self.assertEqual(result.returncode, 1, result.stderr + result.stdout)
+AssertionError: 2 != 1 : /home/c08r4d0r/.hermes/hermes-agent/venv/bin/python3: can't open file '/home/c08r4d0r/worktrees/cycle-open-gates/analysis/gates/register_check.py': [Errno 2] No such file or directory
+
+
+======================================================================
+FAIL: test_missing_citation_fails (test_register_check.RegisterCheckTest.test_missing_citation_fails)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-open-gates/analysis/gates/tests/test_register_check.py", line 112, in test_missing_citation_fails
+    self.assert_fails(self.run_check(text), "no citation")
+  File "/home/c08r4d0r/worktrees/cycle-open-gates/analysis/gates/tests/test_register_check.py", line 77, in assert_fails
+    self.assertEqual(result.returncode, 1, result.stderr + result.stdout)
+AssertionError: 2 != 1 : /home/c08r4d0r/.hermes/hermes-agent/venv/bin/python3: can't open file '/home/c08r4d0r/worktrees/cycle-open-gates/analysis/gates/register_check.py': [Errno 2] No such file or directory
+
+
+======================================================================
+FAIL: test_missing_summary_bucket_fails (test_register_check.RegisterCheckTest.test_missing_summary_bucket_fails)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-open-gates/analysis/gates/tests/test_register_check.py", line 139, in test_missing_summary_bucket_fails
+    self.assert_fails(self.run_check(text), "summary count")
+  File "/home/c08r4d0r/worktrees/cycle-open-gates/analysis/gates/tests/test_register_check.py", line 77, in assert_fails
+    self.assertEqual(result.returncode, 1, result.stderr + result.stdout)
+AssertionError: 2 != 1 : /home/c08r4d0r/.hermes/hermes-agent/venv/bin/python3: can't open file '/home/c08r4d0r/worktrees/cycle-open-gates/analysis/gates/register_check.py': [Errno 2] No such file or directory
+
+
+======================================================================
+FAIL: test_real_register_passes (test_register_check.RegisterCheckTest.test_real_register_passes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-open-gates/analysis/gates/tests/test_register_check.py", line 87, in test_real_register_passes
+    self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
+AssertionError: 2 != 0 : /home/c08r4d0r/.hermes/hermes-agent/venv/bin/python3: can't open file '/home/c08r4d0r/worktrees/cycle-open-gates/analysis/gates/register_check.py': [Errno 2] No such file or directory
+
+
+======================================================================
+FAIL: test_real_register_passes_optimized (test_register_check.RegisterCheckTest.test_real_register_passes_optimized)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-open-gates/analysis/gates/tests/test_register_check.py", line 95, in test_real_register_passes_optimized
+    self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
+AssertionError: 2 != 0 : /home/c08r4d0r/.hermes/hermes-agent/venv/bin/python3: can't open file '/home/c08r4d0r/worktrees/cycle-open-gates/analysis/gates/register_check.py': [Errno 2] No such file or directory
+
+
+======================================================================
+FAIL: test_short_row_fails (test_register_check.RegisterCheckTest.test_short_row_fails)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-open-gates/analysis/gates/tests/test_register_check.py", line 130, in test_short_row_fails
+    self.assert_fails(self.run_check(text), "column")
+  File "/home/c08r4d0r/worktrees/cycle-open-gates/analysis/gates/tests/test_register_check.py", line 77, in assert_fails
+    self.assertEqual(result.returncode, 1, result.stderr + result.stdout)
+AssertionError: 2 != 1 : /home/c08r4d0r/.hermes/hermes-agent/venv/bin/python3: can't open file '/home/c08r4d0r/worktrees/cycle-open-gates/analysis/gates/register_check.py': [Errno 2] No such file or directory
+
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.449s
+
+FAILED (failures=13)
