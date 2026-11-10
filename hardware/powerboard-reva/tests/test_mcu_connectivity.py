@@ -25,6 +25,7 @@ def validate(parts,nets):
         hits = [r for r,v in parts.items() if r.startswith(kind) and v.startswith(prefix) and {nets.get((r,'1')),nets.get((r,'2'))} == {a,b}]
         if not hits: raise ValueError(f'missing {prefix} {kind}: {a} -- {b}')
     if parts.get('U17') != 'STM32G474VET6': raise ValueError('missing real STM32G474VET6')
+    for p,n in {4:'FSR_SAMPLE_ENABLE',18:'LEFT_FSR_ADC',25:'RIGHT_FSR_ADC'}.items():pin('U17',p,n)
     for p,n in PWM.items(): pin('U17',p,n)
     for p in [46,84]: pin('U17',p,'TIMER_BREAK_OK')
     pin('U16',4,'TIMER_BREAK_OK')
@@ -45,7 +46,7 @@ def validate(parts,nets):
         n=f'{pre}_HALL_{i}';pin('U17',p,n);element('R',n+'_EXT',n,'1k');element('R',n+'_EXT','LOGIC3V3_EXT','10k');element('C',n,'PGND','1n')
     for n in ['ENC_A','ENC_B']:
         element('R',n+'_EXT',n,'1k');element('R',n+'_EXT','LOGIC3V3_EXT','10k');element('C',n,'PGND','1n')
-    unused = {4,5,7,8,9,10,11,12,13,19,30,31,38,47,51,52,53,54,68,69,70,71,72,73,78,79,80,81,82,83,85,86,87,88,89,90,91,96,97,98}
+    unused = {5,7,8,9,10,11,12,13,19,30,31,38,47,51,52,53,54,68,69,70,71,72,73,78,79,80,81,82,83,85,86,87,88,89,90,91,96,97,98}
     for p in unused:
         if not nets.get(('U17',str(p)),'').startswith('unconnected-(U17-'):
             raise ValueError(f'unused MCU pin {p} must be explicit NC')

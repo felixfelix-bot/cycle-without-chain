@@ -1,4 +1,4 @@
-ERC report (2026-11-10T13:54:10+0100, Encoding UTF8)
+ERC report (2026-11-10T14:42:25+0100, Encoding UTF8)
 Report includes: Errors, Warnings
 
 ***** Sheet /
@@ -51,12 +51,23 @@ Report includes: Errors, Warnings
 
 ***** Sheet /Bounded bench DC entry - manual dead-circuit sequencing only/
 
-***** Sheet /LEFT rider Hall and supervised binary interface/
+***** Sheet /LEFT supervised binary brake interface/
 
-***** Sheet /RIGHT rider Hall and supervised binary interface/
+***** Sheet /RIGHT supervised binary brake interface/
 
 ***** Sheet /Rider dump PWM OR independent emergency overvoltage/
 
 ***** Sheet /OFFBOARD supervised switch end-of-line network - candidate/
 
- ** ERC messages: 4  Errors 4  Warnings 0
+***** Sheet /LEFT selected FSR low-voltage bench frontend/
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(43.18 mm, 177.80 mm): Symbol U26 Pin 5 [V+, Power input, Line]
+
+***** Sheet /LEFT FSR candidate ESD and secondary clamps - unqualified/
+
+***** Sheet /RIGHT selected FSR low-voltage bench frontend/
+
+***** Sheet /RIGHT FSR candidate ESD and secondary clamps - unqualified/
+
+ ** ERC messages: 5  Errors 5  Warnings 0

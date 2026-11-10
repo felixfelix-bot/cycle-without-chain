@@ -10,8 +10,8 @@ def validate(parts,nets):
             raise ValueError(f'missing {prefix} {a}/{b}')
     pin('U6',11,'FAULT_CHAIN'); pin('J5',2,'FAULT_CHAIN')
     pin('U14',3,'WD_OK'); pin('U14',6,'OC_OK'); pin('U16',1,'HEALTHY')
-    for p,n in {18:'LEFT_HALL_ADC',25:'RIGHT_HALL_ADC',26:'LEFT_SWITCH_ADC',34:'RIGHT_SWITCH_ADC'}.items(): pin('U17',p,n)
-    for i,n in enumerate(['LEFT_HALL','RIGHT_HALL','LEFT_SWITCH','RIGHT_SWITCH']):
+    for p,n in {18:'LEFT_FSR_ADC',25:'RIGHT_FSR_ADC',26:'LEFT_SWITCH_ADC',34:'RIGHT_SWITCH_ADC'}.items(): pin('U17',p,n)
+    for i,n in enumerate(['LEFT_SWITCH','RIGHT_SWITCH'], start=2):
         element('R',n+'_EXT',n+'_ADC','10k')
         element('C',n+'_ADC','PGND','10n')
         pin('D'+str(30+i),1,n+'_EXT');pin('D'+str(30+i),2,'PGND')
@@ -25,6 +25,6 @@ class BrakeTopology(unittest.TestCase):
     def test_export(self):validate(*exported())
     def test_mutations(self):
         parts,nets=exported();validate(parts,nets)
-        for e in [('U6','11'),('U14','3'),('U14','6'),('U17','18'),('D34','1'),('D34','2'),('D30','2'),('U10','6')]:
+        for e in [('U6','11'),('U14','3'),('U14','6'),('U17','18'),('D36','1'),('D36','2'),('D32','2'),('U10','6')]:
             bad=dict(nets);bad[e]='BROKEN'
             with self.subTest(endpoint=e),self.assertRaises(ValueError):validate(parts,bad)

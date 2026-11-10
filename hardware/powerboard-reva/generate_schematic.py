@@ -169,12 +169,14 @@ from entry_circuit import populate as populate_entry
 populate_entry(globals())
 from brake_intent_circuit import populate as populate_brake
 populate_brake(globals())
+from fsr_circuit import populate as populate_fsr
+populate_fsr(globals())
 local_symbols=[local_drv]
 for a in custom_symbols:
     b=parse(dump(a));b[1]=q(val(b[1]).split(':')[1]);local_symbols.append(b)
 (ROOT/'Powerboard.kicad_sym').write_text('(kicad_symbol_lib (version 20241209) (generator "powerboard_generator") '+' '.join(dump(a) for a in local_symbols)+')\n')
 for i,s in enumerate(sheets):
-    x=25.4+(i%2)*177.8;y=71.12+(i//2)*58.42
+    x=25.4+(i%3)*177.8;y=71.12+(i//3)*58.42
     root.items.append(f'(sheet (at {x} {y}) (size 152.4 40.64) (stroke (width 0.254) (type default)) (fill (color 0 0 0 0)) (uuid {uid("sheet/"+s.name)}) (property "Sheetname" {q(s.title)} (at {x} {y-2.54} 0) (effects (font (size 1.27 1.27)) (justify left))) (property "Sheetfile" {q(s.name+".kicad_sch")} (at {x} {y+43.18} 0) (effects (font (size 1.27 1.27)) (justify left))) (instances (project "powerboard-reva" (path "/{ROOTID}" (page "{i+2}")))))')
 root.save()
 for fn,rows in [('review-bom.csv',bom),('pin-net-map.csv',pinmap)]:

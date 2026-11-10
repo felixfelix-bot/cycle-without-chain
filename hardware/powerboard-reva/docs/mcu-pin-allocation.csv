@@ -25,8 +25,9 @@ DRV_MOSI,PB5,92,SPI1_MOSI,5,DS12288r5 T12 pp60/70; T13 pp73-74,Shared driver reg
 GEN_CS_N,PD15,62,GPIO,none,DS12288r5 T12 pp63-64,External pull/default required
 HUB_CS_N,PE14,45,GPIO,none,DS12288r5 T12 pp63-64,External pull/default required
 FAULT_CHAIN_SENSE,PD14,61,GPIO,none,DS12288r5 T12 pp63-64,E-stop/thermal status only; not rider brake
-LEFT_HALL_ADC,PC3,18,ADC12_IN9,analog,DS12288r5 T12,Alternative Hall input; selected FSR frontend absent
-RIGHT_HALL_ADC,PA3,25,ADC1_IN4,analog,DS12288r5 T12,Alternative Hall input; selected FSR frontend absent
+FSR_SAMPLE_ENABLE,PE5,4,GPIO,none,DS12288r5 T12; stock exact package pin,Default low; enable only after valid rails/reference; firmware absent
+LEFT_FSR_ADC,PC3,18,ADC12_IN9,analog,DS12288r5 T12,Selected buffered FSR; acquisition and calibration unimplemented
+RIGHT_FSR_ADC,PA3,25,ADC1_IN4,analog,DS12288r5 T12,Selected buffered FSR; acquisition and calibration unimplemented
 LEFT_SWITCH_ADC,PA4,26,ADC2_IN17,analog,DS12288r5 T12,Supervised EOL input; disable DAC1_OUT1
 RIGHT_SWITCH_ADC,PB2,34,ADC2_IN12,analog,DS12288r5 T12,Supervised EOL input; sampling unimplemented
 BRAKE_DUMP_PWM,PB11,50,GPIO,none,DS12288r5 T12,Command only; firmware PWM/timer mapping unimplemented
