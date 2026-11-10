@@ -36,6 +36,13 @@ requirements, evidence audit, generator selection, fair storage comparisons,
 duty-cycle modelling, bench tests and decision criteria. The chain-and-hub design
 is a comparison baseline, not a substitute for independent cadence.
 
+## Consolidated component research
+
+[Research index, candidate BOM and evidence limits](docs/research/README.md).
+Includes controller design-envelope research, machine candidates, source evidence
+and the efficiency-allocation model. Earlier separate-repository work is preserved
+under `archive/` as historical material, not validated design specifications.
+
 ## Question
 
 Would a bicycle that generates electricity at the pedals (using a car or

@@ -1,0 +1,8 @@
+stage,assumption,kind,source,output_W,loss_W
+crank gearing,0.98,estimate,design-envelope.md: allocation not measurements,147.0,3.0
+generator,0.93,estimate,design-envelope.md: allocation not measurements,136.71,10.289999999999992
+rectifier,0.98,estimate,design-envelope.md: allocation not measurements,133.9758,2.7342000000000155
+bus wiring,0.995,estimate,design-envelope.md: allocation not measurements,133.30592099999998,0.6698790000000088
+auxiliary fixed W,1.5,estimate,design-envelope.md: allocation not measurements,131.80592099999998,1.5
+motor inverter,0.98,estimate,design-envelope.md: allocation not measurements,129.16980257999998,2.6361184200000025
+motor and final transmission,0.93,estimate,design-envelope.md: allocation not measurements,120.1279163994,9.041886180599988

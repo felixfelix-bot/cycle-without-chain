@@ -1,0 +1,8 @@
+Wheel: 120.127916 W; efficiency: 80.085278%
+Equal machine efficiency for 80%: 92.950752%
+Equal machine efficiency for assumed 97% mechanical baseline: 102.298195%
+Both machines 85%: 100.242175W, 66.828116%
+Both machines 90%: 112.460054W, 74.973369%
+Both machines 93%: 120.127916W, 80.085278%
+Both machines 95%: 125.380298W, 83.586865%
+1mF energy headroom: 0.431420J; at 150W 2.876133ms; at 500W 0.862840ms
