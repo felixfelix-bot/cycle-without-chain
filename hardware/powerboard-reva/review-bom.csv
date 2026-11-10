@@ -1,0 +1,85 @@
+reference,value,footprint,sheet
+U1,DRV8353SRTAT,,gen-driver
+C1,47n 100V X7R,,gen-driver
+C2,1u 16V X7R,,gen-driver
+C3,1u 16V X7R,,gen-driver
+C4,1u 10V X7R,,gen-driver
+C5,100n 25V X7R,,gen-driver
+C6,10u 25V X7R,,gen-driver
+C7,100n 10V X7R,,gen-driver
+R1,100k,,gen-driver
+R2,10k,,gen-driver
+R3,10k,,gen-driver
+R4,10k,,gen-driver
+Q1,CSD19532Q5B,Package_TO_SOT_SMD:TDSON-8-1,gen-bridge
+R5,4R7 provisional,,gen-bridge
+R6,100k G-S,,gen-bridge
+Q2,CSD19532Q5B,Package_TO_SOT_SMD:TDSON-8-1,gen-bridge
+R7,4R7 provisional,,gen-bridge
+R8,100k G-S,,gen-bridge
+R9,2m 1% 3W WSLP2512,Resistor_SMD:R_2512_6332Metric,gen-bridge
+C8,1u 100V X7R provisional,,gen-bridge
+Q3,CSD19532Q5B,Package_TO_SOT_SMD:TDSON-8-1,gen-bridge
+R10,4R7 provisional,,gen-bridge
+R11,100k G-S,,gen-bridge
+Q4,CSD19532Q5B,Package_TO_SOT_SMD:TDSON-8-1,gen-bridge
+R12,4R7 provisional,,gen-bridge
+R13,100k G-S,,gen-bridge
+R14,2m 1% 3W WSLP2512,Resistor_SMD:R_2512_6332Metric,gen-bridge
+C9,1u 100V X7R provisional,,gen-bridge
+Q5,CSD19532Q5B,Package_TO_SOT_SMD:TDSON-8-1,gen-bridge
+R15,4R7 provisional,,gen-bridge
+R16,100k G-S,,gen-bridge
+Q6,CSD19532Q5B,Package_TO_SOT_SMD:TDSON-8-1,gen-bridge
+R17,4R7 provisional,,gen-bridge
+R18,100k G-S,,gen-bridge
+R19,2m 1% 3W WSLP2512,Resistor_SMD:R_2512_6332Metric,gen-bridge
+C10,1u 100V X7R provisional,,gen-bridge
+U2,DRV8353SRTAT,,hub-driver
+C11,47n 100V X7R,,hub-driver
+C12,1u 16V X7R,,hub-driver
+C13,1u 16V X7R,,hub-driver
+C14,1u 10V X7R,,hub-driver
+C15,100n 25V X7R,,hub-driver
+C16,10u 25V X7R,,hub-driver
+C17,100n 10V X7R,,hub-driver
+R20,100k,,hub-driver
+R21,10k,,hub-driver
+R22,10k,,hub-driver
+R23,10k,,hub-driver
+Q7,CSD19532Q5B,Package_TO_SOT_SMD:TDSON-8-1,hub-bridge
+R24,4R7 provisional,,hub-bridge
+R25,100k G-S,,hub-bridge
+Q8,CSD19532Q5B,Package_TO_SOT_SMD:TDSON-8-1,hub-bridge
+R26,4R7 provisional,,hub-bridge
+R27,100k G-S,,hub-bridge
+R28,2m 1% 3W WSLP2512,Resistor_SMD:R_2512_6332Metric,hub-bridge
+C18,1u 100V X7R provisional,,hub-bridge
+Q9,CSD19532Q5B,Package_TO_SOT_SMD:TDSON-8-1,hub-bridge
+R29,4R7 provisional,,hub-bridge
+R30,100k G-S,,hub-bridge
+Q10,CSD19532Q5B,Package_TO_SOT_SMD:TDSON-8-1,hub-bridge
+R31,4R7 provisional,,hub-bridge
+R32,100k G-S,,hub-bridge
+R33,2m 1% 3W WSLP2512,Resistor_SMD:R_2512_6332Metric,hub-bridge
+C19,1u 100V X7R provisional,,hub-bridge
+Q11,CSD19532Q5B,Package_TO_SOT_SMD:TDSON-8-1,hub-bridge
+R34,4R7 provisional,,hub-bridge
+R35,100k G-S,,hub-bridge
+Q12,CSD19532Q5B,Package_TO_SOT_SMD:TDSON-8-1,hub-bridge
+R36,4R7 provisional,,hub-bridge
+R37,100k G-S,,hub-bridge
+R38,2m 1% 3W WSLP2512,Resistor_SMD:R_2512_6332Metric,hub-bridge
+C20,1u 100V X7R provisional,,hub-bridge
+J1,PROTECTED_DC_INPUT_EXT,,external-boundaries
+J2,REGULATED_AUX_EXT,,external-boundaries
+J3,GEN_MACHINE_PHASES,,external-boundaries
+J4,GEN_MCU_PWM_EXT,,external-boundaries
+J5,GEN_SPI_EXT,,external-boundaries
+J6,GEN_ADC_EXT,,external-boundaries
+J7,HUB_MACHINE_PHASES,,external-boundaries
+J8,HUB_MCU_PWM_EXT,,external-boundaries
+J9,HUB_SPI_EXT,,external-boundaries
+J10,HUB_ADC_EXT,,external-boundaries
+J11,INDEPENDENT_ENABLE_CHAIN_EXT,,external-boundaries
+C21,100u 100V provisional,,external-boundaries

@@ -1,0 +1,19 @@
+{
+  "screening": {
+    "bus_A": 13.88888888888889,
+    "shunt_W": 1.8,
+    "adc_low_V": 0.44999999999999996,
+    "adc_high_V": 2.8499999999999996,
+    "dump_ohm": 7.2,
+    "dump_J": 5000,
+    "vm_static_margin_V": 16.6,
+    "vds_static_margin_V": 41.6
+  },
+  "illustrative_precharge": {
+    "initial_A": 0.584,
+    "resistor_J": 1.70528,
+    "initial_W": 34.1056,
+    "time_99_s": 0.4605170185988091
+  },
+  "illustrative_adc_seconds": 2.611764705882353e-06
+}
