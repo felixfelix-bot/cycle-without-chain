@@ -15,6 +15,13 @@ a conventional chain drive on measured component efficiencies.
 **Correction:** a retained chain still couples cadence to road speed through the
 selected gear. Motor assistance does not replace shifting or provide pedal-by-wire.
 
+## Current evaluation plan
+
+[Evaluate independent pedalling / pedal-by-wire](docs/pedal-by-wire-evaluation-plan.md):
+requirements, evidence audit, generator selection, fair storage comparisons,
+duty-cycle modelling, bench tests and decision criteria. The chain-and-hub design
+is a comparison baseline, not a substitute for independent cadence.
+
 ## Question
 
 Would a bicycle that generates electricity at the pedals (using a car or
