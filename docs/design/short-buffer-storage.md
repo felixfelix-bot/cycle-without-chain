@@ -15,7 +15,7 @@
 
 - **D1:** Screen a **16s1p ANR26650M1B LFP** pack first for electrical compatibility, alongside **13s1p P28A**: 1.216 kg versus 0.598 kg **cells only**. LFP's documented 26 A continuous charge ceiling is materially different from P28A's 8.4 A; neither is a finished BMS-equipped pack. This is not final chemistry selection.
 - **D2:** Do not select supercap-only by headline joules. A practical 20s Eaton XV300 string is 1.240 kg cells, **3.906 Wh between 50 and25 V**, before ESR/converter loss. It cannot supply even a 250 W residual bus deficit for60 s (4.167 Wh). A direct 50–36 V window offers just2.508 Wh before loaded-voltage guard.
-- **D3:** A 10 s launch to25 km/h at assumed150 kg needs only **0.695 Wh net bus energy** with250 W crank input, but reaches **778 W storage deficit** at the end of a linear speed ramp. This exceeds the existing500 W screening ceiling; slower/nonlinear launch is required, not an implicit uprating of the PCB.
+- **D3:** A 10 s launch to25 km/h at assumed150 kg needs only **0.695 Wh net bus energy** with250 W crank input, but reaches **778 W storage deficit** at the end of a linear speed ramp. This assumed launch is **not an operator requirement** and exceeds the existing500 W screening ceiling. Screen a slower/nonlinear launch instead; no power uprating or launch target is approved.
 - **D4:** Defer hybrid unless repeated braking demonstrably exceeds battery charge acceptance or cold operation is mandatory. Adding20 XV cells already costs1.240 kg before converter, mount and balance hardware; no demonstrated battery-life saving offsets this today.
 - **D5:** No buffer is a legitimate bench baseline (with controlled power supply/dump path), but not an equivalent ride architecture: cannot deliver surplus launch torque from rest, cannot store stop energy, and must curtail generator/regen during mismatch.
 
@@ -23,14 +23,14 @@ These are analysis recommendations for parent/independent review, not delegated 
 
 ## 1. Boundary conditions and reproducible load cases
 
-**User facts:** human-powered first; independent cadence;80% crank-to-wheel target accepted;120 kg was rider+luggage, **not total mass**. No powered-range requirement. Total140/150 kg below are assumptions corresponding to20/30 kg bike+equipment; actual build mass is unknown.
+**User facts:** human-powered first; independent cadence;80% crank-to-wheel target accepted;120 kg is confirmed rider+luggage, **not total mass**. Braking is rider-requested only; storage charging must not initiate unsolicited wheel braking. No powered-range requirement. Total140/150 kg below are assumptions corresponding to20/30 kg bike+equipment; actual build mass is unknown.
 
 **ASSUMPTIONS, not measured:** level road, linear speed ramp over10 s,250 W crank throughout, generator/gear-to-bus efficiency0.90, bus-to-wheel8/9 (product0.80),5 W auxiliary, Crr0.006, CdA0.5 m², air density1.225 kg/m³. These cruise-like efficiencies may be optimistic at launch. Model does not include rotating inertia, wind, grade, traction/torque limits, or thermal map. Add those before sizing. `launch()` accepts grade/rider/efficiency overrides.
 
 `KE=½mv²`; distance=`vt/2`; road work=`mg(Crr+grade)vt/2 + ½rho CdA v³t/4`.
 Net buffer energy=`max(0,(KE+road)/eta_drive + Paux*t − Pcrank*eta_gen*t)/3600`.
 Instantaneous ramp-end deficit=`(mv²/t+mg(Crr+grade)v+½rho CdA v³)/eta_drive+Paux−Pcrank*eta_gen`.
-The reported net integral is **not minimum required capacity**: early-ramp surplus and late-ramp deficit require SOC headroom and chronological integration in the final controller model. Oversizing reserve is required; no claim that0.695 Wh alone suffices.
+The reported net integral is **not minimum required capacity**: early-ramp surplus and late-ramp deficit require SOC headroom and chronological integration in the final controller model. The reviewed model now computes cumulative excursion: at150 kg/25 km/h, ideal usable swing is0.7709 Wh, with0.6951 Wh initial energy and0.0758 Wh initial charge headroom if all early generator surplus is accepted. These exclude storage losses and reserve; no claim that0.695 Wh alone suffices. `buffer_wh` remains the nonnegative net integral for compatibility, **not capacity**; `net_bus_wh` preserves its sign. `excursion_wh=max Q−min Q`, where `Q(t)=∫Pdeficit dt/3600`; initial energy must be ≥max Q and headroom ≥−min Q. Curtailing early generator surplus changes this trajectory.
 
 | Total kg | Stop/launch km/h | KE Wh | Road Wh | Net buffer Wh | End deficit W | Recoverable stop Wh at eta_regen=0.50 |
 |---:|---:|---:|---:|---:|---:|---:|
@@ -107,7 +107,7 @@ Standby/balance:20s XV leakage proxy at50 V is0.030 W (0.72 Wh/day),20s XL0.250 
 
 ## 5. Ranking reversal thresholds and interface handoff
 
-1. **Short pulses only:**20s XV converted bank's optimistic60 s crossover is222.66 W average residual deficit; ESR, reserve and cold/aging lower it. Above that, this bank fails on energy regardless of peak-current rating. Below it, cap-only remains possible if mass, standby and converter losses are acceptable. At ≤36 V motor-bus minimum direct caps lose additional energy; a genuinely wide-voltage motor bus could improve cap ranking.
+1. **Short pulses only:**20s XV converted bank's optimistic60 s crossover is222.66 W average residual deficit; ESR, reserve and cold/aging lower it. Above that, this bank fails on energy regardless of peak-current rating. Below it, cap-only remains possible if mass, standby and converter losses are acceptable. At the provisional36 V motor-bus minimum direct caps lose additional energy; a genuinely wide-voltage motor bus could improve cap ranking.
 2. **Regen charge demand:** warm13s1p P28A is plausible if charging is limited below8.4 A with taper; above that choose more parallel cells, charge-limiting with mechanical braking, qualified LFP/LTO, or hybrid. Do not equate35 A discharge with35 A charge. LFP's charge advantage is conditional on exact cell revision/BMS.
 3. **Mandatory subzero charge:** present LFP/P28A baseline inhibits normal cold charging, including regen and generator surplus. Qualified SCiB cold-charge envelope could change the ranking despite3 kg cells; Toshiba's generic/10 Ah cold claim alone does not qualify the2.9 Ah pack. Caps could accept brief cold pulses only after their ESR/current derating is verified.
 4. **Mass priority with modest regen:** P28A1p wins bare-cell mass. High repeated accepted braking current may favor LFP or2p P28A before hybrid. No price-based winner is defensible without quotes. Very frequent cycling is not yet a proven lifecycle-cost case for caps.
@@ -133,4 +133,6 @@ Open before purchase: authenticated supply/stock and exact datasheet revision; p
 
 ## 7. Verification record
 
-Tests written first: eight assertions initially **FAILED** because model was absent, then all eight passed after implementation. Tests cover series energy, current/heat, separate charge equation, infeasible constant power, rider subtraction, independent regen efficiency, nonnegative deficit and invalid voltage window. Real model ran exit0 and produced tables above. These are arithmetic tests, not bench validation; no battery, capacitor string, converter, BMS or PCB was exercised.
+See [independent arithmetic/source-boundary review](storage-review.md) for cumulative-excursion corrections, high-voltage charging corner, confirmed user boundaries and the expanded12-test result.
+
+Original implementation record: eight test methods initially **FAILED** because model was absent, then all eight passed after implementation. Tests cover series energy, current/heat, separate charge equation, infeasible constant power, rider subtraction, independent regen efficiency, nonnegative deficit and invalid voltage window. Real model ran exit0 and produced tables above. These are arithmetic tests, not bench validation; no battery, capacitor string, converter, BMS or PCB was exercised.

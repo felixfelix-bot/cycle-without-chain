@@ -30,12 +30,38 @@ def launch(mass, kmh, rider=250, seconds=10, regen=.5,
            cda=.5, rho=1.225, grade=0):
     # All defaults ASSUMPTIONS, not measured efficiency/road parameters.
     # Linear velocity ramp: distance=v*t/2, integral(v**3 dt)=v**3*t/4.
+    if (mass <= 0 or kmh < 0 or seconds <= 0 or rider < 0 or aux < 0
+            or not 0 < eta_drive <= 1 or not 0 <= eta_gen <= 1
+            or not 0 <= regen <= 1 or crr < 0 or grade+crr < 0
+            or cda < 0 or rho < 0):
+        raise ValueError('invalid launch; requires nonnegative road resistance')
     v = kmh/3.6
     ke = .5*mass*v*v
     road = mass*9.81*(crr+grade)*v*seconds/2 + .5*rho*cda*v**3*seconds/4
     bus = (ke+road)/eta_drive + aux*seconds - rider*eta_gen*seconds
     peak = (mass*v*v/seconds + mass*9.81*(crr+grade)*v + .5*rho*cda*v**3)/eta_drive + aux-rider*eta_gen
-    return dict(ke_wh=ke/3600, road_wh=road/3600,
+    # Signed cumulative bus deficit Q(t); ideal storage SOC changes by -Q.
+    # Nonnegative resistance makes power monotone: at most one interior minimum.
+    a = v/seconds
+    linear = (mass*a*a + mass*9.81*(crr+grade)*a)/eta_drive
+    cubic = .5*rho*cda*a**3/eta_drive
+    constant = aux-rider*eta_gen
+    def q(t):
+        return constant*t + linear*t*t/2 + cubic*t**4/4
+    left, right = 0., seconds
+    for _ in range(64):
+        mid = (left+right)/2
+        if constant+linear*mid+cubic*mid**3 < 0:
+            left = mid
+        else:
+            right = mid
+    minimum = min(0., bus, q((left+right)/2))
+    maximum = max(0., bus)
+    return dict(net_bus_wh=bus/3600,
+                excursion_wh=(maximum-minimum)/3600,
+                charge_headroom_wh=-minimum/3600,
+                initial_energy_wh=maximum/3600,
+                ke_wh=ke/3600, road_wh=road/3600,
                 buffer_wh=max(0,bus)/3600, peak_w=max(0,peak),
                 regen_wh=ke*regen/3600)
 
