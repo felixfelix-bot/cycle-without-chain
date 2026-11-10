@@ -1,0 +1,38 @@
+Protection comparator and NAND latch IDEAL behavioral SPICE, NOT vendor models
+* Exact divider/hysteresis RC; logic delay modeled with 100ns output RC.
+Vcc vcc 0 3.3
+Vref ref 0 2.5
+Vbus bus 0 PWL(0 55 1m 55 3m 64 4m 64 6m 55 8m 55)
+Rt bus sense 225k
+Rb sense 0 10k
+Rh ov sense 330k
+Cf sense 0 100p
+Rp vcc ov 1k
+Bcmp comp 0 V=V(sense)>V(ref) ? 0 : 3.3
+Sout ov 0 comp 0 OC
+.model OC SW(Ron=60 Roff=1e12 Vt=1.65 Vh=.01)
+* Rail/brake/watchdog/fault aggregate, healthy low 0-1ms and 4-5ms
+Vhealthy healthy 0 PWL(0 0 1m 0 1.001m 3.3 4m 3.3 4.001m 0 5m 0 5.001m 3.3 8m 3.3)
+* Reset overlaps persistent fault, then later explicit reset
+Vreset reset 0 PWL(0 0 2m 0 2.001m 3.3 2.1m 3.3 2.101m 0 4.2m 0 4.201m 3.3 4.3m 3.3 4.301m 3.3 6.5m 3.3 6.501m 3.3 6.6m 3.3 6.601m 0 8m 0)
+Brn rn 0 V=(V(healthy)>1.65 && V(reset)>1.65) ? 0 : 3.3
+Bfault f0 0 V=(V(healthy)>1.65 && V(permit)>1.65) ? 0 : 3.3
+Rf f0 fault 1k
+Cfault fault 0 100p
+Bpermit p0 0 V=(V(rn)>1.65 && V(fault)>1.65) ? 0 : 3.3
+Rpermit p0 permit 1k
+Cpermit permit 0 100p
+Benable enable 0 V=(V(healthy)>1.65 && V(permit)>1.65) ? 3.3 : 0
+.control
+tran 100n 8m
+meas tran ov_on FIND v(bus) WHEN v(ov)=1.65 RISE=1
+meas tran ov_off FIND v(bus) WHEN v(ov)=1.65 FALL=1
+meas tran enabled_before_fault FIND v(enable) AT=3m
+meas tran disabled_during_reset_fault FIND v(enable) AT=4.25m
+meas tran held_after_fault FIND v(enable) AT=5.5m
+meas tran rearmed FIND v(enable) AT=7m
+meas tran chopper_while_disabled FIND v(ov) AT=4.1m
+* Bulky waveform output omitted from negative control.
+quit
+.endc
+.end

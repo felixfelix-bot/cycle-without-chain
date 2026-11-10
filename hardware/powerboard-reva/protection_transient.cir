@@ -1,8 +1,45 @@
-Protection comparator and NAND latch IDEAL behavioral SPICE, NOT vendor models
-* Exact divider/hysteresis RC; logic delay modeled with 100ns output RC.
-Vcc vcc 0 3.3
+Explicit two-DFF restart interlock IDEAL behavioral SPICE, NOT vendor models
+* Logic-only abstraction: no metastability, recovery/removal, supply-valid timing,
+* output drive, device failure, or SN74LVC1G74 silicon validation is claimed.
+* HEALTHY includes independent supervisor AND all fault/brake/rail indications.
+* 3.3V LVC interface envelope: valid low <=0.8 V, valid high >=2.0 V.
+* Schmitt thresholds here are illustrative 0.8/2.0, not guaranteed device trips.
+Vcc vcc 0 PWL(0 0 .1m 3.3 10m 3.3 10.001m 1 11m 1 11.001m 3.3 30m 3.3)
+Vsup supervisor 0 PWL(0 0 1m 0 1.001m 3.3 10m 3.3 10.001m 0 12m 0 12.001m 3.3 30m 3.3)
+Vfault faults_ok 0 PWL(0 3.3 6m 3.3 6.001m 0 7m 0 7.001m 3.3 16m 3.3 16.001m 0 17m 0 17.001m 3.3 21m 3.3 21.001m 0 22m 0 22.001m 3.3 27m 3.3 27.001m 0 28m 0 28.001m 3.3 30m 3.3)
+Bhealthy healthy 0 V=(V(vcc)>=2.7 && V(supervisor)>=2 && V(faults_ok)>=2) ? 3.3 : 0
+* Initially stuck high; release/repress 3/4ms; fault 6ms, held high recovery;
+* release/repress 8/9ms; brownout 10ms, supervisor holds to12ms;
+* release/repress 13/14ms; reset low during fault16ms/recovery17ms;
+* first rising18ms rejected, fresh falling19/rising20 accepted;
+* short bounce after recovery22ms rejected; genuine release23/rise24 accepted.
+Vreset reset 0 PWL(0 3.3 3m 3.3 3.001m 0 4m 0 4.001m 3.3 8m 3.3 8.001m 0 9m 0 9.001m 3.3 13m 3.3 13.001m 0 14m 0 14.001m 3.3 16.2m 3.3 16.201m 0 18m 0 18.001m 3.3 19m 3.3 19.001m 0 20m 0 20.001m 3.3 22.2m 3.3 22.201m 0 22.211m 0 22.212m 3.3 22.23m 3.3 22.231m 0 22.241m 0 22.242m 3.3 23m 3.3 23.001m 0 24m 0 24.001m 3.3 30m 3.3)
+* Explicit candidate RC = 10k/10n = 100us. Bounce pulses below are 10us.
+* Ideal nominal filter only; not a tolerance/debounce qualification.
+Rreset reset filtered 10k
+Creset filtered 0 10n
+Sschmitt vcc schmitt filtered 0 SCHMITT
+Rschmitt schmitt 0 10k
+.model SCHMITT SW(Ron=1 Roff=1e12 Vt=1.4 Vh=.6)
+* Digital bridge rejects indeterminate levels rather than declaring 1.65V valid.
+Vone one_v 0 3.3
+Ainputs [healthy schmitt one_v] [health clk one] ADC
+.model ADC adc_bridge(in_low=.8 in_high=2.0)
+Anothealth health clear INV
+Anotclock clk released_clk INV
+.model INV d_inverter(rise_delay=10n fall_delay=10n)
+* First FF records a falling RESET edge AFTER health (D=1).
+* Both active-low asynchronous CLR pins correspond to digital clear=!HEALTHY.
+* Presets inactive; first D tied high; clear dominates clock.
+Arelease one released_clk NULL clear release_seen NULL FF
+Apermit release_seen clk NULL clear permit NULL FF
+.model FF d_dff(clk_delay=20n set_delay=10n reset_delay=10n ic=0)
+Aout [permit release_seen] [permit_v release_v] DAC
+.model DAC dac_bridge(out_low=0 out_high=3.3 t_rise=10n t_fall=10n)
+Benable enable 0 V=(V(healthy)>=2 && V(permit_v)>=2) ? V(vcc) : 0
+* Independent chopper path retained from previous fixture, not interlocked by enable.
 Vref ref 0 2.5
-Vbus bus 0 PWL(0 55 1m 55 3m 64 4m 64 6m 55 8m 55)
+Vbus bus 0 PWL(0 55 1m 55 3m 64 4m 64 6m 55 30m 55)
 Rt bus sense 225k
 Rb sense 0 10k
 Rh ov sense 330k
@@ -11,28 +48,27 @@ Rp vcc ov 1k
 Bcmp comp 0 V=V(sense)>V(ref) ? 0 : 3.3
 Sout ov 0 comp 0 OC
 .model OC SW(Ron=60 Roff=1e12 Vt=1.65 Vh=.01)
-* Rail/brake/watchdog/fault aggregate, healthy low 0-1ms and 4-5ms
-Vhealthy healthy 0 PWL(0 0 1m 0 1.001m 3.3 4m 3.3 4.001m 0 5m 0 5.001m 3.3 8m 3.3)
-* Reset overlaps persistent fault, then later explicit reset
-Vreset reset 0 PWL(0 0 2m 0 2.001m 3.3 2.1m 3.3 2.101m 0 4.2m 0 4.201m 3.3 4.3m 3.3 4.301m 0 6.5m 0 6.501m 3.3 6.6m 3.3 6.601m 0 8m 0)
-Brn rn 0 V=(V(healthy)>1.65 && V(reset)>1.65) ? 0 : 3.3
-Bfault f0 0 V=(V(healthy)>1.65 && V(permit)>1.65) ? 0 : 3.3
-Rf f0 fault 1k
-Cfault fault 0 100p
-Bpermit p0 0 V=(V(rn)>1.65 && V(fault)>1.65) ? 0 : 3.3
-Rpermit p0 permit 1k
-Cpermit permit 0 100p
-Benable enable 0 V=(V(healthy)>1.65 && V(permit)>1.65) ? 3.3 : 0
 .control
-tran 100n 8m
+tran 1u 30m
+meas tran initial_safe FIND v(enable) AT=0.5m
+meas tran held_high_startup FIND v(enable) AT=2m
+meas tran fresh_cycle_arms FIND v(enable) AT=5m
+meas tran fault_immediate FIND v(enable) AT=6.01m
+meas tran held_after_fault FIND v(enable) AT=7.5m
+meas tran fresh_after_fault FIND v(enable) AT=9.5m
+meas tran brownout_safe FIND v(enable) AT=10.5m
+meas tran supervisor_wait FIND v(enable) AT=11.5m
+meas tran held_after_brownout FIND v(enable) AT=12.5m
+meas tran fresh_after_brownout FIND v(enable) AT=14.5m
+meas tran low_through_recovery FIND v(enable) AT=17.5m
+meas tran first_rise_rejected FIND v(enable) AT=18.5m
+meas tran fresh_after_low FIND v(enable) AT=20.5m
+meas tran bounce_rejected FIND v(enable) AT=22.5m
+meas tran fresh_after_bounce FIND v(enable) AT=24.5m
+meas tran stuck_high_safe FIND v(enable) AT=29m
+meas tran stuck_low_safe FIND v(enable) AT=17.8m
 meas tran ov_on FIND v(bus) WHEN v(ov)=1.65 RISE=1
 meas tran ov_off FIND v(bus) WHEN v(ov)=1.65 FALL=1
-meas tran enabled_before_fault FIND v(enable) AT=3m
-meas tran disabled_during_reset_fault FIND v(enable) AT=4.25m
-meas tran held_after_fault FIND v(enable) AT=5.5m
-meas tran rearmed FIND v(enable) AT=7m
-meas tran chopper_while_disabled FIND v(ov) AT=4.1m
-wrdata exports/protection-transient.dat v(bus) v(ov) v(healthy) v(reset) v(fault) v(enable)
 quit
 .endc
 .end
