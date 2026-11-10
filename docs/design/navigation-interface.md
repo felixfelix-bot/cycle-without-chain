@@ -265,7 +265,8 @@ Avoid exact positions in public bug reports without explicit consent.
 implementation (missing implementation assertions). First GREEN attempt exposed a
 hand-calculated expected log rate typo (14,680); corrected to 416×32+10×100+50×16 =
 15,112, with no production formula change. These are arithmetic/pin tests, not hardware
-or estimator qualification. Pending gates: merge FSR and regenerate exports; resolve
+or estimator qualification. The independent review subsequently tested the merged
+FSR export (see navigation-review.md). Pending gates: resolve
 PPS capture; fetch complete ST datasheet; source antenna/passives/connector and actual
 current maxima; independent design review; EMC/power/timing bench evidence. No balloon
 component provenance is claimed: none was copied from balloon-fresh.

@@ -6,9 +6,11 @@
 
 Integration branch starts at GitHub master `aebd795` (including gyro review),
 then merges navigation `2890447f49bab541166becc29ca4ff4dd68d5b98` without
-replacing concurrent files. Latest fetched master remained `aebd795` at review.
-FSR `44d3d9fc` is not yet an ancestor; its actual exported netlist and MCU
-source were read separately, not substituted into this worktree. No schematic,
+replacing concurrent files. Master advanced during review to `c1216a6`; it was
+merged without conflicts, preserving both FSR and precharge reviews.
+FSR `44d3d9fc` was initially not an ancestor; its actual exported netlist and MCU
+source were read separately, then the merged master export passed the same
+five tests normally and optimized plus the checker. No schematic,
 README, precharge, FSR or gyro files are changed by this review.
 
 Optional daughterboard logging remains the cost/safety-first architecture;
