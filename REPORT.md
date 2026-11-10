@@ -1,9 +1,43 @@
-# Custom powerboard concept report
+# Powerboard concept report
 
-Delivered [bounded concept](docs/evaluation/custom-powerboard-concept.md), [candidate BOM](docs/evaluation/custom-powerboard-bom.csv), [block diagram](docs/evaluation/custom-powerboard-block.svg) and reproducible arithmetic model. Not a PCB, fabrication release or procurement BOM.
+Summary of where the design stands. The authoritative record is the
+[open-gates register](docs/design/open-gates-register.md); the architecture is in
+the [README](README.md) and the [evaluation plan](docs/pedal-by-wire-evaluation-plan.md).
 
-Key findings: 48 V-class packs can reach58.4 V; DRV8353 VM recommended limit is75 V despite100 V headline. Generator nominal torque and gear ratio are a significant open constraint. No measured machine map or80% efficiency result obtained. Preserve two mechanical brakes and reversible mounting; no clamp torque specified.
+## What exists
 
-Primary TI/ST PDFs and manufacturer/vendor machine listings checked; maxon direct fetch failed, manufacturer indexed catalog/shop evidence retained with explicit availability caveat. Only maxon price is recorded, as an indexed indicative price, not a quote. Safety-critical parts and optional storage DC/DC are intentionally unresolved release blockers.
+- Bounded [concept and candidate BOM](docs/evaluation/custom-powerboard-concept.md),
+  block diagram and reproducible arithmetic model — architecture and sizing
+  screening only.
+- Generated KiCad 9 schematic for Powerboard Rev A under
+  [`hardware/powerboard-reva/`](hardware/powerboard-reva/README.md): two DRV8353
+  bridges, twelve low-side shunts, protected-entry intent and an autonomous
+  protection chain. **No `.kicad_pcb`, no placement, no routing, no fabrication data.**
+- Analysis models with tests: `analysis/storage`, `analysis/precharge`,
+  `analysis/braking`, `analysis/brake_intent`, `analysis/fsr`, `analysis/gyro`,
+  `analysis/navigation`, `analysis/gates`.
 
-Validation: arithmetic model run, SVG XML and CSV structure checked, git whitespace check. No hardware tests. GitHub feature branch only; parent review required before any merge. ngit not attempted: existing report records unusable signing key; no bypass authorized.
+## Findings that constrain the design
+
+- The 80% crank-to-wheel target is a **goal, not a measurement**; at 250 W crank it
+  allows only 50 W of aggregate loss across gears, both machines, converters and
+  auxiliaries.
+- Generator selection at human power levels is the hardest open problem. No verified
+  efficiency map has been obtained for a candidate at a ~300 rpm shaft speed.
+- The DRV8353 is a 75 V *supply* part with a 100 V *drain* rating — the headline
+  voltage is not an operating limit.
+- Gate-off does not stop a PM machine rectifying through MOSFET body diodes, so a
+  spinning machine can charge the bus with the pack open. A sustained-energy sink is
+  a protection requirement, not a firmware behaviour.
+- Zero-speed balance support would need a very high precession authority: both
+  wheels are rigidly journalled, so gyroscopic reaction appears as frame load rather
+  than as a steering force that could restore uprightness. This is why the gyro
+  branch stays separate and unpromised.
+
+## Validation performed
+
+Arithmetic models run and their unit tests pass; the open-gates register passes its
+consistency check; schematic exports are checked for structure. **No hardware test
+has been performed, nothing has been energized, and no outdoor trial is authorised.**
+Passing checks means the documents and arithmetic are organised — not that the
+machine is safe, legal or buildable.

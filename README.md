@@ -1,155 +1,146 @@
 # cycle-without-chain
 
-Historical trade study of a chainless / series-hybrid bicycle drivetrain,
-now investigating an **independent-cadence series hybrid**, with a chain-retained
-parallel hybrid as the comparison baseline, not the selected final architecture.
+A **pedal-by-wire bicycle**: the rider's legs drive a generator at the crank, the
+electrical output drives a hub motor, and there is no chain to the wheel. The point
+is not to beat a chain on efficiency — it is to make **pedal cadence independent of
+road speed**, with electronically controlled pedal resistance.
 
-> **Supersession / purchasing caution:** the [current implementation plan](docs/PLAN-parallel-hybrid.md)
-> supersedes historical build recommendations. The older analysis, model and
-> diagrams are **not validated purchasing evidence**: they mix assumptions and
-> unsupported product claims and contain known energy-accounting errors. See the
-> plan's correction register before reusing any numerical result. No hardware has
-> been purchased or definitively selected; no prototype performance is established.
+**Status: schematic and analysis only. No PCB, no routing, no fabrication, no
+purchase, no riding.** Every design document is stamped *not safe to energize*.
+The [open-gates register](docs/design/open-gates-register.md) is the single place
+that states what is proven and what is not.
 
-The plan evaluates a PM pedal generator, active rectifier, shared DC bus, hub
-inverter/motor and battery/BMS storage branch for independent cadence. Mechanical
-friction brakes remain mandatory. The parallel baseline still uses gears to set
-cadence and cannot provide stationary pedal charging. Next: audit old claims,
-resolve CIXI vendor/version discrepancies and define requirements before sourcing
-parts or testing. An illustrative 80% cruise target is not measured performance.
+## What is being built
 
-## Potential audiences and use cases
-
-These customer segments are **hypotheses to test, not market validation**. The
-series concept trades conversion losses, added mass and control complexity for
-cadence independent of road speed, controllable pedal resistance and chassis
-design freedom. The chain-coupled baseline does not offer independent cadence.
-Rider input and generator load must balance: arbitrary cadence and power cannot
-both be independently enforced. This is research, not a certified product.
-
-- **Cargo and urban logistics:** choose a comfortable cadence through stops and
-  changing road speeds; payload and hill capability remain bounded by motor
-  torque, available power, storage state and thermal limits—not guaranteed.
-- **Adaptive cycling and rehabilitation research:** adjustable pedal resistance
-  could support experiments with different rider abilities; suitability requires
-  individual assessment and validation, with no medical safety or treatment claims.
-- **Low-maintenance, clean commuters:** removing the wheel-drive chain could
-  reduce chain grime and servicing, but does not guarantee lower total maintenance.
-  The crank-to-generator gearing remains moving machinery and needs a guard;
-  electrical components and cooling add service needs.
-- **Recumbent, velomobile and alternative-chassis designers:** electrical routing
-  could replace long wheel-drive chains and free up layout choices, subject to
-  generator packaging, structural loads, mass and heat-rejection requirements.
-- **Stationary exercise and pedal charging:** controlled resistance could enable
-  workouts and conversion of rider effort into stored energy—not free energy.
-  Use requires a safe, stable stand and wheel-propulsion inhibit. At full storage,
-  useful charging stops; continued pedalling under load requires a safe energy
-  sink and adequate cooling, otherwise load must be reduced or stopped.
-
-### Balance assistance and accessible cycling — research option
-
-Some older riders and people with vestibular, neurological or other balance
-limitations may value low-speed assistance more than minimum drivetrain loss or
-mass. Investigate whether an actively gimballed flywheel can assist stopping,
-starting and mounting/dismounting within a specified operating envelope. This is
-an accessibility hypothesis, not demonstrated medical suitability or fall prevention.
-Compare against mechanically supported adaptive cycles, including tricycles.
-
-Evaluate energy buffering and balance assistance separately before combining them:
-energy scales with rotor speed squared, angular momentum only linearly. Discharging
-the rotor reduces balancing authority. Two gimbal axes do not eliminate torque
-coupling, travel limits, singularities or power-failure risk. Turning requires
-appropriate lean, not unconditional vertical holding.
-
-Count containment, motor-generator, bearings, actuators and control electronics in
-mass and losses. The suggested 8–12 kg mass and 30% range penalty are unverified
-examples, not specifications. Do not promise recovery from ice, potholes, collisions
-or arbitrary disturbances, and never claim the rider cannot tip over.
-
-Before rider trials, quantify disturbance limits and test on a restrained rig:
-startup/shutdown support, depleted energy, sensor/actuator failure, gimbal saturation,
-power loss, containment, frame loads and thermal behavior. Accessibility benefits
-require user-centred assessment and relevant clinical input. High-speed rotor safety
-requires specialist mechanical engineering, not just electrical PCB checks.
-
-Flywheel storage and active balancing form a separate feasibility workstream. The
-current reversible Villiger design retains its small electrical-buffer baseline;
-no gyro hardware is selected and mechanical brakes/support are not replaced.
-The [quantified gyro feasibility study](docs/design/gyro-balance-feasibility.md)
-compares balance-only and combined storage options with simpler supports, includes
-reproducible calculations and a source-backed research shortlist—not a purchase BOM.
-
-## Historical illustrations — not validated build specifications
-
-[Parts, efficiency, limitations and existing bicycles](docs/analysis/parallel-hybrid-guide.md)
-
-![Parallel hybrid](docs/analysis/parallel-hybrid-explainer.png)
-
-![Efficiency examples](docs/analysis/parallel-hybrid-blend.png)
-
-**Correction:** a retained chain still couples cadence to road speed through the
-selected gear. Motor assistance does not replace shifting or provide pedal-by-wire.
-
-## Current evaluation plan
-
-[Evaluate independent pedalling / pedal-by-wire](docs/pedal-by-wire-evaluation-plan.md):
-requirements, evidence audit, generator selection, fair storage comparisons,
-duty-cycle modelling, bench tests and decision criteria. The chain-and-hub design
-is a comparison baseline, not a substitute for independent cadence.
-
-## Consolidated component research
-
-[Research index, candidate BOM and evidence limits](docs/research/README.md).
-Includes controller design-envelope research, machine candidates, source evidence
-and the efficiency-allocation model. Earlier separate-repository work is preserved
-under `archive/` as historical material, not validated design specifications.
-
-## Question
-
-Would a bicycle that generates electricity at the pedals (using a car or
-motorbike alternator) and drives the wheels with hub motors — buffering energy
-in supercapacitors — beat a chain? Should the buffer be supercapacitors,
-batteries, or both? And how does a battery-less version bootstrap its
-generator?
-
-## Current direction
-
-Try the original independent-cadence series concept through staged feasibility
-checks; compare it with a chain-retained baseline against measured requirements. The historical series-efficiency scenarios are not measured
-ceilings, and old battery, drag, range and price figures are not purchase criteria.
-
-## What is in here
-
-- `docs/analysis/chainless-drivetrain.md` — the full study: assumptions,
-  cited efficiencies, buffer sizing, the battery-less bootstrap question,
-  failure modes, sensitivity analysis, and a BOM.
-- `docs/analysis/chainless_drivetrain_model.py` — historical stdlib-only model;
-  retained unchanged for audit, including known accounting errors.
-- [Series-feasibility plan (parallel baseline)](docs/PLAN-parallel-hybrid.md) — current scope, correction
-  register, staged gates and measurement protocol.
-
-**Evidence correction for §11:** no verified crank-generator efficiency map
-was found for Mando Footloose or Schaeffler Free Drive. Earlier claims that both
-use automotive claw-pole alternators and deliver ~32% pedals-to-road are not
-established. Do not use them as measured product specifications. See the
-[illustrated guide](docs/analysis/parallel-hybrid-guide.md) for source boundaries.
-
-## Sections of the study
-
-- §0 answer first — §1 assumptions — §2 vehicle power — §3 series vs chain
-- §4 cadence — §5 buffer sizing — §6 is a buffer needed — §7 bootstrap
-- §8 sensitivity — §9 failure modes — §10 recommendation
-- §11 the two production systems (Mando, Schaeffler) reconciled
-- **§12 the recommended build, worked numbers, parts explained**
-- **§13 has anyone built this? (Stromer, Grin builds, mid-drive comparison)**
-- §14 open items — §15 scope limits
-
-## Reproduce
-
-```sh
-python3 docs/analysis/chainless_drivetrain_model.py
+```
+cranks → removable gear → clamped PM generator → active rectifier
+                                                        │
+                                            protected shared DC bus (36–58.4 V)
+                                                        │            │
+                                              hub inverter/motor   storage branch
+                                                        │            │
+                                                     rear wheel   LTO pack
+                                                                  (+ optional
+                                                                   supercap buffer)
 ```
 
-Stdlib only, no dependencies. This is a historical-model smoke run, not scientific
-validation. Successful execution does not establish that its assumptions,
-calculations or the diagrams are correct.
+- **Independent cadence.** A controller sets generator current, which sets pedal
+  resistance, independently of wheel speed. Stationary pedalling is possible.
+  Cadence and power cannot both be forced — the rider supplies what the load draws.
+- **Generator at the crank**, driven by a small gear from a bolt-on crank ring.
+  Reversible: no drilling, welding or grinding of the donor frame.
+- **Two custom three-phase bridges on one board** — generator active rectifier and
+  hub inverter — sharing a protected DC link. Not an off-the-shelf controller.
+- **Storage is a short buffer**, not a powered-range battery: starts, stops and
+  brief power deficits. Chemistry frozen as **LTO**, with an optional supercapacitor
+  branch for power peaks — see [the storage decision](docs/design/storage-decision-lto.md).
+- **Rider-requested braking only.** Electrical braking follows brake-lever intent
+  via force-sensitive pads plus an independent activation signal; it never brakes
+  because a map, a slope or an energy target says so. It supplements the mechanical
+  brakes, which remain mandatory and independent.
+- **Resistor dump** for kinetic energy when storage is full or refuses charge.
+- **Navigation** (GNSS + IMU + wheel speed, fused by an extended Kalman filter) is
+  for energy budgeting and route logging only, starting in logging-only mode. It
+  has no authority over propulsion or braking.
+
+**Not selected:** generator model, wheel motor, BMS part, pack build, gimbal
+actuators. See [machine candidates](docs/research/machines/candidates.md) for what
+has been screened and what is missing.
+
+## Accepted targets and their status
+
+| Target | Value | Status |
+|---|---|---|
+| Crank-to-wheel efficiency at cruise | **80%** (150 W in → 120 W at wheel) | Accepted by operator; **never measured** |
+| Rider + luggage mass | **120 kg** (bicycle and hardware extra) | Operator-confirmed; total mass unweighed |
+| Bus voltage | 36–58.4 V, 100 V devices | Provisional; the selected pack may lower the ceiling |
+| Electrical braking | Supplemental, thermally limited | Bench target 100 W first, 300 W max average |
+| Frame modification | None | Design rule; mounting not yet assessed |
+
+The 80% figure is a design goal that costs roughly 20% more pedal power than a
+97%-efficient chain would. It is not a demonstrated result, and generator efficiency
+maps at human power levels are the main missing evidence.
+
+## Repository map
+
+| Area | Where |
+|---|---|
+| **What is proven vs open** | [open-gates register](docs/design/open-gates-register.md) — start here |
+| Powerboard schematic (generative KiCad) | [`hardware/powerboard-reva/`](hardware/powerboard-reva/README.md) |
+| Storage decision and analysis | [storage decision](docs/design/storage-decision-lto.md), [short-buffer analysis](docs/design/short-buffer-storage.md) |
+| Braking envelope and dump sizing | [downhill braking envelope](docs/design/downhill-braking-envelope.md) |
+| Brake-intent (FSR) sensing | [FSR frontend evaluation](docs/design/fsr-frontend-evaluation.md) |
+| Navigation and sensor fusion | [navigation interface](docs/design/navigation-interface.md) |
+| Gyro balance (separate research option) | [gyro feasibility](docs/design/gyro-balance-feasibility.md) |
+| Machine and controller candidates | [research index](docs/research/README.md) |
+| Evaluation plan and staging | [pedal-by-wire evaluation plan](docs/pedal-by-wire-evaluation-plan.md) |
+| PCB release gates | [PCB quality gates](docs/design/pcb-quality-gates.md), [`tools/gates/`](tools/gates/README.md) |
+
+## Potential audiences
+
+Hypotheses to test, not market validation. What is being offered is **independent
+cadence and controllable resistance**, not efficiency.
+
+- **Cargo and urban logistics:** a comfortable cadence through stops and changing
+  road speeds, without long chain runs and idlers. Bounded by motor torque,
+  available power, storage state and thermal limits.
+- **Adaptive cycling and rehabilitation research:** adjustable pedal resistance for
+  different abilities. Requires individual assessment; no medical claims.
+- **Low-maintenance commuters:** no wheel-drive chain to clean or adjust — but the
+  crank gear is still moving machinery, and electronics add their own servicing.
+- **Recumbent, velomobile and alternative chassis:** electrical routing replaces
+  long chain paths and frees layout, subject to generator packaging, structural
+  loads and heat rejection.
+- **Stationary exercise and pedal charging:** controlled resistance and stored
+  energy. Needs a stable stand and propulsion inhibit; at full storage, charging
+  stops and load must be reduced or dumped.
+- **Balance assistance (research only):** an actively gimballed flywheel as a
+  low-speed aid for riders with balance limitations. Not part of the current build;
+  no fall-prevention claim, and a tricycle is the honest comparison. See
+  [gyro feasibility](docs/design/gyro-balance-feasibility.md).
+
+## Historical material — do not use for decisions
+
+This repository began as a trade study asking whether a chainless drivetrain could
+*beat* a chain. That question was answered — it cannot, on efficiency — and the
+project moved on to the architecture above, chosen for different reasons.
+
+The older documents are **retained for audit only**:
+
+- [`docs/analysis/chainless-drivetrain.md`](docs/analysis/chainless-drivetrain.md)
+  and its model: historical efficiency scenarios, including known energy-accounting
+  errors and unsupported product claims about Mando Footloose and Schaeffler Free
+  Drive. No verified crank-generator efficiency map was found for either, so
+  earlier figures attributed to them are not product facts.
+- [`archive/`](archive/): the earlier separate repository, preserved rather than
+  deleted.
+- [`docs/analysis/parallel-hybrid-guide.md`](docs/analysis/parallel-hybrid-guide.md)
+  and the parallel-hybrid diagrams: a **comparison baseline**. A retained chain
+  still couples cadence to road speed through the selected gear, so it does not
+  provide what this project exists to provide. Those figures compare a chain-coupled
+  bike to a serial drivetrain; they do not describe the bicycle being built here.
+
+Where a historical document and a current design document disagree, **the current
+design documents and the open-gates register win**.
+
+## Reproduce the checks
+
+```sh
+python3 analysis/gates/register_check.py docs/design/open-gates-register.md
+python3 -m unittest discover -s analysis/gates/tests -v
+python3 analysis/storage/model.py
+python3 -m unittest discover -s analysis/storage -v
+python3 analysis/gyro/model.py
+```
+
+These check that documents are well-formed and that the arithmetic models run and
+pass their physics checks. **They do not prove the design is safe, legal or
+buildable.** A green run means the paperwork is organised, not that a bicycle works.
+
+The powerboard schematic is generated from Python, not hand-drawn KiCad; see
+[`hardware/powerboard-reva/README.md`](hardware/powerboard-reva/README.md) for the
+current component and ERC counts and the generator commands.
+
+## Licence
+
+MIT — see [`LICENSE`](LICENSE).
