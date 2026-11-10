@@ -73,11 +73,29 @@ class Sheet:
         dx,dy={0:(-5.08,0),180:(5.08,0),90:(0,5.08),270:(0,-5.08)}[angle]
         xx,yy=round(x+dx,4),round(y+dy,4)
         self.items.append(f'(wire (pts (xy {x} {y}) (xy {xx} {yy})) (stroke (width 0) (type default)) (uuid {uid(tag+"wire")}))')
+        # Bounded presentation repair: labels must extend AWAY from horizontal pins.
+        if self.legibility_layout() and dx:
+            angle_label = 180 if dx < 0 else 0
+            justify_label = 'right' if dx < 0 else 'left'
+        else:
+            angle_label = 0 if dx <= 0 else 180
+            justify_label = 'left' if dx <= 0 else 'right'
         # All labels global: explicit namespace GEN_/HUB_ prevents unintended merges.
-        self.items.append(f'(global_label {q(net)} (shape bidirectional) (at {xx} {yy} {0 if dx<=0 else 180}) (effects (font (size 0.9 0.9)) (justify {"left" if dx<=0 else "right"})) (uuid {uid(tag+"label")}))')
+        self.items.append(f'(global_label {q(net)} (shape bidirectional) (at {xx} {yy} {angle_label}) (effects (font (size 0.9 0.9)) (justify {justify_label})) (uuid {uid(tag+"label")}))')
+    def legibility_layout(self):
+        return self.name.startswith(('fsr-', 'brake-intent-')) or self.name in ('brake-switch-harness', 'brake-dump-command')
     def part(self,a,ref,value,x,y,nets,footprint=''):
         libid=val(a[1]);self.syms[libid]=a
-        props=f'(property "Reference" {q(ref)} (at {x} {y-5.08} 0) (effects (font (size 1.27 1.27)))) (property "Value" {q(value)} (at {x} {y-2.54} 0) (effects (font (size 1.016 1.016)))) (property "Footprint" {q(footprint)} (at {x} {y} 0) (effects (font (size 1.27 1.27)) hide))'
+        fx, ry, vy, justify = x, y-5.08, y-2.54, ''
+        if self.legibility_layout():
+            if libid in ('Device:R', 'Device:C'):
+                fx, ry, vy, justify = x+3.81, y-1.27, y+1.27, '(justify left)'
+            else:
+                # Clear the highest pin and body; keep original symbol and wires.
+                top = max(py for _,_,_,py,_ in pins(a))
+                ry, vy = y-max(top, 5.08)-10.16, y-max(top, 5.08)-7.62
+        justify = (' '+justify) if justify else ''
+        props=f'(property "Reference" {q(ref)} (at {fx} {ry} 0) (effects (font (size 1.27 1.27)){justify})) (property "Value" {q(value)} (at {fx} {vy} 0) (effects (font (size 1.016 1.016)){justify})) (property "Footprint" {q(footprint)} (at {x} {y} 0) (effects (font (size 1.27 1.27)) hide))'
         self.items.append(f'(symbol (lib_id {q(libid)}) (at {x} {y} 0) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid {uid(ref)}) {props} (instances (project "powerboard-reva" (path {q(self.path)} (reference {q(ref)}) (unit 1)))))')
         done={}
         for num,name,px,py,angle in pins(a):
