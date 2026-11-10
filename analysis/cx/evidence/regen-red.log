@@ -1,0 +1,97 @@
+test_every_withdrawn_mention_points_at_section_12 (test_regen_recovery.DocumentStatusTest.test_every_withdrawn_mention_points_at_section_12) ... FAIL
+test_section_12_keeps_the_current_figure (test_regen_recovery.DocumentStatusTest.test_section_12_keeps_the_current_figure) ... ok
+test_withdrawn_figure_is_still_present_and_marked (test_regen_recovery.DocumentStatusTest.test_withdrawn_figure_is_still_present_and_marked) ... FAIL
+test_helper_agrees_with_the_committed_model_stdout (test_regen_recovery.RegenRecoveryTest.test_helper_agrees_with_the_committed_model_stdout) ... FAIL
+test_kinetic_energy_matches_the_model (test_regen_recovery.RegenRecoveryTest.test_kinetic_energy_matches_the_model) ... FAIL
+test_rejects_impossible_inputs (test_regen_recovery.RegenRecoveryTest.test_rejects_impossible_inputs) ... FAIL
+test_single_hop_65_percent_reproduces_the_withdrawn_figure (test_regen_recovery.RegenRecoveryTest.test_single_hop_65_percent_reproduces_the_withdrawn_figure) ... FAIL
+test_trip_energy_denominator_is_the_models_55_6_wh (test_regen_recovery.RegenRecoveryTest.test_trip_energy_denominator_is_the_models_55_6_wh) ... FAIL
+test_two_hop_chain_is_the_models_0_791_squared (test_regen_recovery.RegenRecoveryTest.test_two_hop_chain_is_the_models_0_791_squared) ... FAIL
+
+======================================================================
+FAIL: test_every_withdrawn_mention_points_at_section_12 (test_regen_recovery.DocumentStatusTest.test_every_withdrawn_mention_points_at_section_12)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-contradictions/analysis/cx/test_regen_recovery.py", line 113, in test_every_withdrawn_mention_points_at_section_12
+    self.assertIn("§12", window,
+AssertionError: '§12' not found in '3. **The energy you want to recover at the traffic light is tiny.** At 25 km/h\n   with 94 kg, KE = **2267 J = 0.63 Wh**. Twenty stop-starts per 10 km commute =\n   **12.6 Wh gross**, of which maybe **8.2 Wh** is capturable — versus **55.6 Wh**\n   of flat-road tractive energy for the whole trip. Real-world ebike regen\n   recovery is **3–8 %**, up to ~14 % in dense stop-go [CITED: ebikes.ca].' : no pointer to §12 near: '   **12.6 Wh gross**, of which maybe **8.2 Wh** is capturable — versus **55.6 Wh**'
+
+======================================================================
+FAIL: test_withdrawn_figure_is_still_present_and_marked (test_regen_recovery.DocumentStatusTest.test_withdrawn_figure_is_still_present_and_marked)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-contradictions/analysis/cx/test_regen_recovery.py", line 104, in test_withdrawn_figure_is_still_present_and_marked
+    self.assertIn("superseded", line.lower(),
+AssertionError: 'superseded' not found in '   **12.6 wh gross**, of which maybe **8.2 wh** is capturable — versus **55.6 wh**' : unmarked withdrawn figure: '   **12.6 Wh gross**, of which maybe **8.2 Wh** is capturable — versus **55.6 Wh**'
+
+======================================================================
+FAIL: test_helper_agrees_with_the_committed_model_stdout (test_regen_recovery.RegenRecoveryTest.test_helper_agrees_with_the_committed_model_stdout)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-contradictions/analysis/cx/test_regen_recovery.py", line 44, in setUp
+    self.m = _load()
+             ^^^^^^^
+  File "/home/c08r4d0r/worktrees/cycle-contradictions/analysis/cx/test_regen_recovery.py", line 29, in _load
+    raise AssertionError("regen_recovery.py not implemented")
+AssertionError: regen_recovery.py not implemented
+
+======================================================================
+FAIL: test_kinetic_energy_matches_the_model (test_regen_recovery.RegenRecoveryTest.test_kinetic_energy_matches_the_model)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-contradictions/analysis/cx/test_regen_recovery.py", line 44, in setUp
+    self.m = _load()
+             ^^^^^^^
+  File "/home/c08r4d0r/worktrees/cycle-contradictions/analysis/cx/test_regen_recovery.py", line 29, in _load
+    raise AssertionError("regen_recovery.py not implemented")
+AssertionError: regen_recovery.py not implemented
+
+======================================================================
+FAIL: test_rejects_impossible_inputs (test_regen_recovery.RegenRecoveryTest.test_rejects_impossible_inputs)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-contradictions/analysis/cx/test_regen_recovery.py", line 44, in setUp
+    self.m = _load()
+             ^^^^^^^
+  File "/home/c08r4d0r/worktrees/cycle-contradictions/analysis/cx/test_regen_recovery.py", line 29, in _load
+    raise AssertionError("regen_recovery.py not implemented")
+AssertionError: regen_recovery.py not implemented
+
+======================================================================
+FAIL: test_single_hop_65_percent_reproduces_the_withdrawn_figure (test_regen_recovery.RegenRecoveryTest.test_single_hop_65_percent_reproduces_the_withdrawn_figure)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-contradictions/analysis/cx/test_regen_recovery.py", line 44, in setUp
+    self.m = _load()
+             ^^^^^^^
+  File "/home/c08r4d0r/worktrees/cycle-contradictions/analysis/cx/test_regen_recovery.py", line 29, in _load
+    raise AssertionError("regen_recovery.py not implemented")
+AssertionError: regen_recovery.py not implemented
+
+======================================================================
+FAIL: test_trip_energy_denominator_is_the_models_55_6_wh (test_regen_recovery.RegenRecoveryTest.test_trip_energy_denominator_is_the_models_55_6_wh)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-contradictions/analysis/cx/test_regen_recovery.py", line 44, in setUp
+    self.m = _load()
+             ^^^^^^^
+  File "/home/c08r4d0r/worktrees/cycle-contradictions/analysis/cx/test_regen_recovery.py", line 29, in _load
+    raise AssertionError("regen_recovery.py not implemented")
+AssertionError: regen_recovery.py not implemented
+
+======================================================================
+FAIL: test_two_hop_chain_is_the_models_0_791_squared (test_regen_recovery.RegenRecoveryTest.test_two_hop_chain_is_the_models_0_791_squared)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-contradictions/analysis/cx/test_regen_recovery.py", line 44, in setUp
+    self.m = _load()
+             ^^^^^^^
+  File "/home/c08r4d0r/worktrees/cycle-contradictions/analysis/cx/test_regen_recovery.py", line 29, in _load
+    raise AssertionError("regen_recovery.py not implemented")
+AssertionError: regen_recovery.py not implemented
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.002s
+
+FAILED (failures=8)
+exit=1

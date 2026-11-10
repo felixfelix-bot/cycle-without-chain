@@ -36,9 +36,12 @@ LTO, not supercapacitors.** Five findings carry that:
 
 3. **The energy you want to recover at the traffic light is tiny.** At 25 km/h
    with 94 kg, KE = **2267 J = 0.63 Wh**. Twenty stop-starts per 10 km commute =
-   **12.6 Wh gross**, of which maybe **8.2 Wh** is capturable — versus **55.6 Wh**
+   **12.6 Wh gross**, of which **7.9 Wh** is recoverable through the honest
+   two-hop chain (see §12) — versus **55.6 Wh**
    of flat-road tractive energy for the whole trip. Real-world ebike regen
    recovery is **3–8 %**, up to ~14 % in dense stop-go [CITED: ebikes.ca].
+   *(The 8.2 Wh printed here previously is **superseded** — §12 shows it used
+   65 % as a single KE→battery hop.)*
    The prize is real but small, and a **normal e-bike with a DD hub already
    gets it** — no chain removal required.
 
@@ -78,7 +81,7 @@ series hybrid does not.
 | A4 | Crr, good tyre on asphalt | 0.006 | ESTIMATE (0.005–0.008) |
 | A5 | cruise speed | 25 km/h | ASSUMPTION (EU L1e-A class) |
 | A6 | rider continuous power | 150 W | ESTIMATE |
-| A7 | regen capture efficiency | 65 % | ESTIMATE |
+| A7 | regen capture efficiency — **withdrawn from the current figure** | 65 % | ESTIMATE; applied as a single KE→battery hop, which §12 corrected |
 | A8 | off-cadence metabolic penalty | 4 % | ESTIMATE, ~20 rpm off optimum |
 | A9 | battery round-trip incl. BMS | 92 % | ESTIMATE |
 | A10 | supercap round-trip at bike currents | 97 % | ESTIMATE |
@@ -126,8 +129,17 @@ KE(25 km/h) = ½·94·6.94² = 2267 J = 0.630 Wh
 
 Ten kilometres at 25 km/h takes 24.0 min and **55.6 Wh** of tractive energy.
 Twenty stop-starts contribute **12.6 Wh** of gross kinetic energy, of which
-**8.2 Wh (14.7 %)** is capturable at 65 % regen efficiency. That agrees with
+**7.9 Wh (14.2 %)** is recoverable once the chain is counted as two hops
+(KE→battery 0.791, battery→wheel 0.791 — see §12). That agrees with
 the cited 3–8 % flat / ≤14 % urban range — the model is not optimistic.
+
+> **Superseded figure.** This section previously printed **8.2 Wh (14.7 %)**
+> "at 65 % regen efficiency". 65 % (assumption A7) was applied as a *single*
+> KE→battery hop, which omits the battery→wheel hop. The figure is withdrawn,
+> not deleted: §12 *Correction to §3/§5* carries the current number, and
+> `analysis/cx/regen_recovery.py` reproduces both from the committed model
+> (`docs/analysis/chainless_drivetrain_model.py`, §14 output). 8.2 Wh must not
+> be quoted as this study's result.
 
 ---
 
@@ -197,7 +209,13 @@ USD 293** (Eaton XV3560-2R7407-R at USD 16.27 qty-1), storing **7.29 Wh** at
 full charge.
 
 **So the buffer is trivially small — and therefore pointless as a design
-driver.** The reason people reach for capacitors is *range*, and that is where
+driver.** Note what this sizing does *not* use: it absorbs one stop's raw
+kinetic energy, so it is independent of the regen-chain correction in §12. The
+only recoverable-energy figure this study publishes is **§12's 7.9 Wh**; the
+8.2 Wh single-hop figure that used to be quoted in §0/§2 is **superseded** and
+must not be reused for sizing (see §12, *Correction to §3/§5*).
+
+The reason people reach for capacitors is *range*, and that is where
 they collapse:
 
 | target | supercap pack | LFP pack | LTO pack |
@@ -484,8 +502,8 @@ flat ground. That is the whole argument in two lines.
 
 ### Correction to §3/§5 — the regen figure
 
-The earlier 8.2 Wh used 65 % as a *single* KE→battery hop. The honest chain is
-two hops (0.791 out, 0.791 back):
+The earlier 8.2 Wh — the **superseded** single-hop figure — used 65 % as a
+*single* KE→battery hop. The honest chain is two hops (0.791 out, 0.791 back):
 
 ```
 2267 J × 0.791 = 1793 J = 0.498 Wh stored
@@ -493,8 +511,16 @@ two hops (0.791 out, 0.791 back):
 20 stops        → 7.9 Wh usable = 14.2 % of the 10 km trip energy
 ```
 
-Same order of magnitude; the 8.2 Wh figure is **superseded**. Both are
-single-digit Wh, and neither justifies removing a chain.
+**7.9 Wh is the current figure.** Same order of magnitude as the withdrawn one;
+the 8.2 Wh single-hop figure is **superseded** and is now marked as such in
+§0, §2 and §5 rather than left quotable. Both are single-digit Wh, and neither
+justifies removing a chain.
+
+Reproduce both: `analysis/cx/regen_recovery.py` prints 7.88 Wh for the two-hop
+chain and 8.18 Wh for the withdrawn one-hop chain, and its tests assert they
+agree with the committed model's own output
+(`docs/analysis/chainless_drivetrain_model.py`, §14 `Regen at the traffic
+light, honest round trip`).
 
 ### The honest tax, and the real trade-off
 
@@ -624,8 +650,10 @@ this study computes.**
 
 ## §14 Open items
 
-- **TODO(unverified)** — 65 % regen capture efficiency (A7) is an ESTIMATE. A
-  bench measurement with a Phaserunner + All-Axle at 5–25 km/h would settle it.
+- **TODO(unverified)** — the regen chain's two hops are ESTIMATES/CITED, not measurements:
+  0.86 (Grin All-Axle DD hub *system*) × 0.92 (LFP round trip incl. BMS) = 0.791 per hop.
+  65 % (A7) is no longer used by the current figure. A bench measurement with a
+  Phaserunner + All-Axle at 5–25 km/h would settle the one-hop number.
 - **TODO(unverified)** — 4 % off-cadence metabolic penalty (A8) is an ESTIMATE
   read off the cited cadence literature, not measured on this rider.
 - **TODO(unverified)** — the 3 W housekeeping figure is an ESTIMATE for a

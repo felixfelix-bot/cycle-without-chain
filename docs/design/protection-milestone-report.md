@@ -1,8 +1,10 @@
 # Autonomous protection circuit milestone — NOT SAFE TO ENERGIZE
 
 > Superseded electrical verdict: [independent integration review](protection-integration-review.md).
-> UNSAFE DRAFT. In particular the 0.4 V comparator corner assumption below is
-> insufficient over temperature; published threshold extrema are not qualified limits.
+> UNSAFE DRAFT. In particular the comparator output-low corner below is not the
+> full-temperature limit; the *qualified* band is the 0.55 V-corner one, and
+> neither band is a qualified limit at small input overdrive (see
+> `analysis/cx/ov_threshold.py` and PROT-07).
 
 ## Delivered and bounded
 
@@ -29,7 +31,13 @@ Comparator IN+ node: bus through 112k+113k, ground through 10k, positive feedbac
 
 `Vbus_trip = Vref*(1+Rt/Rb+Rt/Rh) - Vout*Rt/Rh`.
 
-Nominal turn-on **60.318 V**, turn-off **58.205 V**, hysteresis **2.114 V**. Exhaustive 64-corner arithmetic: turn-on **59.417–61.226 V**, turn-off **57.356–59.058 V**. Budget: resistor 0.1% initial +25 ppm/K×50 K; reference 0.1%+100 ppm/K×50 K; ±5.5 mV comparator offset plus 50 nA×10k; output low 0–0.4 V and high ±4%. This is a conservative screening band for a ±50 K excursion from calibration, NOT the entire component rated-temperature guarantee. Resistor tracking, aging and reference load regulation require closure. Output pullup loading creates millivolt error, below this screening allowance. Minimum on threshold remains above provisional 58.4 V.
+Nominal turn-on **60.318 V**, turn-off **58.205 V**, hysteresis **2.114 V**. Budget: resistor 0.1% initial +25 ppm/K×50 K; reference 0.1%+100 ppm/K×50 K; ±5.5 mV comparator offset plus 50 nA×10k; output low corner and high ±4%.
+
+**Qualified band, comparator output low 0–0.55 V** (the LM339B −40…85 °C VOL limit at ISINK ≤ 4 mA, VID = −1 V): turn-on **59.315–61.226 V**, turn-off **57.356–59.058 V**. Qualified minimum turn-on **59.315 V**, **0.915 V above the provisional 58.4 V bus maximum**. Recomputed by `analysis/cx/ov_threshold.py` (tests in `analysis/cx/test_ov_threshold.py`), which also reproduces the retired 0.4 V-corner figure below.
+
+**Superseded, kept for the record:** the earlier exhaustive 64-corner arithmetic printed turn-on **59.417–61.226 V**, turn-off **57.356–59.058 V**, using an output-low corner of 0–0.4 V. That 0.4 V is the 25 °C VOL limit, not the −40…85 °C limit. Raising the low corner to 0.55 V moves the minimum turn-on down by **0.102 V** (= Rt/Rh × 0.15 V = 0.6788 × 0.15), so **59.417 V must not be quoted as a qualified bound** — this is the correction recorded in [the integration review](protection-integration-review.md) §P1, now applied here.
+
+Both bands cover only a ±50 K excursion from calibration, **not** the entire component rated-temperature guarantee. Resistor tracking, aging and reference load regulation require closure (PROT-07). The sweep also assumes the datasheet VOL limit, which is specified at VID = −1 V, still holds at the ~0 V overdrive of the threshold itself; TI publishes no guaranteed VOL there, so even 59.315 V is a screening number rather than a datasheet-backed one. Output pullup loading at 3.3 V into 1 kΩ sinks ≤ 3.3 mA, inside the 4 mA test condition, and creates millivolt error below this screening allowance. Qualified minimum on threshold remains above provisional 58.4 V.
 
 Sense Thevenin resistance ≈9.30 kohm, nominal RC≈0.93 us. LM339B propagation is overdrive-dependent; its typical 1 us must not be promoted to a guaranteed maximum. Reserve 10 us total comparator/filter/driver/gate turn-on as an **unverified design budget**, not a demonstrated hardware bound. At 500 W into the existing 100 uF, 60 V rises to **60.828 V in 10 us**, from sqrt(V²+2Pt/C). At 50 us it reaches 64.031 V. Ringing and cable energy are excluded. This is why 100 V MOSFET headroom does not close safety.
 
