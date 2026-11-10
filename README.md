@@ -18,6 +18,34 @@ cadence and cannot provide stationary pedal charging. Next: audit old claims,
 resolve CIXI vendor/version discrepancies and define requirements before sourcing
 parts or testing. An illustrative 80% cruise target is not measured performance.
 
+## Potential audiences and use cases
+
+These customer segments are **hypotheses to test, not market validation**. The
+series concept trades conversion losses, added mass and control complexity for
+cadence independent of road speed, controllable pedal resistance and chassis
+design freedom. The chain-coupled baseline does not offer independent cadence.
+Rider input and generator load must balance: arbitrary cadence and power cannot
+both be independently enforced. This is research, not a certified product.
+
+- **Cargo and urban logistics:** choose a comfortable cadence through stops and
+  changing road speeds; payload and hill capability remain bounded by motor
+  torque, available power, storage state and thermal limits—not guaranteed.
+- **Adaptive cycling and rehabilitation research:** adjustable pedal resistance
+  could support experiments with different rider abilities; suitability requires
+  individual assessment and validation, with no medical safety or treatment claims.
+- **Low-maintenance, clean commuters:** removing the wheel-drive chain could
+  reduce chain grime and servicing, but does not guarantee lower total maintenance.
+  The crank-to-generator gearing remains moving machinery and needs a guard;
+  electrical components and cooling add service needs.
+- **Recumbent, velomobile and alternative-chassis designers:** electrical routing
+  could replace long wheel-drive chains and free up layout choices, subject to
+  generator packaging, structural loads, mass and heat-rejection requirements.
+- **Stationary exercise and pedal charging:** controlled resistance could enable
+  workouts and conversion of rider effort into stored energy—not free energy.
+  Use requires a safe, stable stand and wheel-propulsion inhibit. At full storage,
+  useful charging stops; continued pedalling under load requires a safe energy
+  sink and adequate cooling, otherwise load must be reduced or stopped.
+
 ## Historical illustrations — not validated build specifications
 
 [Parts, efficiency, limitations and existing bicycles](docs/analysis/parallel-hybrid-guide.md)
