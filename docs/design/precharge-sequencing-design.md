@@ -1,6 +1,6 @@
 # Precharge and auxiliary sequencing — proposed implementation contract
 
-> **STATUS: CONSULTANT ANALYSIS — NOT A DECISION RECORD. NOT SAFE TO ENERGIZE.** Docs/model only; no schematic, PCB, ordering, operation or hardware approval. No independent cross-family review obtained; no further delegation attempted (quota gate required).
+> **STATUS: CONSULTANT ANALYSIS — NOT A DECISION RECORD. NOT SAFE TO ENERGIZE.** Docs/model only; no schematic, PCB, ordering, operation or hardware approval. Follow-up independent review: [precharge-review.md](precharge-review.md). Its corrections supersede the historical price-verification and pin-level-readiness language below; architecture and auxiliary budgets remain blocked.
 
 2026-11-10; branch `pr/precharge-design`; worktree `/home/c08r4d0r/worktrees/cycle-precharge-design`; base `d07bdb2` (fetched github/master). Read first: `entry-review.md`, `dc-entry-milestone.md`. Scope: source switching/boot dependencies, not FSR/brake changes. 120 kg rider/payload excludes bicycle mass. Human-powered short buffer; 36–58.4 V, 500 W screen and 15 A target are NOT installed ratings or a final battery chemistry.
 
@@ -12,7 +12,7 @@
 
 **D3 — latch timeout, do not retry a hot resistor.** Nominal timeout 1.5 s, ready requires |pack−bus| <1 V for 20 ms, followed by main confirmation and 20 ms settling before drive AUX enable. Model gives close at **0.85245 s**, precharge energy **2.602695 J**; 1 ohm bus fault dissipates **49.336146 J** before timeout. The latter, not capacitor energy alone, governs resistor qualification.
 
-**D4 — baseline is lowest-complexity credible candidate, NOT a proven cheapest complete BOM.** Verified partial silicon subtotal is $47.876 (four MOSFETs, two drivers, two LM5164 controllers). This excludes passives, third-party assembly, protection, third supply if needed, and instrumentation. No fabricated complete cost. An optional rated relay adds $108.11 before driver hardware. Price/stock and qualification can reverse this choice.
+**D4 — baseline is lowest-complexity credible candidate, NOT a proven cheapest complete BOM.** Historical quoted partial silicon subtotal is $47.876 (arithmetic checked, purchase-price tiers unverified) (four MOSFETs, two drivers, two LM5164 controllers). This excludes passives, third-party assembly, protection, third supply if needed, and instrumentation. No fabricated complete cost. An optional rated relay adds $108.11 before driver hardware. Price/stock and qualification can reverse this choice.
 
 ## 1. Existing connectivity actually read
 
@@ -36,7 +36,7 @@ Read-only `hardware/powerboard-reva/exports/powerboard-reva.net`, `generate_sche
 | VOM1271T photovoltaic drive | $2.08 each attractive, but minimum 7.8 V open circuit at 10 mA LED, only 6 uA minimum short-circuit current at 25 C; not guaranteed 10 V Rds(on) drive. Slow linear passage/temperature burden. Rejected for baseline main switch. |
 | Panasonic HEV2AN-P-DC12V | Two series contacts; specified 20 A/800 V resistive forward and −20 A/400 V reverse, 40 A/800 V inrush endurance in cited table. 1.92 W coil, $108.11, bulky. Credible optional independent isolation, not fuse substitute. |
 
-## 3. Exact next schematic wiring specification (new refs reserved by implementer)
+## 3. Provisional next schematic net/function specification (new refs reserved by implementer)
 
 This is a **net/function contract**, not a finished pin-numbered schematic. Final package pins, gate capacitance sizing, analog tolerance stack and protective component ratings must be independently checked before implementation approval.
 
@@ -90,7 +90,7 @@ No vendor SPICE model used, no ngspice result claimed. Semiconductor SOA, parasi
 
 ## 6. Candidate BOM and price evidence
 
-See `analysis/precharge/candidate-bom.csv`. USD displayed supplier prices accessed 2026-11-10, excludes VAT/shipping; stock/checkout not guaranteed. $47.876 is a **partial** baseline (4×$6.864 + 2×$5.24 + 2×$4.97). Third enabled drive converter adds verified IC-only $4.97 if not reusing an independent qualified supply. Optional series HE-V adds $108.11 plus coil driver/clamp and 1.92 W controller output demand, invalidating the 0.5 W controller allocation. Unknown rows stay unknown; no complete cheapest-price claim.
+See `analysis/precharge/candidate-bom.csv`. USD displayed supplier prices accessed 2026-11-10, excludes VAT/shipping; stock/checkout not guaranteed. $47.876 is a **partial** baseline (4×$6.864 + 2×$5.24 + 2×$4.97). Third enabled drive converter adds historically quoted IC-only $4.97 if not reusing an independent qualified supply. Optional series HE-V adds $108.11 plus coil driver/clamp and 1.92 W controller output demand, invalidating the 0.5 W controller allocation. Unknown rows stay unknown; no complete cheapest-price claim.
 
 Primary evidence:
 
