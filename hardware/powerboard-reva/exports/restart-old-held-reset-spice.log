@@ -38,7 +38,7 @@ vbus#branch                       -0.000234312
 vref#branch                                  0
 vcc#branch                         -0.00311285
 
- Reference value :  4.76055e-03
+ Reference value :  4.41225e-03
 No. of Data Rows : 80086
 ov_on               =  6.033114e+01
 ov_off              =  5.820204e+01

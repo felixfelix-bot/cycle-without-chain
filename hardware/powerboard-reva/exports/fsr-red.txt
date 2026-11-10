@@ -1,0 +1,30 @@
+test_actual_export (test_fsr_connectivity.FSRTopology.test_actual_export) ... ERROR
+test_every_fsr_endpoint_mutation (test_fsr_connectivity.FSRTopology.test_every_fsr_endpoint_mutation) ... ERROR
+test_values_and_legacy_path (test_fsr_connectivity.FSRTopology.test_values_and_legacy_path) ... ok
+
+======================================================================
+ERROR: test_actual_export (test_fsr_connectivity.FSRTopology.test_actual_export)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-fsr-circuit/hardware/powerboard-reva/tests/test_fsr_connectivity.py", line 35, in test_actual_export
+    def test_actual_export(self):validate(*exported())
+                                 ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/c08r4d0r/worktrees/cycle-fsr-circuit/hardware/powerboard-reva/tests/test_fsr_connectivity.py", line 13, in validate
+    raise ValueError('obsolete rider Hall path remains')
+ValueError: obsolete rider Hall path remains
+
+======================================================================
+ERROR: test_every_fsr_endpoint_mutation (test_fsr_connectivity.FSRTopology.test_every_fsr_endpoint_mutation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-fsr-circuit/hardware/powerboard-reva/tests/test_fsr_connectivity.py", line 37, in test_every_fsr_endpoint_mutation
+    parts,nets=exported();validate(parts,nets)
+                          ^^^^^^^^^^^^^^^^^^^^
+  File "/home/c08r4d0r/worktrees/cycle-fsr-circuit/hardware/powerboard-reva/tests/test_fsr_connectivity.py", line 13, in validate
+    raise ValueError('obsolete rider Hall path remains')
+ValueError: obsolete rider Hall path remains
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.161s
+
+FAILED (errors=2)

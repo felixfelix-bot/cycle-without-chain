@@ -100,22 +100,21 @@ aout#branch_1_2                              0
 aout#branch_1_3                              0
 aout#branch_1_4                              0
 
- Reference value :  7.08364e-04
- Reference value :  1.46997e-03
- Reference value :  2.22832e-03
- Reference value :  3.00463e-03
- Reference value :  3.76757e-03
- Reference value :  4.57771e-03
- Reference value :  5.32491e-03
- Reference value :  6.10438e-03
- Reference value :  6.90153e-03
- Reference value :  7.72168e-03
- Reference value :  8.51998e-03
- Reference value :  9.28562e-03
- Reference value :  1.00720e-02
- Reference value :  1.06984e-02
- Reference value :  1.11865e-02
- Reference value :  1.17043e-02
+ Reference value :  7.86764e-04
+ Reference value :  1.66497e-03
+ Reference value :  2.54628e-03
+ Reference value :  3.43047e-03
+ Reference value :  4.32136e-03
+ Reference value :  5.20071e-03
+ Reference value :  6.06891e-03
+ Reference value :  6.87578e-03
+ Reference value :  7.67278e-03
+ Reference value :  8.46423e-03
+ Reference value :  9.21927e-03
+ Reference value :  9.99427e-03
+ Reference value :  1.06560e-02
+ Reference value :  1.12682e-02
+ Reference value :  1.18992e-02
 No. of Data Rows : 240086
 startup_held        =  0.000000e+00
 armed               =  3.300000e+00

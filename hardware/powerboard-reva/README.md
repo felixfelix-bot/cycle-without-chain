@@ -2,9 +2,19 @@
 
 **NOT SAFE TO ENERGIZE. NOT FABRICATION-READY. No PCB, routing, procurement or riding authorization.**
 
-Open `powerboard-reva.kicad_pro` or root `powerboard-reva.kicad_sch` in KiCad 9. The root references fourteen real child sheets. Nets join electrically through explicitly named global labels; GEN_ and HUB_ prefixes separate bridge/control signals. This is not a block-diagram-only drawing or connector substitution for ICs.
+Open `powerboard-reva.kicad_pro` or root `powerboard-reva.kicad_sch` in KiCad 9. The root references twenty-six real child sheets. Nets join electrically through explicitly named global labels; GEN_ and HUB_ prefixes separate bridge/control signals. This is not a block-diagram-only drawing or connector substitution for ICs.
 
-## Current MCU milestone (supersedes counts and missing-MCU statements below)
+## Selected FSR circuit milestone (current; supersedes historical counts below)
+
+Two actual OPA333AIDBVR + TMUX1511PWR channels now replace the rider Hall inputs.
+See [FSR implementation](docs/fsr-implementation.md). The binary switch topology remains;
+its authority is a **firmware contract, not a hardware positive-torque guard**.
+27 pages, 314 components, 181 connected nets, 956 connected endpoints, 51 explicit NCs.
+Strict ERC returns **5**, with **5 unresolved errors / 0 warnings**; no suppression.
+Candidate TVS/clamps are not battery-short protection. Low-voltage frontend bench use
+only after independent review; this does not authorize energizing the powerboard.
+
+## Current MCU milestone (historical; superseded by FSR counts above)
 
 See [MCU integration review](../../docs/design/mcu-integration-review.md) for reproduced checks, pending cross-family approval and prioritized next circuit blockers. [MCU milestone](../../docs/design/mcu-milestone.md): real STM32G474VET6 circuit, 15 pages, 199 components, 642 connected endpoints and 45 explicit NC pins. Native ERC: four unresolved errors, zero warnings. Firmware, fast overcurrent trip, protected entry, storage acceptance and sequencing remain blockers. Historical sections below are not current status.
 

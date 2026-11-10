@@ -1,4 +1,4 @@
-> **STATUS: CANDIDATE ANALYSIS — NOT A FROZEN SCHEMATIC OR SAFETY QUALIFICATION.**
+> **STATUS: HISTORICAL CANDIDATE ANALYSIS — superseded for actual circuit values and safety claims by [FSR circuit milestone](fsr-circuit-milestone.md). References below to a hardwired positive-torque inhibit were incorrect: only a firmware/control-model contract exists; firmware is unimplemented. Not safety qualification.**
 
 # Brake-lever FSR analogue frontend evaluation
 
