@@ -8,7 +8,8 @@
 > classified by the *kind of evidence* that would close it. Finishing it means
 > the design phase is organised, not that the machine is safe.
 
-- Repository state: `master` at `02c56a6` plus the storage decision added on branch `pr/storage-lto-decision`.
+- Repository state: `master` at `6134e5f` plus the gate wiring on branch
+  `pr/gate-wiring`.
 - Consolidates (read-only) the milestone and review documents under
   `docs/design/` plus `docs/analysis/chainless-drivetrain.md`.
 - Consistency of this document is checked mechanically by
@@ -123,7 +124,7 @@ Bucket legend (exhaustive; every gate is in exactly one):
 | RAIL-09 | Start-up and UVLO | Restart into both drivers, D500 inrush into C500/C501, cold start at −20 °C, TPSI3052 transfer latency; the 0.8 W cap is 22.22 mA at 36 V and 13.70 mA at 58.4 V | Start-up current exceeds the pack-input cap; UVLO cycling into a live load | B | Bench matrix: 36 V and 58.4 V, zero/minimum/full load, both drivers simultaneous, UVLO restart, temperature | OPEN | ctrl-supply-review.md §3 Remaining startup and budget limits; §4 Finite gating checklist, item 5 |
 | RAIL-10 | Passive MPNs | Exact passives R500–R505, C505, C506 and the 200 V input pair with working voltage, tolerance and temperature | Candidate values reaching a fabrication BOM | A | Freeze MPNs against datasheet ratings | OPEN | ctrl-supply-review.md §4 Finite gating checklist, item 1 |
 | RAIL-11 | ERC completeness | Ten strict-ERC `power_pin_not_driven` errors on this head (U3.1, U1.3, U1.24, U1.25, U17.37, U26.5, U400.3, U400.5, U401.5, U500.2), unsuppressed | A real undriven power pin hiding among known ones; no ERC-clean claim is possible | A | Close each identity with defensible source/return semantics, without `PWR_FLAG` | OPEN — enumerated and gate-enforced, not waived | rail-partition-review.md §Independently reproduced; hardware/powerboard-reva/verify_exports.py |
-| RAIL-12 | Export parity | The XML netlist consumed by tests vs the S-expression `.net` consumed by `verify_exports`; an injection into XML only stays green | A rail split invisible to one of two verifiers | A | Run the existing `netlist_parity` gate against both artifacts | PARTIAL — tool exists on master (4d18b7c), not wired to both | rail-partition-review.md §Defects found 8 |
+| RAIL-12 | Export parity | The XML netlist consumed by tests vs the S-expression `.net` consumed by `verify_exports`; an injection into XML only stays green | A rail split invisible to one of two verifiers | D | Run the existing `netlist_parity` gate against both artifacts | RESOLVED — `netlist_parity --netlist-sexpr` grades both exports against one map; 35 new tests including per-artifact injection controls | rail-partition-review.md §Defects found 8 |
 | RAIL-13 | DRV8353 direct-bus load | That the always-on `IVDRAIN` load is inside any envelope: 2 × 4 mA × 58.4 V = 0.467 W on DC_LINK, larger than the whole SINK12 subtotal | An unbounded always-on load the sink envelope never covered | D | Fixed: explicit `DC_LINK` row, `direct_bus_always_w`, `-O`-safe self-test | RESOLVED in bd00ac9 | rail-partition-review.md §Defects found 1 |
 | RAIL-14 | Rail self-test integrity | That `rail_budget.py --self-test` proves anything under `python3 -O` | A budget model that passes while its own expectation is corrupted | D | `_check()` raising `RuntimeError`; mutation controls fail in both modes | RESOLVED in bd00ac9 | rail-partition-review.md §Defects found 2 |
 | RAIL-15 | OC supply claim | That all independent safety loads sit downstream of SINK12/SAFETY3V3 — the netlist puts both TLV3202s and both OC ladders on LOGIC3V3_EXT | A false independence claim inside the safety argument | D | Netlist-verified and the milestone Outcome paragraph corrected | RESOLVED in bd00ac9 | rail-partition-review.md §Defects found 6 |
@@ -208,7 +209,7 @@ Bucket legend (exhaustive; every gate is in exactly one):
 | PCB-06 | Bench validation | That any current-limited bring-up, gate waveform, deadtime, fault injection, regen or thermal load test has run | Everything in the A bucket above is still paper | B | Staged guarded bench validation | OPEN | pcb-quality-gates.md §Actionable checklist, G9 |
 | PCB-07 | Generator reproducibility | That the schematic/PCB generator reproduces byte-identically; the audited upstream pipeline replaced placeholder UUIDs with UUID4 | A reproducibility claim that holds only within one run | A | Deterministic identifiers plus a two-build comparison | OPEN | tooling-audit-report.md §What the actual code provides |
 | PCB-08 | Fail-closed release gates | That release gates fail closed instead of reporting success for work not done | A gate that passes on a missing report | D | Three fail-closed checkers plus a runner, exercised by planted-fault tests | RESOLVED in 4d18b7c and c8c4d5f | tooling-audit-report.md §What the actual code provides; pcb-quality-gates.md §Smallest tooling to port later |
-| TOOL-01 | Gate runner wiring | That the release gates run at all without a human remembering: there is no workflow file and no runner invocation on the board directory | A gate that is only ever run by the person who wrote it | A | Add a CI job or a documented runner invocation | OPEN | pcb-quality-gates.md §Evidence contract; tooling-audit-report.md §What the actual code provides |
+| TOOL-01 | Gate runner wiring | That the release gates run at all without a human remembering: there was no workflow file and no runner invocation on the board directory | A gate that is only ever run by the person who wrote it | D | Add a CI job or a documented runner invocation | RESOLVED — `tools/gates/run_release_gates.py` is the one command and `.github/workflows/release-gates.yml` calls it on push and pull request, surfacing every gate it cannot grade as `NOT RUN` with a reason. Locally exercised; no CI run observed yet | pcb-quality-gates.md §Evidence contract; tooling-audit-report.md §What the actual code provides |
 | DRV-01 | Regen capture efficiency | That 65 % (A7) is right; it is an ESTIMATE | Buffer and regen benefit sized from an unmeasured number | B | Bench measurement with a Phaserunner and All-Axle at 5–25 km/h | OPEN | chainless-drivetrain.md §14 Open items |
 | DRV-02 | Off-cadence penalty | That 4 % (A8) applies to this rider; it is read off literature | The 8.7× gearing-benefit trade shifts | C | Operator or rider measurement, or a written accepted bound | OPEN | chainless-drivetrain.md §14 Open items |
 | DRV-03 | Housekeeping draw | That 3 W is right for a dual-controller build; it is an ESTIMATE | The bootstrap and standby budget | B | Measure Phaserunner plus CA3 idle draw | OPEN | chainless-drivetrain.md §14 Open items |
@@ -222,10 +223,10 @@ disagree with the table above.
 
 | Bucket | Meaning | Gates |
 |---|---|---|
-| A | Schematic/analysis work still possible now, closeable without hardware | 54 |
+| A | Schematic/analysis work still possible now, closeable without hardware | 52 |
 | B | Bench measurement that needs a built board | 35 |
 | C | Operator input required | 12 |
-| D | Resolved, with the commit or document that closed it | 8 |
+| D | Resolved, with the commit or document that closed it | 10 |
 
 ---
 

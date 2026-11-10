@@ -107,6 +107,33 @@ def netlist_xml(nets, *, components=("R1", "R2", "C1")):
     return "\n".join(lines) + "\n"
 
 
+def netlist_sexpr(nets, *, components=("R1", "R2", "C1")):
+    """Build a KiCad-9-shaped S-expression netlist (``sch export netlist``).
+
+    The XML and this file are two exports of the same design; the parity gate
+    must grade both against one expected map. ``nets`` maps net name ->
+    iterable of (ref, pin).
+    """
+    lines = ['(export (version "E")',
+             '  (design',
+             '    (source "board.kicad_sch")',
+             '    (date "2026-11-10T00:00:00+0100")',
+             '    (tool "Eeschema 9.0.9")',
+             '    (sheet (number "1") (name "/") (tstamps "/")))',
+             '  (components']
+    for ref in components:
+        lines.append('    (comp (ref "%s") (value "x") (footprint "Test:R_0603"))' % ref)
+    lines.append("  )")
+    lines.append("  (nets")
+    for code, (name, nodes) in enumerate(sorted(nets.items()), start=1):
+        lines.append('    (net (code "%d") (name "%s") (class "Default")' % (code, name))
+        for ref, pin in nodes:
+            lines.append('      (node (ref "%s") (pin "%s") (pintype "passive"))' % (ref, pin))
+        lines.append("    )")
+    lines.append("  ))")
+    return "\n".join(lines) + "\n"
+
+
 # --------------------------------------------------------------------------
 # Fake kicad-cli
 # --------------------------------------------------------------------------

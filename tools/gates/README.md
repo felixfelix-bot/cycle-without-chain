@@ -182,6 +182,95 @@ code 0. A gate that self-reports `PASS` while exiting nonzero is downgraded to
 `FAIL`. `--skip GATE` removes a gate. Selecting a gate without its inputs is
 `NOT RUN`, so a half-configured invocation cannot look like a pass.
 
+`netlist_parity` takes either `--expected FILE.json` or
+`--expected-from-pin-net-map hardware/powerboard-reva/pin-net-map.csv`, which
+derives the same map from the board's committed connectivity table so there is
+no second hand-maintained copy to drift. It also takes `--netlist-sexpr FILE`,
+which grades the plain `sch export netlist` artifact against the same map and
+requires the two exports to agree row-for-row; see §5.
+
+### 5. `run_release_gates.py` — the one command
+
+```sh
+python3 tools/gates/run_release_gates.py           # local: NOT RUN is a failure
+python3 tools/gates/run_release_gates.py --ci \
+    --summary-file "$GITHUB_STEP_SUMMARY"          # CI: NOT RUN is reported
+python3 tools/gates/run_release_gates.py --list
+```
+
+This is the wiring that was missing: the gates existed but nothing ran them
+unless a human typed the long `run_all_gates.py` line above. It plans each gate
+from what this tree actually contains, runs the runnable ones through
+`run_all_gates.py` (one subprocess, so the per-gate isolation still holds), and
+records the rest as `NOT RUN` with the concrete reason — "no board file",
+"kicad-cli not available", "no release manifest". It never invents an input and
+never substitutes a pass for a skip.
+
+Two modes, one code path:
+
+| mode | `NOT RUN` | `FAIL` | green means |
+|---|---|---|---|
+| local (default) | fails the run (exit 2) | fails the run (exit 1) | every gate graded and passed |
+| `--ci` | reported in the summary, not fatal | fails the job (exit 1) | at least one gate graded and passed, and none failed |
+
+`--ci` relaxes `NOT RUN` only, and only when at least one gate actually ran. A
+run in which every selected gate was skipped is `NOT RUN`, not green. The
+relaxation exists because the alternative — installing KiCad in CI to satisfy a
+gate that has no board file to grade — would be a green badge for work not done.
+
+`.github/workflows/release-gates.yml` calls exactly this command on `push` and
+`pull_request`. The step has no `continue-on-error`, no `|| true` and no pipe
+that could swallow the exit code, so its status *is* the job's status. The
+summary table it appends to `$GITHUB_STEP_SUMMARY` lists every gate with its
+verdict and, for `NOT RUN`, the reason.
+
+At this commit the workflow grades one gate and cannot grade two:
+
+| gate | in CI | why |
+|---|---|---|
+| `netlist_parity` | runs | needs only the two committed exports and `pin-net-map.csv` |
+| `native_reports` | `NOT RUN` | no `.kicad_pcb` exists (schematic-only design) and no `kicad-cli` on the runner |
+| `release_manifest` | `NOT RUN` | no release manifest and no Gerber packet to inventory |
+
+A green CI run therefore means "both netlist exports agree with the committed
+pin map, and the gate suite's own tests pass". It is not ERC, not DRC, and not
+a fabrication approval.
+
+### 6. RAIL-12: two exports, one expectation
+
+`hardware/powerboard-reva/exports/` carries two serialisations of the same
+netlist: `ctrl-supply.xml` (what the topology tests read) and
+`powerboard-reva.net` (what `verify_exports.py` grades). Before this wiring
+nothing compared them, so an intra-rail split injected into one artifact alone
+stayed green — the `.net` side never saw it and the pin-level tests did not
+cover it.
+
+The gate now takes both:
+
+```sh
+python3 -m tools.gates.netlist_parity \
+  --netlist hardware/powerboard-reva/exports/ctrl-supply.xml \
+  --netlist-sexpr hardware/powerboard-reva/exports/powerboard-reva.net \
+  --expected-from-pin-net-map hardware/powerboard-reva/pin-net-map.csv
+```
+
+Each artifact is graded against the expected map independently (checks are
+prefixed `sexpr_` for the second one, so a failure names the artifact), and
+then `artifacts_agree` compares the two endpoint sets and net-name sets
+directly. `artifacts_agree` is a *diagnostic*, not an independent proof: if both
+exports match the same map they agree by transitivity, so it can only fire when
+one of the map comparisons already failed. Its value is that it localizes the
+disagreement — which rows exist in the XML but not in the `.net`, and which net
+names appeared or vanished — instead of leaving a reader to diff two failure
+lists. A split in either artifact alone fails; a split in both still fails
+against the map. `tools/gates/red_rail12_injection.py` reproduces the original
+defect on demand: it copies the real XML, injects a `DRIVE12_SPLIT` net, and
+shows the pair call going red while the `.net`-only view never sees the split.
+
+`tools/gates/sexpr_netlist.py` is the reader. It is deliberately a separate
+implementation from `verify_exports.py`'s parser: importing the checker under
+test would make the gate inherit its bugs and stop being a second opinion.
+
 ## Tests
 
 ```sh

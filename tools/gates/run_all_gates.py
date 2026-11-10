@@ -71,7 +71,13 @@ def _build_argparser():
 
     parity = parser.add_argument_group("netlist_parity")
     parity.add_argument("--netlist")
+    parity.add_argument("--netlist-sexpr", dest="netlist_sexpr", default=None,
+                        help="also grade this S-expression netlist against the "
+                             "same expected map and require both to agree")
     parity.add_argument("--expected")
+    parity.add_argument("--expected-from-pin-net-map", dest="pin_net_map", default=None,
+                        metavar="CSV",
+                        help="derive the expected map from pin-net-map.csv")
     parity.add_argument("--require-net", action="append", dest="require_nets")
 
     manifest = parser.add_argument_group("release_manifest")
@@ -102,10 +108,17 @@ def _gate_argv(gate, args):
             "--kicad-cli", args.kicad_cli,
         ], ""
     if gate == "netlist_parity":
-        if args.netlist is None or args.expected is None:
-            return None, "needs --netlist and --expected"
-        argv = ["-m", "tools.gates.netlist_parity",
-                "--netlist", args.netlist, "--expected", args.expected]
+        if args.netlist is None:
+            return None, "needs --netlist"
+        if args.expected is None and args.pin_net_map is None:
+            return None, "needs --expected or --expected-from-pin-net-map"
+        argv = ["-m", "tools.gates.netlist_parity", "--netlist", args.netlist]
+        if args.expected is not None:
+            argv.extend(["--expected", args.expected])
+        if args.pin_net_map is not None:
+            argv.extend(["--expected-from-pin-net-map", args.pin_net_map])
+        if args.netlist_sexpr is not None:
+            argv.extend(["--netlist-sexpr", args.netlist_sexpr])
         for name in args.require_nets or ():
             argv.extend(["--require-net", name])
         return argv, ""

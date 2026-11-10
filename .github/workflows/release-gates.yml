@@ -1,0 +1,69 @@
+name: release-gates
+
+# The gates in tools/gates/ answer "did this artifact survive the checks?".
+# Before this workflow nothing invoked them, so a gate only ran when a human
+# remembered the command. This job is that invocation.
+#
+# What it grades here, and what it cannot:
+#
+#   netlist_parity     runs. It needs no KiCad, only the two committed exports
+#                      plus pin-net-map.csv, and it grades the XML and the
+#                      S-expression netlist against one expected map.
+#   native_reports     NOT RUN on this runner: there is no .kicad_pcb in the
+#                      tree (the design is schematic-only) and no kicad-cli.
+#                      The gate says so with an explicit reason; it is not
+#                      silently skipped and it is not faked.
+#   release_manifest   NOT RUN: there is no release manifest and no Gerber
+#                      packet to inventory.
+#
+# So a green run means exactly "the netlist parity gate graded both exports and
+# passed", and the job summary lists the two gates that did not run with their
+# reasons. It is not a fabrication approval and not an ERC/DRC result.
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  gates:
+    name: fail-closed gate suite
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # PyYAML is used by the workflow-contract tests in tests/gates/.
+      - name: Install test dependencies
+        run: pip install --no-cache-dir pytest pyyaml
+
+      - name: Gate suite self-tests
+        run: python3 -m pytest tests/gates -q
+
+      - name: Run the release gates
+        env:
+          PYTHONPATH: .
+        # --ci means "NOT RUN is reported, not fatal, because this runner cannot
+        # produce the artifact"; FAIL is never relaxed. No `|| true`, no
+        # continue-on-error: the step's exit code is the job's verdict.
+        run: |
+          set -e
+          python3 tools/gates/run_release_gates.py --ci \
+            --summary-file "$GITHUB_STEP_SUMMARY" \
+            --json-out gate-summary.json
+
+      - name: Upload the aggregate payload
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-gates-aggregate
+          path: |
+            gate-summary.json
+          if-no-files-found: ignore
+          retention-days: 14
