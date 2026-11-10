@@ -4,6 +4,17 @@ Trade study and reproducible model for a **chainless / series-hybrid bicycle
 drivetrain** (pedal → generator → energy buffer → hub motor), evaluated against
 a conventional chain drive on measured component efficiencies.
 
+## Illustrated parallel-hybrid design
+
+[Parts, efficiency, limitations and existing bicycles](docs/analysis/parallel-hybrid-guide.md)
+
+![Parallel hybrid](docs/analysis/parallel-hybrid-explainer.png)
+
+![Efficiency examples](docs/analysis/parallel-hybrid-blend.png)
+
+**Correction:** a retained chain still couples cadence to road speed through the
+selected gear. Motor assistance does not replace shifting or provide pedal-by-wire.
+
 ## Question
 
 Would a bicycle that generates electricity at the pedals (using a car or
@@ -28,13 +39,11 @@ profile of a capacitor."
 - `docs/analysis/chainless_drivetrain_model.py` — stdlib-only model that
   re-derives every number in the document.
 
-Two production systems are reconciled in §11: Mando Footloose (2015) and
-Schaeffler/Heinzmann Free Drive (2021, fleet production 2023). Both use
-automotive claw-pole alternators, giving ~40–45 % at the pedal generator and
-**~32 % pedals-to-road**. Schaeffler's widely-quoted "5 % less efficient than a
-chain" is shown to be a *vehicle range* figure that only holds at a rider
-energy share of ~12 % — not a drivetrain efficiency, and not reproducible on a
-light commuter.
+**Evidence correction for §11:** no verified crank-generator efficiency map
+was found for Mando Footloose or Schaeffler Free Drive. Earlier claims that both
+use automotive claw-pole alternators and deliver ~32% pedals-to-road are not
+established. Do not use them as measured product specifications. See the
+[illustrated guide](docs/analysis/parallel-hybrid-guide.md) for source boundaries.
 
 ## Reproduce
 
