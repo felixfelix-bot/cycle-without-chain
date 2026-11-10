@@ -1,5 +1,7 @@
 # Independent precharge review — 2026-11-10
 
+> Numerical budgets superseded by [budget revision](precharge-budget-revision.md); original values below retained as review history.
+
 **Verdict: publishable screening proposal, NOT ready for a released pin-level schematic specification. NO ENERGIZE / NO FAB / NO qualified SOA claim.** Reviewed feature `37751668474e5e425e1ebf27d0bdab6dc4827783`, merged onto fetched default `aebd795`. No circuit files changed; FSR owner retains circuit ownership. This review supersedes stronger readiness/price language in the original proposal.
 
 ## Electrical architecture

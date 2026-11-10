@@ -1,5 +1,5 @@
 import unittest
-from model import Config, simulate
+from legacy_model import Config, simulate
 
 class SequenceTests(unittest.TestCase):
     def test_passive_loaded_fails(self):

@@ -1,7 +1,7 @@
 """Independent closed-form controls; no hardware/switching qualification."""
 import math
 import unittest
-from model import Config, simulate
+from legacy_model import Config, simulate
 
 
 class AnalyticControls(unittest.TestCase):

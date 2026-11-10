@@ -1,0 +1,31 @@
+F.EE
+======================================================================
+ERROR: test_failed_open_never_enables_drive (test_budget.BudgetTests.test_failed_open_never_enables_drive)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-precharge-budget/analysis/precharge/tests/test_budget.py", line 18, in test_failed_open_never_enables_drive
+    self.assertFalse(model.simulate(model.Config(main_path_available=False))['run'])
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: Config.__init__() got an unexpected keyword argument 'main_path_available'
+
+======================================================================
+ERROR: test_unknown_external_source_never_proves (test_budget.BudgetTests.test_unknown_external_source_never_proves)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-precharge-budget/analysis/precharge/tests/test_budget.py", line 20, in test_unknown_external_source_never_proves
+    self.assertFalse(model.simulate(model.Config(pm_quiet_valid=False))['run'])
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: Config.__init__() got an unexpected keyword argument 'pm_quiet_valid'
+
+======================================================================
+FAIL: test_component_budget_replaces_impossible_allocations (test_budget.BudgetTests.test_component_budget_replaces_impossible_allocations)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-precharge-budget/analysis/precharge/tests/test_budget.py", line 7, in test_component_budget_replaces_impossible_allocations
+    self.assertGreaterEqual(c.sink_w, .825)
+AssertionError: 0.1 not greater than or equal to 0.825
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.918s
+
+FAILED (failures=1, errors=2)
