@@ -5,7 +5,8 @@ fabricate, or ride. No cross-model-family electrical approval is claimed: the
 reviewer's actual model family was not established.**
 
 Reviewed feature `44d3d9fc2c542bccb24466b791668cd05a88fadd`, merged onto
-`aebd795` (published master including README/use-case, gyro and precharge work).
+`aebd795` (published master including README/use-case and gyro work), then
+merged the concurrently published `93d5b85` precharge consolidation before push.
 This review changes no entry circuit, firmware, or protection design.
 
 ## Independent electrical findings
