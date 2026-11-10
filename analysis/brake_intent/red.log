@@ -1,0 +1,77 @@
+test_disagreement_and_open_wire_on_either_lever_latch (__main__.BrakeIntentTests.test_disagreement_and_open_wire_on_either_lever_latch) ... FAIL
+test_each_hardware_kill_overrides_brake_and_stuck_mcu_demand (__main__.BrakeIntentTests.test_each_hardware_kill_overrides_brake_and_stuck_mcu_demand) ... FAIL
+test_either_or_both_healthy_levers_request_brake (__main__.BrakeIntentTests.test_either_or_both_healthy_levers_request_brake) ... FAIL
+test_emergency_ov_clamp_is_independent_and_can_drag_without_brake (__main__.BrakeIntentTests.test_emergency_ov_clamp_is_independent_and_can_drag_without_brake) ... FAIL
+test_full_pack_hot_dump_has_no_electrical_braking (__main__.BrakeIntentTests.test_full_pack_hot_dump_has_no_electrical_braking) ... FAIL
+test_full_pack_uses_cool_dump_not_battery (__main__.BrakeIntentTests.test_full_pack_uses_cool_dump_not_battery) ... FAIL
+test_hot_dump_allows_independently_accepted_battery_regen (__main__.BrakeIntentTests.test_hot_dump_allows_independently_accepted_battery_regen) ... FAIL
+test_no_brake_never_commands_regen_or_dump (__main__.BrakeIntentTests.test_no_brake_never_commands_regen_or_dump) ... FAIL
+
+======================================================================
+FAIL: test_disagreement_and_open_wire_on_either_lever_latch (__main__.BrakeIntentTests.test_disagreement_and_open_wire_on_either_lever_latch)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-brake-intent/analysis/brake_intent/test_model.py", line 13, in setUp
+    self.assertIsNotNone(SPEC, "brake intent model not implemented")
+AssertionError: unexpectedly None : brake intent model not implemented
+
+======================================================================
+FAIL: test_each_hardware_kill_overrides_brake_and_stuck_mcu_demand (__main__.BrakeIntentTests.test_each_hardware_kill_overrides_brake_and_stuck_mcu_demand)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-brake-intent/analysis/brake_intent/test_model.py", line 13, in setUp
+    self.assertIsNotNone(SPEC, "brake intent model not implemented")
+AssertionError: unexpectedly None : brake intent model not implemented
+
+======================================================================
+FAIL: test_either_or_both_healthy_levers_request_brake (__main__.BrakeIntentTests.test_either_or_both_healthy_levers_request_brake)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-brake-intent/analysis/brake_intent/test_model.py", line 13, in setUp
+    self.assertIsNotNone(SPEC, "brake intent model not implemented")
+AssertionError: unexpectedly None : brake intent model not implemented
+
+======================================================================
+FAIL: test_emergency_ov_clamp_is_independent_and_can_drag_without_brake (__main__.BrakeIntentTests.test_emergency_ov_clamp_is_independent_and_can_drag_without_brake)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-brake-intent/analysis/brake_intent/test_model.py", line 13, in setUp
+    self.assertIsNotNone(SPEC, "brake intent model not implemented")
+AssertionError: unexpectedly None : brake intent model not implemented
+
+======================================================================
+FAIL: test_full_pack_hot_dump_has_no_electrical_braking (__main__.BrakeIntentTests.test_full_pack_hot_dump_has_no_electrical_braking)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-brake-intent/analysis/brake_intent/test_model.py", line 13, in setUp
+    self.assertIsNotNone(SPEC, "brake intent model not implemented")
+AssertionError: unexpectedly None : brake intent model not implemented
+
+======================================================================
+FAIL: test_full_pack_uses_cool_dump_not_battery (__main__.BrakeIntentTests.test_full_pack_uses_cool_dump_not_battery)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-brake-intent/analysis/brake_intent/test_model.py", line 13, in setUp
+    self.assertIsNotNone(SPEC, "brake intent model not implemented")
+AssertionError: unexpectedly None : brake intent model not implemented
+
+======================================================================
+FAIL: test_hot_dump_allows_independently_accepted_battery_regen (__main__.BrakeIntentTests.test_hot_dump_allows_independently_accepted_battery_regen)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-brake-intent/analysis/brake_intent/test_model.py", line 13, in setUp
+    self.assertIsNotNone(SPEC, "brake intent model not implemented")
+AssertionError: unexpectedly None : brake intent model not implemented
+
+======================================================================
+FAIL: test_no_brake_never_commands_regen_or_dump (__main__.BrakeIntentTests.test_no_brake_never_commands_regen_or_dump)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-brake-intent/analysis/brake_intent/test_model.py", line 13, in setUp
+    self.assertIsNotNone(SPEC, "brake intent model not implemented")
+AssertionError: unexpectedly None : brake intent model not implemented
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.002s
+
+FAILED (failures=8)

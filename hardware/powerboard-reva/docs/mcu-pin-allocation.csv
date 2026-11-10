@@ -24,7 +24,12 @@ DRV_MISO,PA6,28,SPI1_MISO,5,DS12288r5 T12 pp60/70; T13 pp73-74,Shared driver reg
 DRV_MOSI,PB5,92,SPI1_MOSI,5,DS12288r5 T12 pp60/70; T13 pp73-74,Shared driver register SPI; not control-loop critical
 GEN_CS_N,PD15,62,GPIO,none,DS12288r5 T12 pp63-64,External pull/default required
 HUB_CS_N,PE14,45,GPIO,none,DS12288r5 T12 pp63-64,External pull/default required
-BRAKE_SENSE,PD14,61,GPIO,none,DS12288r5 T12 pp63-64,External pull/default required
+FAULT_CHAIN_SENSE,PD14,61,GPIO,none,DS12288r5 T12 pp63-64,E-stop/thermal status only; not rider brake
+LEFT_HALL_ADC,PC3,18,ADC12_IN9,analog,DS12288r5 T12,Alternative Hall input; selected FSR frontend absent
+RIGHT_HALL_ADC,PA3,25,ADC1_IN4,analog,DS12288r5 T12,Alternative Hall input; selected FSR frontend absent
+LEFT_SWITCH_ADC,PA4,26,ADC2_IN17,analog,DS12288r5 T12,Supervised EOL input; disable DAC1_OUT1
+RIGHT_SWITCH_ADC,PB2,34,ADC2_IN12,analog,DS12288r5 T12,Supervised EOL input; sampling unimplemented
+BRAKE_DUMP_PWM,PB11,50,GPIO,none,DS12288r5 T12,Command only; firmware PWM/timer mapping unimplemented
 GEN_HALL_1,PD8,55,GPIO/EXTI8,none,DS12288r5 T12 p64,Edge timestamps; separate from PWM cadence
 GEN_HALL_2,PD9,56,GPIO/EXTI9,none,DS12288r5 T12 p64,Edge timestamps; separate from PWM cadence
 GEN_HALL_3,PD10,57,GPIO/EXTI10,none,DS12288r5 T12 p64,Edge timestamps; separate from PWM cadence

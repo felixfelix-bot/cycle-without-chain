@@ -75,7 +75,7 @@ J1,BUS_TEST_ONLY_NOT_SOURCE_INPUT,,external-boundaries
 J2,MCU_SUPPLY_EXT,,external-boundaries
 J3,GEN_MACHINE_PHASES,,external-boundaries
 J4,HUB_MACHINE_PHASES,,external-boundaries
-J5,SAFETY_BRAKE_LOOP_NC,,external-boundaries
+J5,SAFETY_FAULT_CHAIN_NC,,external-boundaries
 C21,100u 100V provisional,,external-boundaries
 U3,R-78HB12-0.5,,aux-supply
 U4,TLV76033DBZR,Package_TO_SOT_SMD:SOT-23,aux-supply
@@ -256,3 +256,40 @@ C73,470u 100V UHE2A471MHD +/-20%,,dc-entry
 C74,470u 100V UHE2A471MHD +/-20%,,dc-entry
 R118,10k 1% RH02510K00FE02 always-on bleed,,dc-entry
 J43,Kelvin BUS measurement isolated instrument ONLY,,dc-entry
+J44,LEFT_LEVER_3V3_ONLY,,brake-intent-left
+R119,22R sensor supply limit,Resistor_SMD:R_0805_2012Metric,brake-intent-left
+C75,100n sensor cable supply,Capacitor_SMD:C_0805_2012Metric,brake-intent-left
+R120,10k 1% signal current limit,Resistor_SMD:R_0805_2012Metric,brake-intent-left
+R121,100k open Hall bias,Resistor_SMD:R_0805_2012Metric,brake-intent-left
+C76,10n ADC filter,Capacitor_SMD:C_0805_2012Metric,brake-intent-left
+D30,PESD3V3U1UL,Diode_SMD:D_SOD-882,brake-intent-left
+D34,BAT54S,Package_TO_SOT_SMD:SOT-23,brake-intent-left
+R122,10k 1% signal current limit,Resistor_SMD:R_0805_2012Metric,brake-intent-left
+R123,10k 1% switch bias,Resistor_SMD:R_0805_2012Metric,brake-intent-left
+C77,10n ADC filter,Capacitor_SMD:C_0805_2012Metric,brake-intent-left
+D32,PESD3V3U1UL,Diode_SMD:D_SOD-882,brake-intent-left
+D36,BAT54S,Package_TO_SOT_SMD:SOT-23,brake-intent-left
+J45,RIGHT_LEVER_3V3_ONLY,,brake-intent-right
+R124,22R sensor supply limit,Resistor_SMD:R_0805_2012Metric,brake-intent-right
+C78,100n sensor cable supply,Capacitor_SMD:C_0805_2012Metric,brake-intent-right
+R125,10k 1% signal current limit,Resistor_SMD:R_0805_2012Metric,brake-intent-right
+R126,100k open Hall bias,Resistor_SMD:R_0805_2012Metric,brake-intent-right
+C79,10n ADC filter,Capacitor_SMD:C_0805_2012Metric,brake-intent-right
+D31,PESD3V3U1UL,Diode_SMD:D_SOD-882,brake-intent-right
+D35,BAT54S,Package_TO_SOT_SMD:SOT-23,brake-intent-right
+R127,10k 1% signal current limit,Resistor_SMD:R_0805_2012Metric,brake-intent-right
+R128,10k 1% switch bias,Resistor_SMD:R_0805_2012Metric,brake-intent-right
+C80,10n ADC filter,Capacitor_SMD:C_0805_2012Metric,brake-intent-right
+D33,PESD3V3U1UL,Diode_SMD:D_SOD-882,brake-intent-right
+D37,BAT54S,Package_TO_SOT_SMD:SOT-23,brake-intent-right
+U24,SN74LVC1G32DBVR,Package_TO_SOT_SMD:SOT-23-5,brake-dump-command
+U25,SN74LVC1G08DBVR,Package_TO_SOT_SMD:SOT-23-5,brake-dump-command
+C81,100n AND decoupling,Capacitor_SMD:C_0805_2012Metric,brake-dump-command
+R129,10k dump PWM default off,Resistor_SMD:R_0805_2012Metric,brake-dump-command
+C82,100n OR decoupling,Capacitor_SMD:C_0805_2012Metric,brake-dump-command
+R130,4k7 1% EOL OFFBOARD,Resistor_SMD:R_0805_2012Metric,brake-switch-harness
+R131,10k 1% EOL OFFBOARD,Resistor_SMD:R_0805_2012Metric,brake-switch-harness
+SW1,NC_RELEASE_OPEN_ON_BRAKE_UNSELECTED,,brake-switch-harness
+R132,4k7 1% EOL OFFBOARD,Resistor_SMD:R_0805_2012Metric,brake-switch-harness
+R133,10k 1% EOL OFFBOARD,Resistor_SMD:R_0805_2012Metric,brake-switch-harness
+SW2,NC_RELEASE_OPEN_ON_BRAKE_UNSELECTED,,brake-switch-harness

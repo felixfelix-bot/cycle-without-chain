@@ -32,7 +32,7 @@ def validate(parts,nets):
         for p,n in [(32,'INHA'),(33,'INLA'),(34,'INHB'),(35,'INLB'),(36,'INHC'),(37,'INLC'),(31,'ENABLE')]:pin(ref,p,pre+'_'+n)
         for p,n in [(29,'DRV_SCK'),(28,'DRV_MOSI'),(27,'DRV_MISO')]:pin(ref,p,n)
         element('R','TIMER_BREAK_OK',pre+'_ENABLE','1k')
-    for p,n in {27:'DRV_SCK',28:'DRV_MISO',92:'DRV_MOSI',62:'GEN_nSCS',45:'HUB_nSCS',1:'MCU_ARM',2:'WDI',3:'RESET_REQUEST',61:'BRAKE_SENSE',14:'MCU_NRST',95:'MCU_BOOT0',76:'SWDIO',77:'SWCLK',93:'ENC_A',94:'ENC_B'}.items():pin('U17',p,n)
+    for p,n in {27:'DRV_SCK',28:'DRV_MISO',92:'DRV_MOSI',62:'GEN_nSCS',45:'HUB_nSCS',1:'MCU_ARM',2:'WDI',3:'RESET_REQUEST',61:'FAULT_CHAIN_SENSE',14:'MCU_NRST',95:'MCU_BOOT0',76:'SWDIO',77:'SWCLK',93:'ENC_A',94:'ENC_B'}.items():pin('U17',p,n)
     for p in [24,49,64,75,100,6]:pin('U17',p,'LOGIC3V3_EXT')
     for p in [23,48,63,74,99,35]:pin('U17',p,'PGND')
     for p,n in [(37,'MCU_VDDA'),(36,'MCU_VREF')]:
@@ -45,12 +45,12 @@ def validate(parts,nets):
         n=f'{pre}_HALL_{i}';pin('U17',p,n);element('R',n+'_EXT',n,'1k');element('R',n+'_EXT','LOGIC3V3_EXT','10k');element('C',n,'PGND','1n')
     for n in ['ENC_A','ENC_B']:
         element('R',n+'_EXT',n,'1k');element('R',n+'_EXT','LOGIC3V3_EXT','10k');element('C',n,'PGND','1n')
-    unused = {4,5,7,8,9,10,11,12,13,18,19,25,26,30,31,34,38,47,50,51,52,53,54,68,69,70,71,72,73,78,79,80,81,82,83,85,86,87,88,89,90,91,96,97,98}
+    unused = {4,5,7,8,9,10,11,12,13,19,30,31,38,47,51,52,53,54,68,69,70,71,72,73,78,79,80,81,82,83,85,86,87,88,89,90,91,96,97,98}
     for p in unused:
         if not nets.get(('U17',str(p)),'').startswith('unconnected-(U17-'):
             raise ValueError(f'unused MCU pin {p} must be explicit NC')
     for n in ['MCU_ARM','RESET_REQUEST','WDI','MCU_BOOT0']:element('R',n,'PGND','1' if n=='WDI' else '10k')
-    element('R','BRAKE_LOOP','BRAKE_SENSE','10k');element('R','BRAKE_SENSE','PGND','100k')
+    element('R','FAULT_CHAIN','FAULT_CHAIN_SENSE','10k');element('R','FAULT_CHAIN_SENSE','PGND','100k')
     element('R','MCU_NRST','LOGIC3V3_EXT','10k');element('C','MCU_NRST','PGND','100n')
     if any('_PWM_EXT' in v or '_SPI_EXT' in v or '_ADC_EXT' in v or v=='SAFETY_CONTROL' for v in parts.values()):raise ValueError('placeholder control connector remains')
 
