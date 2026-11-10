@@ -1,10 +1,24 @@
 # cycle-without-chain
 
-Trade study and reproducible model for a **chainless / series-hybrid bicycle
-drivetrain** (pedal → generator → energy buffer → hub motor), evaluated against
-a conventional chain drive on measured component efficiencies.
+Historical trade study of a chainless / series-hybrid bicycle drivetrain,
+now investigating an **independent-cadence series hybrid**, with a chain-retained
+parallel hybrid as the comparison baseline, not the selected final architecture.
 
-## Illustrated parallel-hybrid design
+> **Supersession / purchasing caution:** the [current implementation plan](docs/PLAN-parallel-hybrid.md)
+> supersedes historical build recommendations. The older analysis, model and
+> diagrams are **not validated purchasing evidence**: they mix assumptions and
+> unsupported product claims and contain known energy-accounting errors. See the
+> plan's correction register before reusing any numerical result. No hardware has
+> been purchased or definitively selected; no prototype performance is established.
+
+The plan evaluates a PM pedal generator, active rectifier, shared DC bus, hub
+inverter/motor and battery/BMS storage branch for independent cadence. Mechanical
+friction brakes remain mandatory. The parallel baseline still uses gears to set
+cadence and cannot provide stationary pedal charging. Next: audit old claims,
+resolve CIXI vendor/version discrepancies and define requirements before sourcing
+parts or testing. An illustrative 80% cruise target is not measured performance.
+
+## Historical illustrations — not validated build specifications
 
 [Parts, efficiency, limitations and existing bicycles](docs/analysis/parallel-hybrid-guide.md)
 
@@ -30,21 +44,21 @@ in supercapacitors — beat a chain? Should the buffer be supercapacitors,
 batteries, or both? And how does a battery-less version bootstrap its
 generator?
 
-## Answer in one line
+## Current direction
 
-The drivetrain loses ~35 percentage points of the rider's power, and even with
-every stage at its datasheet peak it is still ~20 points worse than a waxed
-derailleur. Supercapacitors are a power buffer, not an energy store (19× the
-mass of LFP for the same energy). LTO is the honest answer to "I want the wear
-profile of a capacitor."
+Try the original independent-cadence series concept through staged feasibility
+checks; compare it with a chain-retained baseline against measured requirements. The historical series-efficiency scenarios are not measured
+ceilings, and old battery, drag, range and price figures are not purchase criteria.
 
 ## What is in here
 
 - `docs/analysis/chainless-drivetrain.md` — the full study: assumptions,
   cited efficiencies, buffer sizing, the battery-less bootstrap question,
   failure modes, sensitivity analysis, and a BOM.
-- `docs/analysis/chainless_drivetrain_model.py` — stdlib-only model that
-  re-derives every number in the document.
+- `docs/analysis/chainless_drivetrain_model.py` — historical stdlib-only model;
+  retained unchanged for audit, including known accounting errors.
+- [Series-feasibility plan (parallel baseline)](docs/PLAN-parallel-hybrid.md) — current scope, correction
+  register, staged gates and measurement protocol.
 
 **Evidence correction for §11:** no verified crank-generator efficiency map
 was found for Mando Footloose or Schaeffler Free Drive. Earlier claims that both
@@ -68,5 +82,6 @@ established. Do not use them as measured product specifications. See the
 python3 docs/analysis/chainless_drivetrain_model.py
 ```
 
-stdlib only, no dependencies. Every figure in the document is that script's
-printed output.
+Stdlib only, no dependencies. This is a historical-model smoke run, not scientific
+validation. Successful execution does not establish that its assumptions,
+calculations or the diagrams are correct.

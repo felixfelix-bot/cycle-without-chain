@@ -1,0 +1,54 @@
+# Independent-cadence series hybrid: feasibility plan
+
+Status: planning only; priority **SOON**. The user now wants to try the original independent-cadence series architecture; the parallel hybrid is a comparison baseline, not the final choice. The filename is retained for link continuity. No hardware has been purchased or definitively selected. This is a documentation-only change, not approval to buy parts or ride a prototype.
+
+> **Supersession / purchasing caution:** this plan supersedes the build recommendations and certainty of the historical [study](analysis/chainless-drivetrain.md), [illustrated guide](analysis/parallel-hybrid-guide.md), model and diagrams. Those artifacts remain for audit, not as validated purchasing evidence. Their calculations, product claims and illustrations are not prototype measurements. The model is not rewritten here; successful execution does not validate its science.
+
+This is a concise implementation/safety and evidence supplement to the concurrently landed [pedal-by-wire evaluation plan](pedal-by-wire-evaluation-plan.md), which retains the broader battery/capacitor/hybrid storage comparison. The battery/BMS branch below is a candidate for evaluation, not a chemistry or storage decision. Both plans leave purchases and final architecture approval pending evidence.
+
+## Scope and limits
+
+Primary candidate: crank → permanent-magnet generator → active rectifier → shared DC bus → hub inverter → hub motor. Battery/BMS is a storage branch on the bus, not a compulsory round-trip in the direct pedal-to-wheel path. Evaluate bus regulation, reverse-current control, precharge, protection and startup power; no hardware is selected or purchased. Torque/cadence sensors regulate pedal load independently of wheel speed, subject to generator torque/speed, bus power and control limits. Independent mechanical friction brakes remain mandatory.
+
+Compare against the chain-retained parallel baseline: regen-capable hub, compatible controller, battery/BMS and torque/cadence sensing. **Its mechanical gears still set cadence relative to road speed**; that baseline does not offer independent pedal speed or stationary pedal charging. For the series candidate, stationary charging is a possible test objective, not an established feature; require safe charge acceptance and control. Loss of electronics can remove all propulsion: assess safe stopping and recovery without assuming a mechanical fallback.
+
+## New vendor evidence and open questions
+
+Checked 2026-11-10: the [CIXI 2026 catalog](https://static.cixi.life/bcfe3d6f-13a7-4c3f-963f-02441bf08647-PERS-Catalog-2026-EN-Eurobike-ok.pdf) describes PERS as mechanically decoupled series hybrid and claims operation with the battery depleted or removed (printed pp. 5–6). Its standalone table (pp. 11–12) lists efficiency “Higher than 80%”, 3.7 kg, 360 W maximum continuous and 2000 W peak. These are **vendor claims**, not our measurements or complete pedal-to-wheel efficiency; no efficiency map or test conditions are established here.
+
+The user reports that the [professional technology page](https://www.cixi.life/pers-technology-pro) lists 80% unit efficiency, 3.4 kg and 613 W. The live text extraction in this task returned professional-support content, not that specification table, so those page values were not independently reverified. Treat the page/catalog power, mass, efficiency boundary and hardware-version discrepancies as unresolved; request dated datasheets and maps before comparison. Battery-removed operation does not by itself demonstrate zero-energy cold startup in our proposed circuit.
+
+An **80% pedal-to-wheel cruise target is illustrative, not proven feasible** across rider loads or cadence. Establish the operating point and full loss budget before adopting it as an acceptance target. The pasted AI claim that GaN raises total efficiency from 65% to 86% is unsupported: switching-device improvements alone do not establish generator, inverter, motor and auxiliary losses. Compare active-rectifier/device choices through measured loss maps, not headline percentages.
+
+## Historical claims requiring correction before reuse
+
+- “Alternator” does not establish claw-pole topology for Mando Footloose or Schaeffler/Heinzmann Free Drive. Their generator and end-to-end efficiencies are unknown from the evidence reviewed; the historical derived product efficiencies are unsupported.
+- The reported “5% less efficient” claim lacks a sufficiently defined measurement boundary and test protocol. It is ambiguous, not proven thermodynamically impossible, and not established here as a particular range penalty or rider-energy share.
+- The historical approximately 61% series result is an assumed stage-product scenario, not a measured ceiling. Generator-to-DC-bus power need not round-trip through the battery. Separate direct and stored energy flows and avoid double-counting controller losses.
+- The stated regen expression `0.86² × 0.92` equals approximately **68.0%**, not the historical 62.6%. The old code squares a battery round-trip factor. Even the corrected arithmetic is only an illustration with assumed efficiencies, not a regen measurement.
+- The old 74.9 W battery-deficit result divides by regen round-trip efficiency instead of the relevant battery-to-wheel drive efficiency. Do not reuse that result; define the electrical boundary before recomputing.
+- Historical 2 W drag, 25–40 km range, mass and cost figures are assumptions or unverified estimates for this project, not established specifications. Recheck all prices, availability, fit, legal classifications and component maps. Old diagrams may embed the same errors and do not establish feasibility.
+
+## Phases and exit gates
+
+| Phase | Work | Evidence required to proceed |
+|---|---|---|
+| 1. Audit prior work | Inventory study/model/diagram claims; label measured, sourced, assumed or unsupported. Check sources, units, stage boundaries and arithmetic; distinguish battery charge/discharge from direct bus flow. | Claim ledger and proposed model corrections with reproducible checks. No historical numeric result becomes a target without revalidation. |
+| 2. Define requirements | Confirm rider plus cargo mass, sustainable pedal effort, independent cadence/load range and stationary-charging interest; donor bike wheel/axle/dropout/frame/brake/gear interfaces; route grades, descents, stops, surface, weather and desired range. Establish jurisdiction, lawful assist behavior, intended road class, budget including tools/shipping/tax and acceptable added mass. | Rider-approved requirements and numeric pass/fail limits, including stopping, thermal, range and drag limits; authoritative legal checks. Unknowns remain explicit blockers. |
+| 3. Source compatible BOM | Compare current purchasable PM generator/active rectifier/bus control/hub inverter/pack/BMS/sensor/brake options and a parallel baseline with dated vendor links, stock, delivered prices and alternatives. Verify generator gearing/mounting and usable torque/cadence maps, DC-bus control stability, axle torque retention, wheel build, rotor fit, wiring/connectors, sensor protocols, voltage/current limits and charger compatibility. Confirm the hub actually supports regen (a freewheeling geared hub usually does not). | Compatibility matrix, full cost/mass budget, documented charge acceptance across state of charge and temperature, electrical protection and mechanical installation review. No definitive part choice or purchase before approval. |
+| 4. Bench and brake safety | Calibrate instruments; test independent cadence/load regulation, cold startup and battery-absent behavior safely, direct-bus and storage flows, stationary charge control, cutoff, sensor faults, loss of power, regen inhibition at full/cold battery, BMS disconnect and bus overvoltage handling within manufacturer limits. Verify friction braking independently, axle retention, wiring protection, fusing and thermal limits. Use restrained fixtures and qualified mechanical review; do not deliberately exceed pack ratings. | Logged results against phase-2 limits; safe fallback with regen absent, no unintended torque, and all safety defects closed. Stop on overheating, unstable braking or electrical faults. |
+| 5. Instrumented road evaluation | Only after safety and legal gates: start on a controlled low-speed course, then representative matched routes. Compare series direct-bus and buffered operation with the parallel baseline, at matched rider work and conditions; compare regen disabled/enabled. | Repeated raw logs, calibration/uncertainty record and results against approved requirements; decision to retain, revise or reject the design. No range/efficiency marketing claim from one ride. |
+
+## Measurement and acceptance protocol
+
+Set numeric thresholds in phase 2, before buying or testing; none are claimed achieved now.
+
+- **Pedal and electrical watts:** synchronize calibrated crank torque/cadence power with signed DC voltage/current at a declared battery-terminal boundary; log speed, assist setting, gear and time. Do not infer rider power from controller estimates alone.
+- **Regen wheel → storage → wheel:** measure wheel torque and angular speed on an instrumented rig plus charge/discharge DC energy. Integrate energy over defined intervals; report wheel-to-storage capture separately from subsequent storage-to-wheel delivery and their round trip. Match state of charge and temperature, account for auxiliaries, and do not count the same recovered energy twice. Without wheel instrumentation, label DC-only results as such, not a measured mechanical round trip.
+- **Range / Wh per km:** report gross battery discharge, recovered charge and net terminal Wh/km separately, route length/elevation, rider work, payload, wind, temperature and speed. Derive range only from measured usable pack energy under comparable conditions; retain reserve and report variability.
+- **Thermal, cadence and drag:** log generator/rectifier/motor/controller/pack temperatures and cadence distribution; verify cadence independence for series and required shifting for the parallel baseline. Measure unpowered drag versus speed using controlled coast-down or dynamometer comparison with consistent tyres, load and baseline; include measurement uncertainty and low-speed climbing heat.
+- **Acceptance:** all safety/legal gates pass, every requirement has a measured result and uncertainty, and missing measurements are marked unverified rather than replaced with model outputs. Publish failures as well as benefits.
+
+## Immediate next action
+
+Complete phases 1–2 with the rider and donor bike details, prioritizing series feasibility and vendor specification clarification. Procurement, hardware construction and a broader model rewrite are follow-up work, not part of this plan delivery.
