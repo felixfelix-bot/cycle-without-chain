@@ -82,6 +82,8 @@ figure as a product specification. See
 **KiCad 9** schematic, native netlist, PDF and SVG. Current state:
 
 - **382 components, 218 nets, 1129 connected pins, 51 explicit NCs, 32 pages.**
+  These figures were re-measured from a fresh clone at `ae42054`, including what the
+  net/NC split actually means: [schematic figure verification](docs/design/schematic-figures-verified.md).
 - **45 hardware tests** pass, normally and under `python3 -O`.
 - Strict ERC: **10 errors, 0 warnings, exit 5** — unsuppressed and unwaived.
   Enumerated, gate-enforced and treated as open work, not silenced.
@@ -101,12 +103,17 @@ priced purchase BOM, no assembled board, no bench measurement of any kind.
 [Open gates register](docs/design/open-gates-register.md) states what is proven and
 what is not: **109 gates**, each classified by the kind of evidence that closes it.
 
-- **A — 54:** closable now by calculation, part selection, topology change or
+- **A — closable now** by calculation, part selection, topology change or
   simulation, without hardware.
-- **B — 35:** needs a built board (thermal, ripple, effective capacitance under DC
+- **B — needs a built board** (thermal, ripple, effective capacitance under DC
   bias, start-up sequencing, EMI, hot-plug, pulse/SOA, main-switch conduction).
-- **C — 12:** needs an operator decision.
-- **D — 8:** resolved, with the commit that closed it.
+- **C — needs an operator decision.**
+- **D — resolved**, with the commit that closed it.
+
+Per-bucket counts are deliberately **not** repeated here. They move whenever a gate
+is closed, and a stale copy in the README is exactly the drift this register exists
+to prevent. The register's own summary table is authoritative, and
+`analysis/gates/register_check.py` fails if it disagrees with the rows above it.
 
 **The design phase is complete when every A gate is closed and every B and C gate
 is explicitly deferred to a named phase with a named owner.** It is not complete
