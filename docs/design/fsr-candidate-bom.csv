@@ -1,0 +1,11 @@
+reference,manufacturer,mpn,value_or_role,status,source,release_note
+FSR1,Interlink Electronics,34-00018,402 short tail housed contacts,provisional,https://www.interlinkelectronics.com/downloads/datasheets/fsr-400-series-datasheet.pdf,Confirm lever fit and drawing revision
+U_FSR,Texas Instruments,OPA333AIDBVR,unity buffer,provisional,https://www.ti.com/lit/ds/symlink/opa333.pdf,Confirm output swing and stability at actual load
+U_ISO,Texas Instruments,TMUX1511PWR,powered-off protected SPST quad,provisional,https://www.ti.com/lit/ds/symlink/tmux1511.pdf,Off-state limit 3.6V not battery fault protection
+U_REF,Texas Instruments,REF3325AIDBZR,2.5V reference,DNP optional,https://www.ti.com/lit/ds/symlink/ref33.pdf,Not needed for baseline ratiometric divider
+R_EXC;R_RET;R_ADC,TBD,TBD,1.00kohm each,engineering value,,Pulse rating and exact MPN open
+R_MEAS,TBD,TBD,10.0kohm 0.1percent,engineering value,,Exact MPN open
+R_SEL,TBD,TBD,100kohm,engineering value,,Mux enable pulldown
+R_BLEED,TBD,TBD,1Mohm,engineering value,,ADC capacitor discharge
+C_SENSE;C_ADC;C_BYPASS,TBD,TBD,100nF each,engineering value,,Dielectric voltage rating and exact MPN open
+D_ESD;D_SECONDARY,TBD,TBD,cable ESD and secondary clamps,UNQUALIFIED,,Clamp voltage leakage and dead-rail sink must be solved
