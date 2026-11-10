@@ -36,6 +36,12 @@ def spi_us(byte_count, hz):
     if byte_count < 0 or hz <= 0: raise ValueError('invalid SPI parameters')
     return byte_count * 8 / hz * 1_000_000
 
+def uart_8n1_capacity(baud):
+    """Payload bytes/s: one start + eight data + one stop bit per byte."""
+    if not math.isfinite(baud) or baud <= 0:
+        raise ValueError("finite positive baud required")
+    return baud / 10
+
 def log_bytes_per_second():
     # Assumptions: IMU 416Hz*32B, GNSS 10Hz*100B, wheel 50Hz*16B.
     return 416 * 32 + 10 * 100 + 50 * 16

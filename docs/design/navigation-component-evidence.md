@@ -36,7 +36,7 @@ Confirmed from manufacturer's page: 0.55 mA combo high-performance claim; analog
 
 SPI plus a data-ready interrupt is the intended integration, but exact DRDY pin/register mapping, IO upper limit, SPI timing, decoupling and electrical-table current conditions must be checked in DS12941 before schematic release. No guaranteed maximum current is established here. Do not treat generic interrupt advertising as verification of the proposed DRDY wiring.
 
-### IX — ST LSM6DSOXTR (alternative, not a second populated IMU)
+### IX — ST LSM6DSOXTR (baseline candidate, not a qualified selection)
 
 [Manufacturer product page](https://www.st.com/en/mems-and-sensors/lsm6dsox.html) fetched successfully; [primary PDF](https://www.st.com/resource/en/datasheet/lsm6dsox.pdf) unavailable despite extraction, IPv4 curl and HTTP/1.1 attempts. Resource list identifies **DS12814 version 4.0, 04-Jun-2024**, not a verified PDF read.
 
@@ -60,7 +60,7 @@ Manufacturer-page facts: 0.55 mA combo high-performance claim; analog supply 1.7
 | MAX-M10S + passive antenna | Absolute outdoor position/time without active antenna draw | RF layout/enclosure/ground-plane validation; GNSS blocked indoors | Candidate baseline; antenna still open |
 | Active antenna instead | Potential placement/sensitivity improvement | Extra current, bias/protection parts, cable/connector and cost | Only after passive antenna tests fail |
 | DSO32 over DSOX | ±32 g range for shocks | No ±2 g range; scaling must be explicit | Prefer only when shock requirement justifies it |
-| DSOX over DSO32 | ±2 g option, MLC/OIS features | Only ±16 g; unused features do not justify premium | Accept alternative after interface audit; compare actual quotes |
+| DSOX over DSO32 | ±2 g option, MLC/OIS features | Only ±16 g; unused features do not justify premium | Baseline after interface audit; compare actual quotes |
 | Add BMP390 | Relative climb/descent aid at low current | Weather drift, venting, extra assembly/driver burden | DNP until a vertical-navigation need exists |
 | Add magnetometer / RTK / dual-band GNSS | Potential heading/position improvement | More calibration, RF/power/cost and scope | Out of this bounded shortlist |
 

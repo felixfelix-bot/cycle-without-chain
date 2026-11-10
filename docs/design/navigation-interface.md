@@ -62,7 +62,9 @@ DMA/DMAMUX and peripheral clock allocation during integration. No TIM1/TIM8 cont
 resources or encoder TIM4 are allocated to navigation. Hardware owner must remove
 NC markers and approve routing; these reservations are not present in the schematic.
 Run `python3 analysis/navigation/check.py` against regenerated merged exports;
-checks detect occupied physical pins and pending PE5, not EXTI/AF correctness or PCB wiring.
+checks detect occupied physical pins and reserved PE5, not EXTI/AF correctness or PCB wiring.
+Independent current-FSR and source-table review is recorded in
+[navigation review](navigation-review.md); no pin was found in conflict.
 
 ### Alternate shared SPI1 (not preferred)
 
@@ -116,7 +118,9 @@ is claimed without enclosure testing. GNSS radome must not shield its antenna.
 
 Exact primary source tables/conditions are in component evidence. GNSS currents are
 specified at **3.0 V**; using them unchanged at **3.3 V** below is a planning proxy,
-not a measured or guaranteed value. IMU 0.55 mA is a manufacturer headline typical,
+not a measured or guaranteed value. These GNSS currents are for **1 Hz**, not
+the proposed 10 Hz logging configuration: do not use this proxy as its power
+budget. Requalify constellation/rate and current together. IMU 0.55 mA is a manufacturer headline typical,
 not a verified worst-case at our sample rate. Barometer values apply only at 1 Hz
 ultra-low-power ×1/×1, not faster updates.
 
@@ -159,7 +163,16 @@ At 170 MHz and assumed 20 kHz dual FOC there are 8,500 CPU cycles per 50 us peri
 for **all** work, not per motor. No navigation cycle budget is claimed. EKF state
 (16 float32 nominal values) + 15×15 float32 covariance alone use 964 bytes; working
 matrices, stacks, replay history and drivers dominate beyond that. A 64 KiB log
-buffer alone is significant. Measure worst-case cycles/stack/high-water RAM, DMA
+buffer consumes half of the STM32G474VE's 128 KiB total SRAM, before control
+firmware and EKF scratch/history. DS12288 Rev5 section 3.5 partitions it into
+80 KiB SRAM1 + 16 KiB SRAM2 + 32 KiB CCM; DMA access to CCM uses the system-bus
+alias, not the CPU-only 0x10000000 mapping. A contiguous allocation and linker/DMA
+placement must be proved, not inferred from total capacity. Even dedicating all
+512 KiB internal program flash to logs would hold only 34.69 s at payload rate,
+and actual firmware, erase latency and endurance make that an invalid storage plan.
+Select external/supervisor storage with bounded stalls and power-loss handling;
+72 MB/hour is capacity allowance, not a selected storage device.
+Measure worst-case cycles/stack/high-water RAM, DMA
 contention and ISR latency with both FOC loops, Hall edges, serial burst, sensor
 FIFO backlog and storage stall. If deadlines cannot be proved, keep supervisor
 architecture; don't lower safety priority or hide load behind average CPU percentage.
