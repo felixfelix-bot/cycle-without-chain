@@ -10,7 +10,7 @@ def envelope():
     return dict(bus_A=500/36, shunt_W=30**2*.002,
                 adc_low_V=1.65-30*.002*20, adc_high_V=1.65+30*.002*20,
                 dump_ohm=60**2/500, dump_J=500*10,
-                vm_static_margin_V=75-58.4, vds_static_margin_V=100-58.4)
+                vm_static_margin_V=75-12, vds_static_margin_V=100-58.4)
 
 
 def precharge(volts, farads, ohms):

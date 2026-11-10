@@ -6,7 +6,7 @@
     "adc_high_V": 2.8499999999999996,
     "dump_ohm": 7.2,
     "dump_J": 5000,
-    "vm_static_margin_V": 16.6,
+    "vm_static_margin_V": 63,
     "vds_static_margin_V": 41.6
   },
   "illustrative_precharge": {

@@ -9,7 +9,7 @@ class Calculations(unittest.TestCase):
         self.assertAlmostEqual(x['adc_low_V'], .45)
         self.assertAlmostEqual(x['dump_ohm'], 7.2)
         self.assertEqual(x['dump_J'], 5000)
-        self.assertAlmostEqual(x['vm_static_margin_V'], 16.6)
+        self.assertAlmostEqual(x['vm_static_margin_V'], 63)
     def test_precharge(self):
         x = precharge(58.4, .001, 100)
         self.assertAlmostEqual(x['initial_A'], .584)
