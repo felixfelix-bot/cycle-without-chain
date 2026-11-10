@@ -1,9 +1,12 @@
-ERC report (2026-11-10T16:36:40+0100, Encoding UTF8)
+ERC report (2026-11-10T17:57:53+0100, Encoding UTF8)
 Report includes: Errors, Warnings
 
 ***** Sheet /
 
 ***** Sheet /GEN DRV8353S driver and three low-side current channels/
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(50.80 mm, 76.20 mm): Symbol U1 Pin 3 [VM, Power input, Line]
 [power_pin_not_driven]: Input Power pin not driven by any Output Power pins
     ; error
     @(101.60 mm, 76.20 mm): Symbol U1 Pin 24 [VREF, Power input, Line]
@@ -88,4 +91,8 @@ Report includes: Errors, Warnings
     ; error
     @(55.88 mm, 91.44 mm): Symbol U500 Pin 2 [VIN, Power input, Line]
 
- ** ERC messages: 9  Errors 9  Warnings 0
+***** Sheet /Rail partition: SINK12 always-on, DRIVE12/MCU3V3 delayed and inhibited/
+
+***** Sheet /Rail partition passive networks - unqualified/
+
+ ** ERC messages: 10  Errors 10  Warnings 0

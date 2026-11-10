@@ -83,7 +83,7 @@ class Sheet:
         # All labels global: explicit namespace GEN_/HUB_ prevents unintended merges.
         self.items.append(f'(global_label {q(net)} (shape bidirectional) (at {xx} {yy} {angle_label}) (effects (font (size 0.9 0.9)) (justify {justify_label})) (uuid {uid(tag+"label")}))')
     def legibility_layout(self):
-        return self.name.startswith(('fsr-', 'brake-intent-')) or self.name in ('brake-switch-harness', 'brake-dump-command', 'ctrl-supply')
+        return self.name.startswith(('fsr-', 'brake-intent-')) or self.name in ('brake-switch-harness', 'brake-dump-command', 'ctrl-supply', 'rail-partition', 'rail-passives')
     def part(self,a,ref,value,x,y,nets,footprint=''):
         libid=val(a[1]);self.syms[libid]=a
         fx, ry, vy, justify = x, y-5.08, y-2.54, ''
@@ -134,11 +134,11 @@ for idx,prefix in enumerate(['GEN','HUB']):
     s.text('RELEASE BLOCKERS: firmware, OC timing/coverage and transient/thermal qualification unfinished.',20.32,30.48)
     mapping={str(i+1):n(name) for i,name in enumerate(names)}
     for name in ['AGND','GND','EP','SNA','SNB','SNC']:mapping[str(names.index(name)+1)]='PGND'
-    for name,net in [('VM','AUX12V'),('VDRAIN','DC_LINK'),('VREF','LOGIC3V3_EXT')]:mapping[str(names.index(name)+1)]=net
+    for name,net in [('VM','DRIVE12'),('VDRAIN','DC_LINK'),('VREF','LOGIC3V3_EXT')]:mapping[str(names.index(name)+1)]=net
     for p in 'ABC': mapping[str(names.index('SH'+p)+1)]=n('PHASE_'+p); mapping[str(names.index('SP'+p)+1)]=n('SHUNT_'+p)
     for name,net in [('SCLK','DRV_SCK'),('SDI','DRV_MOSI'),('SDO','DRV_MISO')]:mapping[str(names.index(name)+1)]=net
     s.part(DRV,'U'+str(idx+1),'DRV8353SRTAT',76.2,114.3,mapping,'')
-    specs=[('47n 100V X7R',n('CPH'),n('CPL')),('1u 16V X7R',n('VCP'),'DC_LINK'),('1u 16V X7R',n('VGLS'),'PGND'),('1u 10V X7R',n('DVDD'),'PGND'),('100n 25V X7R','AUX12V','PGND'),('10u 25V X7R','AUX12V','PGND'),('100n 10V X7R','LOGIC3V3_EXT','PGND')]
+    specs=[('47n 100V X7R',n('CPH'),n('CPL')),('1u 16V X7R',n('VCP'),'DC_LINK'),('1u 16V X7R',n('VGLS'),'PGND'),('1u 10V X7R',n('DVDD'),'PGND'),('100n 25V X7R','DRIVE12','PGND'),('10u 25V X7R','DRIVE12','PGND'),('100n 10V X7R','LOGIC3V3_EXT','PGND')]
     for j,(v,a,b) in enumerate(specs):passive(s,'C',v,177.8+(j%3)*71.12,63.5+(j//3)*40.64,a,b)
     for j,(v,a,b) in enumerate([('100k',n('ENABLE'),'PGND'),('10k',n('nFAULT'),'LOGIC3V3_EXT'),('10k','DRV_MISO','LOGIC3V3_EXT'),('10k',n('nSCS'),'LOGIC3V3_EXT')]):passive(s,'R',v,177.8+(j%3)*71.12,190.5+(j//3)*35.56,a,b)
     s.text('ENABLE pull-down defaults off; not a safety-rated inhibit. SPI configuration and CSA gain20 not yet validated.',20.32,259.08)
@@ -165,7 +165,7 @@ s.text('DO NOT ENERGIZE. Protected entry unfinished; MCU and protection remain u
 def connector(value,nets,x,y):
     counters['J']+=1;s.part(stock('Connector_Generic','Conn_01x'+str(len(nets)).zfill(2)),'J'+str(counters['J']),value,x,y,{str(i+1):net for i,net in enumerate(nets)})
 connector('BUS_TEST_ONLY_NOT_SOURCE_INPUT',['DC_LINK','PGND'],63.5,48.26)
-connector('MCU_SUPPLY_EXT',['LOGIC3V3_EXT','PGND'],63.5,83.82)
+connector('MCU_RAIL_TEST_ONLY_NOT_INPUT',['LOGIC3V3_EXT','PGND'],63.5,83.82)
 for j,prefix in enumerate(['GEN','HUB']):
     x=177.8+j*116.84
     connector(prefix+'_MACHINE_PHASES',[prefix+'_PHASE_'+p for p in 'ABC'],x,48.26)
@@ -193,6 +193,8 @@ from active_entry_circuit import populate as populate_active_entry
 populate_active_entry(globals())
 from ctrl_supply_circuit import populate as populate_ctrl_supply
 populate_ctrl_supply(globals())
+from rail_partition_circuit import populate as populate_rails
+populate_rails(globals())
 local_symbols=[local_drv]
 for a in custom_symbols:
     b=parse(dump(a));b[1]=q(val(b[1]).split(':')[1]);local_symbols.append(b)

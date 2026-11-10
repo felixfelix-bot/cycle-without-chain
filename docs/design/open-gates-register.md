@@ -1,0 +1,294 @@
+# Open gates register — what is proven, what is not, and what would close it
+
+> **STATUS: DESIGN-PHASE DEFINITION OF DONE. NOT AN ELECTRICAL, ROAD-LEGAL OR
+> MANUFACTURING APPROVAL.** No board exists, no PCB exists, nothing has been
+> energized, and every source document in `docs/design/` is stamped
+> `NOT SAFE TO ENERGIZE`. This register is the single place that states what the
+> design currently is, what is actually verified, and every unresolved gate
+> classified by the *kind of evidence* that would close it. Finishing it means
+> the design phase is organised, not that the machine is safe.
+
+- Repository state: `master` at `8064947b52b1d3770ea6a2d9e11f8d69af69a42f`.
+- Consolidates (read-only) the milestone and review documents under
+  `docs/design/` plus `docs/analysis/chainless-drivetrain.md`.
+- Consistency of this document is checked mechanically by
+  `analysis/gates/register_check.py` (tests in
+  `analysis/gates/tests/test_register_check.py`). That check verifies the table
+  is complete and countable. It does **not** verify that any engineering claim
+  in it is true.
+
+---
+
+## 1. What the design currently is
+
+A 36–58.4 V pedal-by-wire powerboard for a human-powered vehicle with an
+independent-cadence drivetrain, described only as generative KiCad schematic
+code and analysis models. Concretely, at the commit above:
+
+- **Schematic only.** `hardware/powerboard-reva/` holds a Python generator
+  (`generate_schematic.py` plus per-block `*_circuit.py`) that emits a
+  hierarchical KiCad 9 schematic, native netlist, PDF and SVG pages. There is no
+  `.kicad_pcb`, no placement, no routing, no fabrication data.
+- **Two motor/generator bridges** (hub and generator) driven by DRV8353
+  smart gate drivers with six 2 mΩ low-side shunts, and a 29-MOSFET population.
+- **A protected-entry intent, not a protected entry.** A fuse candidate, a shunt
+  reverse clamp, a 100 Ω→22 Ω resistor precharge branch, back-to-back MOSFET
+  pairs driven by TPSI3052 isolated drivers, a MAIN_PROVEN measurement
+  candidate, and inhibit resistors that hold everything off without firmware.
+- **Rail partition.** Pack→LM5164→CTRL3V3 for the entry controller, bus→LM5164
+  →SINK12 for the autonomous always-on safety chain, and a delayed DRIVE12 with
+  a further AP63203→MCU3V3. `R402`/`R412`/`R519`/`R516`/`R517` inhibit networks
+  hold the default state off.
+- **An autonomous protection chain** (AUX12V, SAFETY3V3, LM4040 reference,
+  LM339B comparators, HC00/HC11 latch logic, TPS3823 watchdog, UCC27511 chopper
+  driver, external dump resistor candidate) that is explicitly **not**
+  independent of its own auxiliary supply.
+- **A fast overcurrent path** of twelve TLV3202 comparisons on raw shunt
+  outputs pulling a shared `OC_OK`, reaching HEALTHY, the latch clears, the
+  inhibit gate and both timer-break pins.
+- **An FSR (force-sensing resistor) brake frontend** with OPA333 buffers and
+  TMUX1511 muxes, an MCU sheet with timer/ADC/SPI/Hall allocation, an optional
+  navigation daughterboard contract, and four analysis models (precharge,
+  storage, braking, navigation) plus a drivetrain trade study.
+- **No firmware.** Every firmware behaviour referenced below is an executable
+  contract or an unimplemented input, never code on a device.
+
+## 2. What is actually verified
+
+Verified here means *mechanically reproduced at the cited commit*, by the kind
+of evidence named. None of it is electrical qualification.
+
+| Claim | Evidence kind | Where |
+|---|---|---|
+| Generator reproduces the committed netlist byte-identically | determinism check | rail-partition-review.md §Independently reproduced |
+| Native KiCad export loads and yields 382 components / 218 nets on the rail head | native tool run | rail-partition-review.md §Independently reproduced |
+| Strict ERC = exit 5, 10 errors, 0 warnings, no waiver, no `PWR_FLAG` | native tool run | rail-partition-review.md §Independently reproduced |
+| SINK12 has no path to DRIVE12; inhibits byte-unchanged from master | netlist membership check | rail-partition-review.md §Verified structurally |
+| DRV8353 `IVDRAIN` 0.467 W direct-bus load now budgeted, and the budget self-test is non-vacuous under `-O` | mutation-controlled self-test | rail-partition-review.md §Defects found 1–2 |
+| Precharge timing/energy converge to <4 mJ residual across 6 corners | numerical convergence | precharge-budget-review.md §Executed numerical evidence |
+| MAIN_PROVEN fails-open discrimination ≥0.328 V at 38 ms under stated tolerances | closed-form arithmetic | precharge-budget-review.md §Independent checks |
+| 200 V input ceramics selected and asserted from the native export, after a RED run | datasheet + netlist assertion | ctrl-supply-review.md §1, §5 |
+| TPSI3052 pin map and CDIV2 ≥ 3×CDIV1 (worst ratio 4.25) | primary datasheet vs fitted values | active-entry-independent-review.md |
+| FSR excitation 0.157 mA / 1.571 V and 0.350 cm² contact bound | arithmetic | fsr-review.md §Independent electrical findings |
+| OC comparator polarity consistent with DRV8353 SO direction, no push-pull short | netlist + datasheet | fast-oc-integration-review.md |
+| MCU timer/ADC/SPI/Hall pin identities match DS12288 Rev5 Tables 12/13 | datasheet vs netlist | mcu-integration-review.md §Electrical crosscheck |
+| Braking arithmetic: 1537.334 W braking at 150 kg/15 %/30 km/h, 383 W into 9.4 Ω at 60 V | independent recomputation | braking-review.md §Independent arithmetic and boundaries |
+| Storage: 0.6951 Wh net vs 0.7709 Wh excursion, 3.90625 Wh ideal at 50–25 V | independent quadrature | storage-review.md §Findings and corrections |
+| Navigation: 15112 B/s, 54.4032 MB/h, UART cannot fit the combined stream | arithmetic + regression test | navigation-review.md §Arithmetic, power boundary and resource findings |
+| FSR sheets 24–27: 0 text/text and 0 text/stroke collisions | measured native SVG bounds | schematic-legibility-review.md §Measured native SVG geometry |
+| Behavioral ngspice: OV rise 60.33114 V, fall 58.20219 V, rearm demonstrated, 80 086 rows | ideal-model simulation | protection-integration-review.md §Integration and evidence |
+| Fail-closed release gates exist and reject planted faults | mutation-controlled tests | tools/gates/README.md; pcb-quality-gates.md §Smallest tooling to port later |
+
+What is **not** verified anywhere: any thermal measurement, any ripple or
+effective-capacitance measurement, any start-up sequence on hardware, any EMI
+or hot-plug result, any polarity or pulse/SOA test, any loss-of-sink behaviour,
+any main-switch conduction measurement, any cell or BMS qualification, any
+firmware, and any legal classification.
+
+---
+
+## 3. The register
+
+Bucket legend (exhaustive; every gate is in exactly one):
+
+- **A — schematic/analysis work still possible now.** A calculation, a part
+  selection against a verified datasheet, a topology change, a simulation, a
+  firmware/contract change or a tooling change. Closeable without hardware.
+- **B — bench measurement that needs a built board.** Thermal, ripple,
+  effective capacitance under DC bias, start-up sequencing, EMI, hot-plug,
+  polarity, pulse/SOA, loss-of-sink, main-switch conduction, injected faults.
+- **C — operator input required.** Frame/machine geometry, motor choice and
+  pole count, pack/BMS specification and source limits, storage chemistry,
+  permissible test energy, environment, legal/road classification, and the
+  human resources only the operator can name.
+- **D — resolved**, with the commit or document that closed it.
+
+| ID | Subsystem | What is unproven | Consequence if wrong | Bucket | Evidence that closes it | Current status | Source |
+|---|---|---|---|---|---|---|---|
+| ARCH-01 | Whole-system architecture | That the chainless series-hybrid drivetrain is the architecture to build at all; the study recommends the parallel hybrid instead | A powertrain that loses ~35 points of rider power and cannot be pedalled home when a battery dies | C | Operator records a decision against, or an explicit overrule of, the study | OPEN — study is explicitly `NOT A DECISION RECORD` | chainless-drivetrain.md §0 Answer first; §15 What this analysis is not |
+| ARCH-02 | Legal and road class | Jurisdiction, lawful assist behaviour, road class, throttle vs pedal-assist rules | A machine that cannot lawfully be registered or ridden; controller and sensor choice changes | C | Operator states country and intended class; a legal review is accepted as a gate | OPEN — no legal analysis anywhere in the corpus | chainless-drivetrain.md §15; PLAN-parallel-hybrid.md §Phases and exit gates, phase 2 |
+| ARCH-03 | Mass and geometry envelope | Gross mass, frame/fork material, dropout spacing, wheel circumference, permitted mounting region | Every thermal, braking and structural number is scaled from an unweighed bicycle | C | Weighed complete bicycle plus frame/fork make and model, with photos | OPEN — only 120 kg rider+luggage is operator-confirmed | downhill-braking-envelope.md §1 Inputs and interpretation; §7 Ranked risks and remaining inputs, item 2 |
+| ARCH-04 | Motor and generator choice | Machine type, pole count, Kv, winding, back-EMF and torque/current/speed maps, and whether a 250–400 W low-kv crank generator at 300 rpm exists off the shelf | Bus voltage, phase current, shunt sizing, regen ceiling and PM body-diode energy all move | C | Operator selects the machine(s) and supplies datasheet maps | OPEN — no price or availability check on the crank generator | chainless-drivetrain.md §14 Open items; pcb-quality-gates.md §Actionable checklist, G0 |
+| ARCH-05 | Duty envelope | Route grades, descent length, speeds, continuous lever-request duration, ambient, altitude, cooling breaks | Every energy and thermal bound is an assumption and no descent rating can be set | C | Operator names a descent or equivalent duty cycle | OPEN — no route supplied | downhill-braking-envelope.md §1 Inputs and interpretation; §7 Ranked risks and remaining inputs, items 3–4 |
+| ARCH-06 | Storage chemistry and BMS | LFP 16s1p vs P28A 13s1p vs SCiB, plus BMS thresholds, charge current, disconnect behaviour and cold/full acceptance | Charge acceptance and the usable bus ceiling move; a wrong pick removes regen acceptance | C | Operator freezes chemistry and BMS part, fixing series count and window | OPEN — provisional recommendation only | storage-review.md §Source and BOM boundaries; short-buffer-storage.md §0 Answer and provisional decision log, D1 |
+| ARCH-07 | Test authority | Permissible test energy, guarded bench setup, and who signs off before any energized test | Bench qualification cannot legally or safely start | C | Operator states permitted test energy and names the sign-off | OPEN — no energization permission exists anywhere | pcb-quality-gates.md §Actionable checklist, G9; protection-integration-review.md §Integration and evidence |
+| RAIL-01 | CTRL3V3 / DRIVE12 | No output OVP on U501: an open R512 floats FB to VOUT and DRIVE12 rises to 58.4 V against AP63203 35 V absmax and 25 V C513/C514/C517 | One resistor open destroys U502 and over-volts three capacitors | A | Add a clamp or second FB leg, or reselect a converter with integrated OVP; recalculate absmax | OPEN | rail-partition-review.md §Defects found 3 |
+| RAIL-02 | DRIVE12 inductor | L501 MSS1246T-683MLC against LM5164's own current limit: Isat 2.26 A, Irms 1.30 A, top limit 1.75 A = 1.35× Irms, 0.51 W there | Saturation and heating at the converter's limit rather than at the load | A | Reselect L501 or reduce the limit, with datasheet Isat/Irms and I²R recomputed | OPEN | rail-partition-review.md §Defects found 4 |
+| RAIL-03 | CTRL3V3 inductor | Hot saturation and current-limit overshoot for the 68 µH part; 182–190 mA pp ripple and ≈205 mA peak are calculated only | Thermal drift or saturation at the hot corner, invisible in the nominal calc | B | Hot Isat and current-limit overshoot measurement on the built converter | OPEN — explicitly unproven | ctrl-supply-review.md §2 Independent checks |
+| RAIL-04 | Safety-domain partition | `ANALOG_OK` is hard-coupled to delayed DRIVE12 `PGOOD`, so an always-on chain is gated by a delayed rail | Fail-safe in direction, but contradicts the claimed independence and can mask a sink-side fault | A | Recorded decision: move `PGOOD` off the always-on chain, or justify the coupling | OPEN — explicitly needs a decision | rail-partition-review.md §Defects found 5 |
+| RAIL-05 | SINK12 budget | Light-load efficiency of the R-78HB at ≈4 % of rating; η = 0.60 assumed against break-even 0.5453, and R39 alone is 71 % of the rail | The 1.1 W sink envelope is exceeded and the always-on safety chain browns out | B | Measured module efficiency at the actual light load, hot and cold | OPEN — assumption, not measurement | rail-partition-review.md §Defects found 7 |
+| RAIL-06 | CTRL input ceramics | Effective capacitance of C500/C501 (2.2 µF 200 V X7R) at 58.4 V DC bias | Nameplate capacitance is not in-circuit capacitance; surge, damping and loop stability unproven | B | Capacitance-vs-bias measurement on the selected part, then bench confirmation | OPEN — part verified 200 V, bias curve unknown | ctrl-supply-review.md §1 The correction |
+| RAIL-07 | CTRL footprint | Whether the stock 2225 land pattern matches the vendor's recommended pad geometry and the LM5164 EP/thermal land | A pad or thermal-pad error discovered only at assembly | A | Compare the vendor land drawing to the footprint and correct if needed | OPEN — new and unverified footprint | ctrl-supply-review.md §1 The correction; §4 Finite gating checklist, item 3 |
+| RAIL-08 | CTRL light load | COT minimum load: CCM boundary 91–95 mA and 20.05–20.89 mV ramp, so 301 kHz is not guaranteed at light load | Pulse-skip changes ripple and EMI in an unmodelled regime | B | Bench ripple and mode measurement at zero, minimum and full load | OPEN | ctrl-supply-review.md §2 Independent checks; §4 Finite gating checklist, item 5 |
+| RAIL-09 | Start-up and UVLO | Restart into both drivers, D500 inrush into C500/C501, cold start at −20 °C, TPSI3052 transfer latency; the 0.8 W cap is 22.22 mA at 36 V and 13.70 mA at 58.4 V | Start-up current exceeds the pack-input cap; UVLO cycling into a live load | B | Bench matrix: 36 V and 58.4 V, zero/minimum/full load, both drivers simultaneous, UVLO restart, temperature | OPEN | ctrl-supply-review.md §3 Remaining startup and budget limits; §4 Finite gating checklist, item 5 |
+| RAIL-10 | Passive MPNs | Exact passives R500–R505, C505, C506 and the 200 V input pair with working voltage, tolerance and temperature | Candidate values reaching a fabrication BOM | A | Freeze MPNs against datasheet ratings | OPEN | ctrl-supply-review.md §4 Finite gating checklist, item 1 |
+| RAIL-11 | ERC completeness | Ten strict-ERC `power_pin_not_driven` errors on this head (U3.1, U1.3, U1.24, U1.25, U17.37, U26.5, U400.3, U400.5, U401.5, U500.2), unsuppressed | A real undriven power pin hiding among known ones; no ERC-clean claim is possible | A | Close each identity with defensible source/return semantics, without `PWR_FLAG` | OPEN — enumerated and gate-enforced, not waived | rail-partition-review.md §Independently reproduced; hardware/powerboard-reva/verify_exports.py |
+| RAIL-12 | Export parity | The XML netlist consumed by tests vs the S-expression `.net` consumed by `verify_exports`; an injection into XML only stays green | A rail split invisible to one of two verifiers | A | Run the existing `netlist_parity` gate against both artifacts | PARTIAL — tool exists on master (4d18b7c), not wired to both | rail-partition-review.md §Defects found 8 |
+| RAIL-13 | DRV8353 direct-bus load | That the always-on `IVDRAIN` load is inside any envelope: 2 × 4 mA × 58.4 V = 0.467 W on DC_LINK, larger than the whole SINK12 subtotal | An unbounded always-on load the sink envelope never covered | D | Fixed: explicit `DC_LINK` row, `direct_bus_always_w`, `-O`-safe self-test | RESOLVED in bd00ac9 | rail-partition-review.md §Defects found 1 |
+| RAIL-14 | Rail self-test integrity | That `rail_budget.py --self-test` proves anything under `python3 -O` | A budget model that passes while its own expectation is corrupted | D | `_check()` raising `RuntimeError`; mutation controls fail in both modes | RESOLVED in bd00ac9 | rail-partition-review.md §Defects found 2 |
+| RAIL-15 | OC supply claim | That all independent safety loads sit downstream of SINK12/SAFETY3V3 — the netlist puts both TLV3202s and both OC ladders on LOGIC3V3_EXT | A false independence claim inside the safety argument | D | Netlist-verified and the milestone Outcome paragraph corrected | RESOLVED in bd00ac9 | rail-partition-review.md §Defects found 6 |
+| CX-01 | Contradiction: OV trip bound | `protection-milestone-report.md` publishes a 59.417 V minimum turn-on using an output-low corner of 0–0.4 V; `protection-integration-review.md` says 0.4 V is not the full-temperature limit (550 mV) and the corner moves down ≈0.102 V | Reusing 59.417 V as a qualified bound overstates OV margin | A | Recompute the 64-corner band with 0.55 V low and publish the qualified minimum | OPEN — banner concedes, the number is still published | protection-milestone-report.md §OV thresholds and timing; protection-integration-review.md §P1 LM339B VOL budget |
+| CX-02 | Contradiction: bus maximum | The release contract freezes 58.4 V maximum normal charge; storage review says real series ceilings are 13×4.2 = 54.6 V and 16×3.6 = 57.6 V, not generic 58.4 V LFP charging | Charge control and clamp thresholds set against a voltage the chosen pack cannot reach | A | Reconcile the bus maximum with the selected pack ceiling after ARCH-06 | OPEN — no winner chosen | pcb-quality-gates.md §Actionable checklist, G0; storage-review.md §Source and BOM boundaries |
+| CX-03 | Contradiction: regen recovery | §2/§5 use 8.2 Wh capturable at 65 % single hop; §12 recomputes a two-hop 0.791² chain to 7.9 Wh and declares the 8.2 Wh figure superseded | A withdrawn number remains quotable as the study's result | A | Mark §2/§5 superseded in place and keep one figure | OPEN — both figures are still printed | chainless-drivetrain.md §2 Vehicle power and energy; §12 Correction to §3/§5 |
+| CX-04 | Contradiction: ERC totals | Milestones record 3, 4, 5, 8, 9 and 10 strict-ERC errors, and none of them says which head it describes | An operator cannot tell which count is current | D | This head's 10 identities are enumerated and enforced by `verify_exports` | RESOLVED by enumeration on the current head | active-entry-independent-review.md; mcu-integration-review.md §Reproduced verification; rail-partition-review.md §Independently reproduced |
+| CX-05 | Contradiction: VM margin | `reva-milestone-review.md` says the reported `vm_static_margin_V = 75−58.4` is a legacy direct-bus hypothetical rather than the actual external-12-V VM margin | A stale margin carried into a design decision | D | `calculations.py` now reports 75−12 | RESOLVED on master | reva-milestone-review.md §Prioritized concrete next circuit changes 6; hardware/powerboard-reva/calculations.py |
+| PRE-01 | Source specification | That 36–58.4 V, ≥3 A available at start-up, ≤0.15 Ω source impedance and ≤1.5 mF assembled capacitance all hold | Every precharge timing and energy number is conditional on them; a stronger source is not a 3 A limiter | C | Operator/BMS datasheet fixes the source and the capacitance; assembly capacitance is measured | OPEN — model input requirements, not granted facts | precharge-budget-review.md §Exact release blockers, item 1 |
+| PRE-02 | Source impedance and capacitance | Demonstrated source resistance, harness impedance and assembled bus capacitance with tolerances | Close time, PRE energy and closing pulse all shift | B | Four-wire measurement on the real pack and harness; LCR on the assembled bus | OPEN | precharge-budget-review.md §Exact release blockers, item 1 |
+| PRE-03 | MAIN closing | Actual closing current and MOSFET SOA at the real source; a 3 A clip in the model is not a current limiter | A 1 V mismatch across a 10 mΩ loop is ≈100 A | B | Measured loop R/L and closing current against a vendor SOA plot | OPEN | precharge-sequencing-design.md §5 SOA, energy and failure boundaries; precharge-budget-review.md §Exact release blockers, item 1 |
+| PRE-04 | PRE resistor energy | Mounted hot-pulse and repetition qualification for the 22 Ω PRE at 54.807 J / 156.591 W with a 350 ms maximum | A stuck PRE dissipates that continuously, and logic cannot interrupt a welded pair | B | Mounted hot-pulse and repetition test with the selected part and interrupt | OPEN — the RH050 candidate is not qualified | precharge-budget-revision.md §Adopted bounded candidate; precharge-budget-review.md §Exact release blockers, item 5 |
+| PRE-05 | Welded PRE interrupt | A physical response to a welded PRE that does not depend on firmware or the gate drive | Continuous dissipation in the precharge branch with no electrical exit | A | Specify an independent thermal interrupt plus fuse coordination | OPEN | precharge-budget-revision.md §Adopted bounded candidate; precharge-sequencing-design.md §5 |
+| PRE-06 | PRE timing maximum | Proof of 300 ms nominal / 350 ms maximum over tolerance and temperature, with the 38–42 ms stimulus and 20 ms post-proof AUX settle | Timeout overrun raises PRE energy and lets drive enable early | B | Bench timing over temperature and tolerance on the built sequencer | OPEN — modelled as a contract only | precharge-budget-review.md §Required next sheet, item 4 |
+| PRE-07 | MAIN_PROVEN discrimination | Worst-case separation of a failed-open MAIN from a PM-driven bus: 1.128 V mismatch against a 0.70 V edge leaves 0.328 V, but the ±0.20 V uncertainty budget is open | False "main proven", then drive enabled onto a dead or PM-driven bus | A | Close the ±0.20 V error budget with exact parts, then bench | OPEN — conditional discrimination, not a tolerance proof | precharge-budget-review.md §Independent checks; main-proven-candidate.md §5 Remaining release gates |
+| PRE-08 | MAIN_PROVEN observability | That the comparator/current-edge logic and the 5 ms continuous valid window behave as modelled; the model checks final voltage only | A boolean input or voltage-match oracle is not hardware evidence | B | Fault-injected bench test of gate, current and PM validity, current edge and continuous window | OPEN | precharge-budget-review.md §Executed numerical evidence; §Required next sheet, item 5 |
+| PRE-09 | PM injection bound | Total external injection ≤10 mA throughout proof, including PM body-diode rectification with every gate off | An unbounded source invalidates the discrimination and forces INDETERMINATE with drive disabled | C | Operator bounds the machine and source current, or it is measured | OPEN — `PM_QUIET_VALID` is an unimplemented input, not a measurement | precharge-budget-review.md §Required next sheet, item 5; precharge-budget-revision.md §Real MAIN_PROVEN rather than an oracle |
+| PRE-10 | Two-device voltage stress | 116.8 V across one off device (pack −58.4 V against bus +58.4 V) against a 150 V rating, plus inductive overshoot, unequal switching, avalanche and Miller turn-on | Device overstress at the first inductive turn-off | B | Measured loop R/L and switching waveform against derated SOA | OPEN — 33.2 V static headroom is not evidence | precharge-review.md §Electrical architecture |
+| PRE-11 | Reverse-blocking integrity | That one shorted FET does not defeat reverse blocking in one direction; four devices in two branches are not redundant barriers | Loss of reverse protection presented as a safety barrier | B | Single-FET short and reverse-polarity bench test | OPEN | precharge-sequencing-design.md §5; precharge-budget-review.md §Exact release blockers, item 4 |
+| PRE-12 | Sequencer state machine | Reset-dominant truth table, absolute timeout, AUX settle, failed-open MAIN, stuck PRE, full and single-FET shorts, missing diagnostic load, stuck comparators, external injection | An unqualified transition enables drive or drops the sink during a fault | B | Bench fault injection on the built sequencer | OPEN | precharge-budget-review.md §Exact release blockers, item 4 |
+| PRE-13 | Diagnostic stuck-on load | The bound of a diagnostic branch stuck on (~11 W at 60 V), not only its 0.463 J normal pulse | A diagnostic fault cooks the measurement network or its supply | A | Calculate and bound stuck-on dissipation with the selected parts | OPEN | precharge-budget-review.md §Exact release blockers, item 4 |
+| PRE-14 | Entry fuse coordination | Prospective fault current, DC interruption rating, clearing time and holder/wiring coordination for F1 KLKD020CN | A fuse that never clears, or clears too slowly to protect D20 | B | Prospective current measurement plus a DC-rated fuse and coordination study | OPEN — F1 remains a candidate | entry-review.md §Measured topology and limits |
+| PRE-15 | Reverse isolation | That a reverse-connected pack is actually isolated; D20 is a shunt reverse clamp and the fuse is not proof | Reverse polarity destroys the board while appearing protected | A | Specify reverse/source isolation topology and prove it by analysis | OPEN | entry-review.md §Measured topology and limits; precharge-sequencing-design.md §1 Existing connectivity actually read |
+| PRE-16 | Hot-plug and reverse polarity | Hot-plug overshoot, D500 inrush, reverse live-bus behaviour and cable resonance | The first connection destroys D500, C500/C501 or a bridge | B | Bench hot-plug and reverse-polarity test with an energy-limited source | OPEN | ctrl-supply-review.md §3; rail-partition-review.md §What this review does NOT establish |
+| PRE-17 | Manual operating sequence | That any approved manual sequence exists; the J41/J42 jumper instruction was withdrawn and interlocked rated switching is missing | An operator manipulating energized connectors | A | Design interlocked switching plus a written, reviewed sequence | OPEN — no approved sequence exists | entry-review.md §Safety-language finding corrected |
+| PRE-18 | Entry permission | That `CHARGE_ALLOWED`/`DISCHARGE_ALLOWED` default false, have a real implementation and have bounded latency | Pack opens or stays closed at the wrong moment | B | Bench permission-loss and latency test | OPEN | precharge-review.md §Electrical architecture |
+| PRE-19 | TPSI3052 driver chain | That CDIV2 ≥ 3×CDIV1 holds on the fitted 470n/100n C0G 5 % (worst ratio 4.25), VSSS sits on the pair's common source, and the non-S continuous variant is used | Gate droop, cold-start failure, or one-shot behaviour in a static-drive application | D | Datasheet Table 5-1 and §6.3 checked against fitted values and the pin map | RESOLVED — verified in independent review | active-entry-independent-review.md; precharge-review.md §TPSI3052 pin-level constraints from primary documentation |
+| FSR-01 | Mounted contact | Actual actuator contact area above 0.350 cm² (Interlink < 1 mA/cm²); nominal pad diameter is not proof | Contact current density over the manufacturer limit, drifting or burnt pad | B | Mounted contact-area and load measurement with the real pad and actuator | OPEN | fsr-review.md §Independent electrical findings |
+| FSR-02 | Frontend source | No qualified regulator or reference: J2.1 `LOGIC3V3_EXT` feeds both excitations, both OPAs, the clamps and MCU_VREF, and two frontends draw ≈0.656 mA nominal | Rail sag, reference drift and cross-channel coupling read as force | A | Design a qualified rail/reference and a worst-case budget | OPEN — explicitly not a worst-case budget | fsr-review.md §Independent electrical findings |
+| FSR-03 | Clamp and backfeed | PESD3V3U1UL and BAT54S do not establish clamping inside downstream absolute maxima; BAT54S can inject MCU_VREF with no established sink; 10k limits backfeed to 0.350 mA, not zero | Silent rail injection or an MCU pin over absolute maximum | A | Part-level clamp analysis with Ioff and injection limits | OPEN | fsr-review.md §Independent electrical findings |
+| FSR-04 | ADC acquisition | Buffer stability, start-up and acquisition with the 1k outside feedback and ≈11k load; ADC capacitor discharge time constant | Force readings that are a function of timing | B | Bench step response, stability and acquisition timing | OPEN | fsr-review.md §Independent electrical findings |
+| FSR-05 | Dead-MCU injection | That the grounded-drain test covers a dead MCU; mux Ioff is ±2 µA, and rail ramps plus retained 100n charge remain | An unpowered MCU back-powered through the analog frontend | B | Bench power-off and partial-power injection test | OPEN | fsr-review.md §Independent electrical findings |
+| FSR-06 | Torque authority | That any firmware implements the brake contract, and that an independent hardware positive-torque sign guard exists; the `inhibit` predicate ignores analog entirely | Positive torque under invalid or absent braking modulation | A | Implement and test firmware plus an independent hardware sign guard | OPEN — executable contracts only | fsr-review.md §Brake authority and preserved circuits |
+| FSR-07 | Sheet legibility | That FSR sheets 24–27 are readable, with J46 and U26/U27 labels clear of pin graphics | Unreadable protection sheets entering a fabrication release | D | Measured native SVG bounds: 0/0 collisions across all eight regions | RESOLVED | schematic-legibility-review.md §Measured native SVG geometry |
+| FSR-08 | Residual visual clearance | Connector and D36/D37/D40/D43 pin-level clearance could not be conclusively resolved by the raster review | A pin-level overlap reaching fabrication | A | Full-resolution inspection or an explicitly accepted exclusion | OPEN — withheld visual approval | schematic-legibility-review.md §Actual raster review and extent |
+| OC-01 | Sink device drive | That 2N7002 is on at the actual gate drive: VGS(th) is not an on-state guarantee at 3.3 V worst-case VOL, with 0.702 mA nominal sink | `OC_OK` not pulled low, so a real overcurrent never latches | A | Select a device with a guaranteed on-state at the real drive, or budget the corner | OPEN | fast-oc-integration-review.md; fast-oc-milestone.md §Implemented circuit |
+| OC-02 | Sink VOL and latency | Worst-temperature VOL, aggregate drain capacitance and propagation at the `OC_OK` node | Slow or incomplete inhibit after a trip | B | Bench VOL and propagation measurement | OPEN | fast-oc-integration-review.md; fast-oc-milestone.md §Timing / survival boundary |
+| OC-03 | Threshold corners | ±19.93 A nominal trip against rail ±3 %, divider ±0.1 %, shunt ±1 %, gain 19.4–20.6, CSA offset ±3 mV, comparator ±6 mV, plus unbounded midpoint error and thermal drift | A trip that never fires inside the destructive current | A | Full worst-case tolerance budget, then one measured corner | OPEN — no worst-case safety claim | fast-oc-milestone.md §Threshold, polarity and coverage |
+| OC-04 | Shunt blind interval | That low-side shunts observe phase current during high-side conduction and every freewheel, deadtime and short path | Destructive current with SO sitting at midpoint | A | Add a continuous observation path or a qualified DRV VDS OCP contract | OPEN | fast-oc-milestone.md §Threshold, polarity and coverage |
+| OC-05 | DRV VDS OCP | Latched OCP mode, 1 µs deglitch, linked shutdown, write/readback after reset; the lowest SEN_OCP 0.25 V is ≈125 A at 2 mΩ, not 20 A | Short-circuit protection that exists only as a register name | A | Firmware configuration with readback lock, then bench proof | OPEN | fast-oc-milestone.md §Threshold, polarity and coverage |
+| OC-06 | Minimum capture pulse | That a 1 µs ideal capture survives silicon timing over overdrive, temperature and load | A fast fault shorter than the real comparator response | B | Bench minimum-pulse and overdrive sweep | OPEN | fast-oc-milestone.md §Timing / survival boundary |
+| OC-07 | Fault-loop SOA | Allowable MOSFET fault joules: hot pulsed SOA, clamp and commutation waveforms, transient thermal impedance, repetitive stress | The switch fails before the trip acts | B | Vendor SOA read against measured fault waveforms, then bench | OPEN — no fault joules invented | fast-oc-milestone.md §Timing / survival boundary |
+| OC-08 | Nuisance latching | That noise and CSA settling do not nuisance-latch with no PWM blanking, given only 1.2 mV typical internal hysteresis | Nuisance trips at speed, or blanking added until the trip is too slow | A | Specify blanking and external hysteresis against a timing budget | OPEN | fast-oc-milestone.md §Timing / survival boundary |
+| MCU-01 | Break configuration | The TIMx_BDTR contract (AF2/AF4, BKE=1, BKP=0, BKINP=0, BKINE=1), input filter, lock, deadtime, idle states and MOE/auto-rearm policy | A break input that is wired but never armed | A | Firmware implementation plus a register-level test | OPEN — net continuity is not timer safety configuration | mcu-integration-review.md §Break polarity and inhibit contract |
+| MCU-02 | VREFBUF | That VREFBUF stays in external/high-impedance mode and never drives the hard-fed 3V3 VREF+ rail | Two drivers on one reference pin | A | Firmware and option-byte setting with a readback test | OPEN | mcu-integration-review.md §Break polarity and inhibit contract |
+| MCU-03 | Sampling schedule | That dedicated pins give simultaneous three-phase sampling; acquisition scheduling beside the phase-current ADCs is unimplemented and shared MISO rise is ≈1.204 RC | Wrong phase-current sample instant, or SPI that fails at speed | A | Specify and implement the trigger/sample/deadtime schedule; budget rise time | OPEN | mcu-integration-review.md §Electrical crosscheck; §Break polarity and inhibit contract |
+| MCU-04 | Analog supply tracking | VDDA/VREF tracking, start-up/reset, back-power and partial-power states, physical decoupling placement and analog return | A reference that tracks nothing the design accounts for | B | Bench supply-sequencing and analog-return measurement | OPEN | mcu-integration-review.md §Electrical crosscheck |
+| MCU-05 | Cable injection | That 3V3-only interfaces survive cable ESD and power-off injection | Field ESD or a dead rail injecting into live logic | B | Bench ESD and power-off injection test | OPEN | mcu-integration-review.md §Electrical crosscheck |
+| MCU-06 | Source revision audit | That DS12288 Rev5 and RM0440 Rev7 are current, plus BOOT0/nSWBOOT0 option-byte defaults | A documented erratum or option-byte default that defeats the reset or break design | A | Retrieve current revisions and errata; audit option bytes | OPEN | mcu-integration-review.md §Isolation and provenance |
+| MCU-07 | Independent reviewer | That any review in this corpus came from a model family other than the author's; the family was never established | A single-family blind spot presented as independent approval | C | Operator names a reviewer whose family can be verified | OPEN — separate contexts are not cross-family independence | mcu-integration-review.md §Reviewer qualification; fsr-review.md front matter |
+| PROT-01 | Bus sink independence | That the only active bus sink survives auxiliary failure: U3→AUX12V→U4/U5/U6/U10, so losing U3, its input, ground or reference removes clamping while the PM machine keeps rectifying | Unclamped bus overvoltage with the pack open; mechanical brakes do not contain it | A | Choose an independently powered or energy-backed clamp with a common-cause analysis | OPEN — architecture change required | protection-integration-review.md §P0 Auxiliary-loss defeats the only active bus sink |
+| PROT-02 | Reset and rearm | That a held-high RESET_REQUEST cannot rearm: it clears memory as soon as HEALTHY rises and drive resumes without a new deliberate action | Automatic rearm after a fault | A | Edge-qualified reset with release-before-rearm and a separate ARM sequence | OPEN | protection-integration-review.md §P0 Held-high RESET_REQUEST automatically rearms |
+| PROT-03 | Logic margins | A per-path VIH/VIL budget: LM339B VOL 400 mV at 25 °C and 550 mV over −40…85 °C at 4 mA, BAT54WS 0.32 V at 1 mA, DRV nFAULT 0.125 V, TPS382x 0.4 V, HC thresholds specified only at 2/4.5/6 V | VOL-plus-diode sums above the logic low threshold at a cold or low-supply corner | A | Per-path budget with temperature, sink current and leakage, else a Schmitt or interface stage | OPEN | protection-integration-review.md §P1 LM339B VOL budget is understated |
+| PROT-04 | Supply permutations | Every supply permutation and every externally driven pin: UCC27511 UVLO 3.70–4.65 V, LM339 common mode VCC−2 V, U4/U5 sequencing, and PWM/SPI/ARM/RESET/WDI injection | An arbitrary OV command or a back-powered dead rail during a ramp | A | Enumerate permutations and prove Ioff/series limits, then bench | OPEN — ideal PWL sources cannot close this | protection-integration-review.md §P1 Startup, brownout and backfeed are unproven |
+| PROT-05 | Watchdog semantics | That TPS3823-33 services on negative transitions, floating WDI disables it, a running peripheral can mask a frozen application, and the documented stuck-reset mode is avoided | RESET stuck low after recovery, or a watchdog that never fires | A | Device/interface decision plus a firmware pulse policy | OPEN | protection-integration-review.md §P1 Watchdog edge semantics and reset interaction |
+| PROT-06 | Sink energy and latency | That two 4.7 Ω in series (≈383 W at 60 V) hold an illustrative 500 W source, and that the 10 µs latency is real; no validated heatsink, pulse energy, cable clamp, branch fuse or resistor-open detection | A sink that cannot hold the source it is sized against, or acts too late | B | Bench energy, latency and thermal measurement on the built sink | OPEN | protection-integration-review.md §P1 Sink energy, latency and thermal qualification remain open |
+| PROT-07 | OV threshold qualification | That the 59.417–61.226 V band is qualification, when it covers only a ±50 K excursion from calibration and leaves resistor tracking, aging and reference load regulation open | A threshold that walks below the bus limit at end of life | A | Extend the corner analysis to rated temperature plus aging and load regulation | OPEN | protection-milestone-report.md §OV thresholds and timing |
+| PROT-08 | Clamp versus switching | That a clamp holds the bus: 500 W into 100 µF reaches 60.828 V in 10 µs and 64.031 V in 50 µs, with ringing and cable energy excluded | 100 V MOSFET headroom presented as safety while the bus exceeds the clamp | B | Measured switching transient with the real cable and clamp | OPEN | protection-milestone-report.md §OV thresholds and timing |
+| PROT-09 | Resistor derating | HSC3004R7J headroom: 419.8 W total and 209.9 W each at 61.226 V, 580.5 W at 72 V, a 300 W rating that needs the specified heatsink and is not free-air, and no pulse-overload energy rating claimed | A resistor pair run past its rating on the first real descent | B | Mounted thermal and pulse test with the specified heatsink | OPEN | protection-milestone-report.md §External sink selection and derating |
+| PROT-10 | MOSFET land geometry | That CSD19532Q5B drain leads 5–8 plus the exposed pad are properly represented when they collapse to KiCad pad 5 with nine unnamed paste apertures | A drain connection that exists in CAD and not in copper | A | Compare the actual land geometry to datasheet pp. 8–9 | OPEN | reva-milestone-review.md §Primary-source pin audit; protection-milestone-report.md §Circuit and primary-source identities |
+| PROT-11 | Chopper gate charge | That active braking and chopper gate-charge demand fit the auxiliary budget | The sink's own driver load breaks the 1.1 W envelope | A | Add gate charge to the ledger and re-check the envelope | OPEN — flagged as still needing PWM/current validation | protection-milestone-report.md §Circuit and primary-source identities; precharge-budget-review.md §Exact release blockers, item 2 |
+| BRK-01 | Installed heatsink | That the sink holds 80 °C at 300 W, which needs ≤0.1333 K/W before interface and local rises; the Fischer 0.3 K/W is a screening number with no installed curve, orientation or road-speed cooling | Resistor or sink overtemperature on a real descent | B | Installed thermal measurement inside the bench qualification | OPEN | braking-review.md §Independent arithmetic and boundaries; downhill-braking-envelope.md §4 Resistor reality check |
+| BRK-02 | Datasheet revision | That the HSC300 evidence is current: literature 1773035 issued 11-05, the newer Rev E fetch failed with curl HTTP/2 error 92, and no pulse rating was found | Sizing against a withdrawn or superseded rating | A | Retrieve the current revision and confirm the exact part | OPEN | braking-review.md §Manufacturer evidence independently checked |
+| BRK-03 | Staged bench protocol | That the 100 W then conditional 300 W / 600 s protocol with isolated source, independent interruption and temperature aborts works; it has never been executed | A rating asserted from a protocol that only exists on paper | B | Execute the staged protocol on the bench | OPEN — prerequisites, not proof that tests happened | braking-review.md §Scope and safety retained |
+| STO-01 | Converter option | That the 25 V low end is compatible with a 36 V minimum direct bus without a converter, or that the converter's mass, efficiency and price are acceptable | Storage cannot deliver into the bus, or mass is added for nothing | A | Size or eliminate the converter against the chosen window and datasheets | OPEN | storage-review.md §Findings and corrections 4; short-buffer-storage.md §0 Answer and provisional decision log, D2 |
+| STO-02 | Cell pulse and thermal maps | That per-cell DC pulse, thermal maps, reserve SOC and the per-cell series ceiling are known for the chosen chemistry | Series count or reserve chosen from nominal Wh alone | A | Datasheet pulse and thermal maps plus a written reserve policy | OPEN | short-buffer-storage.md §6 Risk ordering and next evidence |
+| STO-03 | Cold and full-SOC acceptance | That a full or cold pack accepts or refuses charge safely; the LFP <250 mA subzero note does not qualify ordinary cold regen | Charging a full or cold pack, or regen dumped into a pack that refuses it | B | Bench charge-acceptance test at temperature | OPEN | storage-review.md §Source and BOM boundaries |
+| STO-04 | Supplier revisions | That Eaton and Toshiba ratings are real: they rest on indexed primary text, one ESR unit rendered as "mW", and SCiB 10 s power is not continuous current | A chemistry rejected or selected on a misread table | A | Re-fetch the exact supplier revisions and correct the units | OPEN — lower-confidence status retained | storage-review.md §Source and BOM boundaries |
+| STO-05 | Chronological transient model | Storage losses, SOC reserve, rejected charge, rotating inertia and actual efficiency maps, plus the fact that net energy is not capacity | Sizing a pack from a net integral it cannot deliver | A | Extend the model with the missing channels | OPEN | storage-review.md §Findings and corrections 2 |
+| STO-06 | Recovery after refusal | That rejected regen recovers without pedal back-drive | The rider loses drive when the pack refuses charge | B | Bench test of the refusal and recovery path | OPEN | short-buffer-storage.md §6 Risk ordering and next evidence |
+| NAV-01 | Inertial sensor data | That the LSM6DSOX noise, current, IO and DRDY support the interface; the detailed datasheet was never retrieved | A sensor whose behaviour is not what the estimator assumes | A | Retrieve the datasheet and qualify it against the interface | OPEN | navigation-review.md §Pending, explicitly not qualified |
+| NAV-02 | GNSS and barometer sources | That MAX-M10S and BMP390 claims hold: they are the feature's recorded evidence, not re-fetched PDFs, and sourced GNSS current is at 1 Hz while logging assumes 10 Hz | Applying a 1 Hz current proxy to a 10 Hz design | A | Verify at the intended rate and constellation | OPEN | navigation-review.md §Arithmetic, power boundary and resource findings |
+| NAV-03 | Storage device | That any device exists: 64 KiB is 4.3367 s at 15112 B/s and 512 KiB flash is ≈34.69 s, with no retention guarantee | A log that cannot hold a ride | A | Select a device with a retention datasheet | OPEN | navigation-review.md §Arithmetic, power boundary and resource findings |
+| NAV-04 | Estimator | That any EKF exists; the approved error-state EKF is an implementation contract only | Navigation confidence reported without a filter | A | Implement and replay-test the estimator | OPEN — no EKF code was added | navigation-review.md §Actual execution |
+| NAV-05 | RF, EMC and physical | RF/EMC, rail transients, connector isolation, memory and timing tests, physical storage | Interference or a connector fault on an optional subsystem | B | Bench RF/EMC and transient test | OPEN | navigation-review.md §Pending, explicitly not qualified |
+| NAV-06 | Daughterboard BOM and routing | That the supervisor, antenna and support BOM exist and that reserved pins match firmware EXTI/DMA routing; only netlist reservation was validated | A pin conflict found after layout | A | Select the BOM, implement and test the routing | OPEN | navigation-review.md §Integration and disposition; §Independent pin/source audit |
+| PCB-01 | Requirements freeze | Frozen bus minimum, 58.4 V maximum plus tolerance, transient envelope, motor speed/back-EMF, phase RMS and peak, duty, ambient and cooling, plus power-off/reset/fault/full-storage behaviour | Copper drawn against an envelope that later moves | C | Operator freezes the numbers | OPEN | pcb-quality-gates.md §Actionable checklist, G0 |
+| PCB-02 | Pin and pad truth | That every power semiconductor, driver and current-sense package pin matches its datasheet at pad level; only DRV8353 and CSD19532Q5B were audited so far | A pad-level error found after fabrication | A | Datasheet pin and land check for every power part plus netlist parity | OPEN | pcb-quality-gates.md §Actionable checklist, G1 |
+| PCB-03 | BOM identity | That one approved MPN per populated reference exists with exact reference-set equality across schematic, PCB and variant; blank footprints are still permitted | A BOM that cannot be assembled as drawn | A | Exact reference-set equality and one MPN per populated reference | OPEN | pcb-quality-gates.md §Actionable checklist, G2 |
+| PCB-04 | Placement, routing and power layout | That any placement, DRC or power-layout review exists; there is no board file at all | Loop inductance, Kelvin sense and thermal bottlenecks decided by accident | A | Placement, routing and power-layout review on a real board file | OPEN | pcb-quality-gates.md §Actionable checklist, G4–G6 |
+| PCB-05 | Manufacturing packet and reproducibility | That a layer-complete packet exists and that two clean builds match | An incomplete or non-reproducible packet | A | Release manifest with hashes and a two-build comparison | OPEN | pcb-quality-gates.md §Actionable checklist, G7–G8 |
+| PCB-06 | Bench validation | That any current-limited bring-up, gate waveform, deadtime, fault injection, regen or thermal load test has run | Everything in the A bucket above is still paper | B | Staged guarded bench validation | OPEN | pcb-quality-gates.md §Actionable checklist, G9 |
+| PCB-07 | Generator reproducibility | That the schematic/PCB generator reproduces byte-identically; the audited upstream pipeline replaced placeholder UUIDs with UUID4 | A reproducibility claim that holds only within one run | A | Deterministic identifiers plus a two-build comparison | OPEN | tooling-audit-report.md §What the actual code provides |
+| PCB-08 | Fail-closed release gates | That release gates fail closed instead of reporting success for work not done | A gate that passes on a missing report | D | Three fail-closed checkers plus a runner, exercised by planted-fault tests | RESOLVED in 4d18b7c and c8c4d5f | tooling-audit-report.md §What the actual code provides; pcb-quality-gates.md §Smallest tooling to port later |
+| TOOL-01 | Gate runner wiring | That the release gates run at all without a human remembering: there is no workflow file and no runner invocation on the board directory | A gate that is only ever run by the person who wrote it | A | Add a CI job or a documented runner invocation | OPEN | pcb-quality-gates.md §Evidence contract; tooling-audit-report.md §What the actual code provides |
+| DRV-01 | Regen capture efficiency | That 65 % (A7) is right; it is an ESTIMATE | Buffer and regen benefit sized from an unmeasured number | B | Bench measurement with a Phaserunner and All-Axle at 5–25 km/h | OPEN | chainless-drivetrain.md §14 Open items |
+| DRV-02 | Off-cadence penalty | That 4 % (A8) applies to this rider; it is read off literature | The 8.7× gearing-benefit trade shifts | C | Operator or rider measurement, or a written accepted bound | OPEN | chainless-drivetrain.md §14 Open items |
+| DRV-03 | Housekeeping draw | That 3 W is right for a dual-controller build; it is an ESTIMATE | The bootstrap and standby budget | B | Measure Phaserunner plus CA3 idle draw | OPEN | chainless-drivetrain.md §14 Open items |
+| GYRO-01 | Contained control-moment gyro | That any bicycle-scale contained CMG exists; Seakeeper 1 is 166 kg and a vacuum enclosure is not verified burst containment | A spinning rotor next to a rider without containment | A | Sourcing and containment study, or a recorded HOLD | OPEN — educational candidate remains HOLD | gyro-review.md §Verdict; §Source cross-check and corrections |
+| GYRO-02 | Control law | That direction, finite travel, singularities, desaturation, power loss and start-up/shutdown are handled; `2H` is an upper bound, not available torque | A stabiliser that cannot recover and was never shown to | A | Control design and simulation against a stated envelope | OPEN | gyro-review.md §Direction, finite travel and safety |
+
+## 4. Bucket summary
+
+Counts are recomputed by `analysis/gates/register_check.py`, which fails if they
+disagree with the table above.
+
+| Bucket | Meaning | Gates |
+|---|---|---|
+| A | Schematic/analysis work still possible now, closeable without hardware | 54 |
+| B | Bench measurement that needs a built board | 35 |
+| C | Operator input required | 12 |
+| D | Resolved, with the commit or document that closed it | 8 |
+
+---
+
+## 5. What a design-phase completion actually means here
+
+The design phase is complete when **every A-bucket gate is closed and every B and
+C gate is explicitly deferred to a named phase with a named owner**. It is not
+complete when the board works, because the board has never existed.
+
+Concretely, "design phase complete" means:
+
+1. Every A row above is either closed with its evidence recorded, or converted
+   into a B or C row with a stated reason. No A row may be closed by assertion.
+2. Every B row names the phase that will measure it (bench bring-up, staged
+   isolated-source qualification, dyno, guarded road trial) and the owner of
+   that measurement.
+3. Every C row is answered in writing by the operator, because no amount of
+   engineering closes a question about which machine, pack, route or
+   jurisdiction is intended.
+4. The register's own consistency check passes, so the counts and citations can
+   be trusted as a description of the document even though they say nothing
+   about the engineering.
+
+Finishing this register makes **no claim of electrical safety, no claim of road
+legality, and no claim of manufacturing readiness**. It is a statement that the
+design phase knows what it does not know. Energizing anything still requires the
+B-bucket evidence plus the C-bucket authority plus an independent reviewer;
+fabrication additionally requires the PCB gates G1–G8 with real reports; riding
+additionally requires a legal classification and mechanical brakes that this
+project does not design.
+
+## 6. Open operator decisions
+
+Each question below is a C-bucket row, phrased so it can be asked directly. The
+consequence of each answer is why it is a gate rather than a preference.
+
+1. **Architecture (ARCH-01).** Do we build the chainless series hybrid, or the
+   parallel hybrid the trade study recommends? *If series:* accept a ~35-point
+   rider-power loss and no pedal-home fallback. *If parallel:* most of this
+   powerboard's precharge, entry and dual-bridge rationale collapses to a
+   conventional e-bike drivetrain.
+2. **Road class and jurisdiction (ARCH-02).** Which country, which vehicle
+   class, and is this pedal-assist or throttle? *Consequence:* the lawful power,
+   speed and control topology limits, and possibly the whole controller choice.
+3. **Machine (ARCH-04).** Which motor/generator, how many poles, what Kv and
+   winding? *Consequence:* bus voltage, shunt value, trip thresholds, phase
+   current, regen ceiling and PM body-diode energy all follow, and the
+   low-kv crank generator may not exist off the shelf.
+4. **Pack and BMS (ARCH-06, PRE-01).** Which chemistry, how many series cells,
+   which BMS, what charge and discharge current limits, what is the source
+   impedance? *Consequence:* the precharge timing, the 1.5 mF ceiling, the
+   58.4 V bus maximum and the charge-acceptance envelope all move with it.
+5. **Mass and frame (ARCH-03).** What is the weighed complete bicycle mass,
+   which frame and fork, and where may anything be mounted? *Consequence:*
+   every braking, thermal and structural number, and whether the frame may be
+   used as a heat path at all.
+6. **Duty and route (ARCH-05).** Which descent or route, what grades, what
+   duration, what ambient? *Consequence:* the sink rating, the resistor
+   qualification energy and whether 300 W for 600 s is even relevant.
+7. **Test authority (ARCH-07).** What energy may be tested, in what guarded
+   setup, and who signs before anything is energized? *Consequence:* every B
+   gate is blocked until this exists.
+8. **Independent reviewer (MCU-07).** Who reviews this electrically, with a
+   model family that can be verified? *Consequence:* no review in this corpus
+   can claim cross-family independence, so the strongest available approval is
+   currently single-family.
