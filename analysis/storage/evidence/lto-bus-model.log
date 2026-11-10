@@ -1,0 +1,125 @@
+LTO STORAGE DECISION — series count, bus maximum, downstream numbers
+==============================================================================
+
+1. SERIES SELECTION
+  N * ceiling <= envelope : 58.4 / 2.7 = 21.6296 -> N <= 21
+  N * floor   <= bus min  : 36.0 / 1.8 = 20.0000 -> N <= 19
+  selected series count   : N = 20
+
+2. BUS MAXIMUM
+  bus maximum = 20 x 2.7 = 54.0 V
+  bus minimum = 20 x 1.8 = 36.0 V
+  58.4 V would need 2.92 V/cell at 20S
+  58.4 / 2.7 = 21.629630 — not an integer, so no series count lands on 58.4 V
+  verdict: 58.4 V does NOT survive the LTO decision
+
+  per-candidate ceiling at the same series count:
+    yinlong-66160-40ah       2.90 V/cell ->  58.0 V, floor 1.5 V ->  30.0 V
+    yinlong-66160-30ah       2.90 V/cell ->  58.0 V, floor 1.5 V ->  30.0 V
+    altairnano-70ah          2.90 V/cell ->  58.0 V, floor 1.5 V ->  30.0 V
+    altairnano-60ah          2.80 V/cell ->  56.0 V, floor 1.8 V ->  36.0 V
+    toshiba-scib-2.9ah       2.70 V/cell ->  54.0 V, floor 1.5 V ->  30.0 V   [ceiling is family-level, not cell-level]
+    toshiba-scib-10ah        2.80 V/cell ->  56.0 V, floor 1.8 V ->  36.0 V
+
+3. MIGRATION LIST (old 58.4 V design point -> new)
+  item                                                      old          new unit  moves
+  --------------------------------------------------------------------------------------
+  Bus maximum (pack charge ceiling)                        58.4           54    V  YES
+  Bus minimum (pack continuous floor)                        36           36    V  no
+  PRE fault power (hard short, 21.78 ohm)               156.591      133.884    W  YES
+  PRE fault energy (350 ms maximum)                      54.807        46.86    J  YES
+  Bus capacitor stored energy (1.5 mF)                   2.5579        2.187    J  YES
+  Precharge closure time to 1 V mismatch               0.162515     0.161736    s  YES
+  1.5 mF assembled capacitance ceiling                      1.5          1.5   mF  no
+  CTRL3V3 UVLO (30.181 V rise / 28.169 V fall typical) 30.181/28.169 30.181/28.169    V  no
+  SINK12 UVLO (17.36 V on / 16.13 V off)            17.36/16.13  17.36/16.13    V  no
+  OV trip band                                     59.417/61.226 59.417/61.226    V  no
+  Reverse-pack stress on one off device (2 x Vpack)        116.8          108    V  YES
+  150 V MOSFET static margin                               33.2           42    V  YES
+  Dump resistor power at the CLAMP voltage (9.4 ohm)      375.572      375.572    W  no
+  1.1 W SINK input envelope                                 1.1          1.1    W  no
+  0.8 W CTRL input envelope                                 0.8          0.8    W  no
+  SINK input current at the high corner                0.018836      0.02037    A  YES
+  CTRL input current at the high corner                0.013699     0.014815    A  YES
+  Bus rise under 500 W into 100 uF (10 us)              60.8276      54.9181    V  YES
+
+4. SUPERCAPACITOR BUFFER
+  documented cumulative excursion: 10 s launch = 0.7709 Wh; 30 s launch = 0.5592 Wh
+  (the 0.7709 Wh figure is the 10 s case; sizing against it is the conservative choice)
+  C = 2E/(Vhi^2-Vlo^2) = 2 x 0.7709 x 3600 / (54.0^2 - 36.0^2) = 3.4264 F
+    n                        20
+    strung_voltage_v         54.0
+    per_cell_at_bus_min_v    1.8
+    capacitance_f            20.0
+    esr_ohm                  0.064
+    usable_wh                4.5
+    excursion_wh             0.7709415704483934
+    excursion_margin         5.837
+    cell_mass_kg             1.44
+    pack_mass_kg             1.944
+    cell_volume_l            1.212262
+    pack_volume_l            1.636554
+    cell_wh_per_kg           5.625
+    pack_wh_per_kg           4.166667
+    cap_charge_j_at_bus_max  29160.0
+    precharge_tau_s          447.4
+  surge ceiling = 20 x 2.85 = 57.0 V vs OV trip minimum 59.417 V -> own clamp required: True
+
+  INTERFACE OPTIONS (same cell, same 0.7709 Wh excursion):
+    A: permanently in parallel with the bus
+      cells                              20
+      string_v_max                       54.0
+      string_v_min                       36.0
+      capacitance_f                      20.0
+      esr_ohm                            0.064
+      usable_wh                          4.5
+      usable_over_excursion              5.837
+      cell_mass_kg                       1.44
+      pack_mass_kg                       1.944
+      cell_volume_l                      1.212262
+      bus_cap_ratio                      13333.3
+      precharge_tau_s                    447.4
+      precharge_j                        29160.0
+      needs_own_switch                   False
+      needs_converter                    False
+      verdict                            REJECT — bus capacitance ceiling exceeded by 4 orders of magnitude; every precharge number is invalidated
+    B: same string behind its own contactor + precharge
+      cells                              20
+      string_v_max                       54.0
+      string_v_min                       36.0
+      capacitance_f                      20.0
+      esr_ohm                            0.064
+      usable_wh                          4.5
+      usable_over_excursion              5.837
+      cell_mass_kg                       1.44
+      pack_mass_kg                       1.944
+      cell_volume_l                      1.212262
+      bus_cap_ratio                      0.0
+      precharge_tau_s                    None
+      precharge_j                        None
+      needs_own_switch                   True
+      needs_converter                    False
+      own_surge_ceiling_v                57.0
+      needs_own_ov_clamp                 True
+      verdict                            RECOMMENDED SHAPE — entry-circuit numbers unchanged; needs its own contactor, precharge, clamp and balance
+    C: minimum 4-cell string + bidirectional converter
+      cells                              4
+      string_v_max                       10.8
+      string_v_min                       7.2
+      capacitance_f                      100.0
+      esr_ohm                            0.0128
+      usable_wh                          0.9
+      usable_over_excursion              1.1674
+      cell_mass_kg                       0.288
+      pack_mass_kg                       0.3888
+      cell_volume_l                      0.242452
+      needs_own_switch                   True
+      needs_converter                    True
+      converter_ratio_at_500w            7.5
+      string_current_at_500w_low_v_a     69.44
+      esr_loss_at_500w_low_v_w           61.73
+      verdict                            REJECT on the interface — saves 0.72 kg of cells at the cost of a 7.5:1 bidirectional 500 W stage and 61.73 W of ESR heat at the 500 W corner
+
+5. NEGATIVE CONTROL
+  PASS: bus maximum 58.4 V requires 2.92 V/cell at 20S, above the 2.7 V ceiling of the selected chemistry and above every verified LTO ceiling — rejected
+  PASS: 54.0 V accepted

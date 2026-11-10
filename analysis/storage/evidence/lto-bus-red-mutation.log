@@ -1,0 +1,83 @@
+test_altairnano_70ah_values (test_lto_bus.CandidateCellsTest.test_altairnano_70ah_values) ... ok
+test_candidates_are_cited (test_lto_bus.CandidateCellsTest.test_candidates_are_cited) ... ok
+test_toshiba_cell_level_gaps_are_declared_not_filled (test_lto_bus.CandidateCellsTest.test_toshiba_cell_level_gaps_are_declared_not_filled) ... ok
+test_yinlong_40ah_values (test_lto_bus.CandidateCellsTest.test_yinlong_40ah_values) ... ok
+test_braking_resistor_power (test_lto_bus.DownstreamNumbersTest.test_braking_resistor_power) ... ok
+test_bus_input_current_at_the_high_corner (test_lto_bus.DownstreamNumbersTest.test_bus_input_current_at_the_high_corner) ... ok
+test_bus_input_current_does_not_move_at_the_low_corner (test_lto_bus.DownstreamNumbersTest.test_bus_input_current_does_not_move_at_the_low_corner) ... ok
+test_clamp_rise_at_the_new_maximum (test_lto_bus.DownstreamNumbersTest.test_clamp_rise_at_the_new_maximum) ... ok
+test_ov_band_does_not_move_and_becomes_more_admissible (test_lto_bus.DownstreamNumbersTest.test_ov_band_does_not_move_and_becomes_more_admissible) ... ok
+test_precharge_close_time_at_the_new_maximum_is_shorter (test_lto_bus.DownstreamNumbersTest.test_precharge_close_time_at_the_new_maximum_is_shorter) ... ok
+test_precharge_close_time_reproduces_the_corpus (test_lto_bus.DownstreamNumbersTest.test_precharge_close_time_reproduces_the_corpus) ... ok
+test_precharge_energy_scales_with_v_squared (test_lto_bus.DownstreamNumbersTest.test_precharge_energy_scales_with_v_squared) ... ok
+test_precharge_fault_energy_at_58_4_matches_the_corpus (test_lto_bus.DownstreamNumbersTest.test_precharge_fault_energy_at_58_4_matches_the_corpus) ... ok
+test_precharge_fault_energy_at_the_new_maximum (test_lto_bus.DownstreamNumbersTest.test_precharge_fault_energy_at_the_new_maximum) ... ok
+test_present_ov_band_is_NOT_admissible_at_58_4_v (test_lto_bus.DownstreamNumbersTest.test_present_ov_band_is_NOT_admissible_at_58_4_v) ... ok
+test_present_ov_band_is_admissible_at_54_v (test_lto_bus.DownstreamNumbersTest.test_present_ov_band_is_admissible_at_54_v) ... ok
+test_reverse_pack_stress_and_mosfet_margin (test_lto_bus.DownstreamNumbersTest.test_reverse_pack_stress_and_mosfet_margin) ... ok
+test_supercap_surge_ceiling_forces_a_second_clamp (test_lto_bus.DownstreamNumbersTest.test_supercap_surge_ceiling_forces_a_second_clamp) ... ok
+test_negative_and_zero_inputs_rejected (test_lto_bus.InputValidationTest.test_negative_and_zero_inputs_rejected) ... ok
+test_unknown_cell_name_raises (test_lto_bus.InputValidationTest.test_unknown_cell_name_raises) ... ok
+test_guard_accepts_the_design_point (test_lto_bus.NegativeControlTest.test_guard_accepts_the_design_point) ... ok
+test_guard_is_not_an_assert_statement (test_lto_bus.NegativeControlTest.test_guard_is_not_an_assert_statement) ... ok
+test_guard_raises_on_58_4 (test_lto_bus.NegativeControlTest.test_guard_raises_on_58_4) ... FAIL
+test_no_model_output_equals_the_legacy_envelope (test_lto_bus.NegativeControlTest.test_no_model_output_equals_the_legacy_envelope) ... FAIL
+test_58_0_at_the_most_permissive_ceiling_is_also_rejected (test_lto_bus.SeriesSelectionTest.test_58_0_at_the_most_permissive_ceiling_is_also_rejected) ... ok
+test_58_4_is_not_an_integer_multiple (test_lto_bus.SeriesSelectionTest.test_58_4_is_not_an_integer_multiple) ... ok
+test_58_4_needs_more_than_any_verified_ceiling (test_lto_bus.SeriesSelectionTest.test_58_4_needs_more_than_any_verified_ceiling) ... ok
+test_bus_minimum_is_36_volts_at_the_usable_floor (test_lto_bus.SeriesSelectionTest.test_bus_minimum_is_36_volts_at_the_usable_floor) ... ok
+test_design_bus_maximum_is_54_volts (test_lto_bus.SeriesSelectionTest.test_design_bus_maximum_is_54_volts) ... FAIL
+test_raw_1_5_v_floor_would_need_more_cells_than_the_envelope_allows (test_lto_bus.SeriesSelectionTest.test_raw_1_5_v_floor_would_need_more_cells_than_the_envelope_allows) ... ok
+test_series_is_twenty (test_lto_bus.SeriesSelectionTest.test_series_is_twenty) ... ok
+test_the_floor_binds_not_the_ceiling (test_lto_bus.SeriesSelectionTest.test_the_floor_binds_not_the_ceiling) ... FAIL
+test_usable_floor_is_1_8_v (test_lto_bus.SeriesSelectionTest.test_usable_floor_is_1_8_v) ... ok
+test_cell_count_buys_voltage_not_energy (test_lto_bus.SupercapacitorTest.test_cell_count_buys_voltage_not_energy) ... ok
+test_datasheet_stored_energy_cross_check (test_lto_bus.SupercapacitorTest.test_datasheet_stored_energy_cross_check) ... ok
+test_eaton_400f_values_are_from_the_datasheet (test_lto_bus.SupercapacitorTest.test_eaton_400f_values_are_from_the_datasheet) ... ok
+test_margin_over_the_documented_excursion (test_lto_bus.SupercapacitorTest.test_margin_over_the_documented_excursion) ... ok
+test_mass_and_volume_at_pack_level (test_lto_bus.SupercapacitorTest.test_mass_and_volume_at_pack_level) ... ok
+test_minimum_cell_count_option_is_the_wrong_objective (test_lto_bus.SupercapacitorTest.test_minimum_cell_count_option_is_the_wrong_objective) ... ok
+test_more_energy_needs_no_more_cells (test_lto_bus.SupercapacitorTest.test_more_energy_needs_no_more_cells) ... ok
+test_pack_energy_density_corrects_the_corpus (test_lto_bus.SupercapacitorTest.test_pack_energy_density_corrects_the_corpus) ... ok
+test_permanently_parallel_breaks_the_bus_capacitance_ceiling (test_lto_bus.SupercapacitorTest.test_permanently_parallel_breaks_the_bus_capacitance_ceiling) ... ok
+test_string_is_voltage_driven (test_lto_bus.SupercapacitorTest.test_string_is_voltage_driven) ... ok
+test_string_voltage_equals_the_bus_window_without_a_converter (test_lto_bus.SupercapacitorTest.test_string_voltage_equals_the_bus_window_without_a_converter) ... ok
+test_switched_string_leaves_the_entry_circuit_alone (test_lto_bus.SupercapacitorTest.test_switched_string_leaves_the_entry_circuit_alone) ... ok
+test_thirty_second_case_is_smaller (test_lto_bus.SupercapacitorTest.test_thirty_second_case_is_smaller) ... ok
+
+======================================================================
+FAIL: test_guard_raises_on_58_4 (test_lto_bus.NegativeControlTest.test_guard_raises_on_58_4)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-lto-decision/analysis/storage/test_lto_bus.py", line 133, in test_guard_raises_on_58_4
+    with self.assertRaises(ValueError):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_no_model_output_equals_the_legacy_envelope (test_lto_bus.NegativeControlTest.test_no_model_output_equals_the_legacy_envelope)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-lto-decision/analysis/storage/test_lto_bus.py", line 145, in test_no_model_output_equals_the_legacy_envelope
+    self.assertNotAlmostEqual(self.m.design_bus_maximum_v(), 58.4)
+AssertionError: 58.4 == 58.4 within 7 places
+
+======================================================================
+FAIL: test_design_bus_maximum_is_54_volts (test_lto_bus.SeriesSelectionTest.test_design_bus_maximum_is_54_volts)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-lto-decision/analysis/storage/test_lto_bus.py", line 92, in test_design_bus_maximum_is_54_volts
+    self.assertAlmostEqual(self.m.design_bus_maximum_v(), 54.0)
+AssertionError: 58.4 != 54.0 within 7 places (4.399999999999999 difference)
+
+======================================================================
+FAIL: test_the_floor_binds_not_the_ceiling (test_lto_bus.SeriesSelectionTest.test_the_floor_binds_not_the_ceiling)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-lto-decision/analysis/storage/test_lto_bus.py", line 84, in test_the_floor_binds_not_the_ceiling
+    self.assertEqual(bounds['by_ceiling'], 21)
+AssertionError: 20 != 21
+
+----------------------------------------------------------------------
+Ran 46 tests in 0.281s
+
+FAILED (failures=4)
