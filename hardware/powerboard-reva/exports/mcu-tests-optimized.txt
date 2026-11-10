@@ -1,0 +1,23 @@
+test_adc (test_calculations.Calculations.test_adc) ... ok
+test_envelope (test_calculations.Calculations.test_envelope) ... ok
+test_invalid (test_calculations.Calculations.test_invalid) ... ok
+test_precharge (test_calculations.Calculations.test_precharge) ... ok
+test_exported_topology (test_mcu_connectivity.MCUConnectivity.test_exported_topology) ... ok
+test_mutations_rejected (test_mcu_connectivity.MCUConnectivity.test_mutations_rejected) ... ok
+test_corners (test_protection.Protection.test_corners) ... ok
+test_energy (test_protection.Protection.test_energy) ... ok
+test_set_dominant (test_protection.Protection.test_set_dominant) ... ok
+test_thresholds (test_protection.Protection.test_thresholds) ... ok
+test_corrected_restart_contract (test_protection_spice.ProtectionSpice.test_corrected_restart_contract) ... ok
+test_old_held_reset_is_negative_control (test_protection_spice.ProtectionSpice.test_old_held_reset_is_negative_control) ... ok
+test_actual_export_matches_edge_memory_topology (test_rearm_connectivity.RearmConnectivity.test_actual_export_matches_edge_memory_topology) ... ok
+test_corruptions (test_verify_exports.ExportVerifierTests.test_corruptions) ... ok
+test_explicit_nc_corruptions (test_verify_exports.ExportVerifierTests.test_explicit_nc_corruptions) ... ok
+test_missing_empty_malformed_inputs (test_verify_exports.ExportVerifierTests.test_missing_empty_malformed_inputs) ... ok
+test_structural_controls (test_verify_exports.ExportVerifierTests.test_structural_controls) ... ok
+test_valid_is_read_only (test_verify_exports.ExportVerifierTests.test_valid_is_read_only) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 7.421s
+
+OK

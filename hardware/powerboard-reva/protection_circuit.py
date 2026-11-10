@@ -64,7 +64,7 @@ def populate(g):
     s.text('Default OFF via async supervisor clear. Analog ramp/metastability NOT validated.',20.32,266.7)
     s.save();g['sheets'].append(s)
     s=Sheet('brake-chopper','Independent brake chopper power stage')
-    s.text('Autonomous OV path ignores bridge ENABLE. External resistor is physically required across J12 pins.',20.32,15.24)
+    s.text('Autonomous OV path ignores bridge ENABLE. External resistor is required across BRAKE_DUMP_RESISTOR connector pins.',20.32,15.24)
     part(s,ic('UCC27511',['VDD','OUTH','OUTL','GND','IN-','IN+'],outputs=(2,3)),'U10','UCC27511DBVR',63.5,50.8,['AUX12V','CHOP_SOURCE','CHOP_SINK','PGND','PGND','OV_CMD'],'Package_TO_SOT_SMD:SOT-23-6')
     fet=g['FET'];s.part(fet,'Q13','CSD19532Q5B',215.9,76.2,{num:('CHOP_GATE' if name=='G' else 'DUMP_LOW' if name=='D' else 'PGND') for num,name,*_ in pins(fet)},'Package_TO_SOT_SMD:TDSON-8-1')
     r(s,'10R CRCW080510R0FKEA',139.7,132.08,'CHOP_SOURCE','CHOP_GATE')

@@ -1,6 +1,12 @@
 # Dual FOC pin allocation and timing review
 
-**Research candidate, not implemented or bench-proven.** 2026-11-10. Select STM32G474VET6 (LQFP100) for this pin-budget proposal rather than assume the concept's LQFP64 fits. See `mcu-pin-allocation.csv`: 32 distinct GPIOs/physical pins, including twelve timer outputs, six current inputs, two break inputs, SPI and six Hall inputs. This is a functional allocation, NOT a complete MCU schematic: supply/decoupling, exposed analog references, SWD, reset/boot, clocks, driver fault/enable, watchdog heartbeat, bus voltage/current and temperature allocations still need completion.
+**Schematic implemented; firmware and bench behavior NOT implemented/proven.** 2026-11-10. Select STM32G474VET6 (LQFP100) for this pin-budget proposal rather than assume the concept's LQFP64 fits. See `mcu-pin-allocation.csv`: 32 distinct GPIOs/physical pins, including twelve timer outputs, six current inputs, two break inputs, SPI and six Hall inputs. The CSV is the original functional subset; actual MCU power/reset/debug/control wiring now lives in mcu_circuit.py and the exported netlist. Bus voltage/current and temperature allocations still need completion.
+
+## MCU circuit milestone update
+
+See `mcu-source-evidence.md` for recovered DS12288 Rev5 and RM0440 Rev7 page excerpts, hashes and register evidence; see `../../../docs/design/mcu-milestone.md` for actual circuitry and remaining gaps. The older proposal below is preserved as design history, not current implementation status. TIM8 ITR0 selects TIM1_TRGO. Injected JEXTSEL values: TIM1_CC4=1, TIM8_CC4=7, TIM1_TRGO2=8, TIM8_TRGO2=10. MMS2=0111 selects OC4REFC; 1010 pulses on BOTH edges. Do not infer single ADC event per PWM cycle from CMS interrupt-flag direction rules.
+
+The illustrative 42.5MHz ADC clock below is valid only after satisfying voltage/boost/electrical conditions: DS12288r5 specifies 42MHz at low VDDA for all ADC single-ended channels, 52MHz at VDDA>=2.7V. The 111-cycle sequence excludes trigger latency; async maximum adds 2.5 cycles without regular abort or 3.5 with abort. At 42.5MHz this yields 2.671us or 2.694us before CSA settling, guard and aperture constraints. No register implementation or waveform proof exists.
 
 ## Primary evidence and retrieval qualification
 

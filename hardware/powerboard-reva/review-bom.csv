@@ -74,14 +74,8 @@ C20,1u 100V X7R provisional,,hub-bridge
 J1,PROTECTED_DC_INPUT_EXT,,external-boundaries
 J2,MCU_SUPPLY_EXT,,external-boundaries
 J3,GEN_MACHINE_PHASES,,external-boundaries
-J4,GEN_MCU_PWM_EXT,,external-boundaries
-J5,GEN_SPI_EXT,,external-boundaries
-J6,GEN_ADC_EXT,,external-boundaries
-J7,HUB_MACHINE_PHASES,,external-boundaries
-J8,HUB_MCU_PWM_EXT,,external-boundaries
-J9,HUB_SPI_EXT,,external-boundaries
-J10,HUB_ADC_EXT,,external-boundaries
-J11,SAFETY_CONTROL,,external-boundaries
+J4,HUB_MACHINE_PHASES,,external-boundaries
+J5,SAFETY_BRAKE_LOOP_NC,,external-boundaries
 C21,100u 100V provisional,,external-boundaries
 U3,R-78HB12-0.5,,aux-supply
 U4,TLV76033DBZR,Package_TO_SOT_SMD:SOT-23,aux-supply
@@ -142,4 +136,65 @@ R63,2R2 CRCW08052R20FKEA,Resistor_SMD:R_0805_2012Metric,brake-chopper
 R64,10k CRCW080510K0FKEA,Resistor_SMD:R_0805_2012Metric,brake-chopper
 C38,1u 25V GRM21BR71E105KA99L,Capacitor_SMD:C_0805_2012Metric,brake-chopper
 C39,100n 25V GRM21BR71E104KA01L,Capacitor_SMD:C_0805_2012Metric,brake-chopper
-J12,EXTERNAL_DUMP_RESISTOR,,brake-chopper
+J6,EXTERNAL_DUMP_RESISTOR,,brake-chopper
+U17,STM32G474VET6,Package_QFP:LQFP-100_14x14mm_P0.5mm,mcu-core
+J7,SWD_3V3_TARGET_REFERENCE,,mcu-core
+R65,10k NRST,Resistor_SMD:R_0603_1608Metric,mcu-core
+C40,100n NRST,Capacitor_SMD:C_0603_1608Metric,mcu-core
+R66,10k BOOT0,Resistor_SMD:R_0603_1608Metric,mcu-core
+J8,RESET_BUTTON_NORMALLY_OPEN,,mcu-core
+C41,100n 10V X7R pin24,Capacitor_SMD:C_0603_1608Metric,mcu-power
+C42,100n 10V X7R pin49,Capacitor_SMD:C_0603_1608Metric,mcu-power
+C43,100n 10V X7R pin64,Capacitor_SMD:C_0603_1608Metric,mcu-power
+C44,100n 10V X7R pin75,Capacitor_SMD:C_0603_1608Metric,mcu-power
+C45,100n 10V X7R pin100,Capacitor_SMD:C_0603_1608Metric,mcu-power
+C46,100n 10V X7R pin6,Capacitor_SMD:C_0603_1608Metric,mcu-power
+C47,4u7 10V X7R bulk,Capacitor_SMD:C_0603_1608Metric,mcu-power
+R67,0R analog supply link,Resistor_SMD:R_0603_1608Metric,mcu-power
+C48,100n 10V X7R,Capacitor_SMD:C_0603_1608Metric,mcu-power
+C49,1u 10V X7R,Capacitor_SMD:C_0603_1608Metric,mcu-power
+R68,0R analog supply link,Resistor_SMD:R_0603_1608Metric,mcu-power
+C50,100n 10V X7R,Capacitor_SMD:C_0603_1608Metric,mcu-power
+C51,1u 10V X7R,Capacitor_SMD:C_0603_1608Metric,mcu-power
+R69,100R 1%,Resistor_SMD:R_0603_1608Metric,mcu-analog
+C52,1n C0G,Capacitor_SMD:C_0603_1608Metric,mcu-analog
+R70,100R 1%,Resistor_SMD:R_0603_1608Metric,mcu-analog
+C53,1n C0G,Capacitor_SMD:C_0603_1608Metric,mcu-analog
+R71,100R 1%,Resistor_SMD:R_0603_1608Metric,mcu-analog
+C54,1n C0G,Capacitor_SMD:C_0603_1608Metric,mcu-analog
+R72,100R 1%,Resistor_SMD:R_0603_1608Metric,mcu-analog
+C55,1n C0G,Capacitor_SMD:C_0603_1608Metric,mcu-analog
+R73,100R 1%,Resistor_SMD:R_0603_1608Metric,mcu-analog
+C56,1n C0G,Capacitor_SMD:C_0603_1608Metric,mcu-analog
+R74,100R 1%,Resistor_SMD:R_0603_1608Metric,mcu-analog
+C57,1n C0G,Capacitor_SMD:C_0603_1608Metric,mcu-analog
+R75,10k brake sense,Resistor_SMD:R_0603_1608Metric,mcu-analog
+R76,100k brake default,Resistor_SMD:R_0603_1608Metric,mcu-analog
+C58,1n brake filter,Capacitor_SMD:C_0603_1608Metric,mcu-analog
+J9,GEN_HALL_3V3_ONLY,,mcu-sensors
+R77,10k Hall pullup,Resistor_SMD:R_0603_1608Metric,mcu-sensors
+R78,1k Hall series,Resistor_SMD:R_0603_1608Metric,mcu-sensors
+C59,1n Hall filter,Capacitor_SMD:C_0603_1608Metric,mcu-sensors
+R79,10k Hall pullup,Resistor_SMD:R_0603_1608Metric,mcu-sensors
+R80,1k Hall series,Resistor_SMD:R_0603_1608Metric,mcu-sensors
+C60,1n Hall filter,Capacitor_SMD:C_0603_1608Metric,mcu-sensors
+R81,10k Hall pullup,Resistor_SMD:R_0603_1608Metric,mcu-sensors
+R82,1k Hall series,Resistor_SMD:R_0603_1608Metric,mcu-sensors
+C61,1n Hall filter,Capacitor_SMD:C_0603_1608Metric,mcu-sensors
+J10,HUB_HALL_3V3_ONLY,,mcu-sensors
+R83,10k Hall pullup,Resistor_SMD:R_0603_1608Metric,mcu-sensors
+R84,1k Hall series,Resistor_SMD:R_0603_1608Metric,mcu-sensors
+C62,1n Hall filter,Capacitor_SMD:C_0603_1608Metric,mcu-sensors
+R85,10k Hall pullup,Resistor_SMD:R_0603_1608Metric,mcu-sensors
+R86,1k Hall series,Resistor_SMD:R_0603_1608Metric,mcu-sensors
+C63,1n Hall filter,Capacitor_SMD:C_0603_1608Metric,mcu-sensors
+R87,10k Hall pullup,Resistor_SMD:R_0603_1608Metric,mcu-sensors
+R88,1k Hall series,Resistor_SMD:R_0603_1608Metric,mcu-sensors
+C64,1n Hall filter,Capacitor_SMD:C_0603_1608Metric,mcu-sensors
+J11,OPTIONAL_ENCODER_3V3_ONLY,,mcu-sensors
+R89,10k encoder pullup,Resistor_SMD:R_0603_1608Metric,mcu-sensors
+R90,1k encoder series,Resistor_SMD:R_0603_1608Metric,mcu-sensors
+C65,1n encoder filter,Capacitor_SMD:C_0603_1608Metric,mcu-sensors
+R91,10k encoder pullup,Resistor_SMD:R_0603_1608Metric,mcu-sensors
+R92,1k encoder series,Resistor_SMD:R_0603_1608Metric,mcu-sensors
+C66,1n encoder filter,Capacitor_SMD:C_0603_1608Metric,mcu-sensors

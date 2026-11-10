@@ -2,7 +2,11 @@
 
 **NOT SAFE TO ENERGIZE. NOT FABRICATION-READY. No PCB, routing, procurement or riding authorization.**
 
-Open `powerboard-reva.kicad_pro` or root `powerboard-reva.kicad_sch` in KiCad 9. The root references nine real child sheets. Nets join electrically through explicitly named global labels; GEN_ and HUB_ prefixes separate bridge/control signals. This is not a block-diagram-only drawing or connector substitution for ICs.
+Open `powerboard-reva.kicad_pro` or root `powerboard-reva.kicad_sch` in KiCad 9. The root references fourteen real child sheets. Nets join electrically through explicitly named global labels; GEN_ and HUB_ prefixes separate bridge/control signals. This is not a block-diagram-only drawing or connector substitution for ICs.
+
+## Current MCU milestone (supersedes counts and missing-MCU statements below)
+
+See [MCU milestone](../../docs/design/mcu-milestone.md): real STM32G474VET6 circuit, 15 pages, 199 components, 642 connected endpoints and 45 explicit NC pins. Native ERC: four unresolved errors, zero warnings. Firmware, fast overcurrent trip, protected entry, storage acceptance and sequencing remain blockers. Historical sections below are not current status.
 
 ## Current protection integration — UNSAFE DRAFT
 

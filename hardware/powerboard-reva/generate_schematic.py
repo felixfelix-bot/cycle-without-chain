@@ -82,12 +82,15 @@ class Sheet:
         done={}
         for num,name,px,py,angle in pins(a):
             net=nets[num]; X=round(x+px,4);Y=round(y-py,4)
+            if net is None:
+                self.items.append(f'(no_connect (at {X} {Y}) (uuid {uid(ref+"/"+num+"/nc")}))')
+                continue
             if (X,Y) in done: assert done[X,Y]==net
             else: self.wirelabel(net,X,Y,angle,ref+'/'+num);done[X,Y]=net
             pinmap.append(dict(ref=ref,pin=num,pin_name=name,net=net,sheet=self.name))
         bom.append(dict(reference=ref,value=value,footprint=footprint,sheet=self.name))
     def save(self):
-        s=f'(kicad_sch (version 20250114) (generator "powerboard_generator") (uuid {self.id}) (paper {q("A2" if self.id==ROOTID else "A3")}) (title_block (title {q(self.title)}) (rev "A-PARTIAL") (comment 1 "NOT SAFE TO ENERGIZE - SAFETY CIRCUITS UNFINISHED")) (lib_symbols '+ ' '.join(dump(a) for a in self.syms.values())+') '+' '.join(self.items)
+        s=f'(kicad_sch (version 20250114) (generator "powerboard_generator") (uuid {self.id}) (paper {q("A1" if self.id==ROOTID else "A3")}) (title_block (title {q(self.title)}) (rev "A-PARTIAL") (comment 1 "NOT SAFE TO ENERGIZE - SAFETY CIRCUITS UNFINISHED")) (lib_symbols '+ ' '.join(dump(a) for a in self.syms.values())+') '+' '.join(self.items)
         if self.id==ROOTID:s+=' (sheet_instances (path "/" (page "1")))'
         (ROOT/(self.name+'.kicad_sch')).write_text(s+')\n')
 
@@ -110,15 +113,16 @@ for idx,prefix in enumerate(['GEN','HUB']):
     s=Sheet(prefix.lower()+'-driver',prefix+' DRV8353S driver and three low-side current channels')
     s.text('TI SLVSDY6A pp6-7 pin table. 40-pin RTA + exposed pad. SPI variant, NOT hardware variant.',20.32,15.24)
     s.text('VM supplied by bus-fed auxiliary 12 V. VREF=3V3 (CSA midpoint internally VREF/2).',20.32,22.86)
-    s.text('RELEASE BLOCKERS: MCU, fast OC protection and transient/thermal qualification unfinished.',20.32,30.48)
+    s.text('RELEASE BLOCKERS: firmware, fast OC protection and transient/thermal qualification unfinished.',20.32,30.48)
     mapping={str(i+1):n(name) for i,name in enumerate(names)}
     for name in ['AGND','GND','EP','SNA','SNB','SNC']:mapping[str(names.index(name)+1)]='PGND'
     for name,net in [('VM','AUX12V'),('VDRAIN','DC_LINK'),('VREF','LOGIC3V3_EXT')]:mapping[str(names.index(name)+1)]=net
     for p in 'ABC': mapping[str(names.index('SH'+p)+1)]=n('PHASE_'+p); mapping[str(names.index('SP'+p)+1)]=n('SHUNT_'+p)
+    for name,net in [('SCLK','DRV_SCK'),('SDI','DRV_MOSI'),('SDO','DRV_MISO')]:mapping[str(names.index(name)+1)]=net
     s.part(DRV,'U'+str(idx+1),'DRV8353SRTAT',76.2,114.3,mapping,'')
     specs=[('47n 100V X7R',n('CPH'),n('CPL')),('1u 16V X7R',n('VCP'),'DC_LINK'),('1u 16V X7R',n('VGLS'),'PGND'),('1u 10V X7R',n('DVDD'),'PGND'),('100n 25V X7R','AUX12V','PGND'),('10u 25V X7R','AUX12V','PGND'),('100n 10V X7R','LOGIC3V3_EXT','PGND')]
     for j,(v,a,b) in enumerate(specs):passive(s,'C',v,177.8+(j%3)*71.12,63.5+(j//3)*40.64,a,b)
-    for j,(v,a,b) in enumerate([('100k',n('ENABLE'),'PGND'),('10k',n('nFAULT'),'LOGIC3V3_EXT'),('10k',n('SDO'),'LOGIC3V3_EXT'),('10k',n('nSCS'),'LOGIC3V3_EXT')]):passive(s,'R',v,177.8+(j%3)*71.12,190.5+(j//3)*35.56,a,b)
+    for j,(v,a,b) in enumerate([('100k',n('ENABLE'),'PGND'),('10k',n('nFAULT'),'LOGIC3V3_EXT'),('10k','DRV_MISO','LOGIC3V3_EXT'),('10k',n('nSCS'),'LOGIC3V3_EXT')]):passive(s,'R',v,177.8+(j%3)*71.12,190.5+(j//3)*35.56,a,b)
     s.text('ENABLE pull-down defaults off; not a safety-rated inhibit. SPI configuration and CSA gain20 not yet validated.',20.32,259.08)
     s.save();sheets.append(s)
     b=Sheet(prefix.lower()+'-bridge',prefix+' 100 V MOSFET bridge - schematic only')
@@ -138,8 +142,8 @@ for idx,prefix in enumerate(['GEN','HUB']):
     b.save();sheets.append(b)
 
 s=Sheet('external-boundaries','Unfinished safety / control / supply boundaries')
-s.text('OFFBOARD interfaces: MCU signals, brake loop and protected bus entry.',20.32,15.24)
-s.text('DO NOT ENERGIZE. Protected entry and MCU unfinished; populated protection remains unqualified.',20.32,22.86)
+s.text('OFFBOARD interfaces: 3V3 supply, brake loop and protected bus entry.',20.32,15.24)
+s.text('DO NOT ENERGIZE. Protected entry unfinished; MCU and protection remain unqualified.',20.32,22.86)
 def connector(value,nets,x,y):
     counters['J']+=1;s.part(stock('Connector_Generic','Conn_01x'+str(len(nets)).zfill(2)),'J'+str(counters['J']),value,x,y,{str(i+1):net for i,net in enumerate(nets)})
 connector('PROTECTED_DC_INPUT_EXT',['DC_LINK','PGND'],63.5,48.26)
@@ -147,19 +151,18 @@ connector('MCU_SUPPLY_EXT',['LOGIC3V3_EXT','PGND'],63.5,83.82)
 for j,prefix in enumerate(['GEN','HUB']):
     x=177.8+j*116.84
     connector(prefix+'_MACHINE_PHASES',[prefix+'_PHASE_'+p for p in 'ABC'],x,48.26)
-    connector(prefix+'_MCU_PWM_EXT',[prefix+'_'+n for n in ['INHA','INLA','INHB','INLB','INHC','INLC']]+['PGND'],x,86.36)
-    connector(prefix+'_SPI_EXT',[prefix+'_'+n for n in ['nSCS','SCLK','SDI','SDO','nFAULT']]+['PGND'],x,137.16)
-    connector(prefix+'_ADC_EXT',[prefix+'_SO'+p for p in 'ABC']+['PGND'],x,182.88)
-connector('SAFETY_CONTROL',['RESET_REQUEST','MCU_ARM','WDI','TIMER_BREAK_OK','SAFETY3V3','BRAKE_LOOP','PGND'],63.5,137.16)
+connector('SAFETY_BRAKE_LOOP_NC',['SAFETY3V3','BRAKE_LOOP'],63.5,137.16)
 passive(s,'C','100u 100V provisional',63.5,190.5,'DC_LINK','PGND')
 s.text('Missing: source fuse, reverse blocking, precharge, DC contactor, bus current sensor and discharge.',20.32,228.6)
 s.text('Populated: OV chopper, fault latch, brake loop, watchdog, aux supply. Missing: fast current trip.',20.32,236.22)
-s.text('Missing: STM32 timer/ADC mux, Hall/encoder sensors, thermal sensors, storage/BMS charge acceptance.',20.32,243.84)
+s.text('MCU and sensor interfaces populated; firmware, thermal sensors, storage/BMS acceptance missing.',20.32,243.84)
 s.text('PGND is common, not galvanically isolated. Supply sequencing and back-power paths unqualified.',20.32,251.46)
 s.save();sheets.append(s)
 custom_symbols=[]
 from protection_circuit import populate
 populate(globals())
+from mcu_circuit import populate as populate_mcu
+populate_mcu(globals())
 local_symbols=[local_drv]
 for a in custom_symbols:
     b=parse(dump(a));b[1]=q(val(b[1]).split(':')[1]);local_symbols.append(b)

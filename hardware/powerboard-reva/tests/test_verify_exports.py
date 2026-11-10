@@ -29,10 +29,10 @@ class ExportVerifierTests(unittest.TestCase):
                     self.assertEqual(result.returncode, 0, result.stderr)
                     self.assertIn('PARTIAL_NOT_SAFE_TO_ENERGIZE', result.stdout)
                     summary = json.loads(result.stdout)
-                    for key, count in {'components': 144, 'nets': 112,
-                                       'verified_pin_assignments': 495, 'mosfets': 13,
-                                       'drivers': 2, 'erc_errors': 3, 'erc_warnings': 0,
-                                       'svg_pages': 11}.items():
+                    for key, count in {'components': 199, 'nets': 138,
+                                       'verified_pin_assignments': 642, 'explicit_nc_endpoints': 45, 'mosfets': 13,
+                                       'drivers': 2, 'erc_errors': 4, 'erc_warnings': 0,
+                                       'svg_pages': 15}.items():
                         self.assertEqual(summary[key], count)
                 else:
                     self.assertNotEqual(result.returncode, 0, result.stdout)
@@ -43,7 +43,7 @@ class ExportVerifierTests(unittest.TestCase):
         self.run_case(valid=True)
 
     def test_missing_empty_malformed_inputs(self):
-        for filename in ('exports/powerboard-reva.net', 'exports/erc.rpt', 'pin-net-map.csv', 'review-bom.csv'):
+        for filename in ('exports/powerboard-reva.net', 'exports/erc.rpt', 'pin-net-map.csv', 'review-bom.csv', 'mcu-core.kicad_sch'):
             for mode in ('missing', 'empty', 'malformed'):
                 with self.subTest(filename=filename, mode=mode):
                     def mutate(root):
@@ -73,6 +73,32 @@ class ExportVerifierTests(unittest.TestCase):
             with self.subTest(mutation=mutate.__name__):
                 self.run_case(mutate)
 
+    def test_explicit_nc_corruptions(self):
+        import re
+        def mutate_net(root, mode):
+            p = root / 'exports/powerboard-reva.net'
+            text = p.read_text()
+            pattern = r'\(node \(ref "U17"\) \(pin "25"\)[^\n]*'
+            match = re.search(pattern, text)
+            self.assertIsNotNone(match)
+            original = match.group()
+            replacements = {
+                'missing': '',
+                'changed': original.replace('(pin "25")', '(pin "101")'),
+                'not_nc': original.replace('+no_connect', ''),
+                'not_singleton': original + '\n' + original.replace('(pin "25")', '(pin "101")'),
+            }
+            p.write_text(text.replace(original, replacements[mode], 1))
+        for mode in ('missing', 'changed', 'not_nc', 'not_singleton'):
+            with self.subTest(mode=mode):
+                self.run_case(lambda root: mutate_net(root, mode))
+        def missing_marker(root):
+            p = root / 'mcu-core.kicad_sch'
+            text, count = re.subn(r'\(no_connect \(at [^)]*\) \(uuid [^)]*\)\)', '', p.read_text(), count=1)
+            self.assertEqual(count, 1)
+            p.write_text(text)
+        self.run_case(missing_marker)
+
     def test_corruptions(self):
         cases = [
             ('exports/powerboard-reva.net', 'GEN_INHA', 'BROKEN_GEN_INHA'),
@@ -81,7 +107,7 @@ class ExportVerifierTests(unittest.TestCase):
             ('exports/powerboard-reva.net', '(ref "U1")', '(ref "U999")'),
             ('exports/powerboard-reva.net', '(node (ref "J4") (pin "1")', '(node (ref "J4") (pin "1")) (node (ref "J4") (pin "1")'),
             ('exports/erc.rpt', 'Pin 24 [VREF', 'Pin 3 [VREF'),
-            ('exports/erc.rpt', 'Errors 3', 'Errors 0'),
+            ('exports/erc.rpt', 'Errors 4', 'Errors 0'),
             ('exports/erc.rpt', 'Symbol U3 Pin 1 [IN', 'Symbol U1 Pin 24 [VREF'),
             ('exports/powerboard-reva.net', 'DC_LINK', 'BROKEN_DC_LINK'),
             ('pin-net-map.csv', 'GEN_INHA', 'BROKEN_GEN_INHA'),

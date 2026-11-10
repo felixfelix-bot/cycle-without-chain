@@ -1,0 +1,30 @@
+test_exported_topology (test_mcu_connectivity.MCUConnectivity.test_exported_topology) ... ERROR
+test_mutations_rejected (test_mcu_connectivity.MCUConnectivity.test_mutations_rejected) ... ERROR
+
+======================================================================
+ERROR: test_exported_topology (test_mcu_connectivity.MCUConnectivity.test_exported_topology)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-mcu-completion/hardware/powerboard-reva/tests/test_mcu_connectivity.py", line 52, in test_exported_topology
+    def test_exported_topology(self):validate(*exported())
+                                     ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/c08r4d0r/worktrees/cycle-mcu-completion/hardware/powerboard-reva/tests/test_mcu_connectivity.py", line 27, in validate
+    if parts.get('U17') != 'STM32G474VET6': raise ValueError('missing real STM32G474VET6')
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: missing real STM32G474VET6
+
+======================================================================
+ERROR: test_mutations_rejected (test_mcu_connectivity.MCUConnectivity.test_mutations_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-mcu-completion/hardware/powerboard-reva/tests/test_mcu_connectivity.py", line 55, in test_mutations_rejected
+    validate(parts,nets)
+  File "/home/c08r4d0r/worktrees/cycle-mcu-completion/hardware/powerboard-reva/tests/test_mcu_connectivity.py", line 27, in validate
+    if parts.get('U17') != 'STM32G474VET6': raise ValueError('missing real STM32G474VET6')
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: missing real STM32G474VET6
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.056s
+
+FAILED (errors=2)

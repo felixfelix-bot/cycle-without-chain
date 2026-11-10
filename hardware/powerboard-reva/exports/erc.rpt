@@ -1,4 +1,4 @@
-ERC report (2026-11-10T12:10:54+0100, Encoding UTF8)
+ERC report (2026-11-10T12:37:49+0100, Encoding UTF8)
 Report includes: Errors, Warnings
 
 ***** Sheet /
@@ -32,4 +32,15 @@ Report includes: Errors, Warnings
 
 ***** Sheet /Independent brake chopper power stage/
 
- ** ERC messages: 3  Errors 3  Warnings 0
+***** Sheet /STM32G474VET6 LQFP100: power, reset, debug and control/
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(109.22 mm, 66.04 mm): Symbol U17 Pin 37 [VDDA, Power input, Line]
+
+***** Sheet /MCU 3V3 decoupling - external supervised rail/
+
+***** Sheet /Six CSA ADC input filters and brake status sense/
+
+***** Sheet /3V3 Hall interfaces and optional quadrature encoder/
+
+ ** ERC messages: 4  Errors 4  Warnings 0

@@ -12,6 +12,13 @@ import re
 import sys
 
 P = Path(__file__).resolve().parent
+# Independent physical-pin contract, matching tests/test_mcu_connectivity.py.
+UNUSED_MCU_PINS = {
+    4, 5, 7, 8, 9, 10, 11, 12, 13, 18, 19, 25, 26, 30, 31, 34,
+    38, 47, 50, 51, 52, 53, 54, 68, 69, 70, 71, 72, 73, 78, 79,
+    80, 81, 82, 83, 85, 86, 87, 88, 89, 90, 91, 96, 97, 98,
+}
+EXPECTED_NC = {('U17', str(pin)) for pin in UNUSED_MCU_PINS}
 
 
 class VerificationError(ValueError):
@@ -71,12 +78,12 @@ def rows(path, fields, count):
 
 def verify(root=P):
     expected = {}
-    for row in rows(root / 'pin-net-map.csv', ['ref', 'pin', 'pin_name', 'net', 'sheet'], 495):
+    for row in rows(root / 'pin-net-map.csv', ['ref', 'pin', 'pin_name', 'net', 'sheet'], 642):
         key = (row['ref'], row['pin'])
         require(all(row.values()) and key not in expected, 'empty or duplicate expected endpoint')
         expected[key] = row['net']
     bom = {}
-    for row in rows(root / 'review-bom.csv', ['reference', 'value', 'footprint', 'sheet'], 144):
+    for row in rows(root / 'review-bom.csv', ['reference', 'value', 'footprint', 'sheet'], 199):
         ref = row['reference']
         require(ref and row['value'] and row['sheet'] and ref not in bom, 'empty or duplicate expected part')
         bom[ref] = (row['value'], row['footprint'])
@@ -93,8 +100,9 @@ def verify(root=P):
         footprint = value(comp, 'footprint') if footprints else ''
         actual_bom[ref] = (value(comp, 'value'), footprint)
     require(actual_bom == bom, 'component reference/value/footprint mismatch')
-    require(sum(ref.startswith('Q') for ref in bom) == 13 and sum(ref.startswith('U') for ref in bom) == 16, 'expected 13 Q references and 16 U references')
-    actual, names, codes = {}, set(), set()
+    require(sum(ref.startswith('Q') for ref in bom) == 13 and sum(ref.startswith('U') for ref in bom) == 17, 'expected 13 Q references and 17 U references')
+    actual, names, codes, nc = {}, set(), set(), {}
+    seen_endpoints = set()
     for entry in children(child(net, 'nets'), 'net'):
         name, code = value(entry, 'name'), value(entry, 'code')
         require(name not in names and code not in codes, 'duplicate net name/code')
@@ -102,16 +110,34 @@ def verify(root=P):
         codes.add(code)
         nodes = children(entry, 'node')
         require(bool(nodes), f'empty net {name}')
+        is_nc = name.startswith('unconnected-')
+        if is_nc:
+            require(len(nodes) == 1, 'NC net must be singleton')
         for node in nodes:
             key = (value(node, 'ref'), value(node, 'pin'))
-            require(key not in actual, f'duplicate endpoint {key}')
-            actual[key] = name
-    require(names == set(expected.values()) and len(names) == 112, 'net identity/count mismatch')
+            require(key not in seen_endpoints, f'duplicate endpoint {key}')
+            seen_endpoints.add(key)
+            if is_nc:
+                require(key in EXPECTED_NC, f'unapproved NC endpoint {key}')
+                require(name == f'unconnected-(U17-{value(node, "pinfunction")}-Pad{key[1]})', 'invalid NC net name')
+                require(value(node, 'pintype') == 'bidirectional+no_connect', 'missing explicit NC type')
+                nc[key] = name
+            else:
+                actual[key] = name
+    require(set(nc) == EXPECTED_NC, 'explicit NC endpoint set mismatch')
+    names -= set(nc.values())
+    require(names == set(expected.values()) and len(names) == 138, 'net identity/count mismatch')
+    schematic = parse((root / 'mcu-core.kicad_sch').read_text())
+    require(schematic[0] == 'kicad_sch', 'invalid MCU schematic')
+    markers = children(schematic, 'no_connect')
+    require(len(markers) == len(EXPECTED_NC), 'explicit NC marker count mismatch')
+    positions = [tuple(child(marker, 'at')[1:]) for marker in markers]
+    require(len(set(positions)) == len(markers), 'duplicate NC marker position')
     require(actual == expected, 'endpoint set or net assignment mismatch')
 
     report = (root / 'exports/erc.rpt').read_text()
     require(report.startswith('ERC report (') and 'Report includes: Errors, Warnings' in report, 'invalid ERC report header')
-    require(re.findall(r'\*\* ERC messages:.*', report) == ['** ERC messages: 3  Errors 3  Warnings 0'], 'invalid ERC totals')
+    require(re.findall(r'\*\* ERC messages:.*', report) == ['** ERC messages: 4  Errors 4  Warnings 0'], 'invalid ERC totals')
     # Split on every issue header, so unexpected issue classes cannot disappear.
     chunks = re.split(r'(?m)^(?=\[)', report)[1:]
     identities = []
@@ -127,10 +153,12 @@ def verify(root=P):
         ('U3', '1', 'IN', 'DC_LINK'),
         ('U1', '24', 'VREF', 'LOGIC3V3_EXT'),
         ('U1', '25', 'AGND', 'PGND'),
+        ('U17', '37', 'VDDA', 'MCU_VDDA'),
     ]), 'ERC identity/net mismatch (not an approved waiver)')
     return {'components': len(bom), 'nets': len(names), 'verified_pin_assignments': len(actual),
-            'mosfets': 13, 'drivers': 2, 'erc_errors': 3, 'erc_warnings': 0,
-            'erc_reason': 'Three known undriven supply errors remain unresolved, NOT waived.',
+            'explicit_nc_endpoints': len(nc),
+            'mosfets': 13, 'drivers': 2, 'erc_errors': 4, 'erc_warnings': 0,
+            'erc_reason': 'Four known undriven supply errors remain unresolved, NOT waived.',
             'status': 'PARTIAL_NOT_SAFE_TO_ENERGIZE',
             'svg_pages': len(list((root / 'exports/svg').glob('*.svg')))}
 
