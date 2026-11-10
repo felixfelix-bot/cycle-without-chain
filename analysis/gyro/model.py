@@ -35,7 +35,7 @@ def reserve(usable_j, max_rpm, min_rpm):
 
 def ideal_roll_impulse(h, start_deg, end_deg):
     """One ideal CMG orientation: roll momentum component = H*sin(delta).
-    Signed exchange magnitude; not a universally available roll impulse.
+    Absolute exchange magnitude; not a universally available roll impulse.
     """
     return abs(h * (math.sin(math.radians(end_deg)) - math.sin(math.radians(start_deg))))
 

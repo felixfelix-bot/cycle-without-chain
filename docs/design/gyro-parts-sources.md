@@ -12,10 +12,10 @@ The study basis is 120 kg rider plus luggage, with 140/150 kg total bicycle-syst
 
 ### G1 — Seakeeper 1: engineered marine comparator, reject for bicycle scale
 
-- [Manufacturer product and specifications](https://www.seakeeper.com/seakeeper-products/seakeeper-1/): **165 kg**, 0.582 × 0.598 × 0.403 m; maximum rated speed **9,750 rpm**; angular momentum **1,000 N m s** at that speed; **12 VDC**; spool-up maximum **600 W / 50 A**; operating power **225–600 W**, sea-state dependent; 35 minutes to maximum speed and 18 minutes to stabilization at 7,310 rpm. The page targets approximately 23–30 ft boats up to approximately 5.5 tons.
+- [Manufacturer product and specifications](https://www.seakeeper.com/seakeeper-products/seakeeper-1/): **166 kg**, 0.582 × 0.598 × 0.403 m; maximum rated speed **9,750 rpm**; angular momentum **1,000 N m s** at that speed; **12 VDC**; spool-up maximum **600 W / 50 A**; operating power **225–600 W**, sea-state dependent; 35 minutes to maximum speed and 18 minutes to stabilization at 7,310 rpm. The page targets approximately 23–30 ft boats up to approximately 5.5 tons.
 - [Manufacturer technology description](https://www.seakeeper.com/technology/): vacuum-encapsulated flywheel, bearings and motor; glycol/seawater cooling; active control; fore/aft precession generates port/starboard torque. These are vendor claims, not measurements here. Vacuum isolation is **not** a verified burst-containment rating. Do not transfer generic family maximum claims to a different SKU.
 - This is a real commercial marine product with a dealer channel, not a bicycle module. Stock, delivery and suitability were not verified. No price is used in the study.
-- Its **165 kg bare product mass exceeds either 140 or 150 kg baseline system mass**. Adding it would make the nominal cases at least 305/315 kg before ancillary hardware, power or cooling. It is therefore a scale comparator, not a candidate installation. Marine roll suppression does not demonstrate standstill balance of an inverted-pendulum bicycle.
+- Its **166 kg bare product mass exceeds either 140 or 150 kg baseline system mass**. Adding it would make the nominal cases at least 306/316 kg before ancillary hardware, power or cooling. It is therefore a scale comparator, not a candidate installation. Marine roll suppression does not demonstrate standstill balance of an inverted-pendulum bicycle.
 
 ### G2 — Lit Motors AEV: unqualified technology/preorder lead
 
