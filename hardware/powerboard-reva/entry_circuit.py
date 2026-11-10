@@ -16,7 +16,7 @@ def populate(g):
     passive(s,'C','470u 100V UHE2A471MHD +/-20%',139.7,180.34,'DC_LINK','PGND')
     passive(s,'R','10k 1% RH02510K00FE02 always-on bleed',241.3,180.34,'DC_LINK','PGND')
     part('Connector_Generic','Conn_01x04','J43','Kelvin BUS measurement isolated instrument ONLY',330.2,180.34,{'1':'BUS_SHUNT_HI','2':'DC_LINK','3':'DC_LINK','4':'PGND'})
-    s.text('J41 closes only after measured |SOURCE-BUS| <1V; J42 then removed. NO hot unplug.',20.32,238.76)
+    s.text('NO approved jumper sequence. Never manipulate J40/J41/J42 energized or bus charged.',20.32,238.76)
     s.text('J43 raw high common mode: NOT MCU ADC. D20/fuse reverse-fault coordination UNQUALIFIED.',20.32,248.92)
     s.text('Sink/chopper stays DC_LINK side. MAIN open does NOT make bus safe: PM backfeeds via diodes.',20.32,259.08)
     s.save();g['sheets'].append(s)
