@@ -1,0 +1,2051 @@
+                                                                                                                                        INA293
+                                                                                              SBOS470B – DECEMBER 2019 – REVISED AUGUST 2022
+
+            INA293 –4 V to 110 V, 1.3-MHz, Ultra-Precise Current Sense Amplifier
+
+1 Features                                                             3 Description
+•   Wide common-mode voltage:                                          The INA293 is a ultra-precise current sense amplifier
+    – Operational voltage: −4 V to +110 V                              that can measure voltage drops across shunt resistors
+    – Survival voltage: −20 V to +120 V                                over a wide common-mode range from –4 V to 110
+•   Excellent CMRR:                                                    V. The negative common-mode voltage allows the
+    – 160-dB DC-CMRR                                                   device to operate below ground, thus accommodating
+    – 85-dB AC-CMRR at 50 kHz                                          precise measurement of recirculating currents in half-
+•   Accuracy:                                                          bridge applications. The combination of a low offset
+    – Gain:                                                            voltage, small gain error and high DC CMRR enables
+                                                                       highly accurate current measurement. The INA293 is
+       • Gain error: ±0.15% (maximum)
+                                                                       not only designed for DC current measurement, but
+       • Gain drift: ±10 ppm/ °C (maximum)
+                                                                       also for high-speed applications (ex. Fast over-current
+    – Offset:
+                                                                       protection) with a high bandwidth of 1.3 MHz and an
+       • Offset voltage: ±15 µV (typical)                              85-dB AC CMRR (at 50 kHz).
+       • Offset drift: ±0.05 µV/ °C (typical)
+•   Available gains:                                                   The INA293 operates from a single 2.7-V to 20-
+    – INA293A1, INA293B1 : 20 V/V                                      V supply, drawing 1.5 mA of supply current. The
+    – INA293A2, INA293B2 : 50 V/V                                      INA293 is available with five gain options: 20 V/V,
+    – INA293A3, INA293B3 : 100 V/V                                     50 V/V, 100 V/V, 200 V/V, and 500 V/V. These gain
+    – INA293A4, INA293B4 : 200 V/V                                     options address wide dynamic range current-sensing
+    – INA293A5, INA293B5 : 500 V/V                                     applications.
+•   High bandwidth: 1.3 MHz                                            The INA293 is specified over an operating
+•   Slew rate: 2.5 V/µs                                                temperature range of −40 °C to +125 °C and is
+•   Quiescent current: 1.5 mA                                          offered in a space-saving SOT-23 package with two
+2 Applications                                                         pin-out variants.
+
+•   Active antenna system mMIMO (AAS)                                                               Device Information(1)
+•   Macro remote radio unit (RRU)                                            PART NUMBER                      PACKAGE        BODY SIZE (NOM)
+•   48-V rack server                                                   INA293                           SOT-23 (5)       2.90 mm × 1.60 mm
+•   48-V merchant network & server power supply
+                                                                       (1)        For all available packages, see the package option
+    (PSU)                                                                         addendum at the end of the data sheet.
+•   48-V battery management systems (BMS)
+                                                                                                              VS
+                                                                              VCM
+
+
+
+
+                                                                         ISENSE
+                                                                                                   R1
+                                                                                     IN+
+                                                                                                          +
+
+                                                                        RSENSE                             Current
+                                                                                           Bias
+                                                                                                   R1     Feedback
+                                                                                                          -                              OUT
+                                                                                     IN±                                       Buffer
+
+
+                                                                              Load
+                                                                                                                        RL
+
+
+
+
+                                                                                                                        GND
+
+
+                                                                                                  Functional Block Diagram
+
+
+
+
+     An IMPORTANT NOTICE at the end of this data sheet addresses availability, warranty, changes, use in safety-critical applications,
+     intellectual property matters and other important disclaimers. PRODUCTION DATA.
+INA293
+SBOS470B – DECEMBER 2019 – REVISED AUGUST 2022                                                                                                                   www.ti.com
+
+
+                                                                        Table of Contents
+1 Features............................................................................1     7.4 Device Functional Modes..........................................15
+2 Applications..................................................................... 1     8 Application and Implementation.................................. 16
+3 Description.......................................................................1       8.1 Application Information............................................. 16
+4 Revision History.............................................................. 2          8.2 Typical Application.................................................... 18
+5 Pin Configuration and Functions...................................3                       8.3 Power Supply Recommendations.............................19
+6 Specifications.................................................................. 4        8.4 Layout....................................................................... 19
+  6.1 Absolute Maximum Ratings ....................................... 4                  9 Device and Documentation Support............................21
+  6.2 ESD Ratings .............................................................. 4          9.1 Documentation Support............................................ 21
+  6.3 Recommended Operating Conditions ........................5                            9.2 Receiving Notification of Documentation Updates....21
+  6.4 Thermal Information ...................................................5              9.3 Support Resources................................................... 21
+  6.5 Electrical Characteristics ............................................5              9.4 Trademarks............................................................... 21
+  6.6 Typical Characteristics................................................ 7             9.5 Electrostatic Discharge Caution................................21
+7 Detailed Description......................................................13              9.6 Glossary....................................................................21
+  7.1 Overview................................................................... 13      10 Mechanical, Packaging, and Orderable
+  7.2 Functional Block Diagram......................................... 13                  Information.................................................................... 21
+  7.3 Feature Description...................................................13
+
+
+
+4 Revision History
+Changes from Revision A (June 2021) to Revision B (August 2022)                                                                                                    Page
+• Changed Equation 5 ........................................................................................................................................ 17
+• Moved the Power Supply Recommendations and Layout sections to the Application and Implementation
+  section.............................................................................................................................................................. 19
+
+
+Changes from Revision * (December 2019) to Revision A (June 2021)                                                                    Page
+• Changed data sheet title from: INA293 –4-V to 110-V, 1-MHz, High-Precision Current Sense Amplifier to:
+  INA293 –4-V to 110-V, 1.3-MHz, High-Precision Current Sense Amplifier......................................................... 1
+• Updated the numbering format for tables, figures, and cross-references throughout the document..................1
+• Changed 'high-precision' to 'ultra-precise' in Description section....................................................................... 1
+
+
+
+
+2       Submit Document Feedback                                                                                           Copyright © 2022 Texas Instruments Incorporated
+
+                                                                       Product Folder Links: INA293
+                                                                                                                                        INA293
+www.ti.com                                                                                  SBOS470B – DECEMBER 2019 – REVISED AUGUST 2022
+
+
+5 Pin Configuration and Functions
+
+
+
+                OUT          1                    5    Vs                              OUT          1                 5           IN±
+
+
+                GND          2                                                         GND          2
+
+
+                 IN+         3                    4    IN±                                 Vs       3                 4           IN+
+
+
+
+                                        Not to scale                                                          Not to scale
+
+   Figure 5-1. INA293A: DBV Package 5-Pin SOT-23                            Figure 5-2. INA293B: DBV Package 5-Pin SOT-23
+                      Top View                                                                 Top View
+
+                                                        Table 5-1. Pin Functions
+                                        PIN
+                                                                                  TYPE                        DESCRIPTION
+ NAME                       INA293A                          INA293B
+ GND                             2                               2               Ground Ground
+ OUT                             1                               1                Output    Output voltage
+ Vs                              5                               3                Power     Power supply
+ IN+                             3                               4                 Input    Shunt resistor positive sense input
+ IN–                             4                               5                 Input    Shunt resistor negative sense input
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                                Submit Document Feedback          3
+                                                            Product Folder Links: INA293
+INA293
+SBOS470B – DECEMBER 2019 – REVISED AUGUST 2022                                                                                        www.ti.com
+
+
+6 Specifications
+6.1 Absolute Maximum Ratings
+over operating free-air temperature range (unless otherwise noted)(1)
+                                                                                                         MIN              MAX         UNIT
+    Supply Voltage
+                                                                                                        –0.3                22          V
+    (Vs)
+                      Differential (VIN+) – (VIN–), INA293A5, INA293B5                                    –6                  6
+    Analog Inputs,
+                      Differential (VIN+) – (VIN–), All others                                           –12                12          V
+    VIN+, VIN– (2)
+                      Common - mode                                                                      –20               120
+    Output                                                                                         GND – 0.3          Vs + 0.3          V
+    TA                Operating temperature                                                              –55               150          °C
+    TJ                Junction temperature                                                                                 150          °C
+    Tstg              Storage temperature                                                                –65               150          °C
+
+(1)        Stresses beyond those listed under Absolute Maximum Rating may cause permanent damage to the device. These are stress
+           ratings only, which do not imply functional operation of the device at these or any other conditions beyond those indicated
+           under Recommended Operating Condition. Exposure to absolute-maximum-rated conditions for extended periods may affect device
+           reliability.
+(2)        VIN+ and VIN– are the voltages at the IN+ and IN– pins, respectively.
+
+
+6.2 ESD Ratings
+                                                                                                                          VALUE          UNIT
+                                                                        Human body model (HBM), per ANSI/ESDA/
+                                                                                                                          ±2000
+                                                                        JEDEC JS-001, all pins(1)
+    V(ESD)       Electrostatic discharge                                                                                                     V
+                                                                        Charged device model (CDM), per JEDEC
+                                                                                                                          ±1000
+                                                                        specification JESD22-C101, all pins(2)
+
+(1)        JEDEC document JEP155 states that 500-V HBM allows safe manufacturing with a standard ESD control process.
+(2)        JEDEC document JEP157 states that 250-V CDM allows safe manufacturing with a standard ESD control process.
+
+
+
+
+4          Submit Document Feedback                                                                    Copyright © 2022 Texas Instruments Incorporated
+
+                                                                 Product Folder Links: INA293
+                                                                                                                                          INA293
+www.ti.com                                                                                SBOS470B – DECEMBER 2019 – REVISED AUGUST 2022
+
+
+6.3 Recommended Operating Conditions
+over operating free-air temperature range (unless otherwise noted)
+                                                                                                   MIN            NOM          MAX       UNIT
+ VCM           Common-mode input range                                                              –4             48           110        V
+ VS            Operating supply range                                                              2.7              5            20        V
+ VSENSE        Differential sense input range                                                        0                        VS / G       V
+ TA            Ambient temperature                                                                 –40                          125       °C
+
+
+
+6.4 Thermal Information
+                                                                                                     INA293
+                                    THERMAL METRIC(1)                                              DBV (SOT-23)                         UNIT
+                                                                                                         5 PINS
+ RθJA               Junction-to-ambient thermal resistance                                               184.7                         °C/W
+ RθJC(top)          Junction-to-case (top) thermal resistance                                            105.6                         °C/W
+ RθJB               Junction-to-board thermal resistance                                                  47.2                         °C/W
+ ΨJT                Junction-to-top characterization parameter                                            21.5                         °C/W
+ ΨJB                Junction-to-board characterization parameter                                          46.9                         °C/W
+ RθJC(bot)          Junction-to-case (bottom) thermal resistance                                          N/A                          °C/W
+
+(1)     For more information about traditional and new thermal metrics, see the Semiconductor and IC Package Thermal Metrics application
+        report.
+
+
+6.5 Electrical Characteristics
+at TA = 25 °C, VS = 5 V, VSENSE = VIN+ - VIN- = 0.5 V / Gain, VCM = VIN- = 48 V (unless otherwise noted)
+                      PARAMETER                                      TEST CONDITIONS                      MIN        TYP         MAX      UNIT
+ INPUT
+ VCM         Common-mode input range(1)                 TA = -40°C to +125°C                               –4                     110      V
+
+             Common-mode rejection ratio, input         -4 V ≤ VCM ≤ 110 V, TA = -40°C to +125°C          140           160                dB
+ CMRR
+             referred                                   f = 50 kHz                                                       85                dB
+                                                        INA293x1                                                        ±30      ±150
+                                                        INA293x2                                                        ±15       ±80
+ Vos         Offset voltage, input referred             INA293x3                                                        ±10       ±50      µV
+                                                        INA293x4                                                         ±5       ±30
+                                                        INA293x5                                                         ±2       ±20
+                                                        TA = -40℃ to +125℃, INA293x1,
+                                                                                                                    ±0.05        ±0.5
+                                                        INA293x2, INA293x3
+ dVos/dT     Offset voltage drift                                                                                                         µV/℃
+                                                        TA = -40℃ to +125℃, INA293x4,
+                                                                                                                   ±0.025       ±0.25
+                                                        INA293x5
+                                                        INA293x1, 2.7 V ≤ VS ≤ 20 V,
+                                                                                                                         ±1        ±8
+                                                        TA = -40°C to +125°C
+             Power supply rejection ratio, input        INA293x2, INA293x3, 2.7 V ≤ VS ≤ 20 V,
+ PSRR                                                                                                                ±0.3          ±3     µV/V
+             referred                                   TA = -40°C to +125°C
+                                                        INA293x4, INA293x5, 2.7 V ≤ VS ≤ 20 V,
+                                                                                                                     ±0.1          ±1
+                                                        TA = -40°C to +125°C
+                                                        IB+, VSENSE = 0 V                                  10            20        30      uA
+ IB          Input bias current
+                                                        IB-, VSENSE = 0 V                                  10            20        30      uA
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                                 Submit Document Feedback           5
+                                                           Product Folder Links: INA293
+INA293
+SBOS470B – DECEMBER 2019 – REVISED AUGUST 2022                                                                                      www.ti.com
+
+6.5 Electrical Characteristics (continued)
+at TA = 25 °C, VS = 5 V, VSENSE = VIN+ - VIN- = 0.5 V / Gain, VCM = VIN- = 48 V (unless otherwise noted)
+                        PARAMETER                                  TEST CONDITIONS                       MIN        TYP        MAX      UNIT
+    OUTPUT
+                                                        INA293x1                                                      20                 V/V
+                                                        INA293x2                                                      50                 V/V
+    G           Gain                                    INA293x3                                                     100                 V/V
+                                                        INA293x4                                                     200                 V/V
+                                                        INA293x5                                                     500                 V/V
+                                                        GND + 50 mV ≤ VOUT ≤ VS – 200 mV                           ±0.02      ±0.15       %
+    GERR        Gain error
+                                                        TA = -40°C to +125°C                                          ±1        ±10 ppm/°C
+    NLERR       Nonlinearity error                                                                                  0.01                  %
+                                                        No sustained oscillations, no isolation
+                Maximum capacitive load                                                                              500                  pF
+                                                        resistor
+    VOLTAGE OUTPUT
+                Swing to Vs (Power supply rail)         RLOAD = 10 kΩ, TA = -40°C to +125°C                     Vs – 0.07 Vs – 0.15       V
+                                                        RLOAD = 10 kΩ, VSENSE = 0 V, TA = -40°C
+                Swing to ground                                                                                    0.005        0.02      V
+                                                        to +125°C
+    FREQUENCY RESPONSE
+                                                        INA293x1, CLOAD = 5 pF,
+                                                                                                                    1300
+                                                        VSENSE = 200 mV
+                                                        INA293x2, CLOAD = 5 pF,
+                                                                                                                    1300
+                                                        VSENSE = 80 mV
+                                                        INA293x3, CLOAD = 5 pF,
+    BW          Bandwidth                                                                                           1000                 kHz
+                                                        VSENSE = 40 mV
+                                                        INA293x4, CLOAD = 5 pF,
+                                                                                                                     900
+                                                        VSENSE = 20 mV
+                                                        INA293x5, CLOAD = 5 pF,
+                                                                                                                     900
+                                                        VSENSE = 8 mV
+    SR          Slew rate                               Rising edge                                                  2.5                V/µs
+                                                        VOUT = 4 V ± 0.1 V step, Output settles to
+                                                                                                                      10
+                                                        0.5%
+                                                        VOUT = 4 V ± 0.1 V step, Output settles to
+                Settling time                                                                                          5                  µs
+                                                        1%
+                                                        VOUT = 4 V ± 0.1 V step, Output settles to
+                                                                                                                       1
+                                                        5%
+    NOISE
+    Ven         Voltage noise density                                                                                 50               nV/√Hz
+    POWER SUPPLY
+    Vs          Supply voltage                          TA = –40°C to +125°C                              2.7                     20      V
+                                                                                                                     1.5           2     mA
+    IQ          Quiescent current
+                                                        TA = -40°C to +125°C                                                    2.25     mA
+
+(1)        Common-mode voltage at both VIN+ and VIN- must not exceed the specified common-mode input range.
+
+
+
+
+6          Submit Document Feedback                                                                  Copyright © 2022 Texas Instruments Incorporated
+
+                                                         Product Folder Links: INA293
+                                                                                                                                                                                           INA293
+www.ti.com                                                                                                                                SBOS470B – DECEMBER 2019 – REVISED AUGUST 2022
+
+
+6.6 Typical Characteristics
+All specifications at TA = 25 °C, VS = 5 V, VSENSE = VIN+ – VIN- = 0.5 V / Gain, VCM = VIN– = 48 V, unless otherwise noted.
+
+
+
+
+                                                                                                              Population
+      Population
+
+
+
+
+                                                                                                                            -72
+
+
+                                                                                                                                    -56
+
+
+                                                                                                                                            -40
+
+
+                                                                                                                                                   -24
+
+
+
+
+                                                                                                                                                                        24
+
+
+                                                                                                                                                                              40
+
+
+                                                                                                                                                                                     56
+
+
+                                                                                                                                                                                           72
+                                                                                                                                                           -8
+
+
+                                                                                                                                                                 8
+                                 -75
+
+
+                                        -45
+
+
+                                               -15
+                   -135
+
+
+                          -105
+
+
+
+
+                                                      15
+
+
+                                                             45
+
+
+                                                                   75
+
+
+                                                                         105
+
+
+                                                                               135
+                                                                                                                                                  Input Offset Voltage (PV)
+                                       Input Offset Voltage (PV)
+     Figure 6-1. INA293x1 Input Offset Production Distribution                                        Figure 6-2. INA293x2 Input Offset Production Distribution
+      Population
+
+
+
+
+                                                                                                              Population
+                   -45
+
+
+                          -35
+
+
+                                 -25
+
+
+                                        -15
+
+
+
+
+                                                             15
+
+
+                                                                   25
+
+
+                                                                         35
+
+
+                                                                               45
+
+
+
+
+                                                                                                                            -27
+
+
+                                                                                                                                    -21
+
+
+                                                                                                                                            -15
+
+
+
+
+                                                                                                                                                                              15
+
+
+                                                                                                                                                                                     21
+
+
+                                                                                                                                                                                           27
+                                               -5
+
+
+                                                      5
+
+
+
+
+                                                                                                                                                   -9
+
+
+                                                                                                                                                           -3
+
+
+                                                                                                                                                                 3
+
+
+                                                                                                                                                                        9
+                                       Input Offset Voltage (PV)                                                                                  Input Offset Voltage (PV)
+     Figure 6-3. INA293x3 Input Offset Production Distribution                                        Figure 6-4. INA293x4 Input Offset Production Distribution
+                                                                                                                           16
+                                                                                         Input Offset Voltage (PV)
+
+
+
+
+                                                                                                                           8
+      Population
+
+
+
+
+                                                                                                                           0
+
+
+                                                                                                                                                                                     G = 20
+                                                                                                                           -8                                                        G = 50
+                                                                                                                                                                                     G = 100
+                                                                                                                                                                                     G = 200
+                                                                                                                                                                                     G = 500
+                                                                                                                      -16
+                   -18
+
+
+                          -14
+
+
+                                 -10
+
+
+
+
+                                                                   10
+
+
+                                                                         14
+
+
+                                                                               18
+                                        -6
+
+
+                                               -2
+
+
+                                                      2
+
+
+                                                             6
+
+
+
+
+                                                                                                                        -75         -50    -25    0       25   50    75 100    125   150    175
+                                                                                                                                                         Temperature (qC)
+                                       Input Offset Voltage (PV)
+                                                                                                                                Figure 6-6. Input Offset Voltage vs Temperature
+     Figure 6-5. INA293x5 Input Offset Production Distribution
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                                                                                 Submit Document Feedback            7
+                                                                        Product Folder Links: INA293
+INA293
+SBOS470B – DECEMBER 2019 – REVISED AUGUST 2022                                                                                                                                                                             www.ti.com
+
+6.6 Typical Characteristics (continued)
+All specifications at TA = 25 °C, VS = 5 V, VSENSE = VIN+ – VIN- = 0.5 V / Gain, VCM = VIN– = 48 V, unless otherwise noted.
+
+                                               20                                                                                                               180
+         Common-Mode Rejection Ratio (nV/V)
+
+
+
+
+                                                                                                                            Common-Mode Rejection Ratio (dB)
+                                                                                                                                                                160
+
+                                               10                                                                                                               140
+
+                                                                                                                                                                120
+
+                                                0                                                                                                               100
+
+                                                                                                                                                                  80
+                                                                                                          G = 20
+                                              -10                                                         G = 50                                                  60
+                                                                                                          G = 100
+                                                                                                          G = 200                                                 40
+                                                                                                          G = 500
+                                              -20                                                                                                                 20
+                                                -75    -50    -25    0         25   50    75 100    125   150    175                                                10           100         1k         10k         100k         1M
+                                                                              Temperature (qC)                                                                                               Frequency (Hz)
+              Figure 6-7. Common-Mode Rejection Ratio vs Temperature                                                                               Figure 6-8. Common-Mode Rejection Ratio vs Frequency
+                                              60                                                                                                                0.10
+                                                                                                                                                                                                                           G = 20
+                                              50                                                                                                                                                                           G = 50
+                                                                                                                                                                                                                           G = 100
+                                                                                                                                                                0.05                                                       G = 200
+                                              40                                                                       Gain Error (%)                                                                                      G = 500
+     Gain (dB)
+
+
+
+
+                                              30
+                                                                                                                                                                0.00
+                                              20
+
+                                              10        G = 20
+                                                        G = 50                                                                                                  -0.05
+                                                        G = 100
+                                                0       G = 200
+                                                        G = 500
+                                              -10                                                                                                               -0.10
+                                                 10          100         1k        10k       100k    1M          10M                                                -75    -50   -25   0      25   50    75 100      125   150   175
+                                                                              Frequency (Hz)                                                                                                 Temperature (qC)
+                                                             Figure 6-9. Gain vs Frequency                                                                                Figure 6-10. Gain Error vs Temperature
+                                              1.0                                                                                                               140
+    Power-Supply Rejection Ratio (PV/V)
+
+
+
+
+                                              0.8
+                                                                                                                            Power-Supply Rejection Ratio (dB)
+
+
+
+
+                                                                                                                                                                120
+                                              0.6
+                                              0.4
+                                                                                                                                                                100
+                                              0.2
+                                              0.0                                                                                                                 80
+                                              -0.2
+                                                                                                                                                                  60
+                                              -0.4                                                        G = 20
+                                                                                                          G = 50
+                                              -0.6                                                        G = 100                                                 40
+                                              -0.8                                                        G = 200
+                                                                                                          G = 500
+                                              -1.0                                                                                                                20
+                                                 -75   -50     -25   0         25   50    75 100    125    150   175                                                10           100         1k         10k         100k         1M
+                                                                              Temperature (qC)                                                                                               Frequency (Hz)
+                Figure 6-11. Power-Supply Rejection Ratio vs Temperature                                                                            Figure 6-12. Power-Supply Rejection Ratio vs Frequency
+
+
+
+
+8                                             Submit Document Feedback                                                                                                                     Copyright © 2022 Texas Instruments Incorporated
+
+                                                                                                      Product Folder Links: INA293
+                                                                                                                                                                                                                                       INA293
+www.ti.com                                                                                                                                                                         SBOS470B – DECEMBER 2019 – REVISED AUGUST 2022
+
+
+6.6 Typical Characteristics (continued)
+All specifications at TA = 25 °C, VS = 5 V, VSENSE = VIN+ – VIN- = 0.5 V / Gain, VCM = VIN– = 48 V, unless otherwise noted.
+
+                                        25                                                                                                                    25
+
+                                        20                                                                                                                    20
+             Input Bias Current (PA)
+
+
+
+
+                                                                                                                                    Input Bias Current (PA)
+                                        15                                                                                                                    15                                           VS = 2.7 to 20V, VCM = 48V
+                                                                                                                                                                                                           VS = 2.7 to 20V, VCM = 120V
+                                                                                                VS = 5V                                                                                                    VS = 2.7 to 20V, VCM = -4V
+                                        10                                                                                                                    10
+                                                                                                VS = 20V                                                                                                   VS = 0V, VCM = 120V
+                                                                                                VS = 2.7V                                                                                                  VS = 0V, VCM = -4V
+                                         5                                                      VS = 0V                                                        5
+
+                                         0                                                                                                                     0
+                                                                                                                                                                               VS = 0V and 20V, VCM = -20V
+                                        -5                                                                                                                     -5
+
+                                       -10                                                                                                                    -10
+                                         -20          0         20    40     60       80        100     120                                                     -75          -50    -25       0     25   50    75 100     125    150    175
+                                                                 Common-Mode Voltage (V)                                                                                                           Temperature (qC)
+                                                  VSENSE = 0 V                                                                                                      Figure 6-14. Input Bias Current vs Temperature
+                      Figure 6-13. Input Bias Current vs Common-Mode Voltage
+                                       240                                                                                                                    140
+                                                     IB+                                                                                                                       IB+
+                                       200                                                                                                                    120
+                                                     IB-                                                                                                                       IB-
+                                       160           IB+, VS = 0V                                                                                             100              IB+, VS = 0V
+                                                     IB-, VS = 0V                                                                                                              IB-, VS = 0V
+   Input Bias Current (PA)
+
+
+
+
+                                                                                                                                   Input Bias Current (PA)
+                                                                                                                                                              80
+                                       120
+                                                                                                                                                              60
+                                        80
+                                                                                                                                                              40
+                                        40
+                                                                                                                                                              20
+                                         0
+                                                                                                                                                                0
+                                        -40
+                                                                                                                                                              -20
+                                        -80                                                                                                                   -40
+                                       -120                                                                                                                   -60
+                                       -160                                                                                                                   -80
+                                              0           200        400       600         800         1000                                                         0                   100              200          300               400
+                                                                      VSENSE (mV)                                                                                                                    VSENSE (mV)
+                                        Figure 6-15. INA293x1 Input Bias Current vs VSENSE                               Figure 6-16. INA293x2, INA293x3 Input Bias Current vs VSENSE
+                                       100                                                                                                                          VS
+                                                     IB+, G=200                                                                                                                                                                        25qC
+                                                     IB+, G=500                                                                                                                                                                        125qC
+                                        80           IB-                                                                                                      VS - 1                                                                   -40qC
+                                                     IB+, VS = 0V
+           Input Bias Current (PA)
+
+
+
+
+                                                     IB-, VS = 0V
+                                                                                                              Output Voltage (V)
+
+
+
+
+                                        60                                                                                                                    VS - 2
+
+
+                                        40
+
+
+                                        20                                                                                                            GND + 2
+
+
+                                         0                                                                                                            GND + 1
+
+
+                                        -20                                                                                                                    GND
+                                              0           20          40         60        80           100                                                              0          5         10     15     20      25      30     35         40
+                                                                       VSENSE (mV)                                                                                                                  Output Current (mA)
+   Figure 6-17. INA293x4, INA293x5 Input Bias Current vs VSENSE                                                                                                               VS = 2.7 V
+                                                                                                                                                                    Figure 6-18. Output Voltage vs Output Current
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                                                                                                                          Submit Document Feedback                  9
+                                                                                             Product Folder Links: INA293
+INA293
+SBOS470B – DECEMBER 2019 – REVISED AUGUST 2022                                                                                                                                                                                                             www.ti.com
+
+6.6 Typical Characteristics (continued)
+All specifications at TA = 25 °C, VS = 5 V, VSENSE = VIN+ – VIN- = 0.5 V / Gain, VCM = VIN– = 48 V, unless otherwise noted.
+
+                                                VS                                                                                                                                              VS
+                                                                                                                25qC                                                                                                                                           25qC
+                                          VS - 1                                                                125qC                                                                     VS - 1                                                               125qC
+                                                                                                                -40qC                                                                                                                                          -40qC
+                                          VS - 2                                                                                                                                          VS - 2
+ Output Voltage (V)
+
+
+
+
+                                                                                                                            Output Voltage (V)
+                                          VS - 3                                                                                                                                          VS - 3
+
+
+
+                                        GND + 3                                                                                                                               GND + 3
+
+                                        GND + 2                                                                                                                               GND + 2
+
+                                        GND + 1                                                                                                                               GND + 1
+
+                                           GND                                                                                                                                             GND
+                                                     0          5         10     15     20      25    30       35      40                                                                            0         5      10       15     20      25     30      35        40
+                                                                                Output Current (mA)                                                                                                                           Output Current (mA)
+                                                           VS = 5 V                                                                                                                                       VS = 20 V
+                                                Figure 6-19. Output Voltage vs Output Current                                                                                                   Figure 6-20. Output Voltage vs Output Current
+                                        1000                                                                                                                                             0.00
+                                         500
+                                         200
+                                         100                                                                                                                                             -0.10
+                                          50
+                 Output Impedance (:)
+
+
+
+
+                                          20
+                                                                                                                                            Swing to VS (V)
+
+
+
+                                          10                                                                                                                                             -0.20
+                                           5
+                                            2
+                                            1                                                                                                                                            -0.30
+                                          0.5
+                                          0.2
+                                          0.1                                                                                                                                            -0.40            VS = 5V
+                                         0.05
+                                                                                                                                                                                                          VS = 20V
+                                         0.02                                                                                                                                                             VS = 2.7V
+                                         0.01                                                                                                                                            -0.50
+                                             10                100         1k        10k       100k    1M           10M                                                                      -75         -50   -25    0       25   50    75 100      125    150   175
+                                                                                Frequency (Hz)                                                                                                                               Temperature (qC)
+                                                Figure 6-21. Output Impedance vs Frequency                                                                                                       Figure 6-22. Swing to Supply vs Temperature
+                                        0.020                                                                                                                                            100
+                                                                                                           VS = 5V                                                                                                                                         G = 20
+                                                                                                                                                 Input-Referred Voltage Noise (nV/—Hz)
+
+
+
+
+                                                                                                           VS = 20V                                                                        80                                                              G = 500
+                                                                                                           VS = 2.7V                                                                       70
+                                                                                                                                                                                           60
+                                        0.015
+                                                                                                                                                                                           50
+                Swing to GND (V)
+
+
+
+
+                                                                                                                                                                                           40
+
+                                        0.010                                                                                                                                              30
+
+
+                                                                                                                                                                                           20
+                                        0.005
+
+
+
+                                        0.000                                                                                                                                              10
+                                            -75          -50        -25    0     25   50    75 100    125    150    175                                                                      10                100           1k         10k         100k          1M
+                                                                                Temperature (qC)                                                                                                                             Frequency (Hz)
+                                                 Figure 6-23. Swing to GND vs Temperature                                                                                                    Figure 6-24. Input Referred Noise vs Frequency
+
+
+
+
+10                                       Submit Document Feedback                                                                                                                                                          Copyright © 2022 Texas Instruments Incorporated
+
+                                                                                                       Product Folder Links: INA293
+                                                                                                                                                                                                                                 INA293
+www.ti.com                                                                                                                                                                 SBOS470B – DECEMBER 2019 – REVISED AUGUST 2022
+
+
+6.6 Typical Characteristics (continued)
+All specifications at TA = 25 °C, VS = 5 V, VSENSE = VIN+ – VIN- = 0.5 V / Gain, VCM = VIN– = 48 V, unless otherwise noted.
+
+                                                                                                                                                             2
+
+
+                                                                                                                                                           1.8
+                                 Voltage Noise (200 nV/div)
+
+
+
+
+                                                                                                                              Quiescent Current (mA)
+                                     Referred-to-Input
+
+
+
+
+                                                                                                                                                           1.6
+                                                                                                                                                                                                                    VS = 20V
+                                                                                                                                                           1.4
+                                                                                                                                                                                                VS = 5V
+
+                                                                                                                                                           1.2
+
+
+                                                                                                                                                             1
+                                                                                                                                                                                                                   G = 20 to 50
+                                                                                                                                                                                         VS = 2.7V
+                                                                                                                                                                                                                   G = 100 to 500
+                                                                                                                                                           0.8
+                                                                                                                                                                 0     2.5           5       7.5    10     12.5   15      17.5      20
+                                                                                 Time (1 s/div)                                                                                              Output Voltage (V)
+                                                                   Figure 6-25. Input Referred Noise                                                         Figure 6-26. Quiescent Current vs Output Voltage
+                                             2                                                                                                             50
+                                                               VS = 5V                                                                                                                                        VS = 5V, Sourcing
+                                                               VS = 20V                                                                                                                                       VS = 5V, Sinking
+                                  1.8                          VS = 2.7V                                                                                                                                      VS = 20V, Sourcing
+                                                                                                                                                           40
+
+                                                                                                                              Short Circuit Current (mA)
+                                                                                                                                                                                                              VS = 20V, Sinking
+    Quiescent Current (mA)
+
+
+
+
+                                                                                                                                                                                                              VS = 2.7V, Sourcing
+                                  1.6                                                                                                                                                                         VS = 2.7V, Sinking
+                                                                                                                                                           30
+                                  1.4
+                                                                                                                                                           20
+                                  1.2
+
+                                                                                                                                                           10
+                                             1
+
+
+                                  0.8                                                                                                                       0
+                                    -75                       -50    -25   0    25   50    75 100      125   150   175                                      -75      -50       -25       0    25   50    75 100     125    150   175
+                                                                               Temperature (qC)                                                                                              Temperature (qC)
+                                                       Figure 6-27. Quiescent Current vs Temperature                                                        Figure 6-28. Short-Circuit Current vs Temperature
+                                                2                                                                                                           2
+                                                                                                                                                                                                                       VS = 5V
+                                                                                                                                                                                                                       VS = 20V
+                                     1.8                                                                                                                   1.8                                                         VS = 2.7V
+                                                                                                                          Quiescent Current (mA)
+        Quiescent Current (mA)
+
+
+
+
+                                     1.6                                                                                                                   1.6
+
+
+                                     1.4                                                                                                                   1.4
+
+
+                                     1.2                                                                                                                   1.2
+
+
+                                                1                                                            25qC                                           1
+                                                                                                             125qC
+                                                                                                             -40qC
+                                     0.8                                                                                                                   0.8
+                                                         0     2      4    6     8    10    12    14   16    18    20                                        -20           0         20    40     60       80             100     120
+                                                                               Supply Voltage (V)                                                                                     Common-Mode Voltage (V)
+                                              Figure 6-29. Quiescent Current vs Supply Voltage                                    Figure 6-30. Quiescent Current vs Common-Mode Voltage
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                                                                                                                      Submit Document Feedback            11
+                                                                                                         Product Folder Links: INA293
+INA293
+SBOS470B – DECEMBER 2019 – REVISED AUGUST 2022                                                                                                                                                                www.ti.com
+
+6.6 Typical Characteristics (continued)
+All specifications at TA = 25 °C, VS = 5 V, VSENSE = VIN+ – VIN- = 0.5 V / Gain, VCM = VIN– = 48 V, unless otherwise noted.
+
+                                                                                            VCM
+
+
+
+
+                                                                                                                                    Output Voltage
+                                                                                            VOUT
+     Common-Mode Voltage (20V/div)
+
+
+
+
+                                                                                                                                     500 mV/div
+                                                                                                        Output Voltage (2.5V/div)
+                                     0V                                                                                                                      0V
+
+
+
+
+                                                                                                                                    Input Voltage
+                                                                                                                                      5 mV/div
+                                                                                                   0V
+                                                                                                                                                             0V
+
+                                                                Time (12.5Ps/div)                                                                                                Time (10 Ps/div)
+                                     Figure 6-31. Common-Mode Voltage Fast Transient Pulse                                                                         Figure 6-32. INA293x3 Step Response
+
+                                                                                     Supply Voltage                                                                                                  Supply Voltage
+                                                                                     Output Voltage                                                                                                  Output Voltage
+
+
+
+
+                                                                                                                                         Voltage (1 V/div)
+                                     Voltage(1 V/div)
+
+
+
+
+                                          0V
+
+                                                                                                                                                  0V
+                                                                   Time (5 Ps/div)                                                                                              Time (50 Ps/div)
+                                                        Figure 6-33. Start-Up Response                                                                            Figure 6-34. Supply Transient Response
+
+
+
+
+12                                        Submit Document Feedback                                                                                                             Copyright © 2022 Texas Instruments Incorporated
+
+                                                                                          Product Folder Links: INA293
+                                                                                                                            INA293
+www.ti.com                                                                            SBOS470B – DECEMBER 2019 – REVISED AUGUST 2022
+
+
+7 Detailed Description
+7.1 Overview
+The INA293 is a high- or low-side current-sense amplifier that offers a wide common-mode range, precision
+zero-drift topology, excellent common-mode rejection ratio (CMRR), high bandwidth and fast slew rate. Different
+gain versions are available to optimize the output dynamic range based on the application. The INA293 is
+designed using a transconductance architecture with a current-feedback amplifier that enables low bias currents
+of 20 μA with a common-mode voltage of 110 V.
+7.2 Functional Block Diagram
+                                                             VS
+                         Load
+                        Supply
+
+
+
+
+                    ISENSE
+                                                  R1
+                                IN+
+                                                        +
+
+                  RSENSE                                Current
+                                        Bias
+                                                  R1
+                                                       Feedback
+                                                                                                              OUT
+                                                        -
+                                IN±                                                          Buffer
+
+                         Load
+                                                                                      RL
+
+
+
+
+                                                                                       GND
+
+
+7.3 Feature Description
+7.3.1 Amplifier Input Common-Mode Signal
+The INA293 supports large input common-mode voltages from –4 V to +110 V. Because of the internal topology,
+the common-mode range is not restricted by the power-supply voltage (VS). This allows for the INA293 to be
+used for both low and high side current-sensing applications.
+7.3.1.1 Input-Signal Bandwidth
+The INA293 –3-dB bandwidth is gain dependent, with several gain options of 20 V/V, 50 V/V, 100 V/V, 200 V/V,
+and 500 V/V. The unique multistage design enables the amplifier to achieve high bandwidth at all gains. This
+high bandwidth provides the throughput and fast response that is required for the rapid detection and processing
+of overcurrent events.
+The bandwidth of the device also depends on the applied VSENSE voltage. Figure 7-1 shows the bandwidth
+performance profile of the device over frequency as output voltage increases for each gain variation. As shown
+in Figure 7-1, the device exhibits the highest bandwidth with higher VSENSE voltages, and the bandwidth is
+higher with lower device gain options. Individual requirements determine the acceptable limits of error for high
+frequency current-sensing applications. Testing and evaluation in the end application or circuit is required to
+determine the acceptance criteria, and to validate that the performance levels meet the system specifications.
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                       Submit Document Feedback     13
+                                                       Product Folder Links: INA293
+INA293
+SBOS470B – DECEMBER 2019 – REVISED AUGUST 2022                                                                                                 www.ti.com
+
+                                                   1400
+
+
+                                                   1200
+
+
+
+
+                                 Bandwidth (kHz)
+                                                   1000
+
+
+                                                    800
+
+
+                                                    600
+                                                                                                         INA293A1
+                                                                                                         INA293A2
+                                                    400                                                  INA293A3
+                                                                                                         INA293A4
+                                                                                                         INA293A5
+                                                    200
+                                                          0              1                        2                 3
+                                                                             Output Voltage (V)
+
+                                                     Figure 7-1. Bandwidth vs Output Voltage
+
+7.3.1.2 Low Input Bias Current
+The INA293 inputs draw a 20-µA (typical) bias current at a common-mode voltage as high as 110 V, which
+enables precision current sensing on applications that require lower current leakage.
+7.3.1.3 Low VSENSE Operation
+The INA293 operates with high performance across the entire valid VSENSE range. The zero-drift input
+architecture of the INA293 provides the low offset voltage and low offset drift needed to measure low VSENSE
+levels accurately across the wide operating temperature of –40 °C to +125 °C. Low VSENSE operation is
+particularly beneficial when using low ohmic shunts for low current measurements, as power losses across
+the shunt are significantly reduced.
+7.3.1.4 Wide Fixed Gain Output
+The INA293 gain error is < 0.15% at room temperature, with a maximum drift of 10 ppm/°C over the full
+temperature range of –40°C to +125°C. The INA293 is available in multiple gain options of 20 V/V, 50 V/V, 100
+V/V, 200 V/V, and 500 V/V, which the system designer should select based on their desired signal-to-noise ratio
+and other system requirements.
+The INA293 closed-loop gain is set by a precision, low drift internal resistor network. The ratio of these resistors
+are excellently matched, while the absolute values may vary significantly. Adding additional resistance around
+the INA293 to change the effective gain is not recommended, however, because of this variation. The typical
+values of the gain resistors are described in Table 7-1.
+                                                              Table 7-1. Fixed Gain Resistor
+                                                      GAIN                     R1                       RL
+                                                     20 (V/V)                 25 kΩ                   500 kΩ
+                                                     50 (V/V)                 10 kΩ                   500 kΩ
+                                                    100 (V/V)                 10 kΩ                   1000 kΩ
+                                                    200 (V/V)                 5 kΩ                    1000 kΩ
+                                                    500 (V/V)                 2 kΩ                    1000 kΩ
+
+
+7.3.1.5 Wide Supply Range
+The INA293 operates with a wide supply range from 2.7 V to 20 V. The output stage supports a wide output
+range while INA293x1 (gain of 20 V/V) at a supply voltage of 20 V allows a maximum acceptable differential
+input of 1 V. When paired with the small input offset voltage of the INA293, systems with very wide dynamic
+range of current measurement can be supported.
+
+
+
+
+14    Submit Document Feedback                                                                                  Copyright © 2022 Texas Instruments Incorporated
+
+                                                                 Product Folder Links: INA293
+                                                                                                                                   INA293
+www.ti.com                                                                                   SBOS470B – DECEMBER 2019 – REVISED AUGUST 2022
+
+
+7.4 Device Functional Modes
+7.4.1 Unidirectional Operation
+The INA293 measures the differential voltage developed by current flowing through a resistor, commonly
+referred to as a current-sensing resistor or a current-shunt resistor. The INA293 operates in unidirectional mode
+only, meaning it only senses current sourced from a power supply to a system load as shown in Figure 7-2.
+                                                                        5V
+                            48-V
+                           Supply
+
+
+                                   ISENSE
+                                                         R1
+                                            IN+
+                                                                    +
+
+                                RSENSE                               Current
+                                                  Bias
+                                                         R1         Feedback
+                                                                    -                                            OUT
+                                            IN±                                                     Buffer
+
+
+                            Load                                                             RL
+
+
+
+
+                                                                                             GND
+
+
+                                                  Figure 7-2. Unidirectional Application
+
+The linear range of the output stage is limited to how close the output voltage can approach ground under
+zero-input conditions. The zero current output voltage of the INA293 is very small, with a maximum of GND + 20
+mV. Make sure to apply a differential input voltage of (20 mV / Gain) or greater to keep the INA293 output in the
+linear region of operation.
+7.4.2 High Signal Throughput
+With a bandwidth of 1.3 MHz at a gain of 20 V/V and a slew rate of 2.5 V/µs, the INA293 is specifically designed
+for detecting and protecting applications from fast inrush currents. As shown in Table 7-2, the INA293 responds
+in less than 2 µs for a system measuring a 75-A threshold on a 2-mΩ shunt.
+                                                         Table 7-2. Response Time
+                                                                                                                     INA293
+                        PARAMETER                                              EQUATION
+                                                                                                                   AT VS = 5 V
+ G                 Gain                                                                                                20 V/V
+ IMAX              Maximum current                                                                                      100 A
+ IThreshold        Threshold current                                                                                    75 A
+ RSENSE            Current sense resistor value                                                                         2 mΩ
+ VOUT_MAX          Output voltage at maximum current                 VOUT_MAX = IMAX × RSENSE × G                        4V
+ VOUT_THR          Output voltage at threshold current               VOUT_THR = ITHR × RSENSE × G                        3V
+ SR                Slew rate                                                                                           2.5 V/µs
+                   Output response time                                 Tresponse= VOUT_THR / SR                       < 2 µs
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                              Submit Document Feedback     15
+                                                              Product Folder Links: INA293
+INA293
+SBOS470B – DECEMBER 2019 – REVISED AUGUST 2022                                                                   www.ti.com
+
+
+8 Application and Implementation
+                                                            Note
+       Information in the following applications sections is not part of the TI component specification,
+       and TI does not warrant its accuracy or completeness. TI’s customers are responsible for
+       determining suitability of components for their purposes, as well as validating and testing their design
+       implementation to confirm system functionality.
+
+8.1 Application Information
+The INA293 amplifies the voltage developed across a current-sensing resistor as current flows through
+the resistor to the load. The wide input common-mode voltage range and high common-mode rejection of
+the INA293 make it usable over a wide range of voltage rails while still maintaining an accurate current
+measurement.
+8.1.1 RSENSE and Device Gain Selection
+The accuracy of any current-sense amplifier is maximized by choosing the current-sense resistor to be as large
+as possible. A large sense resistor maximizes the differential input signal for a given amount of current flow
+and reduces the error contribution of the offset voltage. However, there are practical limits as to how large the
+current-sense resistor can be in a given application because of the resistor size and maximum allowable power
+dissipation. Equation 1 gives the maximum value for the current-sense resistor for a given power dissipation
+budget:
+
+                PDMAX
+     RSENSE
+                 IMAX2                                                                                               (1)
+
+where:
+•    PDMAX is the maximum allowable power dissipation in RSENSE.
+•    IMAX is the maximum current that will flow through RSENSE.
+An additional limitation on the size of the current-sense resistor and device gain is due to the power-supply
+voltage, VS, and device swing-to-rail limitations. To make sure that the current-sense signal is properly passed
+to the output, both positive and negative output swing limitations must be examined. Equation 2 provides the
+maximum values of RSENSE and GAIN to keep the device from exceeding the positive swing limitation.
+
+     IMAX ª RSENSE ª *$,1 < VSP                                                                                      (2)
+
+where:
+•    IMAX is the maximum current that will flow through RSENSE.
+•    GAIN is the gain of the current-sense amplifier.
+•    VSP is the positive output swing as specified in the data sheet.
+To avoid positive output swing limitations when selecting the value of RSENSE, there is always a trade-off
+between the value of the sense resistor and the gain of the device under consideration. If the sense resistor
+selected for the maximum power dissipation is too large, then it is possible to select a lower-gain device in order
+to avoid positive swing limitations.
+The negative swing limitation places a limit on how small the sense resistor value can be for a given application.
+Equation 3 provides the limit on the minimum value of the sense resistor.
+
+     IMIN ª RSENSE ª *$,1 > VSN                                                                                      (3)
+
+where:
+•    IMIN is the minimum current that will flow through RSENSE.
+
+16    Submit Document Feedback                                                    Copyright © 2022 Texas Instruments Incorporated
+
+                                                 Product Folder Links: INA293
+                                                                                                                                               INA293
+www.ti.com                                                                                        SBOS470B – DECEMBER 2019 – REVISED AUGUST 2022
+
+•     GAIN is the gain of the current-sense amplifier.
+•     VSN is the negative output swing of the device.
+Table 8-1 shows an example of the different results obtained from using five different gain versions of the
+INA293. From the table data, the highest gain device allows a smaller current-shunt resistor and decreased
+power dissipation in the element.
+                                            Table 8-1. RSENSE Selection and Power Dissipation(1)
+                                                                                                              RESULTS AT VS = 5 V
+                       PARAMETER                                     EQUATION            A1, B1     A2, B2              A3, B3     A4, B4     A5, B5
+                                                                                        DEVICES    DEVICES             DEVICES    DEVICES    DEVICES
+ G              Gain                                                                     20 V/V      50 V/V            100 V/V     200 V/V   500 V/V
+ VDIFF          Ideal differential input voltage                  VDIFF = VOUT / G      250 mV      100 mV              50 mV       25 mV     10 mV
+ RSENSE         Current sense resistor value                    RSENSE = VDIFF / IMAX    25 mΩ       10 mΩ              5 mΩ       2.5 mΩ     1 mΩ
+ PSENSE         Current-sense resistor power dissipation          RSENSE × IMAX2         2.5 W        1W                0.5W       0.25 W     0.1 W
+
+(1)      Design example with 10-A full-scale current with maximum output voltage set to 5 V.
+
+8.1.2 Input Filtering
+
+                                                                                 Note
+         Input filters are not required for accurate measurements using the INA293, and use of filters in this
+         location is not recommended. If filter components are used on the input of the amplifier, follow the
+         guidelines in this section to minimize the effects on performance.
+
+Based strictly on user design requirements, external filtering of the current signal may be desired. The initial
+location that can be considered for the filter is at the output of the current sense amplifier. Although placing the
+filter at the output satisfies the filtering requirements, this location changes the low output impedance measured
+by any circuitry connected to the output voltage pin. The other location for filter placement is at the current
+sense amplifier input pins. This location satisfies the filtering requirement also, however the components must be
+carefully selected to minimally impact device performance. Figure 8-1 shows a filter placed at the input pins.
+                                                                                  VS
+                              VCM
+
+
+
+
+                         ISENSE
+                                      RIN                       R1
+                                                   IN+
+                                                                            +
+                                            CIN
+                       RSENSE                                                Current
+                                                         Bias
+                                      RIN                       R1          Feedback
+                                                                             -                                                   OUT
+                                                   IN±                                                        Buffer
+
+
+                             Load
+                                                                                                    RL
+
+
+
+
+                                                                                                     GND
+
+
+                                                           Figure 8-1. Filter at Input Pins
+
+External series resistance provides a source of additional measurement error, so keep the value of these
+series resistors to 10 Ω or less to reduce loss of accuracy. The internal bias network shown in Figure 8-1
+creates a mismatch in input bias currents (see Figure 6-15, Figure 6-16 and Figure 6-17) when a differential
+voltage is applied between the input pins. If additional external series filter resistors are added to the circuit, a
+mismatch is created in the voltage drop across the filter resistors. This voltage is a differential error voltage in the
+shunt resistor voltage. In addition to the absolute resistor value, mismatch resulting from resistor tolerance can
+significantly impact the error because this value is calculated based on the actual measured resistance.
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                                           Submit Document Feedback     17
+                                                                 Product Folder Links: INA293
+INA293
+SBOS470B – DECEMBER 2019 – REVISED AUGUST 2022                                                                                   www.ti.com
+
+The measurement error expected from the additional external filter resistors can be calculated using Equation 4,
+where the gain error factor is calculated using Equation 5.
+
+     Gain Error (%) = 100 - (100 ´ Gain Error Factor)                                                                                (4)
+
+The gain error factor, shown in Equation 4, can be calculated to determine the gain error introduced by the
+additional external series resistance. Equation 4 calculates the deviation of the shunt voltage, resulting from
+the attenuation and imbalance created by the added external filter resistance. Table 8-2 provides the gain error
+factor and gain error for several resistor values.
+
+                                             RB × R1
+     Gain Error Factor =
+                              (RB × R1) + (RB × RIN) + (2 × RIN × R1)                                                                (5)
+
+Where:
+• RIN is the external filter resistance value.
+• R1 is the INA293 input resistance value specified in Table 7-1.
+• RB in the internal bias resistance, which is 6600 Ω ± 20%.
+         Table 8-2. Example Gain Error Factor and Gain Error for 10-Ω External Filter Input Resistors
+             DEVICE (GAIN)                               GAIN ERROR FACTOR                                 GAIN ERROR (%)
+              INA293x1 (20)                                    0.997108386                                   -0.289161432
+              INA293x2 (50)                                    0.996512207                                   -0.348779273
+              INA293x3 (100)                                   0.996512207                                   -0.348779273
+              INA293x4 (200)                                   0.995520159                                   -0.447984072
+              INA293x5 (500)                                   0.992555831                                   -0.744416873
+
+
+8.2 Typical Application
+The INA293 is a unidirectional, current-sense amplifier capable of measuring currents through a resistive shunt
+with shunt common-mode voltages from –4 V to +110 V.
+
+                                                       24 V
+
+
+
+
+                                                                                            Solenoid
+                                                               ISENSE       RSENSE
+                                      MCU
+                                                                        +          ±
+                                     ADC
+                                                                             INA
+                                                                                       5V
+
+                                                              GND
+
+
+
+                                 Figure 8-2. Current Sensing in a Solenoid Application
+
+8.2.1 Design Requirements
+In this example application, the common-mode voltage ranges from 0 V to 24 V. The maximum sense current is
+1.5 A, and a 5-V supply is available for the INA293. Following the design guidelines from the RSENSE and Device
+Gain Selection section, a RSENSE of 50 mΩ and a gain of 50 V/V are selected to provide good output dynamic
+range. Table 8-3 lists the design setup for this application.
+                                                Table 8-3. Design Parameters
+                               DESIGN PARAMETERS                                       EXAMPLE VALUE
+                                Power supply voltage                                         5V
+
+
+18    Submit Document Feedback                                                                    Copyright © 2022 Texas Instruments Incorporated
+
+                                                       Product Folder Links: INA293
+                                                                                                                                                                                              INA293
+www.ti.com                                                                                                                  SBOS470B – DECEMBER 2019 – REVISED AUGUST 2022
+
+                                                                                    Table 8-3. Design Parameters (continued)
+                                  DESIGN PARAMETERS                                                                         EXAMPLE VALUE
+                                Common-mode voltage range                                                                     0 V to 24 V
+                                   Maximum sense current                                                                        1.5 A
+                                       RSENSE resistor                                                                          50 mΩ
+                                         Gain option                                                                            50 V/V
+
+
+8.2.2 Detailed Design Procedure
+The INA293 is designed to measure current in a typical solenoid application. The INA293 measures current
+across the 50-mΩ shunt that is placed at the output of the half-bridge. The INA293 measures the differential
+voltage across the shunt resistor, and the signal is internally amplified with a gain of 50 V/V. The output of the
+INA293 is connected to the analog-to-digital converter (ADC) of an MCU to digitize the current measurements.
+Solenoid loads are highly inductive and are often prone to failure. Solenoids are often used for position control,
+precise fluid control, and fluid regulation. Measuring real-time current on the solenoid continuously can indicate
+premature failure of the solenoid which can lead to a faulty control loop in the system. Measuring high-side
+current also indicates if there are any ground faults on the solenoid or the FETs that can be damaged in an
+application. The INA293, with high bandwidth and slew rate, can be used to detect fast overcurrent conditions to
+prevent the solenoid damage from short-to-ground faults.
+8.2.2.1 Overload Recovery With Negative VSENSE
+The INA293 is a unidirectional current sense amplifier that is meant to operate with a positive differential input
+voltage (VSENSE). If negative VSENSE is applied, the device is placed in an overload condition and requires time
+to recover once VSENSE returns positive. The required overload recovery time increases with more negative
+VSENSE.
+8.2.3 Application Curve
+Figure 8-3 shows the output response of a solenoid.                                                                                           Output Voltage, VOUT (V)
+
+
+
+                                                                                                                                          6
+                                                                                                                                   VCM
+                                                                                                                                   VOUT
+                                                                                                                                          4
+
+
+                                                                                                                                          2
+                                          Common-Mode Input Voltage, VCM (V)
+
+
+
+
+                                                                               40                                                         0
+
+
+                                                                               30
+
+
+                                                                               20
+
+
+                                                                               10
+
+
+                                                                                0
+
+
+
+
+                                                                                                      Time (50 ms/div)
+
+
+                                                           Figure 8-3. Solenoid Control Current Response
+
+8.3 Power Supply Recommendations
+The INA293 power supply can be 5 V, whereas the input common-mode voltage can vary between –4 V to 110
+V. The output voltage range of the OUT pin, however, is limited by the voltage on the power-supply pin.
+8.4 Layout
+8.4.1 Layout Guidelines
+Attention to good layout practices is always recommended.
+•    Connect the input pins to the sensing resistor using a Kelvin or 4-wire connection. This connection technique
+     makes sure that only the current-sensing resistor impedance is detected between the input pins. Poor routing
+     of the current-sensing resistor commonly results in additional resistance present between the input pins.
+     Given the very low ohmic value of the current resistor, any additional high-current carrying impedance can
+     cause significant measurement errors.
+
+Copyright © 2022 Texas Instruments Incorporated                                                                                                                          Submit Document Feedback   19
+                                                                                             Product Folder Links: INA293
+INA293
+SBOS470B – DECEMBER 2019 – REVISED AUGUST 2022                                                                                 www.ti.com
+
+•    Place the power-supply bypass capacitor as close as possible to the device power supply and ground pins.
+     The recommended value of this bypass capacitor is 0.1 µF. Additional decoupling capacitance can be added
+     to compensate for noisy or high-impedance power supplies.
+8.4.2 Layout Example
+
+
+                                                                                                         Supply
+                                                       OUT                Vs                             Voltage
+
+                                                                                       Bypass
+                      Via to GND Plane
+                                                                                        Cap
+                                                       GND
+                                                                                                  Ground Plane
+
+                                                       IN +              IN -
+
+
+
+
+                                      Figure 8-4. INA293A Recommended Layout
+
+
+
+
+                                                              OUT               IN -
+
+
+                          Via to GND Plane
+                                                              GND
+
+
+                           Supply
+                           Voltage                            Vs                IN +
+
+                                             Bypass
+                                              Cap
+
+
+
+                                     Ground Plane
+
+                                      Figure 8-5. INA293B Recommended Layout
+
+
+
+
+20    Submit Document Feedback                                                                  Copyright © 2022 Texas Instruments Incorporated
+
+                                                    Product Folder Links: INA293
+                                                                                                                                   INA293
+www.ti.com                                                                              SBOS470B – DECEMBER 2019 – REVISED AUGUST 2022
+
+
+9 Device and Documentation Support
+9.1 Documentation Support
+9.1.1 Related Documentation
+For related documentation see the following: Texas Instruments, INA293EVM user's guide.
+9.2 Receiving Notification of Documentation Updates
+To receive notification of documentation updates, navigate to the device product folder on ti.com. Click on
+Subscribe to updates to register and receive a weekly digest of any product information that has changed. For
+change details, review the revision history included in any revised document.
+9.3 Support Resources
+TI E2E™ support forums are an engineer's go-to source for fast, verified answers and design help — straight
+from the experts. Search existing answers or ask your own question to get the quick design help you need.
+Linked content is provided "AS IS" by the respective contributors. They do not constitute TI specifications and do
+not necessarily reflect TI's views; see TI's Terms of Use.
+9.4 Trademarks
+TI E2E™ is a trademark of Texas Instruments.
+All trademarks are the property of their respective owners.
+9.5 Electrostatic Discharge Caution
+                    This integrated circuit can be damaged by ESD. Texas Instruments recommends that all integrated circuits be handled
+                    with appropriate precautions. Failure to observe proper handling and installation procedures can cause damage.
+                    ESD damage can range from subtle performance degradation to complete device failure. Precision integrated circuits may
+                    be more susceptible to damage because very small parametric changes could cause the device not to meet its published
+                    specifications.
+
+
+9.6 Glossary
+ TI Glossary             This glossary lists and explains terms, acronyms, and definitions.
+
+10 Mechanical, Packaging, and Orderable Information
+The following pages include mechanical, packaging, and orderable information. This information is the most
+current data available for the designated devices. This data is subject to change without notice and revision of
+this document. For browser-based versions of this data sheet, refer to the left-hand navigation.
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                            Submit Document Feedback          21
+                                                        Product Folder Links: INA293
+                                                                                                                                  PACKAGE OPTION ADDENDUM
+
+  www.ti.com                                                                                                                                                     5-Mar-2026
+
+
+
+
+PACKAGING INFORMATION
+
+ Orderable part number   Status     Material type   Package | Pins     Package qty | Carrier   RoHS      Lead finish/       MSL rating/       Op temp (°C)   Part marking
+                            (1)          (2)                                                    (3)      Ball material      Peak reflow                           (6)
+                                                                                                              (4)                (5)
+
+     INA293A1IDBVR        Active     Production     SOT-23 (DBV) | 5    3000 | LARGE T&R        Yes        NIPDAU        Level-1-260C-UNLIM    -40 to 125       1XWC
+    INA293A1IDBVR.B       Active     Production     SOT-23 (DBV) | 5    3000 | LARGE T&R        Yes        NIPDAU        Level-1-260C-UNLIM    -40 to 125       1XWC
+   INA293A1IDBVRG4        Active     Production     SOT-23 (DBV) | 5    3000 | LARGE T&R        Yes        NIPDAU        Level-1-260C-UNLIM    -40 to 125       1XWC
+  INA293A1IDBVRG4.B       Active     Production     SOT-23 (DBV) | 5    3000 | LARGE T&R        Yes        NIPDAU        Level-1-260C-UNLIM    -40 to 125       1XWC
+     INA293A1IDBVT        Active     Production     SOT-23 (DBV) | 5     250 | SMALL T&R        Yes        NIPDAU        Level-1-260C-UNLIM    -40 to 125       1XWC
+    INA293A1IDBVT.B       Active     Production     SOT-23 (DBV) | 5     250 | SMALL T&R        Yes        NIPDAU        Level-1-260C-UNLIM    -40 to 125       1XWC
+     INA293A2IDBVR        Active     Production     SOT-23 (DBV) | 5    3000 | LARGE T&R        Yes        NIPDAU        Level-1-260C-UNLIM    -40 to 125       1XXC
+    INA293A2IDBVR.B       Active     Production     SOT-23 (DBV) | 5    3000 | LARGE T&R        Yes        NIPDAU        Level-1-260C-UNLIM    -40 to 125       1XXC
+   INA293A2IDBVRG4        Active     Production     SOT-23 (DBV) | 5    3000 | LARGE T&R        Yes        NIPDAU        Level-1-260C-UNLIM    -40 to 125       1XXC
+  INA293A2IDBVRG4.B       Active     Production     SOT-23 (DBV) | 5    3000 | LARGE T&R        Yes        NIPDAU        Level-1-260C-UNLIM    -40 to 125       1XXC
+     INA293A2IDBVT        Active     Production     SOT-23 (DBV) | 5     250 | SMALL T&R        Yes        NIPDAU        Level-1-260C-UNLIM    -40 to 125       1XXC
+    INA293A2IDBVT.B       Active     Production     SOT-23 (DBV) | 5     250 | SMALL T&R        Yes        NIPDAU        Level-1-260C-UNLIM    -40 to 125       1XXC
+     INA293A3IDBVR        Active     Production     SOT-23 (DBV) | 5    3000 | LARGE T&R        Yes        NIPDAU        Level-1-260C-UNLIM    -40 to 125       1XZC
+    INA293A3IDBVR.B       Active     Production     SOT-23 (DBV) | 5    3000 | LARGE T&R        Yes        NIPDAU        Level-1-260C-UNLIM    -40 to 125       1XZC
+   INA293A3IDBVRG4        Active     Production     SOT-23 (DBV) | 5    3000 | LARGE T&R        Yes        NIPDAU        Level-1-260C-UNLIM    -40 to 125       1XZC
+  INA293A3IDBVRG4.B       Active     Production     SOT-23 (DBV) | 5    3000 | LARGE T&R        Yes        NIPDAU        Level-1-260C-UNLIM    -40 to 125       1XZC
+     INA293A3IDBVT        Active     Production     SOT-23 (DBV) | 5     250 | SMALL T&R        Yes        NIPDAU        Level-1-260C-UNLIM    -40 to 125       1XZC
+    INA293A3IDBVT.B       Active     Production     SOT-23 (DBV) | 5     250 | SMALL T&R        Yes        NIPDAU        Level-1-260C-UNLIM    -40 to 125       1XZC
+     INA293A4IDBVR        Active     Production     SOT-23 (DBV) | 5    3000 | LARGE T&R        Yes        NIPDAU        Level-1-260C-UNLIM    -40 to 125       1Z1C
+    INA293A4IDBVR.B       Active     Production     SOT-23 (DBV) | 5    3000 | LARGE T&R        Yes        NIPDAU        Level-1-260C-UNLIM    -40 to 125       1Z1C
+     INA293A4IDBVT        Active     Production     SOT-23 (DBV) | 5     250 | SMALL T&R        Yes        NIPDAU        Level-1-260C-UNLIM    -40 to 125       1Z1C
+    INA293A4IDBVT.B       Active     Production     SOT-23 (DBV) | 5     250 | SMALL T&R        Yes        NIPDAU        Level-1-260C-UNLIM    -40 to 125       1Z1C
+     INA293A5IDBVR        Active     Production     SOT-23 (DBV) | 5    3000 | LARGE T&R        Yes        NIPDAU        Level-1-260C-UNLIM    -40 to 125       1Z7C
+    INA293A5IDBVR.B       Active     Production     SOT-23 (DBV) | 5    3000 | LARGE T&R        Yes        NIPDAU        Level-1-260C-UNLIM    -40 to 125       1Z7C
+     INA293A5IDBVT       Obsolete    Production     SOT-23 (DBV) | 5             -               -          Call TI            Call TI         -40 to 125       1Z7C
+     INA293B1IDBVR        Active     Production     SOT-23 (DBV) | 5    3000 | LARGE T&R        Yes        NIPDAU        Level-1-260C-UNLIM    -40 to 125       1Z2C
+    INA293B1IDBVR.B       Active     Production     SOT-23 (DBV) | 5    3000 | LARGE T&R        Yes        NIPDAU        Level-1-260C-UNLIM    -40 to 125       1Z2C
+     INA293B1IDBVT       Obsolete    Production     SOT-23 (DBV) | 5             -               -          Call TI            Call TI         -40 to 125       1Z2C
+     INA293B2IDBVR        Active     Production     SOT-23 (DBV) | 5    3000 | LARGE T&R        Yes        NIPDAU        Level-1-260C-UNLIM    -40 to 125       1Z3C
+
+
+                                                                                       Addendum-Page 1
+                                                                                                                                                                     PACKAGE OPTION ADDENDUM
+
+       www.ti.com                                                                                                                                                                                                    5-Mar-2026
+
+
+
+
+       Orderable part number          Status     Material type      Package | Pins      Package qty | Carrier       RoHS             Lead finish/               MSL rating/          Op temp (°C)               Part marking
+                                        (1)            (2)                                                            (3)            Ball material              Peak reflow                                           (6)
+                                                                                                                                          (4)                       (5)
+
+         INA293B2IDBVR.B              Active      Production       SOT-23 (DBV) | 5      3000 | LARGE T&R            Yes               NIPDAU            Level-1-260C-UNLIM            -40 to 125                   1Z3C
+         INA293B2IDBVRG4              Active      Production       SOT-23 (DBV) | 5      3000 | LARGE T&R            Yes               NIPDAU            Level-1-260C-UNLIM            -40 to 125                   1Z3C
+        INA293B2IDBVRG4.B             Active      Production       SOT-23 (DBV) | 5      3000 | LARGE T&R            Yes               NIPDAU            Level-1-260C-UNLIM            -40 to 125                   1Z3C
+          INA293B2IDBVT               Active      Production       SOT-23 (DBV) | 5       250 | SMALL T&R            Yes               NIPDAU            Level-1-260C-UNLIM            -40 to 125                   1Z3C
+         INA293B2IDBVT.B              Active      Production       SOT-23 (DBV) | 5       250 | SMALL T&R            Yes               NIPDAU            Level-1-260C-UNLIM            -40 to 125                   1Z3C
+          INA293B3IDBVR               Active      Production       SOT-23 (DBV) | 5      3000 | LARGE T&R            Yes               NIPDAU            Level-1-260C-UNLIM            -40 to 125                   1Z4C
+         INA293B3IDBVR.B              Active      Production       SOT-23 (DBV) | 5      3000 | LARGE T&R            Yes               NIPDAU            Level-1-260C-UNLIM            -40 to 125                   1Z4C
+         INA293B3IDBVRG4              Active      Production       SOT-23 (DBV) | 5      3000 | LARGE T&R            Yes               NIPDAU            Level-1-260C-UNLIM            -40 to 125                   1Z4C
+        INA293B3IDBVRG4.B             Active      Production       SOT-23 (DBV) | 5      3000 | LARGE T&R            Yes               NIPDAU            Level-1-260C-UNLIM            -40 to 125                   1Z4C
+          INA293B3IDBVT              Obsolete     Production       SOT-23 (DBV) | 5                -                   -                Call TI                   Call TI              -40 to 125                   1Z4C
+          INA293B4IDBVR               Active      Production       SOT-23 (DBV) | 5      3000 | LARGE T&R            Yes               NIPDAU            Level-1-260C-UNLIM            -40 to 125                   1Z5C
+         INA293B4IDBVR.B              Active      Production       SOT-23 (DBV) | 5      3000 | LARGE T&R            Yes               NIPDAU            Level-1-260C-UNLIM            -40 to 125                   1Z5C
+          INA293B4IDBVT              Obsolete     Production       SOT-23 (DBV) | 5                -                   -                Call TI                   Call TI              -40 to 125                   1Z5C
+          INA293B5IDBVR               Active      Production       SOT-23 (DBV) | 5      3000 | LARGE T&R            Yes               NIPDAU            Level-1-260C-UNLIM            -40 to 125                   1Z6C
+         INA293B5IDBVR.B              Active      Production       SOT-23 (DBV) | 5      3000 | LARGE T&R            Yes               NIPDAU            Level-1-260C-UNLIM            -40 to 125                   1Z6C
+          INA293B5IDBVT              Obsolete     Production       SOT-23 (DBV) | 5                -                   -                Call TI                   Call TI              -40 to 125                   1Z6C
+
+(1)
+      Status: For more details on status, see our product life cycle.
+
+(2)
+   Material type: When designated, preproduction parts are prototypes/experimental devices, and are not yet approved or released for full production. Testing and final process, including without limitation quality assurance,
+reliability performance testing, and/or process qualification, may not yet be complete, and this item is subject to further changes or possible discontinuation. If available for ordering, purchases will be subject to an additional
+waiver at checkout, and are intended for early internal evaluation purposes only. These items are sold without warranties of any kind.
+
+(3)
+      RoHS values: Yes, No, RoHS Exempt. See the TI RoHS Statement for additional information and value definition.
+
+(4)
+   Lead finish/Ball material: Parts may have multiple material finish options. Finish options are separated by a vertical ruled line. Lead finish/Ball material values may wrap to two lines if the finish value exceeds the maximum
+column width.
+
+(5)
+  MSL rating/Peak reflow: The moisture sensitivity level ratings and peak solder (reflow) temperatures. In the event that a part has multiple moisture sensitivity ratings, only the lowest level per JEDEC standards is shown.
+Refer to the shipping label for the actual reflow temperature that will be used to mount the part to the printed circuit board.
+
+(6)
+      Part marking: There may be an additional marking, which relates to the logo, the lot trace code information, or the environmental category of the part.
+
+
+
+                                                                                                          Addendum-Page 2
+                                                                                                                                                                      PACKAGE OPTION ADDENDUM
+
+    www.ti.com                                                                                                                                                                                                     5-Mar-2026
+
+
+
+
+Multiple part markings will be inside parentheses. Only one part marking contained in parentheses and separated by a "~" will appear on a part. If a line is indented then it is a continuation of the previous line and the two
+combined represent the entire part marking for that device.
+
+Important Information and Disclaimer:The information provided on this page represents TI's knowledge and belief as of the date that it is provided. TI bases its knowledge and belief on information provided by third parties, and
+makes no representation or warranty as to the accuracy of such information. Efforts are underway to better integrate information from third parties. TI has taken and continues to take reasonable steps to provide representative
+and accurate information but may not have conducted destructive testing or chemical analysis on incoming materials and chemicals. TI and TI suppliers consider certain information to be proprietary, and thus CAS numbers
+and other limited information may not be available for release.
+
+In no event shall TI's liability arising out of such information exceed the total purchase price of the TI part(s) at issue in this document sold by TI to Customer on an annual basis.
+
+OTHER QUALIFIED VERSIONS OF INA293 :
+
+• Automotive : INA293-Q1
+
+NOTE: Qualified Version Definitions:
+
+        • Automotive - Q100 devices qualified for high-reliability automotive applications targeting zero defects
+
+
+
+
+                                                                                                          Addendum-Page 3
+                                                                               PACKAGE MATERIALS INFORMATION
+
+www.ti.com                                                                                                                                          10-Apr-2026
+
+
+
+TAPE AND REEL INFORMATION
+
+       REEL DIMENSIONS                                                                      TAPE DIMENSIONS
+                                                                                       K0         P1
+
+
+
+                                                                                                                         B0 W
+                                         Reel
+                                       Diameter
+                                                                                    Cavity             A0
+                                                                A0   Dimension designed to accommodate the component width
+                                                                B0   Dimension designed to accommodate the component length
+                                                                K0   Dimension designed to accommodate the component thickness
+                                                                W    Overall width of the carrier tape
+                                                                P1   Pitch between successive cavity centers
+
+
+                                        Reel Width (W1)
+                              QUADRANT ASSIGNMENTS FOR PIN 1 ORIENTATION IN TAPE
+
+                                                                                                        Sprocket Holes
+
+
+                                                  Q1       Q2          Q1    Q2
+
+                                                  Q3       Q4          Q3    Q4                    User Direction of Feed
+
+
+
+                                                            Pocket Quadrants
+
+
+*All dimensions are nominal
+             Device           Package Package Pins              SPQ        Reel   Reel   A0                    B0         K0     P1     W     Pin1
+                               Type Drawing                              Diameter Width (mm)                  (mm)       (mm)   (mm)   (mm) Quadrant
+                                                                           (mm) W1 (mm)
+     INA293A1IDBVR            SOT-23     DBV           5        3000        180.0           8.4        3.2     3.2       1.4    4.0    8.0     Q3
+   INA293A1IDBVRG4            SOT-23     DBV           5        3000        180.0           8.4        3.23   3.17       1.37   4.0    8.0     Q3
+     INA293A1IDBVT            SOT-23     DBV           5         250        180.0           8.4        3.2     3.2       1.4    4.0    8.0     Q3
+     INA293A1IDBVT            SOT-23     DBV           5         250        180.0           8.4        3.23   3.17       1.37   4.0    8.0     Q3
+     INA293A2IDBVR            SOT-23     DBV           5        3000        180.0           8.4        3.2     3.2       1.4    4.0    8.0     Q3
+   INA293A2IDBVRG4            SOT-23     DBV           5        3000        180.0           8.4        3.23   3.17       1.37   4.0    8.0     Q3
+     INA293A2IDBVT            SOT-23     DBV           5         250        180.0           8.4        3.23   3.17       1.37   4.0    8.0     Q3
+     INA293A2IDBVT            SOT-23     DBV           5         250        180.0           8.4        3.2     3.2       1.4    4.0    8.0     Q3
+     INA293A3IDBVR            SOT-23     DBV           5        3000        180.0           8.4        3.2     3.2       1.4    4.0    8.0     Q3
+   INA293A3IDBVRG4            SOT-23     DBV           5        3000        180.0           8.4        3.23   3.17       1.37   4.0    8.0     Q3
+     INA293A3IDBVT            SOT-23     DBV           5         250        180.0           8.4        3.2     3.2       1.4    4.0    8.0     Q3
+     INA293A3IDBVT            SOT-23     DBV           5         250        180.0           8.4        3.23   3.17       1.37   4.0    8.0     Q3
+     INA293A4IDBVR            SOT-23     DBV           5        3000        180.0           8.4        3.2     3.2       1.4    4.0    8.0     Q3
+     INA293A4IDBVT            SOT-23     DBV           5         250        180.0           8.4        3.23   3.17       1.37   4.0    8.0     Q3
+     INA293A4IDBVT            SOT-23     DBV           5         250        180.0           8.4        3.2     3.2       1.4    4.0    8.0     Q3
+     INA293A5IDBVR            SOT-23     DBV           5        3000        180.0           8.4        3.23   3.17       1.37   4.0    8.0     Q3
+
+
+
+
+                                                                       Pack Materials-Page 1
+                                                           PACKAGE MATERIALS INFORMATION
+
+www.ti.com                                                                                                          10-Apr-2026
+
+
+
+             Device   Package Package Pins   SPQ       Reel   Reel   A0            B0     K0     P1     W     Pin1
+                       Type Drawing                  Diameter Width (mm)          (mm)   (mm)   (mm)   (mm) Quadrant
+                                                       (mm) W1 (mm)
+     INA293A5IDBVR    SOT-23   DBV     5     3000      180.0      8.4      3.2    3.2    1.4    4.0    8.0     Q3
+     INA293B1IDBVR    SOT-23   DBV     5     3000      180.0      8.4      3.2    3.2    1.4    4.0    8.0     Q3
+     INA293B2IDBVR    SOT-23   DBV     5     3000      180.0      8.4      3.2    3.2    1.4    4.0    8.0     Q3
+     INA293B2IDBVR    SOT-23   DBV     5     3000      180.0      8.4      3.23   3.17   1.37   4.0    8.0     Q3
+   INA293B2IDBVRG4    SOT-23   DBV     5     3000      180.0      8.4      3.23   3.17   1.37   4.0    8.0     Q3
+     INA293B2IDBVT    SOT-23   DBV     5     250       180.0      8.4      3.2    3.2    1.4    4.0    8.0     Q3
+     INA293B2IDBVT    SOT-23   DBV     5     250       180.0      8.4      3.23   3.17   1.37   4.0    8.0     Q3
+     INA293B3IDBVR    SOT-23   DBV     5     3000      180.0      8.4      3.23   3.17   1.37   4.0    8.0     Q3
+     INA293B3IDBVR    SOT-23   DBV     5     3000      180.0      8.4      3.2    3.2    1.4    4.0    8.0     Q3
+   INA293B3IDBVRG4    SOT-23   DBV     5     3000      180.0      8.4      3.23   3.17   1.37   4.0    8.0     Q3
+     INA293B4IDBVR    SOT-23   DBV     5     3000      180.0      8.4      3.2    3.2    1.4    4.0    8.0     Q3
+     INA293B5IDBVR    SOT-23   DBV     5     3000      180.0      8.4      3.23   3.17   1.37   4.0    8.0     Q3
+     INA293B5IDBVR    SOT-23   DBV     5     3000      180.0      8.4      3.2    3.2    1.4    4.0    8.0     Q3
+
+
+
+
+                                                   Pack Materials-Page 2
+                                                                PACKAGE MATERIALS INFORMATION
+
+www.ti.com                                                                                                              10-Apr-2026
+
+
+
+ TAPE AND REEL BOX DIMENSIONS
+
+
+
+
+                                                               Width (mm)
+                                                                              H
+                      W
+
+
+
+
+                                                          L
+
+
+
+
+*All dimensions are nominal
+             Device           Package Type   Package Drawing   Pins         SPQ    Length (mm)   Width (mm)   Height (mm)
+     INA293A1IDBVR              SOT-23            DBV           5           3000      210.0        185.0         35.0
+    INA293A1IDBVRG4             SOT-23            DBV           5           3000      183.0        183.0         20.0
+     INA293A1IDBVT              SOT-23            DBV           5           250       210.0        185.0         35.0
+     INA293A1IDBVT              SOT-23            DBV           5           250       183.0        183.0         20.0
+     INA293A2IDBVR              SOT-23            DBV           5           3000      210.0        185.0         35.0
+    INA293A2IDBVRG4             SOT-23            DBV           5           3000      183.0        183.0         20.0
+     INA293A2IDBVT              SOT-23            DBV           5           250       183.0        183.0         20.0
+     INA293A2IDBVT              SOT-23            DBV           5           250       210.0        185.0         35.0
+     INA293A3IDBVR              SOT-23            DBV           5           3000      210.0        185.0         35.0
+    INA293A3IDBVRG4             SOT-23            DBV           5           3000      183.0        183.0         20.0
+     INA293A3IDBVT              SOT-23            DBV           5           250       210.0        185.0         35.0
+     INA293A3IDBVT              SOT-23            DBV           5           250       183.0        183.0         20.0
+     INA293A4IDBVR              SOT-23            DBV           5           3000      210.0        185.0         35.0
+     INA293A4IDBVT              SOT-23            DBV           5           250       183.0        183.0         20.0
+     INA293A4IDBVT              SOT-23            DBV           5           250       210.0        185.0         35.0
+     INA293A5IDBVR              SOT-23            DBV           5           3000      183.0        183.0         20.0
+     INA293A5IDBVR              SOT-23            DBV           5           3000      210.0        185.0         35.0
+     INA293B1IDBVR              SOT-23            DBV           5           3000      210.0        185.0         35.0
+
+
+
+
+                                                        Pack Materials-Page 3
+                                                        PACKAGE MATERIALS INFORMATION
+
+www.ti.com                                                                                                   10-Apr-2026
+
+
+
+             Device   Package Type   Package Drawing   Pins     SPQ     Length (mm)   Width (mm)   Height (mm)
+     INA293B2IDBVR      SOT-23            DBV           5       3000       210.0        185.0         35.0
+     INA293B2IDBVR      SOT-23            DBV           5       3000       183.0        183.0         20.0
+    INA293B2IDBVRG4     SOT-23            DBV           5       3000       183.0        183.0         20.0
+     INA293B2IDBVT      SOT-23            DBV           5       250        210.0        185.0         35.0
+     INA293B2IDBVT      SOT-23            DBV           5       250        183.0        183.0         20.0
+     INA293B3IDBVR      SOT-23            DBV           5       3000       183.0        183.0         20.0
+     INA293B3IDBVR      SOT-23            DBV           5       3000       210.0        185.0         35.0
+    INA293B3IDBVRG4     SOT-23            DBV           5       3000       183.0        183.0         20.0
+     INA293B4IDBVR      SOT-23            DBV           5       3000       210.0        185.0         35.0
+     INA293B5IDBVR      SOT-23            DBV           5       3000       183.0        183.0         20.0
+     INA293B5IDBVR      SOT-23            DBV           5       3000       210.0        185.0         35.0
+
+
+
+
+                                                Pack Materials-Page 4
+                                                                                                            PACKAGE OUTLINE
+DBV0005A                                                          SCALE 4.000
+                                                                                                     SOT-23 - 1.45 mm max height
+                                                                                                              SMALL OUTLINE TRANSISTOR
+
+
+
+
+                                            3.0                                                                       C
+                                            2.6
+                                          1.75                                                                0.1 C
+                                                           B                               A
+                                          1.45
+            PIN 1
+      INDEX AREA
+
+                        1                                        5
+
+
+              2X 0.95                                            (0.1)
+                                                                                          3.05
+                                                                                          2.75
+        1.9                                                                         1.9
+                        2
+                                                                 (0.15)
+
+
+
+                                                                 4
+                            3
+              0.5
+           5X
+              0.3
+                                                                                                                             0.15
+               0.2      C A B                                                   NOTE 5           4X 0 -15      (1.1)              TYP
+                                                                                                                             0.00
+                                                                                                                1.45
+                                                                                                                0.90
+                                                               4X 4 -15
+
+
+
+          0.25
+ GAGE PLANE                                                                          0.22
+                                                                                          TYP
+                                                                                     0.08
+
+
+
+   8
+     TYP                          0.6
+   0                                  TYP            SEATING PLANE
+                                  0.3
+
+
+
+
+                                                                                                                          4214839/K 08/2024
+
+NOTES:
+
+1. All linear dimensions are in millimeters. Any dimensions in parenthesis are for reference only. Dimensioning and tolerancing
+   per ASME Y14.5M.
+2. This drawing is subject to change without notice.
+3. Refernce JEDEC MO-178.
+4. Body dimensions do not include mold flash, protrusions, or gate burrs. Mold flash, protrusions, or gate burrs shall not
+   exceed 0.25 mm per side.
+5. Support pin may differ or may not be present.
+
+
+
+
+                                                                                www.ti.com
+                                                                               EXAMPLE BOARD LAYOUT
+DBV0005A                                                                             SOT-23 - 1.45 mm max height
+                                                                                                     SMALL OUTLINE TRANSISTOR
+
+
+
+
+                                                                 PKG
+                                                 5X (1.1)
+                                             1
+                                                                                         5
+                                  5X (0.6)
+
+
+                                                                                             SYMM
+                                                                                                     (1.9)
+                                             2
+                              2X (0.95)
+
+
+                                             3                                           4
+
+                             (R0.05) TYP                         (2.6)
+
+
+                                                     LAND PATTERN EXAMPLE
+                                                       EXPOSED METAL SHOWN
+                                                            SCALE:15X
+
+
+
+
+                                                                                                         SOLDER MASK
+                 SOLDER MASK                     METAL                   METAL UNDER                     OPENING
+                 OPENING                                                 SOLDER MASK
+
+
+
+
+         EXPOSED METAL                                        EXPOSED METAL
+
+                                          0.07 MAX                                           0.07 MIN
+                                          ARROUND                                            ARROUND
+
+                                NON SOLDER MASK                                        SOLDER MASK
+                                    DEFINED                                              DEFINED
+                                  (PREFERRED)
+
+                                                      SOLDER MASK DETAILS
+
+
+
+
+                                                                                                               4214839/K 08/2024
+
+NOTES: (continued)
+
+6. Publication IPC-7351 may have alternate designs.
+7. Solder mask tolerances between and around signal pads can vary based on board fabrication site.
+
+
+
+
+                                                                www.ti.com
+                                                                               EXAMPLE STENCIL DESIGN
+ DBV0005A                                                                              SOT-23 - 1.45 mm max height
+                                                                                                       SMALL OUTLINE TRANSISTOR
+
+
+
+
+                                                                 PKG
+                                                 5X (1.1)
+                                             1
+                                                                                         5
+                                  5X (0.6)
+
+
+
+                                                                                             SYMM
+                                             2                                                      (1.9)
+                             2X(0.95)
+
+
+                                             3                                           4
+
+                            (R0.05) TYP
+                                                                (2.6)
+
+
+                                                   SOLDER PASTE EXAMPLE
+                                                 BASED ON 0.125 mm THICK STENCIL
+                                                            SCALE:15X
+
+
+
+
+                                                                                                                   4214839/K 08/2024
+
+NOTES: (continued)
+
+8. Laser cutting apertures with trapezoidal walls and rounded corners may offer better paste release. IPC-7525 may have alternate
+    design recommendations.
+9. Board assembly site may have different recommendations for stencil design.
+
+
+
+
+                                                                  www.ti.com
+                                         IMPORTANT NOTICE AND DISCLAIMER
+TI PROVIDES TECHNICAL AND RELIABILITY DATA (INCLUDING DATASHEETS), DESIGN RESOURCES (INCLUDING REFERENCE
+DESIGNS), APPLICATION OR OTHER DESIGN ADVICE, WEB TOOLS, SAFETY INFORMATION, AND OTHER RESOURCES “AS IS”
+AND WITH ALL FAULTS, AND DISCLAIMS ALL WARRANTIES, EXPRESS AND IMPLIED, INCLUDING WITHOUT LIMITATION ANY
+IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT OF THIRD
+PARTY INTELLECTUAL PROPERTY RIGHTS.
+These resources are intended for skilled developers designing with TI products. You are solely responsible for (1) selecting the appropriate
+TI products for your application, (2) designing, validating and testing your application, and (3) ensuring your application meets applicable
+standards, and any other safety, security, regulatory or other requirements.
+These resources are subject to change without notice. TI grants you permission to use these resources only for development of an
+application that uses the TI products described in the resource. Other reproduction and display of these resources is prohibited. No license
+is granted to any other TI intellectual property right or to any third party intellectual property right. TI disclaims responsibility for, and you fully
+indemnify TI and its representatives against any claims, damages, costs, losses, and liabilities arising out of your use of these resources.
+TI’s products are provided subject to TI’s Terms of Sale, TI’s General Quality Guidelines, or other applicable terms available either on
+ti.com or provided in conjunction with such TI products. TI’s provision of these resources does not expand or otherwise alter TI’s applicable
+warranties or warranty disclaimers for TI products. Unless TI explicitly designates a product as custom or customer-specified, TI products
+are standard, catalog, general purpose devices.
+TI objects to and rejects any additional or different terms you may propose.
+IMPORTANT NOTICE
+
+                                                Copyright © 2026, Texas Instruments Incorporated
+                                                                Last updated 10/2025
+
