@@ -1,0 +1,17 @@
+..E
+======================================================================
+ERROR: test_native (test_rail_partition.RailTests.test_native)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-rail-partition/hardware/powerboard-reva/tests/test_rail_partition.py", line 16, in test_native
+    def test_native(self): validate(ET.parse(P/'exports/ctrl-supply.xml').getroot())
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/c08r4d0r/worktrees/cycle-rail-partition/hardware/powerboard-reva/tests/test_rail_partition.py", line 11, in validate
+    if n.get((ref,str(i)))!=net: raise ValueError(f'{ref}.{i} expected {net}')
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: U3.3 expected SINK12
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.057s
+
+FAILED (errors=1)

@@ -72,7 +72,7 @@ R37,100k G-S,,hub-bridge
 R38,2m 1% 3W WSLP2512,Resistor_SMD:R_2512_6332Metric,hub-bridge
 C20,1u 100V X7R provisional,,hub-bridge
 J1,BUS_TEST_ONLY_NOT_SOURCE_INPUT,,external-boundaries
-J2,MCU_SUPPLY_EXT,,external-boundaries
+J2,MCU_RAIL_TEST_ONLY_NOT_INPUT,,external-boundaries
 J3,GEN_MACHINE_PHASES,,external-boundaries
 J4,HUB_MACHINE_PHASES,,external-boundaries
 J5,SAFETY_FAULT_CHAIN_NC,,external-boundaries
@@ -353,3 +353,31 @@ R502,49.9k 1% RG1608P-4992-B-T5,,ctrl-supply
 R503,150k 1% 0.1W >=100V candidate,,ctrl-supply
 R504,1M 1% 0.1W >=100V candidate,,ctrl-supply
 R505,52.3k 1% 0.1W candidate,,ctrl-supply
+U510,SN74LVC1G08DBVR,Package_TO_SOT_SMD:SOT-23-5,rail-partition
+U501,LM5164DDAR,,rail-partition
+U502,AP63203WU,Package_TO_SOT_SMD:TSOT-23-6,rail-partition
+L501,68u MSS1246T-683MLC 20%,,rail-passives
+L502,3.9u candidate 2A,Inductor_SMD:L_Bourns_SRN6045TA,rail-passives
+C510,2.2u 200V X7R 22252C225KAT2A,Capacitor_SMD:C_2225_5664Metric,rail-passives
+C511,2.2u 200V X7R 22252C225KAT2A,Capacitor_SMD:C_2225_5664Metric,rail-passives
+C512,2.2n 50V GCM155R71H222KA37D,,rail-passives
+C513,22u 25V TMK325B7226KMHT,,rail-passives
+C514,22u 25V TMK325B7226KMHT,,rail-passives
+C515,3.3n 100V CGA3E2X7R2A332K080AA,,rail-passives
+C516,56p 50V C0G candidate,,rail-passives
+C517,10u 25V X7R candidate,,rail-passives
+C518,22u 16V X7R candidate,,rail-passives
+C519,22u 16V X7R candidate,,rail-passives
+C520,100n 25V X7R,,rail-passives
+C521,100n 25V X7R,,rail-passives
+R510,100k 1% 0.1W TI reference,,rail-passives
+R511,453k 1% 0.1W TI reference,,rail-passives
+R512,49.9k 1% RG1608P-4992-B-T5,,rail-passives
+R513,453k 1% 0.1W TI reference,,rail-passives
+R514,82k 1% 0.1W >=100V candidate,,rail-passives
+R515,100k 1% DELAY EN pulldown,,rail-passives
+R516,47k 1% EN series,,rail-passives
+R517,100k 1% DELAY EN pulldown,,rail-passives
+R518,100k 1% MAIN_PROVEN default low,,rail-passives
+R519,0R FIXED INHIBIT - no MAIN_PROVEN detector fitted,,rail-passives
+R520,10k CTRL PGOOD pullup,,rail-passives
