@@ -72,7 +72,7 @@ R37,100k G-S,,hub-bridge
 R38,2m 1% 3W WSLP2512,Resistor_SMD:R_2512_6332Metric,hub-bridge
 C20,1u 100V X7R provisional,,hub-bridge
 J1,PROTECTED_DC_INPUT_EXT,,external-boundaries
-J2,REGULATED_AUX_EXT,,external-boundaries
+J2,MCU_SUPPLY_EXT,,external-boundaries
 J3,GEN_MACHINE_PHASES,,external-boundaries
 J4,GEN_MCU_PWM_EXT,,external-boundaries
 J5,GEN_SPI_EXT,,external-boundaries
@@ -81,5 +81,51 @@ J7,HUB_MACHINE_PHASES,,external-boundaries
 J8,HUB_MCU_PWM_EXT,,external-boundaries
 J9,HUB_SPI_EXT,,external-boundaries
 J10,HUB_ADC_EXT,,external-boundaries
-J11,INDEPENDENT_ENABLE_CHAIN_EXT,,external-boundaries
+J11,SAFETY_CONTROL,,external-boundaries
 C21,100u 100V provisional,,external-boundaries
+U3,R-78HB12-0.5,,aux-supply
+U4,TLV76033DBZR,Package_TO_SOT_SMD:SOT-23,aux-supply
+C22,3.3u 100V GRM32ER72A335KA35L,Capacitor_SMD:C_1210_3225Metric,aux-supply
+C23,10u 25V GRM21BR61E106KA73L,Capacitor_SMD:C_0805_2012Metric,aux-supply
+C24,1u 25V GRM21BR71E105KA99L,Capacitor_SMD:C_0805_2012Metric,aux-supply
+R39,1k 1% CRCW08051K00FKEA,Resistor_SMD:R_0805_2012Metric,aux-supply
+U5,LM4040AIM3-2.5/NOPB,Package_TO_SOT_SMD:SOT-23,aux-supply
+R40,4k7 1% CRCW08054K70FKEA,Resistor_SMD:R_0805_2012Metric,aux-supply
+C25,100n 25V GRM21BR71E104KA01L,Capacitor_SMD:C_0805_2012Metric,aux-supply
+U6,LM339BIDR,Package_SO:SOIC-14_3.9x8.7mm_P1.27mm,protection-comparators
+R41,112k 0.1% ERA-6AEB1123V,Resistor_SMD:R_0805_2012Metric,protection-comparators
+R42,113k 0.1% ERA-6AEB1133V,Resistor_SMD:R_0805_2012Metric,protection-comparators
+R43,10k 0.1% ERA-6AEB103V,Resistor_SMD:R_0805_2012Metric,protection-comparators
+R44,330k 0.1% ERA-6AEB334V,Resistor_SMD:R_0805_2012Metric,protection-comparators
+R45,1k 1% CRCW08051K00FKEA,Resistor_SMD:R_0805_2012Metric,protection-comparators
+R46,30k 0.1% ERA-6AEB303V,Resistor_SMD:R_0805_2012Metric,protection-comparators
+R47,10k 0.1% ERA-6AEB103V,Resistor_SMD:R_0805_2012Metric,protection-comparators
+R48,2k 0.1% ERA-6AEB202V,Resistor_SMD:R_0805_2012Metric,protection-comparators
+R49,10k 0.1% ERA-6AEB103V,Resistor_SMD:R_0805_2012Metric,protection-comparators
+R50,10k 1% CRCW080510K0FKEA,Resistor_SMD:R_0805_2012Metric,protection-comparators
+R51,4k7 1% CRCW08054K70FKEA,Resistor_SMD:R_0805_2012Metric,protection-comparators
+C26,100p C0G GRM21A5C1H101JA01D,Capacitor_SMD:C_0805_2012Metric,protection-comparators
+C27,100n 25V GRM21BR71E104KA01L,Capacitor_SMD:C_0805_2012Metric,protection-comparators
+U7,SN74HC00DR,Package_SO:SOIC-14_3.9x8.7mm_P1.27mm,fault-latch
+U8,SN74HC11DR,Package_SO:SOIC-14_3.9x8.7mm_P1.27mm,fault-latch
+U9,TPS3823-33DBVR,Package_TO_SOT_SMD:SOT-23-5,fault-latch
+D1,BAT54WS-7-F,Diode_SMD:D_SOD-323,fault-latch
+D2,BAT54WS-7-F,Diode_SMD:D_SOD-323,fault-latch
+D3,BAT54WS-7-F,Diode_SMD:D_SOD-323,fault-latch
+R52,100k CRCW0805100KFKEA,Resistor_SMD:R_0805_2012Metric,fault-latch
+R53,10k 1% CRCW080510K0FKEA,Resistor_SMD:R_0805_2012Metric,fault-latch
+R54,10k 1% CRCW080510K0FKEA,Resistor_SMD:R_0805_2012Metric,fault-latch
+R55,10k 1% CRCW080510K0FKEA,Resistor_SMD:R_0805_2012Metric,fault-latch
+R56,1k 1% CRCW08051K00FKEA,Resistor_SMD:R_0805_2012Metric,fault-latch
+R57,1k 1% CRCW08051K00FKEA,Resistor_SMD:R_0805_2012Metric,fault-latch
+C28,100n 25V GRM21BR71E104KA01L,Capacitor_SMD:C_0805_2012Metric,fault-latch
+C29,100n 25V GRM21BR71E104KA01L,Capacitor_SMD:C_0805_2012Metric,fault-latch
+C30,100n 25V GRM21BR71E104KA01L,Capacitor_SMD:C_0805_2012Metric,fault-latch
+U10,UCC27511DBVR,Package_TO_SOT_SMD:SOT-23-6,brake-chopper
+Q13,CSD19532Q5B,Package_TO_SOT_SMD:TDSON-8-1,brake-chopper
+R58,10R CRCW080510R0FKEA,Resistor_SMD:R_0805_2012Metric,brake-chopper
+R59,2R2 CRCW08052R20FKEA,Resistor_SMD:R_0805_2012Metric,brake-chopper
+R60,10k CRCW080510K0FKEA,Resistor_SMD:R_0805_2012Metric,brake-chopper
+C31,1u 25V GRM21BR71E105KA99L,Capacitor_SMD:C_0805_2012Metric,brake-chopper
+C32,100n 25V GRM21BR71E104KA01L,Capacitor_SMD:C_0805_2012Metric,brake-chopper
+J12,EXTERNAL_DUMP_RESISTOR,,brake-chopper
