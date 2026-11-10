@@ -95,7 +95,7 @@ The CSV includes 0%, 50%, 100% requested share and the resulting mechanical rema
 
 - Page 1: HSC300 **300 W with heatsink at 25°C**, **75 W without heatsink**; specified standard sink **578,000 mm² area, 3 mm thick** per resistor. Do not assume one small frame tube or one shared plate equals two standard sinks; surface-area convention and boundary conditions need manufacturer confirmation.
 - Page 1: thermal compound **essential** for HSC200/250/300; improved heatsinks do not justify uprating. Standard tolerance ±5%. For improved long-term stability, maximum dissipation of 70% or 50% of rating is stated for 50% or 25% of the stated resistance change respectively.
-- Page 3 HSC75–HSC300 derating graph uses **HEATSINK temperature, not ambient**. HSC300's 300 W plateau visually ends around **130°C**, descending to zero at **250°C**. These approximate graph readings are NOT acceptable bike touch temperatures, nor a precise release curve. Do not apply a generic ambient-linear derating rule to this part.
+- Page 3 HSC75–HSC300 derating graph uses **HEATSINK temperature, not ambient**. HSC300's 300 W plateau visually ends **between 125°C and 150°C, just above 125°C** (the bend is not numerically annotated), descending to zero at **250°C**. These approximate graph readings are NOT acceptable bike touch temperatures, nor a precise release curve. Do not apply a generic ambient-linear derating rule to this part.
 - Page 3 gives pulse-energy-versus-resistance curves. No unrestricted pulse-duration/repetition approval was derived. Do not claim a 4.7 Ω pulse joule rating from a low-resolution curve or multiply it into mountain energy capacity. Confirm hot-start pulse/PWM waveform with TE.
 
 | Candidate item | Qty / purpose | Source / qualification status |
