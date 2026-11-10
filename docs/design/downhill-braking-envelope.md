@@ -9,7 +9,7 @@
 | Worktree / base | `~/worktrees/cycle-braking-thermal` / `30560f6` from GitHub master |
 | Lens | First-order energy, load allocation, resistor and sink screening; not thermal geometry validation |
 | Read first | `hardware/powerboard-reva/docs/safety-review.md`; `docs/evaluation/custom-powerboard-concept.md` |
-| Reproduction | `python3 -m unittest discover -s analysis/braking -v`; `python3 analysis/braking/model.py > braking-grid.csv` |
+| Reproduction | `python3 -m unittest discover -s analysis/braking -v`; `python3 analysis/braking/summary.py`; `python3 analysis/braking/model.py > braking-grid.csv` |
 | Scope exclusions | No schematic/PCB changes, ordering, frame machining, real motor torque validation, SPICE or physical tests |
 
 ## 0. Recommendation and decision log

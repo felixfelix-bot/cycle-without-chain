@@ -26,6 +26,21 @@ class BrakingTests(unittest.TestCase):
         self.assertAlmostEqual(thermal_step(40,40,100,.3,900,1e6),70)
         self.assertLess(thermal_step(100,40,0,.3,900,60),100)
         self.assertGreater(thermal_step(40,40,100,.3,900,60),40)
+    def test_tailwind_adds_load_and_propulsion_balance(self):
+        calm=descent(150,.05,10,100)
+        wind=descent(150,.05,10,100,tailwind=5)
+        self.assertLess(wind['aero_w'],0)
+        self.assertGreater(wind['brake_w'],calm['brake_w'])
+        x=descent(150,.001,30,100)
+        self.assertEqual(x['brake_w'],0)
+        self.assertAlmostEqual(x['potential_j']+x['propulsion_w']*x['seconds'],x['road_j'])
+    def test_drop_scaling_and_wind_to_stop(self):
+        x=descent(150,.1,20,100); y=descent(150,.1,20,600)
+        self.assertEqual(x['brake_w'],y['brake_w'])
+        self.assertAlmostEqual(6*x['brake_j'],y['brake_j'])
+        hot=thermal_step(40,40,300,.1,900,600)
+        self.assertLess(thermal_step(hot,40,0,.6,900,60),hot)
+        self.assertGreater(thermal_step(hot,40,300,.6,900,60),hot)
     def test_invalid_inputs(self):
         for args in [(0,.1,20,100),(150,0,20,100),(150,.1,0,100)]:
             with self.assertRaises(ValueError): descent(*args)
