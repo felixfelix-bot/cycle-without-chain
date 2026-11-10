@@ -75,6 +75,9 @@ requires specialist mechanical engineering, not just electrical PCB checks.
 Flywheel storage and active balancing form a separate feasibility workstream. The
 current reversible Villiger design retains its small electrical-buffer baseline;
 no gyro hardware is selected and mechanical brakes/support are not replaced.
+The [quantified gyro feasibility study](docs/design/gyro-balance-feasibility.md)
+compares balance-only and combined storage options with simpler supports, includes
+reproducible calculations and a source-backed research shortlist—not a purchase BOM.
 
 ## Historical illustrations — not validated build specifications
 
