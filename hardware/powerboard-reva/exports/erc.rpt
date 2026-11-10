@@ -1,4 +1,4 @@
-ERC report (2026-11-10T15:53:39+0100, Encoding UTF8)
+ERC report (2026-11-10T16:36:40+0100, Encoding UTF8)
 Report includes: Errors, Warnings
 
 ***** Sheet /
@@ -83,4 +83,9 @@ Report includes: Errors, Warnings
     ; error
     @(43.18 mm, 81.28 mm): Symbol U401 Pin 5 [VSSS, Power input, Line]
 
- ** ERC messages: 8  Errors 8  Warnings 0
+***** Sheet /CTRL3V3 pack-side buck - unqualified, enables inhibited/
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(55.88 mm, 91.44 mm): Symbol U500 Pin 2 [VIN, Power input, Line]
+
+ ** ERC messages: 9  Errors 9  Warnings 0

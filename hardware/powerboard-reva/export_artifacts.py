@@ -11,6 +11,8 @@ commands=[['python3','generate_schematic.py'],['kicad-cli','sch','export','netli
 for command in commands:
     print('+',' '.join(command),flush=True)
     subprocess.run(command,cwd=p,check=True)
+# Native XML is an independent test input; never synthesized from the manifest.
+subprocess.run(['kicad-cli','sch','export','netlist','--format','kicadxml','-o','exports/ctrl-supply.xml','powerboard-reva.kicad_sch'],cwd=p,check=True)
 # Strict ERC is evidence, not waived by consistency-check success.
 strict = subprocess.run(['kicad-cli','sch','erc','--format','json','--exit-code-violations','-o','exports/fsr-erc-strict.json','powerboard-reva.kicad_sch'],cwd=p)
 (p/'exports/fsr-erc-exit.txt').write_text(str(strict.returncode)+'\n')

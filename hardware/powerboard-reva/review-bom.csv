@@ -337,3 +337,19 @@ R414,100k 1% G-S default OFF,,entry-pre
 Q403,IRFP4568PbF 150V candidate,Package_TO_SOT_THT:TO-247-3_Vertical,entry-pre
 R415,10R 1% gate candidate,,entry-pre
 R416,100k 1% G-S default OFF,,entry-pre
+U500,LM5164DDAR,,ctrl-supply
+D500,S1J-E3/61T 600V 1A,Diode_SMD:D_SMA,ctrl-supply
+L500,68u MSS1246T-683MLC 20%,,ctrl-supply
+C500,2.2u 200V X7R 22252C225KAT2A,Capacitor_SMD:C_2225_5664Metric,ctrl-supply
+C501,2.2u 200V X7R 22252C225KAT2A,Capacitor_SMD:C_2225_5664Metric,ctrl-supply
+C502,2.2n 50V GCM155R71H222KA37D,,ctrl-supply
+C503,22u 25V TMK325B7226KMHT,,ctrl-supply
+C504,22u 25V TMK325B7226KMHT,,ctrl-supply
+C505,3.3n 100V CGA3E2X7R2A332K080AA,,ctrl-supply
+C506,330p 50V C0G 5% candidate,,ctrl-supply
+R500,27.4k 1% 0.1W candidate,,ctrl-supply
+R501,87.3k 1% 0.1W candidate,,ctrl-supply
+R502,49.9k 1% RG1608P-4992-B-T5,,ctrl-supply
+R503,150k 1% 0.1W >=100V candidate,,ctrl-supply
+R504,1M 1% 0.1W >=100V candidate,,ctrl-supply
+R505,52.3k 1% 0.1W candidate,,ctrl-supply

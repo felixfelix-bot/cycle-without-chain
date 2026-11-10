@@ -1,0 +1,13 @@
+{
+  "components": 354,
+  "nets": 205,
+  "verified_pin_assignments": 1058,
+  "explicit_nc_endpoints": 52,
+  "mosfets": 29,
+  "drivers": 4,
+  "erc_errors": 9,
+  "erc_warnings": 0,
+  "erc_reason": "Nine known undriven supply errors remain unresolved, NOT waived.",
+  "status": "PARTIAL_NOT_SAFE_TO_ENERGIZE",
+  "svg_pages": 30
+}

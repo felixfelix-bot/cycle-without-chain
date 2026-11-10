@@ -83,7 +83,7 @@ class Sheet:
         # All labels global: explicit namespace GEN_/HUB_ prevents unintended merges.
         self.items.append(f'(global_label {q(net)} (shape bidirectional) (at {xx} {yy} {angle_label}) (effects (font (size 0.9 0.9)) (justify {justify_label})) (uuid {uid(tag+"label")}))')
     def legibility_layout(self):
-        return self.name.startswith(('fsr-', 'brake-intent-')) or self.name in ('brake-switch-harness', 'brake-dump-command')
+        return self.name.startswith(('fsr-', 'brake-intent-')) or self.name in ('brake-switch-harness', 'brake-dump-command', 'ctrl-supply')
     def part(self,a,ref,value,x,y,nets,footprint=''):
         libid=val(a[1]);self.syms[libid]=a
         fx, ry, vy, justify = x, y-5.08, y-2.54, ''
@@ -191,6 +191,8 @@ from fsr_circuit import populate as populate_fsr
 populate_fsr(globals())
 from active_entry_circuit import populate as populate_active_entry
 populate_active_entry(globals())
+from ctrl_supply_circuit import populate as populate_ctrl_supply
+populate_ctrl_supply(globals())
 local_symbols=[local_drv]
 for a in custom_symbols:
     b=parse(dump(a));b[1]=q(val(b[1]).split(':')[1]);local_symbols.append(b)

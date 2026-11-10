@@ -1,0 +1,39 @@
+.E.E
+======================================================================
+ERROR: test_corrupted_pin_rejected (test_ctrl_supply.CtrlSupplyTests.test_corrupted_pin_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-ctrl-supply/hardware/powerboard-reva/tests/test_ctrl_supply.py", line 42, in test_corrupted_pin_rejected
+    root=self.load()
+         ^^^^^^^^^^^
+  File "/home/c08r4d0r/worktrees/cycle-ctrl-supply/hardware/powerboard-reva/tests/test_ctrl_supply.py", line 39, in load
+    def load(self): return ET.parse(ROOT/'exports/ctrl-supply.xml').getroot()
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/c08r4d0r/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/xml/etree/ElementTree.py", line 1219, in parse
+    tree.parse(source, parser)
+  File "/home/c08r4d0r/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/xml/etree/ElementTree.py", line 570, in parse
+    source = open(source, "rb")
+             ^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/home/c08r4d0r/worktrees/cycle-ctrl-supply/hardware/powerboard-reva/exports/ctrl-supply.xml'
+
+======================================================================
+ERROR: test_native_endpoints_and_values (test_ctrl_supply.CtrlSupplyTests.test_native_endpoints_and_values)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-ctrl-supply/hardware/powerboard-reva/tests/test_ctrl_supply.py", line 40, in test_native_endpoints_and_values
+    def test_native_endpoints_and_values(self): validate(self.load())
+                                                         ^^^^^^^^^^^
+  File "/home/c08r4d0r/worktrees/cycle-ctrl-supply/hardware/powerboard-reva/tests/test_ctrl_supply.py", line 39, in load
+    def load(self): return ET.parse(ROOT/'exports/ctrl-supply.xml').getroot()
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/c08r4d0r/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/xml/etree/ElementTree.py", line 1219, in parse
+    tree.parse(source, parser)
+  File "/home/c08r4d0r/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/xml/etree/ElementTree.py", line 570, in parse
+    source = open(source, "rb")
+             ^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/home/c08r4d0r/worktrees/cycle-ctrl-supply/hardware/powerboard-reva/exports/ctrl-supply.xml'
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.002s
+
+FAILED (errors=2)
