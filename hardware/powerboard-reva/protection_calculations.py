@@ -11,7 +11,7 @@ def corners():
     for a,b,c,d,e,f in itertools.product([-1,1], repeat=6):
         rt=225000*(1+a*.00225); rb=10000*(1+b*.00225); rh=330000*(1+c*.00225)
         ref=2.5*(1+d*.006)+e*(.0055+50e-9*10000)
-        pairs.append(thresholds(rt,rb,rh,ref,3.3*(1+f*.04),.4 if f>0 else 0))
+        pairs.append(thresholds(rt,rb,rh,ref,3.3*(1+f*.04),.55 if f>0 else 0))
     return dict(on_min=min(x[0] for x in pairs),on_max=max(x[0] for x in pairs),off_min=min(x[1] for x in pairs),off_max=max(x[1] for x in pairs))
 
 def latch_next(fault_latched, healthy, reset):

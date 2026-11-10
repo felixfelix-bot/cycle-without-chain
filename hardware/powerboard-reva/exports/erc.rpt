@@ -1,4 +1,4 @@
-ERC report (2026-11-10T11:44:22+0100, Encoding UTF8)
+ERC report (2026-11-10T12:10:54+0100, Encoding UTF8)
 Report includes: Errors, Warnings
 
 ***** Sheet /
@@ -26,7 +26,9 @@ Report includes: Errors, Warnings
 
 ***** Sheet /Autonomous OV chopper comparator and rail / brake monitors/
 
-***** Sheet /Set-dominant fault memory and hardware bridge enable/
+***** Sheet /Release-before-rearm DFF memory/
+
+***** Sheet /LVC Schmitt fault inputs without series diode offsets/
 
 ***** Sheet /Independent brake chopper power stage/
 

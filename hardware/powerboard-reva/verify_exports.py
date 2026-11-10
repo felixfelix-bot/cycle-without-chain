@@ -71,12 +71,12 @@ def rows(path, fields, count):
 
 def verify(root=P):
     expected = {}
-    for row in rows(root / 'pin-net-map.csv', ['ref', 'pin', 'pin_name', 'net', 'sheet'], 452):
+    for row in rows(root / 'pin-net-map.csv', ['ref', 'pin', 'pin_name', 'net', 'sheet'], 495):
         key = (row['ref'], row['pin'])
         require(all(row.values()) and key not in expected, 'empty or duplicate expected endpoint')
         expected[key] = row['net']
     bom = {}
-    for row in rows(root / 'review-bom.csv', ['reference', 'value', 'footprint', 'sheet'], 130):
+    for row in rows(root / 'review-bom.csv', ['reference', 'value', 'footprint', 'sheet'], 144):
         ref = row['reference']
         require(ref and row['value'] and row['sheet'] and ref not in bom, 'empty or duplicate expected part')
         bom[ref] = (row['value'], row['footprint'])
@@ -93,7 +93,7 @@ def verify(root=P):
         footprint = value(comp, 'footprint') if footprints else ''
         actual_bom[ref] = (value(comp, 'value'), footprint)
     require(actual_bom == bom, 'component reference/value/footprint mismatch')
-    require(sum(ref.startswith('Q') for ref in bom) == 13 and sum(ref.startswith('U') for ref in bom) == 10, 'expected 13 Q references and 10 U references')
+    require(sum(ref.startswith('Q') for ref in bom) == 13 and sum(ref.startswith('U') for ref in bom) == 16, 'expected 13 Q references and 16 U references')
     actual, names, codes = {}, set(), set()
     for entry in children(child(net, 'nets'), 'net'):
         name, code = value(entry, 'name'), value(entry, 'code')
@@ -106,7 +106,7 @@ def verify(root=P):
             key = (value(node, 'ref'), value(node, 'pin'))
             require(key not in actual, f'duplicate endpoint {key}')
             actual[key] = name
-    require(names == set(expected.values()) and len(names) == 104, 'net identity/count mismatch')
+    require(names == set(expected.values()) and len(names) == 112, 'net identity/count mismatch')
     require(actual == expected, 'endpoint set or net assignment mismatch')
 
     report = (root / 'exports/erc.rpt').read_text()

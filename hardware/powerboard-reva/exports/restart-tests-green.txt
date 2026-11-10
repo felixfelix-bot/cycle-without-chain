@@ -1,0 +1,7 @@
+test_corrected_restart_contract (test_protection_spice.ProtectionSpice.test_corrected_restart_contract) ... ok
+test_old_held_reset_is_negative_control (test_protection_spice.ProtectionSpice.test_old_held_reset_is_negative_control) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.655s
+
+OK

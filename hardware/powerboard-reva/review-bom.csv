@@ -106,26 +106,40 @@ R50,10k 1% CRCW080510K0FKEA,Resistor_SMD:R_0805_2012Metric,protection-comparator
 R51,4k7 1% CRCW08054K70FKEA,Resistor_SMD:R_0805_2012Metric,protection-comparators
 C26,100p C0G GRM21A5C1H101JA01D,Capacitor_SMD:C_0805_2012Metric,protection-comparators
 C27,100n 25V GRM21BR71E104KA01L,Capacitor_SMD:C_0805_2012Metric,protection-comparators
-U7,SN74HC00DR,Package_SO:SOIC-14_3.9x8.7mm_P1.27mm,fault-latch
-U8,SN74HC11DR,Package_SO:SOIC-14_3.9x8.7mm_P1.27mm,fault-latch
+U7,SN74LVC1G74DCUR,Package_SO:VSSOP-8_2.3x2mm_P0.5mm,fault-latch
+U8,SN74LVC1G74DCUR,Package_SO:VSSOP-8_2.3x2mm_P0.5mm,fault-latch
 U9,TPS3823-33DBVR,Package_TO_SOT_SMD:SOT-23-5,fault-latch
-D1,BAT54WS-7-F,Diode_SMD:D_SOD-323,fault-latch
-D2,BAT54WS-7-F,Diode_SMD:D_SOD-323,fault-latch
-D3,BAT54WS-7-F,Diode_SMD:D_SOD-323,fault-latch
-R52,100k CRCW0805100KFKEA,Resistor_SMD:R_0805_2012Metric,fault-latch
+R52,10k 1% CRCW080510K0FKEA,Resistor_SMD:R_0805_2012Metric,fault-latch
 R53,10k 1% CRCW080510K0FKEA,Resistor_SMD:R_0805_2012Metric,fault-latch
-R54,10k 1% CRCW080510K0FKEA,Resistor_SMD:R_0805_2012Metric,fault-latch
+R54,1k 1% CRCW08051K00FKEA,Resistor_SMD:R_0805_2012Metric,fault-latch
 R55,10k 1% CRCW080510K0FKEA,Resistor_SMD:R_0805_2012Metric,fault-latch
-R56,1k 1% CRCW08051K00FKEA,Resistor_SMD:R_0805_2012Metric,fault-latch
-R57,1k 1% CRCW08051K00FKEA,Resistor_SMD:R_0805_2012Metric,fault-latch
-C28,100n 25V GRM21BR71E104KA01L,Capacitor_SMD:C_0805_2012Metric,fault-latch
+C28,10n 5% C0G GRM21A5C1H103JA01D,Capacitor_SMD:C_0805_2012Metric,fault-latch
+R56,10k 1% CRCW080510K0FKEA,Resistor_SMD:R_0805_2012Metric,fault-latch
+R57,10k 1% CRCW080510K0FKEA,Resistor_SMD:R_0805_2012Metric,fault-latch
+R58,100k CRCW0805100KFKEA,Resistor_SMD:R_0805_2012Metric,fault-latch
+R59,100k CRCW0805100KFKEA,Resistor_SMD:R_0805_2012Metric,fault-latch
+R60,1k 1% CRCW08051K00FKEA,Resistor_SMD:R_0805_2012Metric,fault-latch
+R61,1k 1% CRCW08051K00FKEA,Resistor_SMD:R_0805_2012Metric,fault-latch
 C29,100n 25V GRM21BR71E104KA01L,Capacitor_SMD:C_0805_2012Metric,fault-latch
 C30,100n 25V GRM21BR71E104KA01L,Capacitor_SMD:C_0805_2012Metric,fault-latch
+C31,100n 25V GRM21BR71E104KA01L,Capacitor_SMD:C_0805_2012Metric,fault-latch
+U11,SN74LVC3G17DCUR,Package_SO:VSSOP-8_2.3x2mm_P0.5mm,fault-interfaces
+U12,SN74LVC3G17DCUR,Package_SO:VSSOP-8_2.3x2mm_P0.5mm,fault-interfaces
+U13,SN74LVC1G11DBVR,Package_TO_SOT_SMD:SOT-23-6,fault-interfaces
+U14,SN74LVC1G11DBVR,Package_TO_SOT_SMD:SOT-23-6,fault-interfaces
+U15,SN74LVC1G04DBVR,Package_TO_SOT_SMD:SOT-23-5,fault-interfaces
+U16,SN74LVC1G11DBVR,Package_TO_SOT_SMD:SOT-23-6,fault-interfaces
+C32,100n 25V GRM21BR71E104KA01L,Capacitor_SMD:C_0805_2012Metric,fault-interfaces
+C33,100n 25V GRM21BR71E104KA01L,Capacitor_SMD:C_0805_2012Metric,fault-interfaces
+C34,100n 25V GRM21BR71E104KA01L,Capacitor_SMD:C_0805_2012Metric,fault-interfaces
+C35,100n 25V GRM21BR71E104KA01L,Capacitor_SMD:C_0805_2012Metric,fault-interfaces
+C36,100n 25V GRM21BR71E104KA01L,Capacitor_SMD:C_0805_2012Metric,fault-interfaces
+C37,100n 25V GRM21BR71E104KA01L,Capacitor_SMD:C_0805_2012Metric,fault-interfaces
 U10,UCC27511DBVR,Package_TO_SOT_SMD:SOT-23-6,brake-chopper
 Q13,CSD19532Q5B,Package_TO_SOT_SMD:TDSON-8-1,brake-chopper
-R58,10R CRCW080510R0FKEA,Resistor_SMD:R_0805_2012Metric,brake-chopper
-R59,2R2 CRCW08052R20FKEA,Resistor_SMD:R_0805_2012Metric,brake-chopper
-R60,10k CRCW080510K0FKEA,Resistor_SMD:R_0805_2012Metric,brake-chopper
-C31,1u 25V GRM21BR71E105KA99L,Capacitor_SMD:C_0805_2012Metric,brake-chopper
-C32,100n 25V GRM21BR71E104KA01L,Capacitor_SMD:C_0805_2012Metric,brake-chopper
+R62,10R CRCW080510R0FKEA,Resistor_SMD:R_0805_2012Metric,brake-chopper
+R63,2R2 CRCW08052R20FKEA,Resistor_SMD:R_0805_2012Metric,brake-chopper
+R64,10k CRCW080510K0FKEA,Resistor_SMD:R_0805_2012Metric,brake-chopper
+C38,1u 25V GRM21BR71E105KA99L,Capacitor_SMD:C_0805_2012Metric,brake-chopper
+C39,100n 25V GRM21BR71E104KA01L,Capacitor_SMD:C_0805_2012Metric,brake-chopper
 J12,EXTERNAL_DUMP_RESISTOR,,brake-chopper
