@@ -5,10 +5,13 @@ controller and sink bucks,LM5164DDAR,2,4.97,IC only magnetics capacitors ripple 
 delayed drive buck optional additional,LM5164DDAR,1,4.97,IC only if existing independent supply not reusable,https://www.ti.com/lit/ds/symlink/lm5164.pdf
 optional independent series isolation relay,HEV2AN-P-DC12V,1,108.11,both contacts series; resistive DC rating not inductive qualification,https://digikey.com/en/products/detail/panasonic-electric-works/HEV2AN-P-DC12V/3945771
 controller branch reverse diode,STTH1R02A,1,,200V candidate validate pulse and fuse,https://www.st.com/resource/en/datasheet/stth1r02.pdf
-controller LDO,TLV76033DBZR,1,,candidate thermal and load budget,https://www.ti.com/lit/ds/symlink/tlv760.pdf
+REMOVED controller LDO,TLV76033DBZR,0,,direct 3V3 buck replaces cascade,https://www.ti.com/lit/ds/symlink/tlv760.pdf
 window comparators,LM339BIDR,2,,candidate channel count implementation pending,https://www.ti.com/lit/ds/symlink/lm339b.pdf
 difference amplifier,TLV9002IDR,1,,candidate error budget not closed,https://www.ti.com/lit/ds/symlink/tlv9002.pdf
 timeout,TLC555IDR,1,,candidate tolerance and leakage validation,https://www.ti.com/lit/ds/symlink/tlc555.pdf
 state and fault latches,SN74LVC1G74DCUR,3,,provisional count state implementation pending,https://www.ti.com/lit/ds/symlink/sn74lvc1g74.pdf
-precharge resistor existing,RH050100R0FE02,1,,mounted 58J timeout pulse acceptance outstanding,https://www.vishay.com/docs/30201/rhnh.pdf
+precharge resistor candidate,RH05022R00FE02,1,,22ohm candidate order code and mounted 55J pulse unqualified,https://www.vishay.com/docs/30201/rhnh.pdf
 branch fuse TVS thermal cutoff matched dividers magnetics caps,UNSELECTED,1,,mandatory not included in subtotal,
+main proof precision amplifier,OPA4197IDR,1,,SINK12 powered combined analog 0.10W acceptance allowance,https://www.ti.com/lit/ds/symlink/opa2197.pdf
+main proof window comparator,TLV1702DGKR,1,,precision threshold network and full tolerance closure pending,https://www.ti.com/lit/ds/symlink/tlv1702.pdf
+diagnostic load and Kelvin shunt,UNSELECTED,1,,330ohm 1J qualified hot pulse plus 1ohm shunt and protected switch,

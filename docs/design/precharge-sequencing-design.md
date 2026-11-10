@@ -1,5 +1,7 @@
 # Precharge and auxiliary sequencing — proposed implementation contract
 
+> **Numerical architecture superseded:** [budget revision](precharge-budget-revision.md) replaces 100 Ω, 0.1 W sink, 0.5 W CTRL, and the LDO cascade. Below is historical rationale, not the current build contract.
+
 > **STATUS: CONSULTANT ANALYSIS — NOT A DECISION RECORD. NOT SAFE TO ENERGIZE.** Docs/model only; no schematic, PCB, ordering, operation or hardware approval. Follow-up independent review: [precharge-review.md](precharge-review.md). Its corrections supersede the historical price-verification and pin-level-readiness language below; architecture and auxiliary budgets remain blocked.
 
 2026-11-10; branch `pr/precharge-design`; worktree `/home/c08r4d0r/worktrees/cycle-precharge-design`; base `d07bdb2` (fetched github/master). Read first: `entry-review.md`, `dc-entry-milestone.md`. Scope: source switching/boot dependencies, not FSR/brake changes. 120 kg rider/payload excludes bicycle mass. Human-powered short buffer; 36–58.4 V, 500 W screen and 15 A target are NOT installed ratings or a final battery chemistry.
