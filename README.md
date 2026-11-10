@@ -46,6 +46,36 @@ both be independently enforced. This is research, not a certified product.
   useful charging stops; continued pedalling under load requires a safe energy
   sink and adequate cooling, otherwise load must be reduced or stopped.
 
+### Balance assistance and accessible cycling — research option
+
+Some older riders and people with vestibular, neurological or other balance
+limitations may value low-speed assistance more than minimum drivetrain loss or
+mass. Investigate whether an actively gimballed flywheel can assist stopping,
+starting and mounting/dismounting within a specified operating envelope. This is
+an accessibility hypothesis, not demonstrated medical suitability or fall prevention.
+Compare against mechanically supported adaptive cycles, including tricycles.
+
+Evaluate energy buffering and balance assistance separately before combining them:
+energy scales with rotor speed squared, angular momentum only linearly. Discharging
+the rotor reduces balancing authority. Two gimbal axes do not eliminate torque
+coupling, travel limits, singularities or power-failure risk. Turning requires
+appropriate lean, not unconditional vertical holding.
+
+Count containment, motor-generator, bearings, actuators and control electronics in
+mass and losses. The suggested 8–12 kg mass and 30% range penalty are unverified
+examples, not specifications. Do not promise recovery from ice, potholes, collisions
+or arbitrary disturbances, and never claim the rider cannot tip over.
+
+Before rider trials, quantify disturbance limits and test on a restrained rig:
+startup/shutdown support, depleted energy, sensor/actuator failure, gimbal saturation,
+power loss, containment, frame loads and thermal behavior. Accessibility benefits
+require user-centred assessment and relevant clinical input. High-speed rotor safety
+requires specialist mechanical engineering, not just electrical PCB checks.
+
+Flywheel storage and active balancing form a separate feasibility workstream. The
+current reversible Villiger design retains its small electrical-buffer baseline;
+no gyro hardware is selected and mechanical brakes/support are not replaced.
+
 ## Historical illustrations — not validated build specifications
 
 [Parts, efficiency, limitations and existing bicycles](docs/analysis/parallel-hybrid-guide.md)
