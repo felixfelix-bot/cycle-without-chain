@@ -355,8 +355,9 @@ R504,1M 1% 0.1W >=100V candidate,,ctrl-supply
 R505,52.3k 1% 0.1W candidate,,ctrl-supply
 U510,SN74LVC1G08DBVR,Package_TO_SOT_SMD:SOT-23-5,rail-partition
 U501,LM5164DDAR,,rail-partition
+U503,TLV1701AIDBVR,Package_TO_SOT_SMD:SOT-23-5,rail-partition
 U502,AP63203WU,Package_TO_SOT_SMD:TSOT-23-6,rail-partition
-L501,68u MSS1246T-683MLC 20%,,rail-passives
+L501,68u SPM10065VT-680M-D 20% AEC-Q200 candidate,,rail-passives
 L502,3.9u candidate 2A,Inductor_SMD:L_Bourns_SRN6045TA,rail-passives
 C510,2.2u 200V X7R 22252C225KAT2A,Capacitor_SMD:C_2225_5664Metric,rail-passives
 C511,2.2u 200V X7R 22252C225KAT2A,Capacitor_SMD:C_2225_5664Metric,rail-passives
@@ -381,3 +382,7 @@ R517,100k 1% DELAY EN pulldown,,rail-passives
 R518,100k 1% MAIN_PROVEN default low,,rail-passives
 R519,0R FIXED INHIBIT - no MAIN_PROVEN detector fitted,,rail-passives
 R520,10k CTRL PGOOD pullup,,rail-passives
+R521,47k 1% DRIVE_PG pullup (PGOOD abs max 14V),,rail-passives
+R523,649k 0.1% DRIVE12 OVP upper leg,,rail-passives
+R524,118k 0.1% DRIVE12 OVP lower leg,,rail-passives
+C523,100p 50V C0G OVP sense filter,,rail-passives

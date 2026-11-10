@@ -81,17 +81,18 @@ figure as a product specification. See
 `hardware/powerboard-reva/` is a Python generator that emits a hierarchical
 **KiCad 9** schematic, native netlist, PDF and SVG. Current state:
 
-- **382 components, 218 nets, 1129 connected pins, 51 explicit NCs, 32 pages.**
-  These figures were re-measured from a fresh clone at `ae42054`, including what the
-  net/NC split actually means: [schematic figure verification](docs/design/schematic-figures-verified.md).
-- **45 hardware tests** pass, normally and under `python3 -O`.
+- **387 components, 220 nets, 1142 connected pins, 51 explicit NCs, 32 pages.**
+  The pre-change baseline was re-measured from a fresh clone at `ae42054`
+  (382 components, 218 nets, 1129 pins): [schematic figure verification](docs/design/schematic-figures-verified.md).
+  The current figures include the DRIVE12 OVP comparator, its divider and the L501 change.
+- **49 hardware tests** pass, normally and under `python3 -O`.
 - Strict ERC: **10 errors, 0 warnings, exit 5** — unsuppressed and unwaived.
   Enumerated, gate-enforced and treated as open work, not silenced.
 - Blocks present: dual DRV8353 bridges; protected-entry *intent* (fuse, shunt
   reverse clamp, 22 Ω resistor precharge, back-to-back TPSI3052-driven MOSFET
   pairs); fast overcurrent comparators; dual FSR brake frontends; rail partition
-  (pack→CTRL3V3, bus→SINK12 always-on safety chain, delayed DRIVE12→MCU3V3); and
-  a pack-side control supply.
+  (pack→CTRL3V3, bus→SINK12 always-on safety chain, delayed DRIVE12→MCU3V3) with
+  an independent DRIVE12 output OVP comparator; and a pack-side control supply.
 - **Inhibit resistors hold every switch off without firmware** — fitted 0 Ω ties,
   deliberately present, not to be removed.
 
