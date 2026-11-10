@@ -1,0 +1,31 @@
+test_actual_topology (test_fast_oc_connectivity.FastOC.test_actual_topology) ... ERROR
+test_corrupted_paths_rejected (test_fast_oc_connectivity.FastOC.test_corrupted_paths_rejected) ... ERROR
+
+======================================================================
+ERROR: test_actual_topology (test_fast_oc_connectivity.FastOC.test_actual_topology)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-fast-oc/hardware/powerboard-reva/tests/test_fast_oc_connectivity.py", line 29, in test_actual_topology
+    def test_actual_topology(self):validate(*exported())
+                                   ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/c08r4d0r/worktrees/cycle-fast-oc/hardware/powerboard-reva/tests/test_fast_oc_connectivity.py", line 16, in validate
+    if parts.get(r) != 'TLV3202IDR': raise ValueError(f'missing {r} TLV3202')
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: missing U18 TLV3202
+
+======================================================================
+ERROR: test_corrupted_paths_rejected (test_fast_oc_connectivity.FastOC.test_corrupted_paths_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-fast-oc/hardware/powerboard-reva/tests/test_fast_oc_connectivity.py", line 31, in test_corrupted_paths_rejected
+    parts,nets=exported();validate(parts,nets)
+                          ^^^^^^^^^^^^^^^^^^^^
+  File "/home/c08r4d0r/worktrees/cycle-fast-oc/hardware/powerboard-reva/tests/test_fast_oc_connectivity.py", line 16, in validate
+    if parts.get(r) != 'TLV3202IDR': raise ValueError(f'missing {r} TLV3202')
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: missing U18 TLV3202
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.094s
+
+FAILED (errors=2)

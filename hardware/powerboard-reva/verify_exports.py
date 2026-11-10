@@ -78,12 +78,12 @@ def rows(path, fields, count):
 
 def verify(root=P):
     expected = {}
-    for row in rows(root / 'pin-net-map.csv', ['ref', 'pin', 'pin_name', 'net', 'sheet'], 642):
+    for row in rows(root / 'pin-net-map.csv', ['ref', 'pin', 'pin_name', 'net', 'sheet'], 784):
         key = (row['ref'], row['pin'])
         require(all(row.values()) and key not in expected, 'empty or duplicate expected endpoint')
         expected[key] = row['net']
     bom = {}
-    for row in rows(root / 'review-bom.csv', ['reference', 'value', 'footprint', 'sheet'], 199):
+    for row in rows(root / 'review-bom.csv', ['reference', 'value', 'footprint', 'sheet'], 246):
         ref = row['reference']
         require(ref and row['value'] and row['sheet'] and ref not in bom, 'empty or duplicate expected part')
         bom[ref] = (row['value'], row['footprint'])
@@ -100,7 +100,7 @@ def verify(root=P):
         footprint = value(comp, 'footprint') if footprints else ''
         actual_bom[ref] = (value(comp, 'value'), footprint)
     require(actual_bom == bom, 'component reference/value/footprint mismatch')
-    require(sum(ref.startswith('Q') for ref in bom) == 13 and sum(ref.startswith('U') for ref in bom) == 17, 'expected 13 Q references and 17 U references')
+    require(sum(ref.startswith('Q') for ref in bom) == 25 and sum(ref.startswith('U') for ref in bom) == 23, 'expected 25 Q references and 23 U references')
     actual, names, codes, nc = {}, set(), set(), {}
     seen_endpoints = set()
     for entry in children(child(net, 'nets'), 'net'):
@@ -126,7 +126,7 @@ def verify(root=P):
                 actual[key] = name
     require(set(nc) == EXPECTED_NC, 'explicit NC endpoint set mismatch')
     names -= set(nc.values())
-    require(names == set(expected.values()) and len(names) == 138, 'net identity/count mismatch')
+    require(names == set(expected.values()) and len(names) == 153, 'net identity/count mismatch')
     schematic = parse((root / 'mcu-core.kicad_sch').read_text())
     require(schematic[0] == 'kicad_sch', 'invalid MCU schematic')
     markers = children(schematic, 'no_connect')
@@ -157,7 +157,7 @@ def verify(root=P):
     ]), 'ERC identity/net mismatch (not an approved waiver)')
     return {'components': len(bom), 'nets': len(names), 'verified_pin_assignments': len(actual),
             'explicit_nc_endpoints': len(nc),
-            'mosfets': 13, 'drivers': 2, 'erc_errors': 4, 'erc_warnings': 0,
+            'mosfets': 25, 'drivers': 2, 'erc_errors': 4, 'erc_warnings': 0,
             'erc_reason': 'Four known undriven supply errors remain unresolved, NOT waived.',
             'status': 'PARTIAL_NOT_SAFE_TO_ENERGIZE',
             'svg_pages': len(list((root / 'exports/svg').glob('*.svg')))}

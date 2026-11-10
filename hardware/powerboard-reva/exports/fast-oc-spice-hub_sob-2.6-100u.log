@@ -1,0 +1,134 @@
+Using SPARSE 1.3 as Direct Linear Solver
+
+Note: No compatibility mode selected!
+
+
+Circuit: six-csa independent oc to existing two-dff interlock: ideal, not vendor models
+
+Reducing trtol to 1 for xspice 'A' devices
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+
+Initial Transient Solution
+--------------------------
+
+Node                                   Voltage
+----                                   -------
+gen_soa                                   1.65
+gen_sob                                   1.65
+gen_soc                                   1.65
+hub_soa                                   1.65
+hub_sob                                   1.65
+hub_soc                                   1.65
+safety3v3                                  3.3
+wd_reset_n                                   0
+analog_ok                                  3.3
+gen_nfault                                 3.3
+hub_nfault                                 3.3
+mcu_arm                                    3.3
+reset_request                              3.3
+reset_rc                                   3.3
+reset_clean                            3.29967
+oc_ok                                      3.3
+logic3v3_ext                               3.3
+oc_low_ref                            0.852713
+oc_high_ref                            2.44729
+gen_soa_lo                                   0
+gen_soa_hi                                   0
+gen_sob_lo                                   0
+gen_sob_hi                                   0
+gen_soc_lo                                   0
+gen_soc_hi                                   0
+hub_soa_lo                                   0
+hub_soa_hi                                   0
+hub_sob_lo                                   0
+hub_sob_hi                                   0
+hub_soc_lo                                   0
+hub_soc_hi                                   0
+analog_clean                               3.3
+gen_ok                                     3.3
+hub_ok                                     3.3
+wd_ok                                        0
+arm_clean                                  3.3
+faults_ok                                  3.3
+healthy                                      0
+permit                                       0
+release_seen                                 0
+release_n                                  3.3
+fault_latch                                3.3
+reset_inv                                    0
+timer_break_ok                               0
+gen_enable                                   0
+hub_enable                                   0
+benable#branch                               0
+bhealthy#branch                              0
+bfaults#branch                               0
+barm#branch                                  0
+bwd#branch                                   0
+bhub#branch                                  0
+bgen#branch                                  0
+banalog#branch                               0
+bhi_hub_soc#branch                           0
+blo_hub_soc#branch                           0
+bhi_hub_sob#branch                           0
+blo_hub_sob#branch                           0
+bhi_hub_soa#branch                           0
+blo_hub_soa#branch                           0
+bhi_gen_soc#branch                           0
+blo_gen_soc#branch                           0
+bhi_gen_sob#branch                           0
+blo_gen_sob#branch                           0
+bhi_gen_soa#branch                           0
+blo_gen_soa#branch                           0
+vlogic#branch                     -0.000170543
+vreset#branch                      5.42101e-20
+varm#branch                                  0
+vhub#branch                                  0
+vgen#branch                                  0
+vanalog#branch                               0
+vwd#branch                                   0
+vcc#branch                        -0.000329967
+vhub_soc#branch                              0
+vhub_sob#branch                              0
+vhub_soa#branch                              0
+vgen_soc#branch                              0
+vgen_sob#branch                              0
+vgen_soa#branch                              0
+aout#branch_1_0                              0
+aout#branch_1_1                              0
+aout#branch_1_2                              0
+aout#branch_1_3                              0
+aout#branch_1_4                              0
+
+ Reference value :  7.08364e-04
+ Reference value :  1.46997e-03
+ Reference value :  2.22832e-03
+ Reference value :  3.00463e-03
+ Reference value :  3.76757e-03
+ Reference value :  4.57771e-03
+ Reference value :  5.32491e-03
+ Reference value :  6.10438e-03
+ Reference value :  6.90153e-03
+ Reference value :  7.72168e-03
+ Reference value :  8.51998e-03
+ Reference value :  9.28562e-03
+ Reference value :  1.00720e-02
+ Reference value :  1.06984e-02
+ Reference value :  1.11865e-02
+ Reference value :  1.17043e-02
+No. of Data Rows : 240086
+startup_held        =  0.000000e+00
+armed               =  3.300000e+00
+mcu_stuck_high      =  3.300000e+00
+oc_during           =  7.006369e-03
+healthy_during      =  0.000000e+00
+oc_recovered        =  3.300000e+00
+permit_after        =  0.000000e+00
+fault_latched       =  3.300000e+00
+gen_after           =  0.000000e+00
+hub_after           =  0.000000e+00
+tim1_after          =  0.000000e+00
+tim8_after          =  0.000000e+00
+held_recovery       =  0.000000e+00
+fresh_cycle         =  3.300000e+00
+ngspice-42 done

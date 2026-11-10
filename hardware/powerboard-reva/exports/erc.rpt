@@ -1,4 +1,4 @@
-ERC report (2026-11-10T12:37:49+0100, Encoding UTF8)
+ERC report (2026-11-10T13:05:55+0100, Encoding UTF8)
 Report includes: Errors, Warnings
 
 ***** Sheet /
@@ -42,5 +42,11 @@ Report includes: Errors, Warnings
 ***** Sheet /Six CSA ADC input filters and brake status sense/
 
 ***** Sheet /3V3 Hall interfaces and optional quadrature encoder/
+
+***** Sheet /GEN independent raw CSA window trips/
+
+***** Sheet /HUB independent raw CSA window trips/
+
+***** Sheet /Ratiometric OC window and wired sink fault/
 
  ** ERC messages: 4  Errors 4  Warnings 0

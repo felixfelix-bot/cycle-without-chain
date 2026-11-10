@@ -113,7 +113,7 @@ for idx,prefix in enumerate(['GEN','HUB']):
     s=Sheet(prefix.lower()+'-driver',prefix+' DRV8353S driver and three low-side current channels')
     s.text('TI SLVSDY6A pp6-7 pin table. 40-pin RTA + exposed pad. SPI variant, NOT hardware variant.',20.32,15.24)
     s.text('VM supplied by bus-fed auxiliary 12 V. VREF=3V3 (CSA midpoint internally VREF/2).',20.32,22.86)
-    s.text('RELEASE BLOCKERS: firmware, fast OC protection and transient/thermal qualification unfinished.',20.32,30.48)
+    s.text('RELEASE BLOCKERS: firmware, OC timing/coverage and transient/thermal qualification unfinished.',20.32,30.48)
     mapping={str(i+1):n(name) for i,name in enumerate(names)}
     for name in ['AGND','GND','EP','SNA','SNB','SNC']:mapping[str(names.index(name)+1)]='PGND'
     for name,net in [('VM','AUX12V'),('VDRAIN','DC_LINK'),('VREF','LOGIC3V3_EXT')]:mapping[str(names.index(name)+1)]=net
@@ -154,7 +154,7 @@ for j,prefix in enumerate(['GEN','HUB']):
 connector('SAFETY_BRAKE_LOOP_NC',['SAFETY3V3','BRAKE_LOOP'],63.5,137.16)
 passive(s,'C','100u 100V provisional',63.5,190.5,'DC_LINK','PGND')
 s.text('Missing: source fuse, reverse blocking, precharge, DC contactor, bus current sensor and discharge.',20.32,228.6)
-s.text('Populated: OV chopper, fault latch, brake loop, watchdog, aux supply. Missing: fast current trip.',20.32,236.22)
+s.text('Populated: OV chopper, fault latch, brake loop, watchdog, aux supply. Added: raw CSA window trip; timing/coverage unqualified.',20.32,236.22)
 s.text('MCU and sensor interfaces populated; firmware, thermal sensors, storage/BMS acceptance missing.',20.32,243.84)
 s.text('PGND is common, not galvanically isolated. Supply sequencing and back-power paths unqualified.',20.32,251.46)
 s.save();sheets.append(s)
@@ -163,6 +163,8 @@ from protection_circuit import populate
 populate(globals())
 from mcu_circuit import populate as populate_mcu
 populate_mcu(globals())
+from fast_oc_circuit import populate as populate_oc
+populate_oc(globals())
 local_symbols=[local_drv]
 for a in custom_symbols:
     b=parse(dump(a));b[1]=q(val(b[1]).split(':')[1]);local_symbols.append(b)

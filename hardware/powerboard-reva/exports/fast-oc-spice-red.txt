@@ -1,0 +1,197 @@
+test_all_six_inputs_both_polarities_latch_despite_stuck_mcu (test_fast_oc_spice.FastOCSpice.test_all_six_inputs_both_polarities_latch_despite_stuck_mcu) ... 
+  test_all_six_inputs_both_polarities_latch_despite_stuck_mcu (test_fast_oc_spice.FastOCSpice.test_all_six_inputs_both_polarities_latch_despite_stuck_mcu) (channel='GEN_SOA', level=0.7) ... FAIL
+  test_all_six_inputs_both_polarities_latch_despite_stuck_mcu (test_fast_oc_spice.FastOCSpice.test_all_six_inputs_both_polarities_latch_despite_stuck_mcu) (channel='GEN_SOA', level=2.6) ... FAIL
+  test_all_six_inputs_both_polarities_latch_despite_stuck_mcu (test_fast_oc_spice.FastOCSpice.test_all_six_inputs_both_polarities_latch_despite_stuck_mcu) (channel='GEN_SOB', level=0.7) ... FAIL
+  test_all_six_inputs_both_polarities_latch_despite_stuck_mcu (test_fast_oc_spice.FastOCSpice.test_all_six_inputs_both_polarities_latch_despite_stuck_mcu) (channel='GEN_SOB', level=2.6) ... FAIL
+  test_all_six_inputs_both_polarities_latch_despite_stuck_mcu (test_fast_oc_spice.FastOCSpice.test_all_six_inputs_both_polarities_latch_despite_stuck_mcu) (channel='GEN_SOC', level=0.7) ... FAIL
+  test_all_six_inputs_both_polarities_latch_despite_stuck_mcu (test_fast_oc_spice.FastOCSpice.test_all_six_inputs_both_polarities_latch_despite_stuck_mcu) (channel='GEN_SOC', level=2.6) ... FAIL
+  test_all_six_inputs_both_polarities_latch_despite_stuck_mcu (test_fast_oc_spice.FastOCSpice.test_all_six_inputs_both_polarities_latch_despite_stuck_mcu) (channel='HUB_SOA', level=0.7) ... FAIL
+  test_all_six_inputs_both_polarities_latch_despite_stuck_mcu (test_fast_oc_spice.FastOCSpice.test_all_six_inputs_both_polarities_latch_despite_stuck_mcu) (channel='HUB_SOA', level=2.6) ... FAIL
+  test_all_six_inputs_both_polarities_latch_despite_stuck_mcu (test_fast_oc_spice.FastOCSpice.test_all_six_inputs_both_polarities_latch_despite_stuck_mcu) (channel='HUB_SOB', level=0.7) ... FAIL
+  test_all_six_inputs_both_polarities_latch_despite_stuck_mcu (test_fast_oc_spice.FastOCSpice.test_all_six_inputs_both_polarities_latch_despite_stuck_mcu) (channel='HUB_SOB', level=2.6) ... FAIL
+  test_all_six_inputs_both_polarities_latch_despite_stuck_mcu (test_fast_oc_spice.FastOCSpice.test_all_six_inputs_both_polarities_latch_despite_stuck_mcu) (channel='HUB_SOC', level=0.7) ... FAIL
+  test_all_six_inputs_both_polarities_latch_despite_stuck_mcu (test_fast_oc_spice.FastOCSpice.test_all_six_inputs_both_polarities_latch_despite_stuck_mcu) (channel='HUB_SOC', level=2.6) ... FAIL
+test_inside_provisional_window_does_not_trip (test_fast_oc_spice.FastOCSpice.test_inside_provisional_window_does_not_trip) ... FAIL
+test_model_explicitly_excludes_short_pulse_and_vendor_qualification (test_fast_oc_spice.FastOCSpice.test_model_explicitly_excludes_short_pulse_and_vendor_qualification) ... FAIL
+test_resolved_one_microsecond_pulse_latches_in_ideal_model_only (test_fast_oc_spice.FastOCSpice.test_resolved_one_microsecond_pulse_latches_in_ideal_model_only) ... FAIL
+
+======================================================================
+FAIL: test_all_six_inputs_both_polarities_latch_despite_stuck_mcu (test_fast_oc_spice.FastOCSpice.test_all_six_inputs_both_polarities_latch_despite_stuck_mcu) (channel='GEN_SOA', level=0.7)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-fast-oc/hardware/powerboard-reva/tests/test_fast_oc_spice.py", line 50, in test_all_six_inputs_both_polarities_latch_despite_stuck_mcu
+    m = simulate(channel, level)
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/c08r4d0r/worktrees/cycle-fast-oc/hardware/powerboard-reva/tests/test_fast_oc_spice.py", line 15, in simulate
+    assert deck.exists(), 'Missing independent fast OC transient model'
+           ^^^^^^^^^^^^^
+AssertionError: Missing independent fast OC transient model
+
+======================================================================
+FAIL: test_all_six_inputs_both_polarities_latch_despite_stuck_mcu (test_fast_oc_spice.FastOCSpice.test_all_six_inputs_both_polarities_latch_despite_stuck_mcu) (channel='GEN_SOA', level=2.6)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-fast-oc/hardware/powerboard-reva/tests/test_fast_oc_spice.py", line 50, in test_all_six_inputs_both_polarities_latch_despite_stuck_mcu
+    m = simulate(channel, level)
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/c08r4d0r/worktrees/cycle-fast-oc/hardware/powerboard-reva/tests/test_fast_oc_spice.py", line 15, in simulate
+    assert deck.exists(), 'Missing independent fast OC transient model'
+           ^^^^^^^^^^^^^
+AssertionError: Missing independent fast OC transient model
+
+======================================================================
+FAIL: test_all_six_inputs_both_polarities_latch_despite_stuck_mcu (test_fast_oc_spice.FastOCSpice.test_all_six_inputs_both_polarities_latch_despite_stuck_mcu) (channel='GEN_SOB', level=0.7)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-fast-oc/hardware/powerboard-reva/tests/test_fast_oc_spice.py", line 50, in test_all_six_inputs_both_polarities_latch_despite_stuck_mcu
+    m = simulate(channel, level)
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/c08r4d0r/worktrees/cycle-fast-oc/hardware/powerboard-reva/tests/test_fast_oc_spice.py", line 15, in simulate
+    assert deck.exists(), 'Missing independent fast OC transient model'
+           ^^^^^^^^^^^^^
+AssertionError: Missing independent fast OC transient model
+
+======================================================================
+FAIL: test_all_six_inputs_both_polarities_latch_despite_stuck_mcu (test_fast_oc_spice.FastOCSpice.test_all_six_inputs_both_polarities_latch_despite_stuck_mcu) (channel='GEN_SOB', level=2.6)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-fast-oc/hardware/powerboard-reva/tests/test_fast_oc_spice.py", line 50, in test_all_six_inputs_both_polarities_latch_despite_stuck_mcu
+    m = simulate(channel, level)
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/c08r4d0r/worktrees/cycle-fast-oc/hardware/powerboard-reva/tests/test_fast_oc_spice.py", line 15, in simulate
+    assert deck.exists(), 'Missing independent fast OC transient model'
+           ^^^^^^^^^^^^^
+AssertionError: Missing independent fast OC transient model
+
+======================================================================
+FAIL: test_all_six_inputs_both_polarities_latch_despite_stuck_mcu (test_fast_oc_spice.FastOCSpice.test_all_six_inputs_both_polarities_latch_despite_stuck_mcu) (channel='GEN_SOC', level=0.7)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-fast-oc/hardware/powerboard-reva/tests/test_fast_oc_spice.py", line 50, in test_all_six_inputs_both_polarities_latch_despite_stuck_mcu
+    m = simulate(channel, level)
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/c08r4d0r/worktrees/cycle-fast-oc/hardware/powerboard-reva/tests/test_fast_oc_spice.py", line 15, in simulate
+    assert deck.exists(), 'Missing independent fast OC transient model'
+           ^^^^^^^^^^^^^
+AssertionError: Missing independent fast OC transient model
+
+======================================================================
+FAIL: test_all_six_inputs_both_polarities_latch_despite_stuck_mcu (test_fast_oc_spice.FastOCSpice.test_all_six_inputs_both_polarities_latch_despite_stuck_mcu) (channel='GEN_SOC', level=2.6)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-fast-oc/hardware/powerboard-reva/tests/test_fast_oc_spice.py", line 50, in test_all_six_inputs_both_polarities_latch_despite_stuck_mcu
+    m = simulate(channel, level)
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/c08r4d0r/worktrees/cycle-fast-oc/hardware/powerboard-reva/tests/test_fast_oc_spice.py", line 15, in simulate
+    assert deck.exists(), 'Missing independent fast OC transient model'
+           ^^^^^^^^^^^^^
+AssertionError: Missing independent fast OC transient model
+
+======================================================================
+FAIL: test_all_six_inputs_both_polarities_latch_despite_stuck_mcu (test_fast_oc_spice.FastOCSpice.test_all_six_inputs_both_polarities_latch_despite_stuck_mcu) (channel='HUB_SOA', level=0.7)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-fast-oc/hardware/powerboard-reva/tests/test_fast_oc_spice.py", line 50, in test_all_six_inputs_both_polarities_latch_despite_stuck_mcu
+    m = simulate(channel, level)
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/c08r4d0r/worktrees/cycle-fast-oc/hardware/powerboard-reva/tests/test_fast_oc_spice.py", line 15, in simulate
+    assert deck.exists(), 'Missing independent fast OC transient model'
+           ^^^^^^^^^^^^^
+AssertionError: Missing independent fast OC transient model
+
+======================================================================
+FAIL: test_all_six_inputs_both_polarities_latch_despite_stuck_mcu (test_fast_oc_spice.FastOCSpice.test_all_six_inputs_both_polarities_latch_despite_stuck_mcu) (channel='HUB_SOA', level=2.6)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-fast-oc/hardware/powerboard-reva/tests/test_fast_oc_spice.py", line 50, in test_all_six_inputs_both_polarities_latch_despite_stuck_mcu
+    m = simulate(channel, level)
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/c08r4d0r/worktrees/cycle-fast-oc/hardware/powerboard-reva/tests/test_fast_oc_spice.py", line 15, in simulate
+    assert deck.exists(), 'Missing independent fast OC transient model'
+           ^^^^^^^^^^^^^
+AssertionError: Missing independent fast OC transient model
+
+======================================================================
+FAIL: test_all_six_inputs_both_polarities_latch_despite_stuck_mcu (test_fast_oc_spice.FastOCSpice.test_all_six_inputs_both_polarities_latch_despite_stuck_mcu) (channel='HUB_SOB', level=0.7)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-fast-oc/hardware/powerboard-reva/tests/test_fast_oc_spice.py", line 50, in test_all_six_inputs_both_polarities_latch_despite_stuck_mcu
+    m = simulate(channel, level)
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/c08r4d0r/worktrees/cycle-fast-oc/hardware/powerboard-reva/tests/test_fast_oc_spice.py", line 15, in simulate
+    assert deck.exists(), 'Missing independent fast OC transient model'
+           ^^^^^^^^^^^^^
+AssertionError: Missing independent fast OC transient model
+
+======================================================================
+FAIL: test_all_six_inputs_both_polarities_latch_despite_stuck_mcu (test_fast_oc_spice.FastOCSpice.test_all_six_inputs_both_polarities_latch_despite_stuck_mcu) (channel='HUB_SOB', level=2.6)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-fast-oc/hardware/powerboard-reva/tests/test_fast_oc_spice.py", line 50, in test_all_six_inputs_both_polarities_latch_despite_stuck_mcu
+    m = simulate(channel, level)
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/c08r4d0r/worktrees/cycle-fast-oc/hardware/powerboard-reva/tests/test_fast_oc_spice.py", line 15, in simulate
+    assert deck.exists(), 'Missing independent fast OC transient model'
+           ^^^^^^^^^^^^^
+AssertionError: Missing independent fast OC transient model
+
+======================================================================
+FAIL: test_all_six_inputs_both_polarities_latch_despite_stuck_mcu (test_fast_oc_spice.FastOCSpice.test_all_six_inputs_both_polarities_latch_despite_stuck_mcu) (channel='HUB_SOC', level=0.7)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-fast-oc/hardware/powerboard-reva/tests/test_fast_oc_spice.py", line 50, in test_all_six_inputs_both_polarities_latch_despite_stuck_mcu
+    m = simulate(channel, level)
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/c08r4d0r/worktrees/cycle-fast-oc/hardware/powerboard-reva/tests/test_fast_oc_spice.py", line 15, in simulate
+    assert deck.exists(), 'Missing independent fast OC transient model'
+           ^^^^^^^^^^^^^
+AssertionError: Missing independent fast OC transient model
+
+======================================================================
+FAIL: test_all_six_inputs_both_polarities_latch_despite_stuck_mcu (test_fast_oc_spice.FastOCSpice.test_all_six_inputs_both_polarities_latch_despite_stuck_mcu) (channel='HUB_SOC', level=2.6)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-fast-oc/hardware/powerboard-reva/tests/test_fast_oc_spice.py", line 50, in test_all_six_inputs_both_polarities_latch_despite_stuck_mcu
+    m = simulate(channel, level)
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/c08r4d0r/worktrees/cycle-fast-oc/hardware/powerboard-reva/tests/test_fast_oc_spice.py", line 15, in simulate
+    assert deck.exists(), 'Missing independent fast OC transient model'
+           ^^^^^^^^^^^^^
+AssertionError: Missing independent fast OC transient model
+
+======================================================================
+FAIL: test_inside_provisional_window_does_not_trip (test_fast_oc_spice.FastOCSpice.test_inside_provisional_window_does_not_trip)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-fast-oc/hardware/powerboard-reva/tests/test_fast_oc_spice.py", line 59, in test_inside_provisional_window_does_not_trip
+    m = simulate('GEN_SOA', level)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/c08r4d0r/worktrees/cycle-fast-oc/hardware/powerboard-reva/tests/test_fast_oc_spice.py", line 15, in simulate
+    assert deck.exists(), 'Missing independent fast OC transient model'
+           ^^^^^^^^^^^^^
+AssertionError: Missing independent fast OC transient model
+
+======================================================================
+FAIL: test_model_explicitly_excludes_short_pulse_and_vendor_qualification (test_fast_oc_spice.FastOCSpice.test_model_explicitly_excludes_short_pulse_and_vendor_qualification)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-fast-oc/hardware/powerboard-reva/tests/test_fast_oc_spice.py", line 71, in test_model_explicitly_excludes_short_pulse_and_vendor_qualification
+    self.assertTrue(deck.exists(), 'Missing independent fast OC transient model')
+AssertionError: False is not true : Missing independent fast OC transient model
+
+======================================================================
+FAIL: test_resolved_one_microsecond_pulse_latches_in_ideal_model_only (test_fast_oc_spice.FastOCSpice.test_resolved_one_microsecond_pulse_latches_in_ideal_model_only)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-fast-oc/hardware/powerboard-reva/tests/test_fast_oc_spice.py", line 65, in test_resolved_one_microsecond_pulse_latches_in_ideal_model_only
+    m = simulate('HUB_SOC', level, '1u')
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/c08r4d0r/worktrees/cycle-fast-oc/hardware/powerboard-reva/tests/test_fast_oc_spice.py", line 15, in simulate
+    assert deck.exists(), 'Missing independent fast OC transient model'
+           ^^^^^^^^^^^^^
+AssertionError: Missing independent fast OC transient model
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.003s
+
+FAILED (failures=15)

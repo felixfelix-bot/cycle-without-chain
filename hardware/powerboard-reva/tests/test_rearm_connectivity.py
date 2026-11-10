@@ -17,7 +17,7 @@ class RearmConnectivity(unittest.TestCase):
             'U11': ['ANALOG_OK','WD_OK','GEN_nFAULT','PGND','GEN_OK','WD_RESET_N','ANALOG_CLEAN','SAFETY3V3'],
             'U12': ['HUB_nFAULT','ARM_CLEAN','RESET_RC','PGND','RESET_CLEAN','MCU_ARM','HUB_OK','SAFETY3V3'],
             'U13': ['ANALOG_CLEAN','PGND','GEN_OK','FAULTS_OK','SAFETY3V3','HUB_OK'],
-            'U14': ['FAULTS_OK','PGND','WD_OK','HEALTHY','SAFETY3V3','SAFETY3V3'],
+            'U14': ['FAULTS_OK','PGND','WD_OK','HEALTHY','SAFETY3V3','OC_OK'],
             'U15': ['PGND','RESET_CLEAN','PGND','RESET_INV','SAFETY3V3'],
             'U16': ['HEALTHY','PGND','PERMIT','TIMER_BREAK_OK','SAFETY3V3','ARM_CLEAN'],
         }

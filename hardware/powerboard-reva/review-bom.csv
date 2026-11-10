@@ -198,3 +198,50 @@ C65,1n encoder filter,Capacitor_SMD:C_0603_1608Metric,mcu-sensors
 R91,10k encoder pullup,Resistor_SMD:R_0603_1608Metric,mcu-sensors
 R92,1k encoder series,Resistor_SMD:R_0603_1608Metric,mcu-sensors
 C66,1n encoder filter,Capacitor_SMD:C_0603_1608Metric,mcu-sensors
+U18,TLV3202IDR,Package_SO:SOIC-8_3.9x4.9mm_P1.27mm,gen-fast-oc
+C67,100n X7R 25V,Capacitor_SMD:C_0805_2012Metric,gen-fast-oc
+R93,100k 1% open SO bias,Resistor_SMD:R_0805_2012Metric,gen-fast-oc
+Q14,2N7002,Package_TO_SOT_SMD:SOT-23,gen-fast-oc
+R94,100k 1% gate default,Resistor_SMD:R_0805_2012Metric,gen-fast-oc
+Q15,2N7002,Package_TO_SOT_SMD:SOT-23,gen-fast-oc
+R95,100k 1% gate default,Resistor_SMD:R_0805_2012Metric,gen-fast-oc
+U19,TLV3202IDR,Package_SO:SOIC-8_3.9x4.9mm_P1.27mm,gen-fast-oc
+C68,100n X7R 25V,Capacitor_SMD:C_0805_2012Metric,gen-fast-oc
+R96,100k 1% open SO bias,Resistor_SMD:R_0805_2012Metric,gen-fast-oc
+Q16,2N7002,Package_TO_SOT_SMD:SOT-23,gen-fast-oc
+R97,100k 1% gate default,Resistor_SMD:R_0805_2012Metric,gen-fast-oc
+Q17,2N7002,Package_TO_SOT_SMD:SOT-23,gen-fast-oc
+R98,100k 1% gate default,Resistor_SMD:R_0805_2012Metric,gen-fast-oc
+U20,TLV3202IDR,Package_SO:SOIC-8_3.9x4.9mm_P1.27mm,gen-fast-oc
+C69,100n X7R 25V,Capacitor_SMD:C_0805_2012Metric,gen-fast-oc
+R99,100k 1% open SO bias,Resistor_SMD:R_0805_2012Metric,gen-fast-oc
+Q18,2N7002,Package_TO_SOT_SMD:SOT-23,gen-fast-oc
+R100,100k 1% gate default,Resistor_SMD:R_0805_2012Metric,gen-fast-oc
+Q19,2N7002,Package_TO_SOT_SMD:SOT-23,gen-fast-oc
+R101,100k 1% gate default,Resistor_SMD:R_0805_2012Metric,gen-fast-oc
+U21,TLV3202IDR,Package_SO:SOIC-8_3.9x4.9mm_P1.27mm,hub-fast-oc
+C70,100n X7R 25V,Capacitor_SMD:C_0805_2012Metric,hub-fast-oc
+R102,100k 1% open SO bias,Resistor_SMD:R_0805_2012Metric,hub-fast-oc
+Q20,2N7002,Package_TO_SOT_SMD:SOT-23,hub-fast-oc
+R103,100k 1% gate default,Resistor_SMD:R_0805_2012Metric,hub-fast-oc
+Q21,2N7002,Package_TO_SOT_SMD:SOT-23,hub-fast-oc
+R104,100k 1% gate default,Resistor_SMD:R_0805_2012Metric,hub-fast-oc
+U22,TLV3202IDR,Package_SO:SOIC-8_3.9x4.9mm_P1.27mm,hub-fast-oc
+C71,100n X7R 25V,Capacitor_SMD:C_0805_2012Metric,hub-fast-oc
+R105,100k 1% open SO bias,Resistor_SMD:R_0805_2012Metric,hub-fast-oc
+Q22,2N7002,Package_TO_SOT_SMD:SOT-23,hub-fast-oc
+R106,100k 1% gate default,Resistor_SMD:R_0805_2012Metric,hub-fast-oc
+Q23,2N7002,Package_TO_SOT_SMD:SOT-23,hub-fast-oc
+R107,100k 1% gate default,Resistor_SMD:R_0805_2012Metric,hub-fast-oc
+U23,TLV3202IDR,Package_SO:SOIC-8_3.9x4.9mm_P1.27mm,hub-fast-oc
+C72,100n X7R 25V,Capacitor_SMD:C_0805_2012Metric,hub-fast-oc
+R108,100k 1% open SO bias,Resistor_SMD:R_0805_2012Metric,hub-fast-oc
+Q24,2N7002,Package_TO_SOT_SMD:SOT-23,hub-fast-oc
+R109,100k 1% gate default,Resistor_SMD:R_0805_2012Metric,hub-fast-oc
+Q25,2N7002,Package_TO_SOT_SMD:SOT-23,hub-fast-oc
+R110,100k 1% gate default,Resistor_SMD:R_0805_2012Metric,hub-fast-oc
+R111,28k7 0.1%,Resistor_SMD:R_0805_2012Metric,fast-oc-reference
+R112,10k 0.1%,Resistor_SMD:R_0805_2012Metric,fast-oc-reference
+R113,10k 0.1%,Resistor_SMD:R_0805_2012Metric,fast-oc-reference
+R114,28k7 0.1%,Resistor_SMD:R_0805_2012Metric,fast-oc-reference
+R115,4k7 1%,Resistor_SMD:R_0805_2012Metric,fast-oc-reference
