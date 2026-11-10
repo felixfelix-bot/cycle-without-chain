@@ -339,6 +339,9 @@ wear profile matters more than mass.
 separately excited, needs 20:1 step-up), and a capacitor-only buffer (19× the
 mass for the same energy, and it cannot boot the controller).
 
+**Worked numbers, plain-language part descriptions, and the production
+precedent for this build are in §12 and §13.**
+
 ---
 
 ## §11 Reconciling with the two production systems
@@ -436,7 +439,190 @@ Two owner reports are direct evidence for §7:
 
 ---
 
-## §12 Open items
+## §12 The recommended build: how it works and what it costs
+
+### The two paths
+
+The parallel hybrid has **two independent power paths that meet at the rear
+wheel**. They never convert into each other.
+
+```
+  your legs  ->  crank  ->  chainring  ->  CHAIN  ->  cassette  ->  rear wheel
+                                                                        ^
+  battery    ->  controller  ->  hub motor (inside the wheel)  ---------+
+```
+
+The motor sits *inside* the rear hub, so it adds torque directly at the wheel.
+Your legs push through the chain; the motor pushes at the hub. Both spin the
+same wheel. **Your 150 W never becomes electricity**, so it never pays the
+conversion tax that kills the series hybrid.
+
+### Measured efficiencies of each path
+
+| path | η | basis |
+|---|---|---|
+| **rider path** — waxed derailleur | **96.1 %** | CITED: CyclingAbout on-bike measurement |
+| rider path — single-speed chain | 99.7 % | CITED: Casteel & Archibald |
+| **motor path** — battery → controller → wheel | **86.0 %** | CITED: Grin DD hub *system* @ 31 km/h |
+| controller only | 95 % | ESTIMATE (motor = 86/95 = 90.5 %) |
+| **regen round trip** (KE → battery → wheel) | **62.6 %** | COMPUTED 0.86² × 0.92 |
+| coast drag, DD hub unpowered | **2 W** = 1.4 % of cruise | ESTIMATE 1–4 W |
+| battery round trip, LFP | 92 % | ESTIMATE incl. BMS |
+
+### The number that matters
+
+```
+rider 150 W at pedals × 0.961  =  144.2 W at the wheel
+road demand at 25 km/h         =  138.9 W
+surplus                        =   +5.3 W
+```
+
+**The rider covers 25 km/h on their legs alone, battery idle.** The series
+hybrid with the same rider produces 92.0 W at the wheel and leaves a **46.9 W
+hole** — the battery must supply **74.9 W just to match** the parallel bike on
+flat ground. That is the whole argument in two lines.
+
+### Correction to §3/§5 — the regen figure
+
+The earlier 8.2 Wh used 65 % as a *single* KE→battery hop. The honest chain is
+two hops (0.791 out, 0.791 back):
+
+```
+2267 J × 0.791 = 1793 J = 0.498 Wh stored
+      × 0.791 = 1419 J = 0.394 Wh back at the wheel
+20 stops        → 7.9 Wh usable = 14.2 % of the 10 km trip energy
+```
+
+Same order of magnitude; the 8.2 Wh figure is **superseded**. Both are
+single-digit Wh, and neither justifies removing a chain.
+
+### The honest tax, and the real trade-off
+
+A direct-drive hub drags when coasting unpowered: **2 W at 25 km/h = 1.4 % of
+cruise demand**. A geared hub freewheels with ~0 drag — **but then it cannot
+regen**. That is the actual trade-off, not a myth. Grin states it plainly:
+regen "only works on a direct-drive motor, not on a normal freewheeling geared
+hub" [CITED: ebikes.ca].
+
+### Range — and why the model is optimistic
+
+| motor's share of traction energy | battery draw | range on 480 Wh |
+|---|---|---|
+| 30 % | 1.94 Wh/km | 248 km |
+| 50 % | 3.23 Wh/km | 149 km |
+| 70 % | 4.52 Wh/km | 106 km |
+| 90 % | 5.81 Wh/km | 83 km |
+
+**These are a ceiling, not a prediction.** Real 480 Wh commuter packs deliver
+**25–40 km**. The model assumes flat, still air, constant 25 km/h, no hills, no
+stops. Real commuting adds grades (each 1 % at 94 kg is +9.2 W per km/h),
+stop-starts, headwind and cold cells. Expect **2–3× worse** than this table.
+
+### The parts, in plain language
+
+| part | what it is | why it is there |
+|---|---|---|
+| **Grin All-Axle** (3.9 kg) | direct-drive hub motor, laced into the rear wheel like a normal hub. No gears inside — the motor *is* the wheel | direct drive is what makes regen possible; a geared hub freewheels and cannot push power backwards |
+| **Phaserunner** (280 g) | the controller: an inverter that turns battery DC into three-phase AC for the motor, and reverses it for regen | "FOC" (field-oriented control) keeps it efficient at part load. **This is the part that behaves like a gearbox** — it decides how much torque to add at any wheel speed, which is how the rider keeps a free cadence |
+| **LFP pack, 48 V 10 Ah** (5.3 kg) | lithium iron phosphate, 480 Wh | 2000–3000 cycles vs 400–800 for NMC; chemically stabler. The "I want it to last" choice |
+| **Torque sensor, bottom bracket** (250 g) | measures how hard *you* push | makes the motor *multiply* your effort instead of running off a throttle — this is what makes it feel like a bicycle, not a moped |
+| **Cycle Analyst CA3** (100 g) | display and brain | speed, watts, Wh/km; sets assist level and regen strength |
+| **chain, cassette, derailleur** (existing) | unchanged | your power stays on the 96 % mechanical path |
+
+Total: **10.73 kg, ≈ USD 1290** incremental. Nothing is redundant — one motor,
+one controller, one pack. The series hybrid needs a generator **plus** a motor
+**plus** two controllers.
+
+---
+
+## §13 Has anyone built this?
+
+**Yes — the parallel hybrid is not exotic. It is one of the two dominant
+e-bike architectures in the world.** The chainless version is the rare one.
+
+### Production bikes that are exactly this
+
+**Stromer** (Swiss, since 2009) is the closest match and the best evidence:
+
+- **TDCM direct-drive hub motor** in the rear wheel, up to 500 W / 40 N·m
+  [CITED: Stromer Techbook]
+- **TMM4 torque sensor** in the right dropout, plus a gyroscopic accelerometer,
+  so assist follows rider torque and terrain incline
+  [CITED: ElectricBikeReview ST3; stromer-tech.info]
+- **Regenerative braking on both brake levers**, with five selectable recoup
+  levels; the left lever gives ~1/3 and the right ~2/3 of the set effect
+  [CITED: stromer-tech.info]
+- **Stromer claims up to 20 % range gain from recuperation** [CITED:
+  stromer-tech.info] — higher than the 3–8 % ebikes.ca figure because an
+  S-Pedelec is heavier and faster, so there is more kinetic energy to recover.
+  Both are consistent with §5's arithmetic: recovery scales with mass and v².
+- Stromer's own marketing makes the same argument as this study: the rear-hub
+  motor "eliminates energy losses that occur during transmission through the
+  crank, sprockets and chain" and "operates independently of gear shifting"
+  [CITED: eleway.net, Stromer distributor]
+
+**That is the design you liked, shipping since 2009.** Nothing about it is
+experimental.
+
+### Documented DIY builds of exactly the BOM above
+
+Grin's public project gallery contains real customer builds using the precise
+combination in §10 — Grin All-Axle (or Max45) + Phaserunner + Cycle Analyst 3 +
+T9/T17 torque sensor + 48 V pack, on cargo bikes (Surly Big Dummy long-tail),
+RadWagon conversions, and a solar-car project running three All-Axle motors
+[CITED: ebikes.ca/gallery.html].
+
+Two data points from that gallery worth having:
+
+- a customer with **over 50 000 km** on an All-Axle with no issues
+  [CITED: ebikes.ca All-Axle product page]
+- a recumbent-trike rider recovering **~20 %** of energy from regen and
+  **8 000 km without changing a brake pad** [CITED: ebikes.ca/resources/learn/regen.html]
+
+### Why you mostly see mid-drives instead
+
+Mid-drive motors (Bosch, Shimano Steps, Brose) dominate the European market
+because they drive through the bike's own gearing, which suits steep off-road
+climbing and keeps unsprung mass low. **They have essentially no path to
+regen** [CITED: ebikes.ca]. So the two architectures are chosen for different
+reasons:
+
+| | mid-drive | **DD hub (this design)** |
+|---|---|---|
+| regen | none | **yes** |
+| gearing | uses the bike's cassette | motor has its own speed range |
+| unsprung mass | low | ~4 kg in the wheel |
+| coast drag | none (freewheel) | 2 W |
+| hill climbing | better (torque multiplication) | adequate |
+| brake wear | normal | much lower |
+
+You are choosing the DD hub *precisely for* the two properties mid-drives lack:
+regen, and independence from the gear train.
+
+### The chainless version: two attempts, both niche
+
+§11 covers these in full. Summary:
+
+- **Mando Footloose** (2015) — series hybrid, automotive alternator, 21.5 kg,
+  USD ~3000. Owner verdicts: "very loud (motor and pedaling generator system)";
+  "once the battery dies, the bike is rendered completely unrideable."
+  Commercially flopped.
+- **Schaeffler / Heinzmann Free Drive** (2021, fleet production 2023) — 1:29
+  cycloid + alternator, ~250 W system, aimed explicitly at **cargo bikes,
+  three- and four-wheelers and velomobiles**, not commuters. Their "5 % less
+  efficient than chain" is a vehicle-range figure that only holds where the
+  rider supplies ~12 % of traction energy.
+
+**So the honest answer to "has anyone built this": the thing you liked —
+chain kept, DD hub with regen — has been in continuous production since 2009
+and is one of the two mainstream e-bike architectures. The thing you originally
+proposed — no chain — has been built twice, and both times was confined to a
+niche (city novelty bike; cargo/velomobile) for exactly the efficiency reasons
+this study computes.**
+
+---
+
+## §14 Open items
 
 - **TODO(unverified)** — 65 % regen capture efficiency (A7) is an ESTIMATE. A
   bench measurement with a Phaserunner + All-Axle at 5–25 km/h would settle it.
@@ -451,7 +637,7 @@ Two owner reports are direct evidence for §7:
   obviously exist off the shelf, and that is a real reason the series hybrid is
   hard to build even if it were efficient.
 
-## §13 What this analysis is not
+## §15 What this analysis is not
 
 - Not a frame/structural design, not a mass budget for a specific build.
 - Not a legal analysis (EU 250 W / 25 km/h L1e-A limits, throttle vs pedal-assist

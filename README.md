@@ -45,6 +45,16 @@ use automotive claw-pole alternators and deliver ~32% pedals-to-road are not
 established. Do not use them as measured product specifications. See the
 [illustrated guide](docs/analysis/parallel-hybrid-guide.md) for source boundaries.
 
+## Sections of the study
+
+- §0 answer first — §1 assumptions — §2 vehicle power — §3 series vs chain
+- §4 cadence — §5 buffer sizing — §6 is a buffer needed — §7 bootstrap
+- §8 sensitivity — §9 failure modes — §10 recommendation
+- §11 the two production systems (Mando, Schaeffler) reconciled
+- **§12 the recommended build, worked numbers, parts explained**
+- **§13 has anyone built this? (Stromer, Grin builds, mid-drive comparison)**
+- §14 open items — §15 scope limits
+
 ## Reproduce
 
 ```sh
