@@ -29,7 +29,7 @@ Primary sources actually read:
 |---|---|
 | U500 pin map | 1 GND, 2 VIN, 3 EN/UVLO, 4 RON, 5 FB, 6 PGOOD NC, 7 BST, 8 SW, schematic EP9 to PGND. Physical EP mapping still needs footprint validation. |
 | Input diode | D500 anode2 ENTRY_FUSED; cathode1 CTRL_RAW. Its 600V blocking exceeds 58.4V, including a charged input cap plus reversed pack in the simple two-terminal branch. Alternate paths are unqualified. |
-| C500/C501 | 2 × 2.2uF 100V X7R CGA6N3X7R2A225K230AB, TI table 7-1. Effective capacitance at bias remains a release blocker. |
+| C500/C501 | 2 × 2.2uF **200V** X7R KYOCERA AVX 22252C225KAT2A (EIA 2225), footprint `C_2225_5664Metric`. Meets TI's 2×58.4V = 116.8V rating guidance; effective capacitance at bias remains a release blocker and is **not** known. See `ctrl-supply-review.md`. |
 | Bootstrap C502 | 2.2nF 50V GCM155R71H222KA37D, BST to SW, exactly TI recommendation; internal bootstrap diode, not an omitted external part. |
 | L500 | 68uH MSS1246T-683MLC; retained TI reference inductance, recalculated for 3.3V. |
 | Output C503/C504 | 2 × 22uF 25V TMK325B7226KMHT, reference BOM. Effective C/ESR and startup remain unqualified. |
@@ -64,10 +64,12 @@ those fields is used. CA part-code 2A denotes 100V; qualify actual purchasing da
 - D500 protects only the CTRL positive supply branch. It is **not** a whole-board
   reverse-polarity controller, overvoltage clamp or qualified hot-plug solution.
   The 40A/8.3ms half-sine surge specification is not a capacitor-inrush proof.
-- TI recommends input ceramics rated twice maximum VIN: 100V reference parts
-  do **not** meet 2×58.4V. Nominal voltage rating exceeds operating voltage but
-  bias capacitance, 125V+ replacement selection, cable resonance, input bulk/damping,
-  surge and branch-fuse coordination remain explicit release blockers.
+- TI recommends input ceramics rated twice maximum VIN (2×58.4V = 116.8V). The
+  reference 100V parts did not meet it and were replaced by 200V parts; that is a
+  margin/derating correction, not a claim that the 100V parts would have failed.
+  Effective capacitance at 58.4V bias is unknown for the replacement, and cable
+  resonance, input bulk/damping, surge and branch-fuse coordination remain explicit
+  release blockers.
 
 ## 0.8W pack-input budget, including both drivers
 
@@ -106,6 +108,9 @@ After those fixtures were updated, independent full-suite reruns passed all **41
 normal and 41 optimized tests** (90.787s / 78.794s), recorded in
 `exports/ctrl-full-tests.log` and `exports/ctrl-full-tests-O.log`.
 Incidental unrelated simulation-log changes were discarded.
+The input-capacitor correction in `ctrl-supply-review.md` re-ran the full suite at **42
+normal and 42 optimized** tests (`exports/ctrl-review-tests.log`,
+`exports/ctrl-review-tests-O.log`); ERC is unchanged at 9 errors, 0 warnings.
 Supply-page PDF rendering was inspected: no obvious overlap/clipping; small text
 requires vector zoom. No whole-project fresh visual approval is claimed.
 

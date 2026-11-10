@@ -38,6 +38,15 @@ def validate(root):
 class CtrlSupplyTests(unittest.TestCase):
     def load(self): return ET.parse(ROOT/'exports/ctrl-supply.xml').getroot()
     def test_native_endpoints_and_values(self): validate(self.load())
+    def test_input_capacitor_derating_and_package(self):
+        # TI recommends >=2*VINmax: rating policy, not an absolute failure claim.
+        components = {c.attrib['ref']: c for c in self.load().findall('./components/comp')}
+        for ref in ('C500', 'C501'):
+            self.assertEqual(components[ref].findtext('value'),
+                             '2.2u 200V X7R 22252C225KAT2A')
+            self.assertGreaterEqual(200, 2 * 58.4)
+            self.assertEqual(components[ref].findtext('footprint'),
+                             'Capacitor_SMD:C_2225_5664Metric')
     def test_corrupted_pin_rejected(self):
         root=self.load()
         for node in root.findall('./nets/net/node'):

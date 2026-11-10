@@ -19,8 +19,8 @@ def populate(g):
     s.part(stock('Device','L'),'L500','68u MSS1246T-683MLC 20%',76.2,154.94,
            {'1':'CTRL_SW','2':'CTRL3V3'})
     specs = [
-        ('C500','2.2u 100V CGA6N3X7R2A225K230AB','CTRL_RAW','PGND'),
-        ('C501','2.2u 100V CGA6N3X7R2A225K230AB','CTRL_RAW','PGND'),
+        ('C500','2.2u 200V X7R 22252C225KAT2A','CTRL_RAW','PGND'),
+        ('C501','2.2u 200V X7R 22252C225KAT2A','CTRL_RAW','PGND'),
         ('C502','2.2n 50V GCM155R71H222KA37D','CTRL_BST','CTRL_SW'),
         ('C503','22u 25V TMK325B7226KMHT','CTRL3V3','PGND'),
         ('C504','22u 25V TMK325B7226KMHT','CTRL3V3','PGND'),
@@ -34,9 +34,10 @@ def populate(g):
         ('R505','52.3k 1% 0.1W candidate','CTRL_UVLO','PGND'),
     ]
     for i,(ref,value,a,b) in enumerate(specs):
-        s.part(stock('Device',ref[0]),ref,value,157.48+(i%3)*83.82,53.34+(i//3)*40.64,{'1':a,'2':b})
+        s.part(stock('Device',ref[0]),ref,value,157.48+(i%3)*83.82,53.34+(i//3)*40.64,{'1':a,'2':b},
+               'Capacitor_SMD:C_2225_5664Metric' if ref in ('C500','C501') else '')
     s.text('PGOOD explicitly NC: no supply-valid / gate authority claimed. U400/U401 EN 0R inhibits remain fitted.',20.32,248.92)
-    s.text('100V input ceramics: bias / surge / damping OPEN; exact footprint and thermal layout not qualified.',20.32,259.08)
+    s.text('200V input ceramics: effective C / surge / damping OPEN; 2225 footprint candidate, layout not qualified.',20.32,259.08)
     s.text('D500 protects this positive supply branch only; no full-system reverse-polarity or transient proof.',20.32,269.24)
     s.save()
     g['sheets'].append(s)

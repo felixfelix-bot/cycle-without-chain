@@ -1,7 +1,7 @@
 {
     "$schema": "https://schemas.kicad.org/erc.v1.json",
     "coordinate_units": "mm",
-    "date": "2026-11-10T16:19:23+0100",
+    "date": "2026-11-10T16:36:47+0100",
     "included_severities": [
         "error",
         "warning"
@@ -26,7 +26,7 @@
                                 "x": 1.016,
                                 "y": 0.762
                             },
-                            "uuid": "a3c8f429-e1b9-400c-90eb-9efcdfc3cc9e"
+                            "uuid": "8bc84b9c-608f-470f-8984-c9464d9e4ac2"
                         }
                     ],
                     "severity": "error",
@@ -41,7 +41,7 @@
                                 "x": 1.016,
                                 "y": 0.8128
                             },
-                            "uuid": "181f0afe-2766-4876-b1d2-32b11dbb5d57"
+                            "uuid": "6833d972-ab7b-4b76-8f83-aa8fcf558972"
                         }
                     ],
                     "severity": "error",
@@ -82,7 +82,7 @@
                                 "x": 0.4318,
                                 "y": 0.508
                             },
-                            "uuid": "24189be9-f154-4ede-9c0a-c67fd922a55f"
+                            "uuid": "5c52dc53-71d4-4e63-8228-d414f0e36a17"
                         }
                     ],
                     "severity": "error",
@@ -123,7 +123,7 @@
                                 "x": 1.0922,
                                 "y": 0.6604
                             },
-                            "uuid": "e7ec2851-4363-4139-9f7c-3251bafb30d0"
+                            "uuid": "77343712-9e6f-4cec-af2f-657844959794"
                         }
                     ],
                     "severity": "error",
@@ -199,7 +199,7 @@
                                 "x": 0.4318,
                                 "y": 1.778
                             },
-                            "uuid": "9555c0c4-cdd0-47e1-aa91-b94a3c81b90b"
+                            "uuid": "c9536d93-99a4-4cf4-93d9-0828fc5fcd43"
                         }
                     ],
                     "severity": "error",
@@ -235,7 +235,7 @@
                                 "x": 0.4318,
                                 "y": 0.7112
                             },
-                            "uuid": "5250c8f8-6be5-4ba0-8470-9eb72300ef99"
+                            "uuid": "15b43d09-a1fd-43cc-a3c7-b0b76c81944a"
                         }
                     ],
                     "severity": "error",
@@ -250,7 +250,7 @@
                                 "x": 0.4318,
                                 "y": 0.8128
                             },
-                            "uuid": "00bc860e-b797-4794-ac97-3db2590eb252"
+                            "uuid": "2ec8ca1c-4406-4630-8a5b-8c0c813d4ae6"
                         }
                     ],
                     "severity": "error",
@@ -271,7 +271,7 @@
                                 "x": 0.4318,
                                 "y": 0.8128
                             },
-                            "uuid": "e0b6c505-991a-44bd-8d84-f98352dcad03"
+                            "uuid": "6b66f597-b622-4baa-97d0-0f57bc6c935d"
                         }
                     ],
                     "severity": "error",
@@ -292,7 +292,7 @@
                                 "x": 0.5588,
                                 "y": 0.9144
                             },
-                            "uuid": "5cd66ae9-f2ae-4499-ade6-b670e02d6afe"
+                            "uuid": "bb53011d-331f-4a63-873d-d9757ce72f33"
                         }
                     ],
                     "severity": "error",

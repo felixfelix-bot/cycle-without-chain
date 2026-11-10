@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <export version="E">
   <design>
-    <source>/home/c08r4d0r/worktrees/cycle-ctrl-supply/hardware/powerboard-reva/powerboard-reva.kicad_sch</source>
-    <date>2026-11-10T16:19:21+0100</date>
+    <source>/home/c08r4d0r/worktrees/cycle-ctrl-review/hardware/powerboard-reva/powerboard-reva.kicad_sch</source>
+    <date>2026-11-10T16:36:45+0100</date>
     <tool>Eeschema 9.0.9-9.0.9~ubuntu24.04.1</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -5789,9 +5789,10 @@
       <tstamps>0ef3b59d-0df9-5f97-8daf-01c27b432033</tstamps>
     </comp>
     <comp ref="C500">
-      <value>2.2u 100V CGA6N3X7R2A225K230AB</value>
+      <value>2.2u 200V X7R 22252C225KAT2A</value>
+      <footprint>Capacitor_SMD:C_2225_5664Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_SMD:C_2225_5664Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -5804,9 +5805,10 @@
       <tstamps>5b94472b-cb1d-55be-83cb-2bff256c4500</tstamps>
     </comp>
     <comp ref="C501">
-      <value>2.2u 100V CGA6N3X7R2A225K230AB</value>
+      <value>2.2u 200V X7R 22252C225KAT2A</value>
+      <footprint>Capacitor_SMD:C_2225_5664Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_SMD:C_2225_5664Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -6818,7 +6820,7 @@
       <uri>/usr/share/kicad/symbols//MCU_ST_STM32G4.kicad_sym</uri>
     </library>
     <library logical="Powerboard">
-      <uri>/home/c08r4d0r/worktrees/cycle-ctrl-supply/hardware/powerboard-reva/Powerboard.kicad_sym</uri>
+      <uri>/home/c08r4d0r/worktrees/cycle-ctrl-review/hardware/powerboard-reva/Powerboard.kicad_sym</uri>
     </library>
     <library logical="Switch">
       <uri>/usr/share/kicad/symbols//Switch.kicad_sym</uri>

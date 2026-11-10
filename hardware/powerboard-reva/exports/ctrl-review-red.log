@@ -1,0 +1,16 @@
+...F.
+======================================================================
+FAIL: test_input_capacitor_derating_and_package (test_ctrl_supply.CtrlSupplyTests.test_input_capacitor_derating_and_package)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-ctrl-review/hardware/powerboard-reva/tests/test_ctrl_supply.py", line 45, in test_input_capacitor_derating_and_package
+    self.assertEqual(components[ref].findtext('value'),
+AssertionError: '2.2u 100V CGA6N3X7R2A225K230AB' != '2.2u 200V X7R 22252C225KAT2A'
+- 2.2u 100V CGA6N3X7R2A225K230AB
++ 2.2u 200V X7R 22252C225KAT2A
+
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.047s
+
+FAILED (failures=1)
