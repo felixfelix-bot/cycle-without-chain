@@ -247,9 +247,7 @@ R114,28k7 0.1%,Resistor_SMD:R_0805_2012Metric,fast-oc-reference
 R115,4k7 1%,Resistor_SMD:R_0805_2012Metric,fast-oc-reference
 J40,Anderson 992G1 SB50 keyed SOURCE,,dc-entry
 F1,KLKD020CN 20A 600VDC candidate AT SOURCE,,dc-entry
-J41,SB50 992G1 removable MAIN jumper DEAD ONLY,,dc-entry
-J42,SB50 992G1 removable PRECHARGE jumper,,dc-entry
-R116,100R 1% RH050100R0FE02,,dc-entry
+R116,22R 1% RH05022R00FE02 pulse UNQUALIFIED,,dc-entry
 R117,2m 1% WSLP2512R0020FEA Kelvin,,dc-entry
 D20,STPS30100ST reverse clamp ONLY not reverse blocker,,dc-entry
 C73,470u 100V UHE2A471MHD +/-20%,,dc-entry
@@ -313,3 +311,29 @@ C86,100n mux bypass,Capacitor_SMD:C_0805_2012Metric,fsr-right
 D41,PESD3V3U1UL CANDIDATE,Diode_SMD:D_SOD-882,fsr-protection-right
 D42,PESD3V3U1UL CANDIDATE,Diode_SMD:D_SOD-882,fsr-protection-right
 D43,BAT54S CANDIDATE,Package_TO_SOT_SMD:SOT-23,fsr-protection-right
+U400,TPSI3052DWZR,,entry-main
+R400,20k 1% PXFR,,entry-main
+R401,10k EN default OFF,,entry-main
+R402,0R FIXED INHIBIT - no operational command source,,entry-main
+C400,1u 10V X7R effective >=0.22u,,entry-main
+C401,100n 25V C0G 5% CDIV1,,entry-main
+C402,470n 25V C0G 5% CDIV2,,entry-main
+Q400,IRFP4568PbF 150V candidate,Package_TO_SOT_THT:TO-247-3_Vertical,entry-main
+R403,10R 1% gate candidate,,entry-main
+R404,100k 1% G-S default OFF,,entry-main
+Q401,IRFP4568PbF 150V candidate,Package_TO_SOT_THT:TO-247-3_Vertical,entry-main
+R405,10R 1% gate candidate,,entry-main
+R406,100k 1% G-S default OFF,,entry-main
+U401,TPSI3052DWZR,,entry-pre
+R410,20k 1% PXFR,,entry-pre
+R411,10k EN default OFF,,entry-pre
+R412,0R FIXED INHIBIT - no operational command source,,entry-pre
+C410,1u 10V X7R effective >=0.22u,,entry-pre
+C411,100n 25V C0G 5% CDIV1,,entry-pre
+C412,470n 25V C0G 5% CDIV2,,entry-pre
+Q402,IRFP4568PbF 150V candidate,Package_TO_SOT_THT:TO-247-3_Vertical,entry-pre
+R413,10R 1% gate candidate,,entry-pre
+R414,100k 1% G-S default OFF,,entry-pre
+Q403,IRFP4568PbF 150V candidate,Package_TO_SOT_THT:TO-247-3_Vertical,entry-pre
+R415,10R 1% gate candidate,,entry-pre
+R416,100k 1% G-S default OFF,,entry-pre

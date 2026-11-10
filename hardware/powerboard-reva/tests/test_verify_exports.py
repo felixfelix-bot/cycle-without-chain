@@ -29,10 +29,10 @@ class ExportVerifierTests(unittest.TestCase):
                     self.assertEqual(result.returncode, 0, result.stderr)
                     self.assertIn('PARTIAL_NOT_SAFE_TO_ENERGIZE', result.stdout)
                     summary = json.loads(result.stdout)
-                    for key, count in {'components': 314, 'nets': 181,
-                                       'verified_pin_assignments': 956, 'explicit_nc_endpoints': 51, 'mosfets': 25,
-                                       'drivers': 2, 'erc_errors': 5, 'erc_warnings': 0,
-                                       'svg_pages': 27}.items():
+                    for key, count in {'components': 338, 'nets': 198,
+                                       'verified_pin_assignments': 1020, 'explicit_nc_endpoints': 51, 'mosfets': 29,
+                                       'drivers': 4, 'erc_errors': 8, 'erc_warnings': 0,
+                                       'svg_pages': 29}.items():
                         self.assertEqual(summary[key], count)
                 else:
                     self.assertNotEqual(result.returncode, 0, result.stdout)
@@ -107,7 +107,7 @@ class ExportVerifierTests(unittest.TestCase):
             ('exports/powerboard-reva.net', '(ref "U1")', '(ref "U999")'),
             ('exports/powerboard-reva.net', '(node (ref "J4") (pin "1")', '(node (ref "J4") (pin "1")) (node (ref "J4") (pin "1")'),
             ('exports/erc.rpt', 'Pin 24 [VREF', 'Pin 3 [VREF'),
-            ('exports/erc.rpt', 'Errors 5', 'Errors 0'),
+            ('exports/erc.rpt', 'Errors 8', 'Errors 0'),
             ('exports/erc.rpt', 'Symbol U3 Pin 1 [IN', 'Symbol U1 Pin 24 [VREF'),
             ('exports/powerboard-reva.net', 'DC_LINK', 'BROKEN_DC_LINK'),
             ('pin-net-map.csv', 'GEN_INHA', 'BROKEN_GEN_INHA'),

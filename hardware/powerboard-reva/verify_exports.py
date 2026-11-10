@@ -79,12 +79,12 @@ def rows(path, fields, count):
 
 def verify(root=P):
     expected = {}
-    for row in rows(root / 'pin-net-map.csv', ['ref', 'pin', 'pin_name', 'net', 'sheet'], 956):
+    for row in rows(root / 'pin-net-map.csv', ['ref', 'pin', 'pin_name', 'net', 'sheet'], 1020):
         key = (row['ref'], row['pin'])
         require(all(row.values()) and key not in expected, 'empty or duplicate expected endpoint')
         expected[key] = row['net']
     bom = {}
-    for row in rows(root / 'review-bom.csv', ['reference', 'value', 'footprint', 'sheet'], 314):
+    for row in rows(root / 'review-bom.csv', ['reference', 'value', 'footprint', 'sheet'], 338):
         ref = row['reference']
         require(ref and row['value'] and row['sheet'] and ref not in bom, 'empty or duplicate expected part')
         bom[ref] = (row['value'], row['footprint'])
@@ -101,7 +101,7 @@ def verify(root=P):
         footprint = value(comp, 'footprint') if footprints else ''
         actual_bom[ref] = (value(comp, 'value'), footprint)
     require(actual_bom == bom, 'component reference/value/footprint mismatch')
-    require(sum(ref.startswith('Q') for ref in bom) == 25 and sum(ref.startswith('U') for ref in bom) == 29, 'expected 25 Q references and 29 U references')
+    require(sum(ref.startswith('Q') for ref in bom) == 29 and sum(ref.startswith('U') for ref in bom) == 31, 'expected 29 Q references and 31 U references')
     actual, names, codes, nc = {}, set(), set(), {}
     seen_endpoints = set()
     for entry in children(child(net, 'nets'), 'net'):
@@ -127,7 +127,7 @@ def verify(root=P):
                 actual[key] = name
     require(set(nc) == EXPECTED_NC, 'explicit NC endpoint set mismatch')
     names -= set(nc.values())
-    require(names == set(expected.values()) and len(names) == 181, 'net identity/count mismatch')
+    require(names == set(expected.values()) and len(names) == 198, 'net identity/count mismatch')
     schematic = parse((root / 'mcu-core.kicad_sch').read_text())
     require(schematic[0] == 'kicad_sch', 'invalid MCU schematic')
     markers = children(schematic, 'no_connect')
@@ -138,7 +138,7 @@ def verify(root=P):
 
     report = (root / 'exports/erc.rpt').read_text()
     require(report.startswith('ERC report (') and 'Report includes: Errors, Warnings' in report, 'invalid ERC report header')
-    require(re.findall(r'\*\* ERC messages:.*', report) == ['** ERC messages: 5  Errors 5  Warnings 0'], 'invalid ERC totals')
+    require(re.findall(r'\*\* ERC messages:.*', report) == ['** ERC messages: 8  Errors 8  Warnings 0'], 'invalid ERC totals')
     # Split on every issue header, so unexpected issue classes cannot disappear.
     chunks = re.split(r'(?m)^(?=\[)', report)[1:]
     identities = []
@@ -156,11 +156,14 @@ def verify(root=P):
         ('U1', '25', 'AGND', 'PGND'),
         ('U17', '37', 'VDDA', 'MCU_VDDA'),
         ('U26', '5', 'V+', 'MCU_VREF'),
+        ('U400', '3', 'VDDP', 'CTRL3V3'),
+        ('U400', '5', 'VSSS', 'MAIN_SOURCE'),
+        ('U401', '5', 'VSSS', 'PRE_SOURCE'),
     ]), 'ERC identity/net mismatch (not an approved waiver)')
     return {'components': len(bom), 'nets': len(names), 'verified_pin_assignments': len(actual),
             'explicit_nc_endpoints': len(nc),
-            'mosfets': 25, 'drivers': 2, 'erc_errors': 5, 'erc_warnings': 0,
-            'erc_reason': 'Five known undriven supply errors remain unresolved, NOT waived.',
+            'mosfets': 29, 'drivers': 4, 'erc_errors': 8, 'erc_warnings': 0,
+            'erc_reason': 'Eight known undriven supply errors remain unresolved, NOT waived.',
             'status': 'PARTIAL_NOT_SAFE_TO_ENERGIZE',
             'svg_pages': len(list((root / 'exports/svg').glob('*.svg')))}
 

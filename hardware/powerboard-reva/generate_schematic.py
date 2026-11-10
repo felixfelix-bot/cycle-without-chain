@@ -189,6 +189,8 @@ from brake_intent_circuit import populate as populate_brake
 populate_brake(globals())
 from fsr_circuit import populate as populate_fsr
 populate_fsr(globals())
+from active_entry_circuit import populate as populate_active_entry
+populate_active_entry(globals())
 local_symbols=[local_drv]
 for a in custom_symbols:
     b=parse(dump(a));b[1]=q(val(b[1]).split(':')[1]);local_symbols.append(b)

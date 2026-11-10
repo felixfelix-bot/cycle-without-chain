@@ -1,7 +1,7 @@
 {
     "$schema": "https://schemas.kicad.org/erc.v1.json",
     "coordinate_units": "mm",
-    "date": "2026-11-10T14:42:31+0100",
+    "date": "2026-11-10T15:53:44+0100",
     "included_severities": [
         "error",
         "warning"
@@ -26,7 +26,7 @@
                                 "x": 1.016,
                                 "y": 0.762
                             },
-                            "uuid": "64203669-e7ef-4c8b-8b48-04d846522d10"
+                            "uuid": "81e4bbbf-03f1-4f53-8aae-40dabbcc4d5a"
                         }
                     ],
                     "severity": "error",
@@ -41,7 +41,7 @@
                                 "x": 1.016,
                                 "y": 0.8128
                             },
-                            "uuid": "a947c3ec-9f7f-495b-b452-179e8e7343c9"
+                            "uuid": "ffedc5fe-d556-46f5-b5c8-78a1d7e3c349"
                         }
                     ],
                     "severity": "error",
@@ -82,7 +82,7 @@
                                 "x": 0.4318,
                                 "y": 0.508
                             },
-                            "uuid": "b4dc77e5-6ebd-46fd-9123-dd2c85916346"
+                            "uuid": "89387dcf-0dbb-49dd-a3f5-4edbb8b23e40"
                         }
                     ],
                     "severity": "error",
@@ -123,7 +123,7 @@
                                 "x": 1.0922,
                                 "y": 0.6604
                             },
-                            "uuid": "1e6dcac4-261c-415d-93bc-e997ee83a191"
+                            "uuid": "f0f9dd9c-0e46-4d2d-a6b7-6b1974af9120"
                         }
                     ],
                     "severity": "error",
@@ -162,7 +162,7 @@
             "violations": []
         },
         {
-            "path": "/Bounded bench DC entry - manual dead-circuit sequencing only/",
+            "path": "/Bounded bench DC entry - active pairs inhibited/",
             "uuid_path": "/001667bc-4fcf-5521-bd76-ec5b5d98ec86/24d0bbba-ff22-55f5-a84f-f92bfd449afd",
             "violations": []
         },
@@ -199,7 +199,7 @@
                                 "x": 0.4318,
                                 "y": 1.778
                             },
-                            "uuid": "176920e5-7d30-485c-a5b1-4cd0bdba7556"
+                            "uuid": "c44434ed-e8e8-4ff4-b29c-3d6e23f51c2b"
                         }
                     ],
                     "severity": "error",
@@ -221,6 +221,63 @@
             "path": "/RIGHT FSR candidate ESD and secondary clamps - unqualified/",
             "uuid_path": "/001667bc-4fcf-5521-bd76-ec5b5d98ec86/c484344b-fa57-51e3-9efe-c91c71e57eaa",
             "violations": []
+        },
+        {
+            "path": "/MAIN back-to-back candidate - hardware inhibited/",
+            "uuid_path": "/001667bc-4fcf-5521-bd76-ec5b5d98ec86/84ab3338-d859-5b7b-a68e-a72aedfc13e7",
+            "violations": [
+                {
+                    "description": "Input Power pin not driven by any Output Power pins",
+                    "items": [
+                        {
+                            "description": "Symbol U400 Pin 3 [VDDP, Power input, Line]",
+                            "pos": {
+                                "x": 0.4318,
+                                "y": 0.7112
+                            },
+                            "uuid": "00c2a3be-f684-4a6f-a3a3-473074ef39d7"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "power_pin_not_driven"
+                },
+                {
+                    "description": "Input Power pin not driven by any Output Power pins",
+                    "items": [
+                        {
+                            "description": "Symbol U400 Pin 5 [VSSS, Power input, Line]",
+                            "pos": {
+                                "x": 0.4318,
+                                "y": 0.8128
+                            },
+                            "uuid": "b3de1f1c-15ed-4e9f-886b-8e322ba9fc2b"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "power_pin_not_driven"
+                }
+            ]
+        },
+        {
+            "path": "/PRE back-to-back candidate - hardware inhibited/",
+            "uuid_path": "/001667bc-4fcf-5521-bd76-ec5b5d98ec86/af136be2-19b5-51aa-9308-d9ca05a8c19d",
+            "violations": [
+                {
+                    "description": "Input Power pin not driven by any Output Power pins",
+                    "items": [
+                        {
+                            "description": "Symbol U401 Pin 5 [VSSS, Power input, Line]",
+                            "pos": {
+                                "x": 0.4318,
+                                "y": 0.8128
+                            },
+                            "uuid": "acdb4164-4ceb-45d9-b631-3b6a2040eeec"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "power_pin_not_driven"
+                }
+            ]
         }
     ],
     "source": "powerboard-reva.kicad_sch"

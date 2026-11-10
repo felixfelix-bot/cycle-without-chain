@@ -1,4 +1,4 @@
-ERC report (2026-11-10T14:42:25+0100, Encoding UTF8)
+ERC report (2026-11-10T15:53:39+0100, Encoding UTF8)
 Report includes: Errors, Warnings
 
 ***** Sheet /
@@ -49,7 +49,7 @@ Report includes: Errors, Warnings
 
 ***** Sheet /Ratiometric OC window and wired sink fault/
 
-***** Sheet /Bounded bench DC entry - manual dead-circuit sequencing only/
+***** Sheet /Bounded bench DC entry - active pairs inhibited/
 
 ***** Sheet /LEFT supervised binary brake interface/
 
@@ -70,4 +70,17 @@ Report includes: Errors, Warnings
 
 ***** Sheet /RIGHT FSR candidate ESD and secondary clamps - unqualified/
 
- ** ERC messages: 5  Errors 5  Warnings 0
+***** Sheet /MAIN back-to-back candidate - hardware inhibited/
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(43.18 mm, 71.12 mm): Symbol U400 Pin 3 [VDDP, Power input, Line]
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(43.18 mm, 81.28 mm): Symbol U400 Pin 5 [VSSS, Power input, Line]
+
+***** Sheet /PRE back-to-back candidate - hardware inhibited/
+[power_pin_not_driven]: Input Power pin not driven by any Output Power pins
+    ; error
+    @(43.18 mm, 81.28 mm): Symbol U401 Pin 5 [VSSS, Power input, Line]
+
+ ** ERC messages: 8  Errors 8  Warnings 0
