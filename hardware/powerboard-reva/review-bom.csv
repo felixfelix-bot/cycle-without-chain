@@ -85,7 +85,7 @@ J11,SAFETY_CONTROL,,external-boundaries
 C21,100u 100V provisional,,external-boundaries
 U3,R-78HB12-0.5,,aux-supply
 U4,TLV76033DBZR,Package_TO_SOT_SMD:SOT-23,aux-supply
-C22,3.3u 100V GRM32ER72A335KA35L,Capacitor_SMD:C_0805_2012Metric,aux-supply
+C22,3.3u 100V GRM32ER72A335KA35L,Capacitor_SMD:C_1210_3225Metric,aux-supply
 C23,10u 25V GRM21BR61E106KA73L,Capacitor_SMD:C_0805_2012Metric,aux-supply
 C24,1u 25V GRM21BR71E105KA99L,Capacitor_SMD:C_0805_2012Metric,aux-supply
 R39,1k 1% CRCW08051K00FKEA,Resistor_SMD:R_0805_2012Metric,aux-supply

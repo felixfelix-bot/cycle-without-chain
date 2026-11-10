@@ -9,7 +9,7 @@ def populate(g):
         a=parse(text+'))');g['custom_symbols'].append(a);return a
     def part(s,a,ref,mpn,x,y,nets,fp):s.part(a,ref,mpn,x,y,{str(i+1):n for i,n in enumerate(nets)},fp)
     def r(s,v,x,y,a,b):return passive(s,'R',v,x,y,a,b,'Resistor_SMD:R_0805_2012Metric')
-    def c(s,v,x,y,a,b):return passive(s,'C',v,x,y,a,b,'Capacitor_SMD:C_0805_2012Metric')
+    def c(s,v,x,y,a,b):return passive(s,'C',v,x,y,a,b,'Capacitor_SMD:C_1210_3225Metric' if 'GRM32' in v else 'Capacitor_SMD:C_0805_2012Metric')
     aux=Sheet('aux-supply','Bus-fed auxiliary and independent safety supply')
     aux.text('R-78HB12-0.5: 17-72V operating, 75V absolute. Entry transient protection still REQUIRED.',20.32,15.24)
     part(aux,ic('R78HB',['IN','GND','OUT'],powerout=(3,)),'U3','R-78HB12-0.5',63.5,50.8,['DC_LINK','PGND','AUX12V'],'')

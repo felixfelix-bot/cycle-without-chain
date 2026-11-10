@@ -1,7 +1,7 @@
 (export (version "E")
   (design
     (source "/home/c08r4d0r/worktrees/cycle-powerboard-protection/hardware/powerboard-reva/powerboard-reva.kicad_sch")
-    (date "2026-11-10T11:41:06+0100")
+    (date "2026-11-10T11:44:19+0100")
     (tool "Eeschema 9.0.9-9.0.9~ubuntu24.04.1")
     (sheet (number "1") (name "/") (tstamps "/")
       (title_block
@@ -1272,9 +1272,9 @@
       (tstamps "e86900ae-dbe4-56e4-9a80-361bcac39006"))
     (comp (ref "C22")
       (value "3.3u 100V GRM32ER72A335KA35L")
-      (footprint "Capacitor_SMD:C_0805_2012Metric")
+      (footprint "Capacitor_SMD:C_1210_3225Metric")
       (fields
-        (field (name "Footprint") "Capacitor_SMD:C_0805_2012Metric")
+        (field (name "Footprint") "Capacitor_SMD:C_1210_3225Metric")
         (field (name "Datasheet"))
         (field (name "Description")))
       (libsource (lib "Device") (part "C") (description "Unpolarized capacitor"))
