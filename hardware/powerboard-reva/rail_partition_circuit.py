@@ -77,10 +77,13 @@ def populate(g):
     parts = [
         # ref, value, net A, net B, footprint
         # L501 reselected for the converter's own 1.75 A top peak limit (was MSS1246T-683MLC,
-        # Isat 2.26 A / Irms 1.30 A). TDK SPM10065VT-D datasheet (20200702) 68 uH row:
-        # Isat 5.1 A at dL=-20% / 7.0 A at -30%, Itemp 3.4 A at dT=40 C, Rdc 121 mOhm typ.
-        # Footprint deliberately blank: the vendor 10.5x10x6.5 mm land is not yet compared to a KiCad land.
-        ('L501', '68u SPM10065VT-680M-D 20% AEC-Q200 candidate', 'DRIVE_SW', 'DRIVE12', ''),
+        # Isat 2.26 A / Irms 1.30 A). TDK SPM10065VC-D (production; the VT variant is NRND
+        # with this part named as its replacement) 68 uH row: Isat 7.3 A at dL=-30%,
+        # Itemp 3.4 A at dT=40 C, Rdc 114 mOhm typ / 131.1 mOhm max, 80 V rated.
+        # Footprint still blank: the vendor land pattern is A 2.95 / B 6.10 / C 4.50 mm
+        # (identical for VT and VC), and NO stock KiCad land matches it - the nearest,
+        # L_Coilcraft_XAL1010-XXX, is 2.38 wide on a 6.65 pitch. A custom land is required.
+        ('L501', '68u SPM10065VC-680M-D 20% AEC-Q200', 'DRIVE_SW', 'DRIVE12', ''),
         ('L502', '3.9u candidate 2A', 'MCU_SW', 'LOGIC3V3_EXT', 'Inductor_SMD:L_Bourns_SRN6045TA'),
         ('C510', '2.2u 200V X7R 22252C225KAT2A', 'DC_LINK', 'PGND', 'Capacitor_SMD:C_2225_5664Metric'),
         ('C511', '2.2u 200V X7R 22252C225KAT2A', 'DC_LINK', 'PGND', 'Capacitor_SMD:C_2225_5664Metric'),

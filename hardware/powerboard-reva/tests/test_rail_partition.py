@@ -40,7 +40,11 @@ def validate(root):
     # The OVP comparator output must be the EN/UVLO divider node, never the EN logic net.
     if n.get(('U503','4'))=='DRIVE_EN': raise ValueError('OVP output tied to DRIVE_EN, not DRIVE_UVLO')
     values={c.findtext('value') for c in root.findall('./components/comp') if c.get('ref') in ('L501','U503')}
-    if not any(v and 'SPM10065VT-680M-D' in v for v in values): raise ValueError('L501 not the reselected 68uH part')
+    # L501 must be a part TDK still sells: the VT variant is NRND with
+    # SPM10065VC-680M-D named as the replacement, and a new design must not
+    # name a not-recommended part. Both share the same 2.95/6.10/4.50 land.
+    if not any(v and 'SPM10065VC-680M-D' in v for v in values): raise ValueError('L501 not the production 68uH part')
+    if any(v and 'VT-680M-D' in v for v in values): raise ValueError('L501 names the NRND VT variant')
     if not any(v=='TLV1701AIDBVR' for v in values): raise ValueError('U503 OVP comparator missing')
     return n
 
