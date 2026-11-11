@@ -252,43 +252,62 @@ asserts `L500`/`L502` are unchanged.
 
 ### 2.3 The reselected part
 
-**TDK `SPM10065VT-680M-D`**, from the vendor datasheet
-`inductor_automotive_power_spm10065vt-d_en.pdf` (20200702), characteristics table,
-68 µH row:
+**TDK `SPM10065VC-680M-D`**, production status, 68 µH row of the SPM-VC-D family:
 
 ```
-68 uH ±20 %, 100 kHz, DCR 121 mOhm typ ±10 %
-Isat 5.1 A typ (dL = -20 %)   7.0 A typ (dL = -30 %)
+68 uH ±20 %, 100 kHz, DCR 114 mOhm typ / 131.1 mOhm max
+Isat 7.3 A typ (dL = -30 %)
 Itemp 3.4 A typ (dT = 40 deg C)
-AEC-Q200, operating range -55 to +155 C including self-heating
+Rated voltage 80 V, AEC-Q200, -55 to +155 C including self-heating
 ```
+
+**Correction to the first selection.** This section originally named
+`SPM10065VT-680M-D`. TDK's product page for that part carries
+`Product Status: Production (NRND)` and, under it,
+`Recommended Alternate Part No.: SPM10065VC-680M-D (Interchangeability is not
+guaranteed.)`. Naming a not-recommended-for-new-design part in a design that has
+never been built is a defect, not a preference, so the part was changed to the
+named successor. The VT variant also publishes no `Rated Voltage`; the VC variant
+publishes **80 V**, which is the number that matters against a 16.25 V OVP trip.
+
+Both variants carry the **same** recommended land pattern:
+
+```
+A (pad width) 2.95 mm Nom.   B (pitch) 6.10 mm Nom.   C 4.50 mm Nom.
+```
+
+So the change costs no layout work.
 
 | Quantity | New part | Rule | Verdict |
 |---|---|---|---|
-| peak vs `Isat`(−20 %) | 5.1 / 1.75 = **2.91×** | ≥ 1.25× | pass |
-| peak vs `Isat`(−30 %) | 7.0 / 1.75 = **4.00×** | ≥ 1.25× | pass |
+| peak vs `Isat`(−30 %) | 7.3 / 1.75 = **4.17×** | ≥ 1.25× | pass |
 | sustained vs `Itemp`(40 °C) | 3.4 / 1.575 = **2.16×** | ≥ 1.25× | pass |
-| I²R at 1.75 A | 1.75² × 0.121 = **0.371 W** | better than 0.569 W | pass |
+| I²R at 1.75 A (typ DCR) | 1.75² × 0.114 = **0.349 W** | better than 0.569 W | pass |
+| I²R at 1.75 A (max DCR) | 1.75² × 0.131 = **0.401 W** | better than 0.569 W | pass |
 
-Even taking the **most pessimistic** published saturation point (5.1 A at
-−20 %) the part clears the 0.80 rule by 2.91×, so the selection does not depend
-on which drop criterion is quoted.
+The VC variant publishes only a −30 % saturation current, so the −20 % row that
+was quoted for the VT part no longer exists. 4.17× against the published figure
+is a wider margin than the 2.91× previously claimed, and it is measured against
+the **tighter** of the two criteria, so the selection is not resting on a
+favourable datasheet row.
 
 ### 2.4 What is still open about `L501`
 
-- **The footprint is deliberately blank.** `SPM10065VT-680M-D` is 10.5 × 10 ×
-  6.5 mm; no KiCad land pattern has been compared to the vendor's recommended
-  pad geometry. Filling in a stock `L_12x12mm` land would be an unverified claim,
-  so the field is left empty and this is an explicit gate.
-- **"Candidate" is in the value string on purpose.** The part number, ratings and
-  package are source-verified; **price and stock are not**, and this branch makes
-  no availability claim.
-- **`DCR` ±10 % means the 0.371 W is a typical, not a maximum,** figure.
-- **Core loss at 300 kHz is not included** in the I²R number.
-- **`L500` (the CTRL3V3 converter's identical old part) is untouched.** It is the
-  same `MSS1246T-683MLC` on a converter with the same topology; RAIL-03 already
-  records it as an open gate. Fixing it here would be an unrequested scope
-  change, so it is called out instead.
+- **The footprint is still blank, and that is now a measured statement, not a
+  deferral.** TDK's land is A 2.95 / B 6.10 / C 4.50 mm. The nearest stock KiCad
+  land, `Inductor_SMD:L_Coilcraft_XAL1010-XXX`, is **2.38 mm wide on a 6.65 mm
+  pitch** — it does not match, and would be a wrong pad geometry that only shows
+  up at assembly. A custom land must be drawn from the vendor drawing. The field
+  is left empty rather than filled with a plausible-looking wrong footprint.
+- **"AEC-Q200" is in the value string but the part is not automotive-qualified
+  for this application.** It is an automotive-grade part used in a non-automotive
+  design; the string records the vendor grade, and no qualification claim is made.
+- **`DCR` maximum is 131.1 mΩ, so 0.401 W is the worst case**, and core loss at
+  300 kHz is still not included in the I²R number.
+- **Price and stock are not checked** and this branch makes no availability claim.
+- **`L500` (the CTRL3V3 converter's old part) is untouched.** It is the same
+  `MSS1246T-683MLC` on a converter with the same topology; RAIL-03 records it as
+  open. Fixing it here would be an unrequested scope change, so it is called out.
 
 ---
 

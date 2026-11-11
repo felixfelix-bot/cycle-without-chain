@@ -357,7 +357,7 @@ U510,SN74LVC1G08DBVR,Package_TO_SOT_SMD:SOT-23-5,rail-partition
 U501,LM5164DDAR,,rail-partition
 U503,TLV1701AIDBVR,Package_TO_SOT_SMD:SOT-23-5,rail-partition
 U502,AP63203WU,Package_TO_SOT_SMD:TSOT-23-6,rail-partition
-L501,68u SPM10065VT-680M-D 20% AEC-Q200 candidate,,rail-passives
+L501,68u SPM10065VC-680M-D 20% AEC-Q200,,rail-passives
 L502,3.9u candidate 2A,Inductor_SMD:L_Bourns_SRN6045TA,rail-passives
 C510,2.2u 200V X7R 22252C225KAT2A,Capacitor_SMD:C_2225_5664Metric,rail-passives
 C511,2.2u 200V X7R 22252C225KAT2A,Capacitor_SMD:C_2225_5664Metric,rail-passives
