@@ -162,7 +162,7 @@ Those lessons are executable here, not documented intent:
 - `tools/gates/run_all_gates.py` — one nonzero status if any gate fails; a crashed
   or unwired gate reports **NOT RUN**, never green.
 
-**233 gate tests pass**, normally and under `python3 -O`, with negative controls
+**237 gate tests pass**, normally and under `python3 -O`, with negative controls
 proving each gate can actually fail.
 
 ## Use cases under investigation
@@ -236,12 +236,29 @@ cd hardware/powerboard-reva && python3 generate_schematic.py
 cd hardware/powerboard-reva && python3 -m unittest discover -s tests
 cd hardware/powerboard-reva && python3 -O -m unittest discover -s tests
 
-# fail-closed release gates
+# fail-closed release gates — pytest only, see the note below
 python3 -m pytest tests/gates -q
 
 # open-gates register consistency
 python3 analysis/gates/register_check.py docs/design/open-gates-register.md
 ```
+
+### `tests/gates` has no unittest route
+
+Every test under `tests/gates` is a **bare module-level function**, and the whole
+directory contains **zero `unittest.TestCase` classes**. `python3 -m unittest
+discover -s tests/gates` exits **0** reporting `Ran 0 tests … OK`: it grades
+nothing. Adding `tests/gates/__init__.py` does not change this — the collection
+unit unittest looks for is a `TestCase` subclass, which these files do not have.
+
+That is why the gate count is quoted from `python3 -m pytest tests/gates -q`
+(**237**) and never from a unittest command. If you add a gate test, use pytest
+and keep it a function; converting the directory to `TestCase` classes would be a
+deliberate change to how the suite is collected, not a cleanup.
+
+The hardware suite under `hardware/powerboard-reva/tests` is different: it is
+`unittest` throughout, so the `unittest discover` command above is correct there
+and reports **49** tests.
 
 Passing tests prove the models and the generated connectivity behave as specified.
 They do not prove the circuit is electrically safe, fabricable or rideable.

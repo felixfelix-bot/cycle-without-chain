@@ -32,7 +32,7 @@ different commit, and a count that nobody re-measured is a claim, not a fact.
 | 51 explicit NCs | 51 (single-pin nets) | ✅ |
 | 45 hardware tests pass, also under `-O` | 45 pass, 45 pass | ✅ |
 | Strict ERC 10 errors, 0 warnings, exit 5 | 10 errors, 0 warnings, exit 5 | ✅ |
-| 233 gate tests pass | 233 pass | ✅ (README said 198; the suite is 233 — corrected here) |
+| gate tests pass | 237 pass | ✅ (README said 198; the suite was 233 before the documented-command guard was added) |
 | No `.kicad_pcb`, no routing, no Gerbers | none present | ✅ |
 
 ## 1. How each figure was measured
@@ -109,8 +109,37 @@ EOF
 # test suites
 python3 -m unittest discover -s tests          # 45 baseline; 49 on pr/rail-ovp-pgood
 python3 -O -m unittest discover -s tests       # same count, must not go vacuous
-cd ../.. && python3 -m pytest tests/gates -q   # 233 tests
+cd ../.. && python3 -m pytest tests/gates -q   # 237 tests
 ```
 
 Observed timings: schematic generation a few minutes, the 45-test suite about
 157 s normally and 190 s under `-O`, the gate suite about 14 s.
+
+## 5. Why the gate suite has only one valid runner
+
+`tests/gates` contains **221 test functions and zero `unittest.TestCase`
+classes** — every test is a bare module-level function taking pytest fixtures
+such as `tmp_path`. Consequently:
+
+- `python3 -m pytest tests/gates -q` → **237 passed** (233 before the
+  documented-command guard was added). This is the only valid route, and the
+  only source for a gate count.
+- `python3 -m unittest discover -s tests/gates` → **exit 0, `Ran 0 tests … OK`**.
+  It reports success while grading nothing.
+
+**The missing `__init__.py` is not the cause.** Adding
+`tests/gates/__init__.py` leaves the count at zero, because unittest collects
+`TestCase` subclasses, not bare functions. The earlier note in this repository
+that attributed the no-op to a missing `__init__.py` was wrong about the
+mechanism, though right that the command is vacuous.
+
+This is also why the **198** figure survived: it was reproduced by a command that
+could not have contradicted it. The correct count at `ae42054` and at master
+`b31ba7e` is **233**.
+
+The hardware suite is the opposite case: `hardware/powerboard-reva/tests` is
+`unittest` throughout, so `python3 -m unittest discover -s tests` is correct
+there — 45 at baseline, 49 on `pr/rail-ovp-pgood`.
+
+**Rule:** quote gate counts from pytest and hardware counts from unittest. Never
+infer one runner's coverage from the other's.
