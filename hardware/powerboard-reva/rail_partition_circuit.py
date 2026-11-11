@@ -44,9 +44,27 @@ def populate(g):
                   ['power_in', 'power_in', 'input', 'input', 'input', 'open_collector', 'passive', 'power_out', 'passive'])
     s.part(buck, 'U501', 'LM5164DDAR', 76.2, 165.1,
            dict(zip(map(str, range(1, 10)),
-                     ['PGND', 'DC_LINK', 'DRIVE_UVLO', 'DRIVE_RON', 'DRIVE_FB', 'ANALOG_OK',
+                     ['PGND', 'DC_LINK', 'DRIVE_UVLO', 'DRIVE_RON', 'DRIVE_FB', 'DRIVE_PG',
                       'DRIVE_BST', 'DRIVE_SW', 'PGND'])))
-    s.text('U501 is TI figure 7-1 (12 V/1 A/300 kHz) with RRON=100k and RFB1/RFB2=453k/49.9k. PGOOD sinks ANALOG_OK.', 20.32, 223.52)
+    s.text('U501 is TI figure 7-1 (12 V/1 A/300 kHz) with RRON=100k and RFB1/RFB2=453k/49.9k. PGOOD drives DRIVE_PG only.', 20.32, 223.52)
+
+    # --- Independent output OVP on DRIVE12 (was RAIL-01: LM5164 has no OVP) ---
+    # TLV1701 (TI SBOS589D): 2.2-36 V open-drain comparator, 560 ns typ propagation,
+    # 300 uV typ offset, output may be pulled to any rail <=42 V above V-.
+    # Polarity matters: SBOS589D Table 8-1 gives output LOW when IN- > IN+. The sense
+    # divider is therefore on IN- (pin 3) and the 2.5 V reference on IN+ (pin 1), so a
+    # rising DRIVE12 pulls the open drain LOW. Reversed, the comparator would go high
+    # exactly when the rail is over voltage and never protect anything.
+    # The output sinks DRIVE_UVLO - the LM5164 EN/UVLO divider node - so a trip drives
+    # EN toward 0 V (below the 1.1 V shutdown threshold) without contending with the
+    # U510 gate output on DRIVE_EN.
+    ovp = symbol(g, 'TLV1701DBVR', ['IN+', 'V-', 'IN-', 'OUT', 'V+'],
+                 ['input', 'power_in', 'input', 'open_collector', 'power_in'])
+    s.part(ovp, 'U503', 'TLV1701AIDBVR', 407.67, 165.1,
+           {'1': 'REF2V5', '2': 'PGND', '3': 'DRIVE_OV_SENSE', '4': 'DRIVE_UVLO', '5': 'SINK12'},
+           'Package_TO_SOT_SMD:SOT-23-5')
+    s.text('U503 output pulls DRIVE_UVLO low when DRIVE12 exceeds 2.5V*(R523+R524)/R524 = 16.25 V nominal. '
+           'Independent of the LM5164 FB node, so an open FB divider cannot hide the fault.', 20.32, 238.76)
 
     # --- MCU3V3: AP63203 fixed 3.3 V buck from DRIVE12 -------------------------
     ap = symbol(g, 'AP63203WU', ['FB', 'EN', 'VIN', 'GND', 'SW', 'BST'],
@@ -58,7 +76,11 @@ def populate(g):
 
     parts = [
         # ref, value, net A, net B, footprint
-        ('L501', '68u MSS1246T-683MLC 20%', 'DRIVE_SW', 'DRIVE12', ''),
+        # L501 reselected for the converter's own 1.75 A top peak limit (was MSS1246T-683MLC,
+        # Isat 2.26 A / Irms 1.30 A). TDK SPM10065VT-D datasheet (20200702) 68 uH row:
+        # Isat 5.1 A at dL=-20% / 7.0 A at -30%, Itemp 3.4 A at dT=40 C, Rdc 121 mOhm typ.
+        # Footprint deliberately blank: the vendor 10.5x10x6.5 mm land is not yet compared to a KiCad land.
+        ('L501', '68u SPM10065VT-680M-D 20% AEC-Q200 candidate', 'DRIVE_SW', 'DRIVE12', ''),
         ('L502', '3.9u candidate 2A', 'MCU_SW', 'LOGIC3V3_EXT', 'Inductor_SMD:L_Bourns_SRN6045TA'),
         ('C510', '2.2u 200V X7R 22252C225KAT2A', 'DC_LINK', 'PGND', 'Capacitor_SMD:C_2225_5664Metric'),
         ('C511', '2.2u 200V X7R 22252C225KAT2A', 'DC_LINK', 'PGND', 'Capacitor_SMD:C_2225_5664Metric'),
@@ -83,6 +105,17 @@ def populate(g):
         ('R518', '100k 1% MAIN_PROVEN default low', 'MAIN_PROVEN_IN', 'PGND', ''),
         ('R519', '0R FIXED INHIBIT - no MAIN_PROVEN detector fitted', 'MAIN_PROVEN_IN', 'PGND', ''),
         ('R520', '10k CTRL PGOOD pullup', 'CTRL3V3', 'CTRL_PG', ''),
+        # RAIL-04 decision: U501 PGOOD no longer joins the always-on ANALOG_OK chain.
+        # It gets its own status net on an always-on pullup (PGOOD abs max 14 V, SINK12 max 12.36 V).
+        ('R521', '47k 1% DRIVE_PG pullup (PGOOD abs max 14V)', 'SINK12', 'DRIVE_PG', ''),
+        # RAIL-01 output OVP divider; trip 2.5V*(649k+118k)/118k = 16.25 V nominal.
+        ('R523', '649k 0.1% DRIVE12 OVP upper leg', 'DRIVE12', 'DRIVE_OV_SENSE', ''),
+        ('R524', '118k 0.1% DRIVE12 OVP lower leg', 'DRIVE_OV_SENSE', 'PGND', ''),
+        # 100pF, not 1nF or 100nF. With Rth = 649k||118k = 99.85k, 100nF would add a
+        # 9.98ms lag (324 V of overshoot at 32.4 mV/us) and defeat the OVP; 1nF gives
+        # 100us => 3.24 V. 100pF gives tau = 9.98us => 0.32 V of lag, so the peak stays
+        # far below the 25 V C513/C514/C517 rating. C0G for stable tau.
+        ('C523', '100p 50V C0G OVP sense filter', 'DRIVE_OV_SENSE', 'PGND', ''),
     ]
     s.save(); g['sheets'].append(s)
     s = g['Sheet']('rail-passives', 'Rail partition passive networks - unqualified')
@@ -91,6 +124,6 @@ def populate(g):
                {'1': a, '2': b}, fp)
 
     s.text('R519 0R keeps MAIN_PROVEN_IN low, so DRIVE_EN stays low: both delayed rails are OFF by construction.', 20.32, 271.78)
-    s.text('PGOOD feeds ANALOG_OK; no sequencing timer claimed. Fitted R402/R412 inhibits unchanged.', 20.32, 279.4)
+    s.text('U501 PGOOD drives DRIVE_PG only: the always-on ANALOG_OK chain is no longer gated by a delayed rail.', 20.32, 279.4)
     s.save()
     g['sheets'].append(s)
