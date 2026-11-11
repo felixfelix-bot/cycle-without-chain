@@ -1,6 +1,12 @@
 > **STATUS: VERIFICATION RECORD — READ-ONLY MEASUREMENT OF THE SCHEMATIC.**
 > This document reports what the generator and KiCad actually produce. It does not
 > approve the design, and a matching count is not an engineering proof.
+>
+> **Baseline note:** every figure below was measured at `ae42054` and is retained
+> as the *pre-change* baseline. Branch `pr/rail-ovp-pgood` adds the DRIVE12 OVP
+> comparator, its divider and a new L501, so the current figures there are
+> 387 components / 220 nets / 1142 pin assignments / 49 tests. The README quotes
+> both sets and says which is which.
 
 # Schematic figure verification
 
@@ -26,7 +32,7 @@ different commit, and a count that nobody re-measured is a claim, not a fact.
 | 51 explicit NCs | 51 (single-pin nets) | ✅ |
 | 45 hardware tests pass, also under `-O` | 45 pass, 45 pass | ✅ |
 | Strict ERC 10 errors, 0 warnings, exit 5 | 10 errors, 0 warnings, exit 5 | ✅ |
-| 198 gate tests pass | 198 pass | ✅ |
+| 233 gate tests pass | 233 pass | ✅ (README said 198; the suite is 233 — corrected here) |
 | No `.kicad_pcb`, no routing, no Gerbers | none present | ✅ |
 
 ## 1. How each figure was measured
@@ -101,9 +107,9 @@ print("single-pin (NC) nets:", sum(1 for n in nets if n == 1))
 EOF
 
 # test suites
-python3 -m unittest discover -s tests          # 45 tests
-python3 -O -m unittest discover -s tests       # 45 tests
-cd ../.. && python3 -m pytest tests/gates -q   # 198 tests
+python3 -m unittest discover -s tests          # 45 baseline; 49 on pr/rail-ovp-pgood
+python3 -O -m unittest discover -s tests       # same count, must not go vacuous
+cd ../.. && python3 -m pytest tests/gates -q   # 233 tests
 ```
 
 Observed timings: schematic generation a few minutes, the 45-test suite about

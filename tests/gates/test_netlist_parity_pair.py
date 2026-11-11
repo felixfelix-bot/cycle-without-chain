@@ -175,8 +175,8 @@ def test_real_sexpr_export_parses_to_the_committed_contract():
     import tools.gates.netlist_parity as parity
 
     parsed = parity.load_sexpr_netlist(NET_REAL)
-    assert len(parsed["endpoints"]) == 1129
-    assert len(parsed["nets"]) == 218
+    assert len(parsed["endpoints"]) == 1142
+    assert len(parsed["nets"]) == 220
     assert len(parsed["unconnected_nets"]) == 51
     assert parsed["shorts"] == []
 
@@ -185,8 +185,8 @@ def test_real_xml_export_parses_to_the_same_contract():
     import tools.gates.netlist_parity as parity
 
     parsed = parity.load_netlist(XML_REAL)
-    assert len(parsed["endpoints"]) == 1129
-    assert len(parsed["nets"]) == 218
+    assert len(parsed["endpoints"]) == 1142
+    assert len(parsed["nets"]) == 220
 
 
 def test_real_both_artifacts_agree_with_the_committed_pin_map(tmp_path):
@@ -195,8 +195,8 @@ def test_real_both_artifacts_agree_with_the_committed_pin_map(tmp_path):
 
     mapping = expected_map.from_pin_net_map(CSV_REAL, tmp_path / "expected.json")
     data = json.loads(mapping.read_text())
-    assert len(data["nets"]) == 218
-    assert sum(len(rows) for rows in data["nets"].values()) == 1129
+    assert len(data["nets"]) == 220
+    assert sum(len(rows) for rows in data["nets"].values()) == 1142
 
     proc, payload = _run(XML_REAL, NET_REAL, mapping)
     assert proc.returncode == 0, proc.stderr

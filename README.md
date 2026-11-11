@@ -162,7 +162,7 @@ Those lessons are executable here, not documented intent:
 - `tools/gates/run_all_gates.py` — one nonzero status if any gate fails; a crashed
   or unwired gate reports **NOT RUN**, never green.
 
-**198 gate tests pass**, normally and under `python3 -O`, with negative controls
+**233 gate tests pass**, normally and under `python3 -O`, with negative controls
 proving each gate can actually fail.
 
 ## Use cases under investigation

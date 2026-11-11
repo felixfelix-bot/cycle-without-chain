@@ -20,7 +20,7 @@ branch; two remain design work.
 | Check | Result |
 |---|---|
 | Hardware suite | **45 tests OK** normal, **45 OK** under `python3 -O` |
-| Fail-closed gates | `pytest tests/gates` → **198 passed**, normal and `-O` |
+| Fail-closed gates | `pytest tests/gates` → **233 passed**, normal and `-O` (this review quoted 198; the suite was already 233 at this head) |
 | Generator fidelity | `generate_schematic.py` reproduces committed `.net` **byte-identical** |
 | Native export | `kicad-cli sch export netlist --format kicadxml` reproduces `ctrl-supply.xml` (382 components, 218 nets) |
 | Strict ERC | **exit 5, 10 errors, 0 warnings** (master had 9); no waiver, no pin-type falsification |
@@ -164,6 +164,6 @@ python3 -O -m unittest discover -s tests           # 45 tests, must also pass
 python3 analysis/precharge/rail_budget.py --self-test
 python3 -O analysis/precharge/rail_budget.py --self-test   # must not go vacuous
 
-python3 -m pytest tests/gates -q                   # 198 passed
+python3 -m pytest tests/gates -q                   # 233 passed
 python3 -m tools.gates.native_reports --kind erc ...        # exits 1 on 10 errors
 ```
