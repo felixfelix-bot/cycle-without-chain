@@ -255,8 +255,8 @@ asserts `L500`/`L502` are unchanged.
 **TDK `SPM10065VC-680M-D`**, production status, 68 µH row of the SPM-VC-D family:
 
 ```
-68 uH ±20 %, 100 kHz, DCR 114 mOhm typ / 131.1 mOhm max
-Isat 7.3 A typ (dL = -30 %)
+68 uH ±20 %, 100 kHz, DCR 114 mOhm typ / 131.1 mOhm max (±15 %)
+Isat 5.5 A typ (dL = -20 %)   7.3 A typ (dL = -30 %)
 Itemp 3.4 A typ (dT = 40 deg C)
 Rated voltage 80 V, AEC-Q200, -55 to +155 C including self-heating
 ```
@@ -270,6 +270,25 @@ never been built is a defect, not a preference, so the part was changed to the
 named successor. The VT variant also publishes no `Rated Voltage`; the VC variant
 publishes **80 V**, which is the number that matters against a 16.25 V OVP trip.
 
+**Correction to this correction.** The first version of the paragraph above
+claimed that "the VC variant publishes only a −30 % saturation current, so the
+−20 % row no longer exists". That was read off TDK's *product page*, which shows
+one `Rated Current (L Change)` field, and it is **wrong**. TDK's own catalogue
+PDF (`inductor_automotive_power_spm10065vc-d_en.pdf`, §`Electrical
+Specification`, 68 µH row) publishes **both** columns:
+
+```
+SPM10065VC-680M-D   68 uH  ±20 %  100 kHz   DCR 114 mOhm ±15 %
+                    Isat 5.5 A typ (dL = -20 %)   7.3 A typ (dL = -30 %)
+                    Itemp 3.4 A typ (dT = 40 deg C)
+```
+
+The product page is a summary; the catalogue is the document of record. The
+−20 % figure is **5.5 A**, not absent, and because the margin rule is written
+against the 10 % / tightest drop criterion, the −20 % number is the one that has
+to be quoted. 5.5 A clears the same rule the old part failed, so the selection
+itself stands on the correct row — only the justification was wrong.
+
 Both variants carry the **same** recommended land pattern:
 
 ```
@@ -280,16 +299,16 @@ So the change costs no layout work.
 
 | Quantity | New part | Rule | Verdict |
 |---|---|---|---|
+| peak vs `Isat`(−20 %) | 5.5 / 1.75 = **3.14×** | ≥ 1.25× | pass |
 | peak vs `Isat`(−30 %) | 7.3 / 1.75 = **4.17×** | ≥ 1.25× | pass |
 | sustained vs `Itemp`(40 °C) | 3.4 / 1.575 = **2.16×** | ≥ 1.25× | pass |
 | I²R at 1.75 A (typ DCR) | 1.75² × 0.114 = **0.349 W** | better than 0.569 W | pass |
 | I²R at 1.75 A (max DCR) | 1.75² × 0.131 = **0.401 W** | better than 0.569 W | pass |
 
-The VC variant publishes only a −30 % saturation current, so the −20 % row that
-was quoted for the VT part no longer exists. 4.17× against the published figure
-is a wider margin than the 2.91× previously claimed, and it is measured against
-the **tighter** of the two criteria, so the selection is not resting on a
-favourable datasheet row.
+The binding number is **3.14× against `Isat` at −20 %**, which is the closest
+published drop criterion to the rule's 10 % basis. It is well clear of 1.25×, but
+it is smaller than the 4.17× that a −30 %-only reading would suggest, so this
+section quotes the conservative figure rather than the flattering one.
 
 ### 2.4 What is still open about `L501`
 
