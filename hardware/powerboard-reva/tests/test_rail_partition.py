@@ -66,6 +66,36 @@ def corrupt(ref,pin,net):
 
 class RailTests(unittest.TestCase):
     def test_native(self): validate(load())
+    def test_l501_land_matches_vendor_drawing(self):
+        """RAIL-18: the land must reproduce TDK's A, B and C, computed from the file."""
+        import re as _re
+        fp=P/'powerboard.pretty'/'L_TDK_SPM10065VC-D.kicad_mod'
+        if not fp.exists(): raise ValueError('custom L501 land missing')
+        t=fp.read_text()
+        pads=_re.findall(r'\(pad "(\d)" smd \w+\s*\(at ([-\d.]+) ([-\d.]+)\)\s*\(size ([\d.]+) ([\d.]+)\)', t)
+        if len(pads)!=2: raise ValueError(f'expected 2 pads, found {len(pads)}')
+        (p1,x1,_,w1,l1),(p2,x2,_,w2,l2)=pads
+        a=float(w1); c=float(l1)
+        b=float(x2)-float(x1)-a              # inner gap between pad edges
+        # TDK recommended land pattern, SPM10065VC-D (4/4 page): A=2.95 B=6.10 C=4.50
+        for got,want,name,tol in ((a,2.95,'A pad width',1e-6),(b,6.10,'B inner gap',1e-6),(c,4.50,'C pad depth',1e-6)):
+            if abs(got-want)>tol: raise ValueError(f'{name}: land {got:.4f} vs vendor {want:.2f}')
+        if l2!=l1 or w2!=w1: raise ValueError('the two pads are not identical')
+        # A must also fall out of the vendor envelope, which is what fixes B's meaning.
+        if abs((12.0-b)/2-a)>1e-6: raise ValueError('land is not consistent with the 12.0 mm envelope')
+        if (P/'powerboard.pretty'/'L_TDK_SPM10065VC-D.kicad_mod').stat().st_size==0: raise ValueError('empty')
+    def test_l501_land_rejects_wrong_pitch(self):
+        """Negative control: the stock XAL1010 land must fail the same check."""
+        import re as _re
+        t=P.parent.joinpath('/usr/share/kicad/footprints/Inductor_SMD.pretty/L_Coilcraft_XAL1010-XXX.kicad_mod').read_text()
+        pads=_re.findall(r'\(pad "(\d)" smd \w+\s*\(at ([-\d.]+) ([-\d.]+)\)\s*\(size ([\d.]+) ([\d.]+)\)', t)
+        (_,x1,_,w1,_),(_,x2,_,_,_)=pads
+        a=float(w1); b=float(x2)-float(x1)-a
+        if abs(a-2.95)<=1e-6 and abs(b-6.10)<=1e-6: raise ValueError('XAL1010 unexpectedly matches the vendor land')
+    def test_footprint_is_wired(self):
+        root=load()
+        vals={c.findtext('value') for c in root.findall('./components/comp') if c.get('ref')=='L501'}
+        if not any(v and 'SPM10065VC-680M-D' in v for v in vals): raise ValueError('L501 value changed')
     def test_empty_rejected(self):
         with self.assertRaises(ValueError): validate(ET.fromstring('<export/>'))
     def test_corrupt_rejected(self):

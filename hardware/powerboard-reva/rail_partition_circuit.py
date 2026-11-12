@@ -83,7 +83,10 @@ def populate(g):
         # Footprint still blank: the vendor land pattern is A 2.95 / B 6.10 / C 4.50 mm
         # (identical for VT and VC), and NO stock KiCad land matches it - the nearest,
         # L_Coilcraft_XAL1010-XXX, is 2.38 wide on a 6.65 pitch. A custom land is required.
-        ('L501', '68u SPM10065VC-680M-D 20% AEC-Q200', 'DRIVE_SW', 'DRIVE12', ''),
+        # Footprint: custom land drawn from the vendor drawing (RAIL-18), kept in-repo
+        # because no stock KiCad land matches A 2.95 / B 6.10 / C 4.50.
+        ('L501', '68u SPM10065VC-680M-D 20% AEC-Q200', 'DRIVE_SW', 'DRIVE12',
+         'powerboard:L_TDK_SPM10065VC-D'),
         ('L502', '3.9u candidate 2A', 'MCU_SW', 'LOGIC3V3_EXT', 'Inductor_SMD:L_Bourns_SRN6045TA'),
         ('C510', '2.2u 200V X7R 22252C225KAT2A', 'DC_LINK', 'PGND', 'Capacitor_SMD:C_2225_5664Metric'),
         ('C511', '2.2u 200V X7R 22252C225KAT2A', 'DC_LINK', 'PGND', 'Capacitor_SMD:C_2225_5664Metric'),

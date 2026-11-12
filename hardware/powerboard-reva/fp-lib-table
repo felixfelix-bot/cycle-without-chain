@@ -1,0 +1,4 @@
+(fp_lib_table
+	(version 7)
+	(lib (name "powerboard")(type "KiCad")(uri "${KIPRJMOD}/powerboard.pretty")(options "")(descr "Project-local land patterns drawn from vendor drawings where no stock KiCad land matches"))
+)

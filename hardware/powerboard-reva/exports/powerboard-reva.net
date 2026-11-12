@@ -1,7 +1,7 @@
 (export (version "E")
   (design
-    (source "/home/c08r4d0r/worktrees/cycle-l501-nrnd/hardware/powerboard-reva/powerboard-reva.kicad_sch")
-    (date "2026-11-11T11:55:33+0100")
+    (source "/home/c08r4d0r/worktrees/cycle-l501-land/hardware/powerboard-reva/powerboard-reva.kicad_sch")
+    (date "2026-11-12T01:06:08+0100")
     (tool "Eeschema 9.0.9-9.0.9~ubuntu24.04.1")
     (sheet (number "1") (name "/") (tstamps "/")
       (title_block
@@ -5513,8 +5513,9 @@
       (tstamps "3a9393a5-fbb6-5669-aa13-ce4dda7a035c"))
     (comp (ref "L501")
       (value "68u SPM10065VC-680M-D 20% AEC-Q200")
+      (footprint "powerboard:L_TDK_SPM10065VC-D")
       (fields
-        (field (name "Footprint"))
+        (field (name "Footprint") "powerboard:L_TDK_SPM10065VC-D")
         (field (name "Datasheet"))
         (field (name "Description")))
       (libsource (lib "Device") (part "L") (description "Inductor"))
@@ -6413,7 +6414,7 @@
     (library (logical "MCU_ST_STM32G4")
       (uri "/usr/share/kicad/symbols//MCU_ST_STM32G4.kicad_sym"))
     (library (logical "Powerboard")
-      (uri "/home/c08r4d0r/worktrees/cycle-l501-nrnd/hardware/powerboard-reva/Powerboard.kicad_sym"))
+      (uri "/home/c08r4d0r/worktrees/cycle-l501-land/hardware/powerboard-reva/Powerboard.kicad_sym"))
     (library (logical "Switch")
       (uri "/usr/share/kicad/symbols//Switch.kicad_sym"))
     (library (logical "Transistor_FET")

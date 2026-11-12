@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <export version="E">
   <design>
-    <source>/home/c08r4d0r/worktrees/cycle-l501-nrnd/hardware/powerboard-reva/powerboard-reva.kicad_sch</source>
-    <date>2026-11-11T11:55:39+0100</date>
+    <source>/home/c08r4d0r/worktrees/cycle-l501-land/hardware/powerboard-reva/powerboard-reva.kicad_sch</source>
+    <date>2026-11-12T01:06:17+0100</date>
     <tool>Eeschema 9.0.9-9.0.9~ubuntu24.04.1</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -6321,8 +6321,9 @@
     </comp>
     <comp ref="L501">
       <value>68u SPM10065VC-680M-D 20% AEC-Q200</value>
+      <footprint>powerboard:L_TDK_SPM10065VC-D</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">powerboard:L_TDK_SPM10065VC-D</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -7384,7 +7385,7 @@
       <uri>/usr/share/kicad/symbols//MCU_ST_STM32G4.kicad_sym</uri>
     </library>
     <library logical="Powerboard">
-      <uri>/home/c08r4d0r/worktrees/cycle-l501-nrnd/hardware/powerboard-reva/Powerboard.kicad_sym</uri>
+      <uri>/home/c08r4d0r/worktrees/cycle-l501-land/hardware/powerboard-reva/Powerboard.kicad_sym</uri>
     </library>
     <library logical="Switch">
       <uri>/usr/share/kicad/symbols//Switch.kicad_sym</uri>
