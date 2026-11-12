@@ -263,6 +263,28 @@ and reports **49** tests.
 Passing tests prove the models and the generated connectivity behave as specified.
 They do not prove the circuit is electrically safe, fabricable or rideable.
 
+## Remotes
+
+The repository is published in two places, and both are live:
+
+- **GitHub** — `origin`, <https://github.com/felixfelix-bot/cycle-without-chain>
+- **nostr (NIP-34)** — `ngit`, via `relay.ngit.dev`
+
+```
+git clone nostr://npub1tc6a0gdsu5l5gplyxflgwy9aq29jyelj9rv65syyukx3setl0usq9npkea/relay.ngit.dev/cycle-without-chain
+```
+
+Web view: <https://gitworkshop.dev/npub1tc6a0gdsu5l5gplyxflgwy9aq29jyelj9rv65syyukx3setl0usq9npkea/relay.ngit.dev/cycle-without-chain>
+
+Push to both with `git push origin master && git push ngit master`. The nostr
+identity (`npub1tc6a0…`) is dedicated to this repository; its secret is held in
+ngit's local file store, not in this tree.
+
+*Earlier history: the repository previously carried a ngit remote for
+`npub1nng5…` that never had a published announcement, so it was a dangling
+coordinate rather than a working mirror. It was replaced by the current identity
+on 2026-11-11; the old coordinate is dead and should not be used.*
+
 ## License
 
 Model and analysis code MIT; documentation separately licensed. See `LICENSE`.
