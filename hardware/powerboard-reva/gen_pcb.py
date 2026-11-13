@@ -198,6 +198,22 @@ def compute_regions(comps: list[dict]) -> dict[str, tuple]:
 REGION_RECTS: dict[str, tuple] = {}
 
 
+def region_for(ref: str, sheets: dict[str, str]) -> str:
+    """Which placement region a reference belongs to.
+
+    Promoted from a closure inside main() so that route_board_blocks.py can share
+    exactly one definition of the block split. It previously called
+    g.region_for(ref, sheets) against a function that only existed inside main(),
+    so the block router could not run at all -- the failure looked like a routing
+    problem and was a missing symbol.
+    """
+    sheet = sheets.get(ref, "")
+    for sub, region, _row in REGIONS:
+        if sub.lower() in sheet.lower():
+            return region
+    return "reserved_safety"
+
+
 def region_rect(region: str) -> tuple[float, float, float, float]:
     return REGION_RECTS.get(region, (BOARD_W / 2 - 10, BOARD_H / 2 - 10,
                                      BOARD_W / 2 + 10, BOARD_H / 2 + 10))
@@ -375,13 +391,6 @@ def main() -> int:
         board.Add(ni)
         netmap[name] = ni
 
-    # reference -> placement region
-    def region_for(ref: str) -> str:
-        sheet = sheets.get(ref, "")
-        for sub, region, _row in REGIONS:
-            if sub.lower() in sheet.lower():
-                return region
-        return "reserved_safety"
 
     placed = 0
     missing = []
@@ -393,7 +402,7 @@ def main() -> int:
     # region rectangles — the rectangles are sized from these measured areas.
     by_region: dict[str, list[dict]] = {}
     for c in comps:
-        c["region"] = region_for(c["ref"])
+        c["region"] = region_for(c["ref"], sheets)
         c["settled"] = not UNSETTLED.search(sheets.get(c["ref"], ""))
         w0, h0 = footprint_size(c["footprint"])
         if w0 == 0.0:
