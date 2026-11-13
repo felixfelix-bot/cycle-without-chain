@@ -279,6 +279,58 @@ measurement that settled it was a deliberately tiny board — if 12 parts route 
 5 seconds and 397 time out, the problem is scale, and the next question is *which*
 resource, which the router's own log answered.
 
+## 6d. Block routing: routed, with the inter-block gaps left open
+
+Route the board one functional block at a time, merge the tracks. 15 blocks:
+
+| Block | Parts | Segments | | Block | Parts | Segments |
+|---|---|---|---|---|---|---|
+| mcu | 19 | 219 | | fsr_left | 17 | 147 |
+| analog_filter | 15 | 52 | | fsr_right | 17 | 120 |
+| fault_logic | 29 | 387 | | aux_supply | 9 | 55 |
+| gen_sense | 21 | 225 | | rail_partition | 43 | 456 |
+| hub_sense | 21 | 232 | | brake_chopper | 13 | 149 |
+| oc_window | 5 | 4 | | brake_left | 6 | 35 |
+| ov_chopper | 14 | 121 | | brake_right | 6 | 28 |
+| hall | 27 | 210 | | | | |
+
+**2708 items merged (2428 tracks + 280 vias), 0 unmatched nets.**
+
+DRC on the merged board: **177 violations, 418 unconnected** — down from 499
+unconnected on the unrouted board, and 199 dangling tracks eliminated.
+
+### The two bugs that made the first merge a no-op
+
+**Bug 1 — net codes are not portable.** Removing footprints from a sub-board
+deletes nets that lost all their pads and *renumbers the survivors*, so block net
+37 is not master net 37. The first merge drew 2428 tracks that were every one
+dangling, and DRC still said 499 unconnected. **That number being identical to
+the unrouted board is what gave it away** — real routing cannot leave the count
+unchanged. Fixed by carrying the net *name* and matching through
+`NetsByName()`.
+
+**Bug 2 — vias were dropped.** FreeRouting routed on all four layers (this was
+before In1/In2 were marked as planes), so it changed layers through vias. The
+harvest loop skipped everything that was not `PCB_TRACE_T`, discarding every via.
+F.Cu and In1.Cu tracks then met at a point with nothing between them. DRC's
+wording — *"Track has unconnected end"* — pointed at a missing interconnect
+rather than a missing track, which is what identified it. Carrying vias took
+unconnected from 499 to 418 and dangling from 199 to 0.
+
+### What the remaining 418 are
+
+They are the **inter-block connections**, exactly as predicted: U504's pad in one
+block and the `DRIVE_EN` track ending in another; U17's pad and a
+`BRAKE_DUMP_PWM` stub. Densest offenders are R416, U2, Q12, C412, U17 — all
+parts whose nets span block boundaries.
+
+This is not a defect in the merge; it is the merge doing what it was built to do.
+Joining those nets is a separate step: either route the inter-block nets
+explicitly on the merged board, or route overlapping pairs of blocks.
+
+Also still absent by intent: the **GEN and HUB power stages** are not autorouted.
+Their loop geometry is what the OC-03 envelope assumes.
+
 ## 7. What PCB-04 still owes
 
 1. Routing, which is the bulk of the work and cannot start on the 150 unsettled
