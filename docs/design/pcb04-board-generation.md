@@ -633,6 +633,47 @@ the inter-block attempts reached from the other direction: **the board is full, 
 the existing routing is what blocks further progress.** Not the router, not the
 clearance, not the grid.
 
+### Routing order tested: the same nets on an EMPTY board routes 3x better
+
+That conclusion makes a testable prediction. If the existing copper is what blocks
+the inter-block nets, then those nets should route far better on the placed but
+**unrouted** board -- which had never been tried. Every previous attempt handed them
+a board with 2708 tracks already on it.
+
+```
+hand_route_interblock.py powerboard-reva.kicad_pcb routing/interblock_first.kicad_pcb
+base: powerboard-reva.kicad_pcb (0 existing tracks)
+```
+
+| board state                      | routed | failed |
+|----------------------------------|--------|--------|
+| v1, 2708 tracks already present  |   6/40 |     34 |
+| placed board, 0 tracks           |  19/40 |     21 |
+
+**Nineteen versus six.** The ordering hypothesis is confirmed: the inter-block nets
+are not hard to route, they were being routed last into a board that no longer had
+room.
+
+The 21 that still fail on an empty board are the remaining question. They are
+concentrated in the three-phase gate-drive and current-sense signals
+(`GEN_INLB`, `GEN_INLC`, `HUB_INLA`, `HUB_INLC`, `HUB_SOA_ADC`, `HUB_SOB_ADC`,
+`DRV_SCK`), which have to cross the dense pin fields of U1/U2/U17 from both sides at
+once. That is a genuine pitch-escape problem, separate from ordering, and it is what
+the collision-checked fan-out in `fanout_checked.py` addresses (43 of its 57 pads
+were blocked by existing copper; on an empty board they would not be).
+
+So the correct pipeline order is:
+
+1. Place parts (done).
+2. Route the inter-block nets on the empty board -- **19/40 achieved**.
+3. Escape-fanout the remaining fine-pitch pads while the board is still mostly
+   empty, so the 43 blocked pads are not blocked.
+4. Block-route the rest around that reserved copper.
+5. Merge, DRC, iterate.
+
+Steps 3-5 are not implemented in that order. The scripts exist but were written to
+run after block routing, which is exactly the mistake this section documents.
+
 **This is where the work stops.** Six router bugs were found and fixed, a
 pitch-specific design rule was added and verified, and the remaining obstacle is a
 connectivity question about the already-routed copper that would need either a
