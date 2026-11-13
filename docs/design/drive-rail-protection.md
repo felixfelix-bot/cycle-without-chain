@@ -394,19 +394,51 @@ should be consumed — MCU GPIO, a drive-domain fault latch, or nothing — is l
 as an open decision rather than invented, because inventing a consumer would be
 re-introducing coupling under a new name.
 
-### 3.4 The better option, and why it was not taken
+### 3.4 The better option — now implemented
 
 The strictly better architecture is a **drive-domain fault latch** that takes
 `DRIVE_PG`, the OVP state, and the DRV8353 `nFAULT` lines, and presents one
-`DRIVE_FAULT` bit to the MCU — still outside `ANALOG_OK`. That is the right end
-state.
+`DRIVE_FAULT` bit to the MCU — still outside `ANALOG_OK`.
 
-It is not done here because it requires a latch with a defined reset domain, a
-set/reset priority, and a decision about whether a drive fault may inhibit drive
-re-enable without operator action. Those are design decisions the operator owns,
-not implementation details. Doing it now would repeat the original defect at one
-remove: a status net with an invented consumer. `DRIVE_PG` is therefore landed as
-a clean, single-consumer status net, and the latch is recorded as the next gate.
+This section originally deferred that work, because it requires a latch with a
+defined reset domain, a set/reset priority, and a decision about whether a drive
+fault may inhibit re-enable without operator action. Those were recorded as
+operator decisions rather than implementation details. They have since been made,
+and the latch is implemented (PR #27, master `2391767`).
+
+**What was built.** `U504` (SN74LVC1G74) sits between the OVP comparator and the
+buck. Its `D` is tied low (`R525`), `CLR_N` is a diode-OR of three fault sources
+(`D520` OVP trip, `D521` `DRIVE_PG` low, `D522` manual reset) pulled up by
+`R526`, and `PRE_N` is tied high so it cannot be set remotely. `Q` is loaded by
+`R528`. `U505` (SN74LVC1G08) ANDs the latched enable with `DRIVE_PG`, which gives
+`DRIVE_PG` its single functional consumer (RAIL-19). The enable chain becomes
+`DRIVE_EN → U504 CLK → Q = DRIVE_EN_GATED → R514 → U501 EN/UVLO`.
+
+**The reset domain decision.** The latch is powered from `SAFETY3V3`, never from
+`DRIVE12`. A latch that dies with the rail it protects cannot hold that rail off,
+so its own supply is the always-on one. Clear is reachable from exactly three
+places — OVP trip, PGOOD-low, and the `J48` header — and from no software path.
+Re-arm after a fault requires a deliberate operator action at `J48`; it is not
+automatic.
+
+**Why it matters, measured.** The pre-latch wiring was level protection, not
+memory. With a permanently open `R512` the comparator's input sits above the
+trip point forever, so a level-only design hiccups the rail between ~0 and 18 V
+instead of keeping it off. `analysis/drive_latch` models both and prints:
+
+```
+old (level only): 1 1 1 0 0 1 1 1   rail returns when the fault clears
+new (latched):    1 1 1 0 0 0 0 0   stays off
+```
+
+**What is NOT claimed.** The model is a state machine, not silicon. Setup/hold,
+recovery/removal, metastability, propagation delay and output drive are all
+unmodelled, and no timing figure is quoted from it. A SPICE deck was attempted
+and abandoned: the XSPICE `d_dff` in this ngspice build returned floating
+(mid-rail) outputs for every port mapping tried, and a behavioural source cannot
+model memory at all — it reproduced the hiccup defect it was meant to disprove.
+An unvalidated simulation presented as evidence is worse than none, so the
+analysis is a tested state machine instead. Proving the timing needs a bench.
 
 ---
 
@@ -416,11 +448,11 @@ Reproduced on `pr/rail-ovp-pgood`. Full detail in `REPORT.md`; the numbers:
 
 | Check | Result |
 |---|---|
-| Hardware suite, normal | **49 tests, OK** |
-| Hardware suite, `python3 -O` | **49 tests, OK** |
+| Hardware suite, normal | **131 tests, 257 subtests, OK** |
+| Hardware suite, `python3 -O` | **131 tests, 257 subtests, OK** |
 | RED run before implementation | 3 errors: `U501.6` on `ANALOG_OK`, no `U503`, `L501` unchanged |
-| Native export | 387 components, 220 nets, 1142 connected pins, 51 explicit NC, 32 pages |
-| Strict ERC | **exit 5, 10 errors, 0 warnings** at this commit — unchanged from `master`, not waived. *(Superseded: ERC is now 0/0 via PWR_FLAGs, see `erc-power-flags.md`.)* |
+| Native export | 397 components, 226 nets, 1171 connected pins, 32 pages |
+| Strict ERC | **exit 0, 0 errors, 0 warnings** — see `erc-power-flags.md` for the justified PWR_FLAGs that removed the ten undriven-supply findings |
 | Generator fidelity | netlist regenerated from source in this branch |
 
 The ERC count is **10**, the same identities as `master` (enumerated in
@@ -440,22 +472,28 @@ negative control that must fail.
 
 Carried forward honestly, not closed by this branch:
 
-1. **`DRIVE12` OVP is non-latching** and hiccups on a permanent divider-open.
-   Where the latch lives is undecided (§1.3.1).
+1. ~~**`DRIVE12` OVP is non-latching**~~ — **CLOSED** by the `U504` latch
+   (§3.4). What remains open is the latch's *timing*, which the state-machine
+   model does not cover: setup/hold, recovery/removal, metastability and
+   propagation delay are unmodelled and need a bench. The topology is proven;
+   the silicon behaviour is not.
 2. **`DRIVE12` clamp/TVS is not fitted.** Its energy and hold-off are unbounded
-   without measurement (§1.4).
+   without measurement (§1.4). The latch bounds *duration*, not peak voltage.
 3. **`DRIVE12` is not fused.** A rail short still relies on LM5164 current limit.
 4. **`L501` footprint unverified** against the vendor land pattern; price and
    availability unverified; core loss excluded; `DCR` ±10 %.
 5. **`L500` (CTRL3V3) still carries the old `MSS1246T-683MLC`** — RAIL-03, same
    defect class, unrequested scope.
-6. **`DRIVE_PG` has no latch consumer** — the drive-domain fault latch is the
-   correct next step (§3.4).
+6. ~~**`DRIVE_PG` has no latch consumer**~~ — **CLOSED** by `U505` (RAIL-19),
+   which ANDs the latched enable with `DRIVE_PG` so a buck that drops out of
+   regulation clears the latch.
 7. **No measurement of any kind.** No thermal, no start-up, no effective
    capacitance at bias, no EMI, no SOA, no hot-plug. The board has never been
    built or energized.
-8. **RAIL-11 ERC completeness** (10 undriven power pins) is unchanged and
-   unresolved by design, per the existing register.
+8. ~~**RAIL-11 ERC completeness** (10 undriven power pins)~~ — **CLOSED**, ERC is
+   0 errors / 0 warnings via ten documented `PWR_FLAG`s, not waivers. See
+   `erc-power-flags.md`.
+
 > **Historical record — superseded.** This review describes the state at the
 > commit it was written for (10 strict-ERC errors). ERC is now 0/0 as of the
 > PWR_FLAG work; see `erc-power-flags.md`. The figures above are left as the
