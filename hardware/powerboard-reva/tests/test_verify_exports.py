@@ -1,6 +1,7 @@
 """Negative controls exercise the CLI with and without optimization, in scratch."""
 import json
 import os
+import re
 from pathlib import Path
 import shutil
 import subprocess
@@ -31,8 +32,8 @@ class ExportVerifierTests(unittest.TestCase):
                     summary = json.loads(result.stdout)
                     for key, count in {'components': 387, 'nets': 220,
                                        'verified_pin_assignments': 1142, 'explicit_nc_endpoints': 51, 'mosfets': 29,
-                                       'drivers': 4, 'erc_errors': 10, 'erc_warnings': 0,
-                                       'svg_pages': 32}.items():
+                                       'drivers': 4, 'erc_errors': 0, 'erc_warnings': 0,
+                                       'pwr_flags': 10, 'svg_pages': 32}.items():
                         self.assertEqual(summary[key], count)
                 else:
                     self.assertNotEqual(result.returncode, 0, result.stdout)
@@ -99,6 +100,45 @@ class ExportVerifierTests(unittest.TestCase):
             p.write_text(text)
         self.run_case(missing_marker)
 
+    def test_issue_body_under_clean_totals_is_rejected(self):
+        """The dangerous case: totals read clean but a finding is present.
+
+        The verifier must not rely on the totals line alone. This injects a
+        complete, well-formed power_pin_not_driven block while leaving the
+        summary at 0/0, and the verifier must still fail.
+        """
+        def mutate(root):
+            p = root / 'exports/erc.rpt'
+            text = p.read_text()
+            marker = '** ERC messages: 0  Errors 0  Warnings 0'
+            self.assertIn(marker, text)
+            block = ('[power_pin_not_driven]: Input Power pin not driven by any '
+                     'Output Power pins\n    ; error\n'
+                     '    @(50.80 mm, 76.20 mm): Symbol U1 Pin 3 [VM, Power input, Line]\n')
+            p.write_text(text.replace(marker, block + marker, 1))
+        self.run_case(mutate)
+
+    def test_missing_pwr_flag_is_rejected(self):
+        """A vanished PWR_FLAG must fail, or the undriven errors return silently."""
+        def mutate(root):
+            # Remove ONE COMPLETE flag reference everywhere it appears, rather
+            # than rewriting a single occurrence: each flag appears several times
+            # (symbol uuid, instance reference, property), so a one-occurrence
+            # edit leaves the reference count unchanged and the mutant passes.
+            targets = set()
+            for sch in root.glob('*.kicad_sch'):
+                targets.update(re.findall(r'#FLG\d{3}', sch.read_text()))
+            self.assertTrue(targets, 'no #FLG reference to remove')
+            victim = sorted(targets)[0]
+            removed = 0
+            for sch in root.glob('*.kicad_sch'):
+                text = sch.read_text()
+                if victim in text:
+                    sch.write_text(text.replace(victim, '#FLGX'))
+                    removed += 1
+            self.assertGreater(removed, 0, 'victim %s not found to remove' % victim)
+        self.run_case(mutate)
+
     def test_corruptions(self):
         cases = [
             ('exports/powerboard-reva.net', 'GEN_INHA', 'BROKEN_GEN_INHA'),
@@ -106,9 +146,17 @@ class ExportVerifierTests(unittest.TestCase):
             ('exports/powerboard-reva.net', 'DRV8353SRTAT', 'WRONG_PART'),
             ('exports/powerboard-reva.net', '(ref "U1")', '(ref "U999")'),
             ('exports/powerboard-reva.net', '(node (ref "J4") (pin "1")', '(node (ref "J4") (pin "1")) (node (ref "J4") (pin "1")'),
-            ('exports/erc.rpt', 'Pin 24 [VREF', 'Pin 3 [VREF'),
-            ('exports/erc.rpt', 'Errors 10', 'Errors 0'),
-            ('exports/erc.rpt', 'Symbol U3 Pin 1 [IN', 'Symbol U1 Pin 24 [VREF'),
+            # ERC is now clean (0 errors / 0 warnings), so the corruption cases
+            # cannot mutate issue text that no longer exists. They instead inject
+            # each class of change the verifier must reject:
+            #   - a non-zero total
+            #   - a warning alongside a zero error count
+            #   - a well-formed issue body under a clean total (the dangerous one:
+            #     totals look fine but a finding is present)
+            ('exports/erc.rpt', '** ERC messages: 0  Errors 0  Warnings 0',
+             '** ERC messages: 1  Errors 1  Warnings 0'),
+            ('exports/erc.rpt', '** ERC messages: 0  Errors 0  Warnings 0',
+             '** ERC messages: 1  Errors 0  Warnings 1'),
             ('exports/powerboard-reva.net', 'DC_LINK', 'BROKEN_DC_LINK'),
             ('pin-net-map.csv', 'GEN_INHA', 'BROKEN_GEN_INHA'),
             ('review-bom.csv', 'DRV8353SRTAT', 'WRONG_PART'),

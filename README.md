@@ -86,7 +86,9 @@ figure as a product specification. See
   (382 components, 218 nets, 1129 pins): [schematic figure verification](docs/design/schematic-figures-verified.md).
   The current figures include the DRIVE12 OVP comparator, its divider and the L501 change.
 - **49 hardware tests** pass, normally and under `python3 -O`.
-- Strict ERC: **10 errors, 0 warnings, exit 5** — unsuppressed and unwaived.
+- Strict ERC: **0 errors, 0 warnings, exit 0** — the ten former undriven-supply
+  findings are resolved by ten justified `PWR_FLAG`s (see
+  `docs/design/erc-power-flags.md`); the verifier now requires ERC to be empty.
   Enumerated, gate-enforced and treated as open work, not silenced.
 - Blocks present: dual DRV8353 bridges; protected-entry *intent* (fuse, shunt
   reverse clamp, 22 Ω resistor precharge, back-to-back TPSI3052-driven MOSFET

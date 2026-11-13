@@ -420,7 +420,7 @@ Reproduced on `pr/rail-ovp-pgood`. Full detail in `REPORT.md`; the numbers:
 | Hardware suite, `python3 -O` | **49 tests, OK** |
 | RED run before implementation | 3 errors: `U501.6` on `ANALOG_OK`, no `U503`, `L501` unchanged |
 | Native export | 387 components, 220 nets, 1142 connected pins, 51 explicit NC, 32 pages |
-| Strict ERC | **exit 5, 10 errors, 0 warnings** — unchanged from `master`, not waived |
+| Strict ERC | **exit 5, 10 errors, 0 warnings** at this commit — unchanged from `master`, not waived. *(Superseded: ERC is now 0/0 via PWR_FLAGs, see `erc-power-flags.md`.)* |
 | Generator fidelity | netlist regenerated from source in this branch |
 
 The ERC count is **10**, the same identities as `master` (enumerated in
@@ -456,3 +456,8 @@ Carried forward honestly, not closed by this branch:
    built or energized.
 8. **RAIL-11 ERC completeness** (10 undriven power pins) is unchanged and
    unresolved by design, per the existing register.
+> **Historical record — superseded.** This review describes the state at the
+> commit it was written for (10 strict-ERC errors). ERC is now 0/0 as of the
+> PWR_FLAG work; see `erc-power-flags.md`. The figures above are left as the
+> record of that run and must not be read as the current state.
+
