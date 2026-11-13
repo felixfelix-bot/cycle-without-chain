@@ -1,4 +1,8 @@
 {
+ "ap63203": {
+  "url": "https://www.diodes.com/assets/Datasheets/AP63200-AP63201-AP63203-AP63205.pdf",
+  "sha256": "ef99daa3789d835bc025dfcb4c605c5c2e6d3e7223e86d40b33e6b497ea5a722"
+ },
  "bat54ws": {
   "url": "https://www.diodes.com/assets/Datasheets/BAT54WS.pdf",
   "sha256": "a910241faa214991993fa171bd226bdbb8730c0f453c18993c738d96226f26d6"
@@ -19,6 +23,14 @@
   "url": "https://www.ti.com/lit/ds/symlink/lm4040-n.pdf",
   "sha256": "c06c6337438bd950ee514ddd863070ab505f5d90e2dabf9ffc4c4a0843058ff6"
  },
+ "lm5164": {
+  "url": "https://www.ti.com/lit/ds/symlink/lm5164.pdf",
+  "sha256": "cce03619fbe13951eea47458cd45e140361637d8fef32ae143b82b16d597e32d"
+ },
+ "opa333": {
+  "url": "https://www.ti.com/lit/ds/symlink/opa333.pdf",
+  "sha256": "df60da7154848c5706e2c7743b5d532fb9b4db97b74b88d0b62b657f73c1f1b7"
+ },
  "r78hb": {
   "url": "https://g.recomcdn.com/media/Datasheet/pdf/.fSx_VzyW/.t62b2d6a7acf719dba8f3/Datasheet-270/R-78HB-0_5.pdf",
   "sha256": "457ccbb2825fd65f87237670a7ab3b9d1c9274c6889729e9323f73f6dde61c9c"
@@ -31,9 +43,21 @@
   "url": "https://www.ti.com/lit/ds/symlink/sn74hc11.pdf",
   "sha256": "4c0a03cf0375be46807f0ef4932fb138572b2fb252d7ff7e8479fc0fc0d09cd1"
  },
+ "tlv1701": {
+  "url": "https://www.ti.com/lit/ds/symlink/tlv1701.pdf",
+  "sha256": "b971c8ca9ae7da43d67fa3486f202e6e688d8f5cc4b220268473fc0b4904c42b"
+ },
+ "tlv3202": {
+  "url": "https://www.ti.com/lit/ds/symlink/tlv3202.pdf",
+  "sha256": "358c30340b482fc4b8fb2a5ae8a32543ff758acbbce2b9c1556ac703df118f1b"
+ },
  "tlv760": {
   "url": "https://www.ti.com/lit/ds/symlink/tlv760.pdf",
   "sha256": "cbc82492fc6f0dcb87f1be90aa1fea13134a65aa283ae048f4b5772d47b2d844"
+ },
+ "tmux1511": {
+  "url": "https://www.ti.com/lit/ds/symlink/tmux1511.pdf",
+  "sha256": "04291b41a68347fedbbb0776aa44f500eaca65f2ca3af0e022ee60d41c7b1e9f"
  },
  "tps3823": {
   "url": "https://www.ti.com/lit/ds/symlink/tps3823.pdf",
