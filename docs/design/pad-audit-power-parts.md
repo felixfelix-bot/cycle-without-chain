@@ -131,26 +131,56 @@ over.
 The value was already `3R3` on these four resistors before the audit; the audit
 changed the *justification*, not the number.
 
-### 3.3 Two datasheet requirements the design does not currently meet
+### 3.3 CDIV and bypass — CORRECTION: the design meets both, my earlier claim was wrong
 
-Both found by reading the TPSI3052 datasheet rather than the numbers it was
-being used with.
+Earlier revisions of this section recorded two "requirements the design does not
+meet". **Both claims were wrong.** They are corrected here, with the arithmetic
+in `size_cdiv_bypass.py` and 17 tests.
 
-**(a) CDIV ratio.** SLVSGS3B §8.3.3 states `CDIV2 = 3 × CDIV1`. The design has
-CDIV1 = 100 nF and CDIV2 = 470 nF — a ratio of **4.7×**, not 3×. Neither value
-is wrong in itself, but the pair does not follow the recommended ratio, and the
-start-up time depends on it.
+**(a) The CDIV ratio — I misread a minimum as a target.**
 
-**(b) Bypass capacitance.** SLVSGS3B recommends bypass capacitors "of 20 times
-the equivalent gate capacitance". The equivalent gate capacitance here is
-Ciss ≈ 10.47 nF, so the datasheet wants **≈ 209 nF** of local bypass. The design
-provides CDIV1 100 nF + CDIV2 470 nF across the rails, which is in the right
-region but was chosen for divider purposes, not for this requirement, and the
-requirement was never checked against the 10.47 nF gate.
+SLVSGS3B §6.3 note 2 states `CDIV2 >= 3 × CDIV1`. That is a **floor**, not a
+setpoint. The design's 470 nF / 100 nF = **4.7×** therefore *complies*; I had
+written it down as a violation by treating "should be at least three times" as
+"should be three times". Both absolute windows are also satisfied:
 
-Both are recorded as **open items** rather than silently retuned: changing CDIV
-affects start-up time and the divider ratio, which feeds the gate-drive UVLO
-behaviour, and that deserves its own calculation rather than a guess made here.
+| | design | datasheet window | result |
+|---|---|---|---|
+| CDIV1 (VDDH–VDDM) | 100 nF | 4 nF … 15 µF | in range, 25× above min |
+| CDIV2 (VDDM–VSSS) | 470 nF | 12 nF … 40 µF | in range, 39× above min |
+| CDIV2/CDIV1 | 4.70 | ≥ 3.0 | **met** |
+
+The structural reason the ratio is a floor: CDIV1 spans the full 15 V VDDH rail
+while CDIV2 sits across VDDM, so a ≥3:1 split keeps one node from sagging first.
+
+**(b) The bypass — I compared against the wrong capacitance.**
+
+TI recommends bypass of "20 times the equivalent gate capacitance". Ciss for the
+IRFP4568PbF is 10.47 nF, so **≈ 209 nF** is wanted. The design has CDIV1 + CDIV2
+= **570 nF** across the secondary rails, which meets it. My error was comparing
+the 209 nF requirement against CDIV1 (100 nF) alone, which made the finding look
+real — the node has both capacitors across it.
+
+**(c) The charge budget, which neither of the above addressed.**
+
+Two things actually needed checking and had not been:
+
+```
+droop per edge = Qg / C
+  Qg 151 nC typ, both caps : 0.265 V
+  Qg 227 nC max, both caps : 0.398 V
+  Qg 151 nC, CDIV1 alone   : 1.510 V   (conservative case)
+headroom to VDDH UVLO (15.0 V -> 10.9 V worst case) : 4.1 V
+```
+
+Even the conservative CDIV1-only case leaves ~2.7 edges of margin, and the
+design uses **RPXFR = 20 kΩ, the 93.3 % duty setting** — the highest of the seven
+power-transfer levels in Table 8‑1 — so the converter replaces each edge's charge
+long before the next. A bike power switch toggles at human rates (a few Hz at
+most), not at the kilohertz this would matter at.
+
+**Verdict: no change to CDIV1 or CDIV2 is required.** The values were correct; the
+audit that said otherwise was not.
 
 ## 4. Still unaudited — and why that is not a formality
 
@@ -181,8 +211,8 @@ because:
 - TO-247 land pattern is a library default, not a vendor drawing
 - the DWZ body width is a library assumption
 - eleven housekeeping devices have no pin-level audit
-- two TPSI3052 datasheet requirements (CDIV ratio, bypass capacitance) are not
-  met by the current values
+- ~~two TPSI3052 datasheet requirements are not met~~ — **withdrawn**: both
+  claims were wrong, see §3.3. The CDIV values and bypass meet the datasheet.
 
 Claiming PCB-02 closed on this evidence would repeat the error recorded in
 `bom-identity-and-gate-sizing.md` §4.5, where a gate was declared closed on a
