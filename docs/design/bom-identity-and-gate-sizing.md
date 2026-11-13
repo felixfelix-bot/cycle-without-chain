@@ -200,7 +200,7 @@ Three things were wrong, and fixing one exposed the next:
    `Conn_01x01_Pin` and `Fuseholder_Littelfuse_100_KM_KLKD` (neither exists),
    and `R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm` (needs `_Horizontal`). Each was
    verified against `/usr/share/kicad/footprints` before correction. ERC returned
-   to 10 errors / 0 warnings.
+   to 0 errors / 0 warnings after the PWR_FLAG work (see erc-power-flags.md).
 
 Two further defects surfaced only once the footprints were flowing:
 
@@ -265,7 +265,7 @@ Mutation results, current tree:
 - **329 of 387** part numbers are series-inferred, not individually audited.
   They are safe inferences for passives and are labelled as such; they are not
   evidence for any power semiconductor.
-- **No layout, no DRC, no ERC clean-up** — the 10 undriven-supply ERC errors
+- **No layout, no DRC** — ERC is now clean (see `erc-power-flags.md`); the former 10 undriven-supply findings
   are unchanged by this work.
 - **The gate-resistor values are modelled, not measured.** The loop inductance
   (4 nH) is an assumption for an unlaid-out board. 3.3 Ω is a defensible

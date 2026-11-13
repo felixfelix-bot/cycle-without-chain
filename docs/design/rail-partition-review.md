@@ -25,6 +25,11 @@ branch; two remain design work.
 | Native export | `kicad-cli sch export netlist --format kicadxml` reproduces `ctrl-supply.xml` (382 components, 218 nets) |
 | Strict ERC | **exit 5, 10 errors, 0 warnings** (master had 9); no waiver, no pin-type falsification |
 | Gate on ERC | `tools/gates/native_reports --kind erc` → **exit 1 FAIL** (`subprocess_exit`, `no_violations`) |
+> **Historical record — superseded.** This review describes the state at the
+> commit it was written for (10 strict-ERC errors). ERC is now 0/0 as of the
+> PWR_FLAG work; see `erc-power-flags.md`. The figures above are left as the
+> record of that run and must not be read as the current state.
+
 
 The tenth error is `U1 pin 3 [VM]` undriven on `DRIVE12` — `L501` is a passive
 inductor between `DRIVE_SW` and `DRIVE12`, so ERC cannot see a power source.

@@ -64,7 +64,7 @@ def driver():
         s+=f' (pin {typ} line (at {x} {y} {0 if left else 180}) (length 5.08) (name {q(n)} (effects (font (size 1.016 1.016)))) (number "{i+1}" (effects (font (size 1.016 1.016)))))'
     return parse(s+'))')
 
-ROOTID=uid('root'); bom=[]; pinmap=[]
+ROOTID=uid('root'); bom=[]; pinmap=[]; _FLG_COUNT=0
 class Sheet:
     def __init__(self,name,title,root=False):
         self.name=name; self.id=ROOTID if root else uid(name); self.path='/'+ROOTID if root else '/'+ROOTID+'/'+uid('sheet/'+name); self.title=title;self.syms={};self.items=[]
@@ -82,6 +82,34 @@ class Sheet:
             justify_label = 'left' if dx <= 0 else 'right'
         # All labels global: explicit namespace GEN_/HUB_ prevents unintended merges.
         self.items.append(f'(global_label {q(net)} (shape bidirectional) (at {xx} {yy} {angle_label}) (effects (font (size 0.9 0.9)) (justify {justify_label})) (uuid {uid(tag+"label")}))')
+    def pwr_flag(self,net,x,y):
+        # ERC requires symbol pins on the connection grid; 1.27 mm is KiCad's
+        # default. Rounding here rather than at every call site means a caller
+        # cannot introduce endpoint_off_grid by choosing a "nice" coordinate.
+        x = round(x / 1.27) * 1.27
+        y = round(y / 1.27) * 1.27
+        """Attach a PWR_FLAG to a net so ERC knows where its power originates.
+
+        KiCad's ERC reports ``power_pin_not_driven`` when a net contains only
+        power-IN pins and no power-OUT pin. That is correct behaviour for a net
+        fed from off-board, through a passive (ferrite, 0R link, rectifier), or
+        from a connector — there is no symbol in the schematic that *drives* it,
+        even though the copper is fine. PWR_FLAG is the sanctioned way to say so.
+
+        It is NOT a way to silence a genuine defect. Each flag placed below was
+        justified individually by tracing the net to a real source first (see
+        docs/design/erc-power-flags.md). Reference ``#FLG`` keeps it out of the BOM.
+        """
+        sym=stock('power','PWR_FLAG')
+        # A module-level counter, not a per-sheet count: counting items within one
+        # sheet produced duplicate references (#FLG1 twice) once flags landed on
+        # more than one sheet.
+        global _FLG_COUNT
+        _FLG_COUNT += 1
+        ref='#FLG%03d' % _FLG_COUNT
+        self.part(sym,ref,'PWR_FLAG',x,y,{'1':net})
+        # mark it non-BOM: PWR_FLAG has in_bom yes in the library, but a #FLG
+        # reference is excluded by KiCad's annotator by convention
     def legibility_layout(self):
         return self.name.startswith(('fsr-', 'brake-intent-')) or self.name in ('brake-switch-harness', 'brake-dump-command', 'ctrl-supply', 'rail-partition', 'rail-passives')
     def part(self,a,ref,value,x,y,nets,footprint=''):
@@ -111,8 +139,14 @@ class Sheet:
                 continue
             if (X,Y) in done: assert done[X,Y]==net
             else: self.wirelabel(net,X,Y,angle,ref+'/'+num);done[X,Y]=net
-            pinmap.append(dict(ref=ref,pin=num,pin_name=name,net=net,sheet=self.name))
-        bom.append(dict(reference=ref,value=value,footprint=footprint,sheet=self.name))
+            # A '#' reference (PWR_FLAG, and KiCad's convention for any
+            # non-physical symbol) is not a placed part: it must not enter the
+            # BOM or the pin-assignment ledger, or the 387/1142 counts move for
+            # a symbol that has no copper.
+            if not ref.startswith('#'):
+                pinmap.append(dict(ref=ref,pin=num,pin_name=name,net=net,sheet=self.name))
+        if not ref.startswith('#'):
+            bom.append(dict(reference=ref,value=value,footprint=footprint,sheet=self.name))
     def save(self):
         s=f'(kicad_sch (version 20250114) (generator "powerboard_generator") (uuid {self.id}) (paper {q("A1" if self.id==ROOTID else "A3")}) (title_block (title {q(self.title)}) (rev "A-PARTIAL") (comment 1 "NOT SAFE TO ENERGIZE - SAFETY CIRCUITS UNFINISHED")) (lib_symbols '+ ' '.join(dump(a) for a in self.syms.values())+') '+' '.join(self.items)
         if self.id==ROOTID:s+=' (sheet_instances (path "/" (page "1")))'
@@ -229,6 +263,42 @@ for a in custom_symbols:
 for i,s in enumerate(sheets):
     x=25.4+(i%3)*177.8;y=71.12+(i//3)*58.42
     root.items.append(f'(sheet (at {x} {y}) (size 152.4 40.64) (stroke (width 0.254) (type default)) (fill (color 0 0 0 0)) (uuid {uid("sheet/"+s.name)}) (property "Sheetname" {q(s.title)} (at {x} {y-2.54} 0) (effects (font (size 1.27 1.27)) (justify left))) (property "Sheetfile" {q(s.name+".kicad_sch")} (at {x} {y+43.18} 0) (effects (font (size 1.27 1.27)) (justify left))) (instances (project "powerboard-reva" (path "/{ROOTID}" (page "{i+2}")))))')
+# --- ERC power provenance ---------------------------------------------------
+# Ten nets hold only power-IN pins and nothing that KiCad counts as a power-OUT,
+# which raises power_pin_not_driven. Each one was traced to a real source before
+# a flag was placed here; the justification is recorded per net. A PWR_FLAG is
+# not a waiver and must never be used to silence a net that is genuinely
+# unsupplied. See docs/design/erc-power-flags.md.
+PWR_FLAGS = [
+    ('dc-entry',     'DC_LINK',      'external pack via J43 / R116 / inhibit FETs; no power-OUT symbol'),
+    ('ctrl-supply',  'CTRL_RAW',     'DC_LINK through D500 S1J rectifier - passive, not a driver'),
+    ('ctrl-supply',  'CTRL3V3',      'U500 LM5164 buck output via L500; SW is not a power-OUT'),
+    ('rail-partition','DRIVE12',     'U501 LM5164 buck output via L501; SW is not a power-OUT'),
+    ('mcu-power',    'MCU_VDDA',     'arrives through R67 0R analog link, not a power-OUT'),
+    ('fsr-left',     'MCU_VREF',     'MCU internal reference output on U17 pin 36'),
+    ('entry-main',   'MAIN_SOURCE',  'floating common-source node of Q400/Q401'),
+    ('entry-pre',    'PRE_SOURCE',   'floating common-source node of Q402/Q403'),
+    ('external-boundaries', 'LOGIC3V3_EXT', 'MCU 3V3 rail brought in at the boundary connector J2'),
+]
+_bysheet={s.name:s for s in sheets}
+_touched=set()
+for _i,(_sheet,_net,_why) in enumerate(PWR_FLAGS):
+    _s=_bysheet.get(_sheet)
+    if _s is None:
+        raise SystemExit('PWR_FLAG target sheet missing: %s'%_sheet)
+    _s.pwr_flag(_net, 20.32, 268.0 + (_i % 3) * 10.16)
+    _s.text('PWR_FLAG %s: %s'%(_net,_why), 20.32, 273.05 + (_i % 3) * 10.16, 1.016)
+    _touched.add(_s)
+# PGND is the return of every one of the above and needs its own flag.
+_pgnd=_bysheet['dc-entry']
+_pgnd.pwr_flag('PGND', 20.32, 258.0)
+_pgnd.text('PWR_FLAG PGND: single-point return; ground is a plane, not a '
+           'power-OUT pin', 20.32, 263.05, 1.016)
+_touched.add(_pgnd)
+# A Sheet writes its own file when populate() calls save(), so a post-pass like
+# this one MUST re-save every sheet it modified or the flags never reach disk.
+for _s in _touched:
+    _s.save()
 root.save()
 for fn,rows in [('review-bom.csv',bom),('pin-net-map.csv',pinmap)]:
     with (ROOT/fn).open('w') as f:

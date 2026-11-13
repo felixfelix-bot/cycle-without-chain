@@ -31,7 +31,7 @@ different commit, and a count that nobody re-measured is a claim, not a fact.
 | 1129 connected pins | 1129 pin assignments | ✅ |
 | 51 explicit NCs | 51 (single-pin nets) | ✅ |
 | 45 hardware tests pass, also under `-O` | 45 pass, 45 pass | ✅ |
-| Strict ERC 10 errors, 0 warnings, exit 5 | 10 errors, 0 warnings, exit 5 | ✅ |
+| Strict ERC 0 errors, 0 warnings, exit 0 | 0 errors, 0 warnings, exit 0 | ✅ |
 | gate tests pass | 237 pass | ✅ (README said 198; the suite was 233 before the documented-command guard was added) |
 | No `.kicad_pcb`, no routing, no Gerbers | none present | ✅ |
 
@@ -47,7 +47,8 @@ The numbers are not all the same kind of quantity, and two of them need care:
   partition seen from both sides: 269 = 218 + 51. This is a self-consistent,
   non-arbitrary split, not a coincidence.
 - **51 explicit NCs** — the single-pin nets, as above.
-- **10 ERC errors / 0 warnings / exit 5** — `kicad-cli sch erc` reports 10
+- **0 ERC errors / 0 warnings / exit 0** — `kicad-cli sch erc` reports none; the
+  ten former undriven-supply findings were resolved by justified `PWR_FLAG`s
   violations, all severity `error`, all type `power_pin_not_driven` ("Input Power
   pin not driven by any Output Power pins") across 8 of the 32 sheets. `0 warnings`
   is accurate; it is not a hidden success.

@@ -11,6 +11,11 @@ endpoint tests first failed on the unpartitioned export (`rail-red.log`) and
 then passed, including empty/corrupt negative controls. BOM, netlist, PDF and SVG
 were regenerated. Strict ERC **exit 5: 10 errors, zero warnings**: inherited nine
 plus DRIVE12 undriven across passive L501. No PWR_FLAG or pin-type suppression.
+> **Historical record — superseded.** This review describes the state at the
+> commit it was written for (10 strict-ERC errors). ERC is now 0/0 as of the
+> PWR_FLAG work; see `erc-power-flags.md`. The figures above are left as the
+> record of that run and must not be read as the current state.
+
 
 Exact changes: U1/U2 VM and four VM capacitors move AUX12V→DRIVE12; all remaining
 AUX12V consumers move to SINK12. U501 VIN is DC_LINK; SW→L501→DRIVE12.
