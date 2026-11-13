@@ -694,11 +694,9 @@ silk_over_copper        32               32
 via_dangling             0                3
 ```
 
-**In-scope unconnected fell 52 to 10.** The all-nets total rose because the block
-pass covered fewer parts this run (ov_chopper, brake_left, brake_right,
-aux_supply and rail_partition harvested 0 segments), so unrelated nets that v1
-happened to have routed are now open. That is a regression in scope the block
-pass owns, not one the ordering fix caused, and it is the next thing to fix.
+**In-scope unconnected fell 52 to 10.** The all-nets total rose because five
+blocks harvested zero segments this run, and that turned out to be a real bug
+rather than a router limitation -- see 6b.
 
 **Clearance is unchanged at 27 and every one of them is on U504** -- my own latch
 footprint (VSSOP-8, 0.5 mm pitch, 0.35 mm pads on a 0.5 mm pitch land). It was
@@ -738,6 +736,43 @@ nets are routable when given the space first, which was the open question. It
 does not establish a finished board: 10 in-scope connections remain, 5 blocks
 harvested nothing, the GEN/HUB power stages are hand layout by intent, and no
 Gerbers exist.
+
+## 6b. Why five blocks harvested nothing (a bug, not a router limit)
+
+`ov_chopper`, `brake_left`, `brake_right`, `aux_supply` and `rail_partition` all
+reported `status=ok` with **0 tracks**. That reads as "nothing left to route" and
+is actually "nothing was handed to the router".
+
+Cause: the block pass was pointed at `powerboard-reva-first.kicad_pcb`, which is
+the inter-block *preparation* board. Preparation restricts routing to the 40
+inter-block nets by clearing every other pad to net 0, so 1274 of 1415 pads carry
+no net. A block whose parts are all in that cleared set has nothing to connect.
+
+Measured on `rail_partition` (43 parts):
+
+```
+powerboard-reva-first.kicad_pcb   116 pads,  0 nets   <- what the block pass got
+powerboard-reva-board.kicad_pcb   116 pads, 28 nets   <- the merged board
+powerboard-reva.kicad_pcb         116 pads, 28 nets   <- the real unrouted board
+```
+
+The DSN confirms it: every block's export carried the same 635 inter-block wires
+and 40 declared nets, and zero wires on the block's own nets. The router was
+being asked to solve the inter-block problem again for every block.
+
+Two fixes:
+
+1. `route_one_block.py` now counts a block's netted pads **before** removing the
+   non-member footprints, and fails with a named reason when that count is zero.
+   Counting after `Remove()` crashes with `'SwigPyObject' object has no attribute
+   'Pads'` -- the same interpreter-damage pattern this chain already documents --
+   and that crash took out 14 of 15 blocks on the first attempt at the guard.
+2. The block pass runs with `--base powerboard-reva-board.kicad_pcb`, the merged
+   board, so the blocks see their real nets *and* the inter-block copper they must
+   route around. That is the ordering the whole change exists to achieve.
+
+The lesson is the same one as the "2 unconnected" false result: a zero that is
+reported as success is worse than an error, because it never gets investigated.
 
 ## 7. What PCB-04 still owes
 
