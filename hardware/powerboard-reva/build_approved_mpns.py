@@ -55,9 +55,9 @@ MPN_TABLE: dict[str, tuple[str, str, str, str]] = {
                     "TI SLPS414 Rev. B", "datasheet"),
     "IPP023N10N5": ("IPP023N10N5AKSA1", "Package_TO_SOT_SMD:TO-263-3_TabPin2",
                     "Infineon unverified - see register", "unverified"),
-    "DRV8353SRTAT": ("DRV8353SRTAT", "Package_DFN_QFN:QFN-40-1EP_6x6mm_P0.5mm",
+    "DRV8353SRTAT": ("DRV8353SRTAT", "Package_DFN_QFN:QFN-40-1EP_6x6mm_P0.5mm_EP4.6x4.6mm",
                      "TI SLVSDY6A pp6-7", "datasheet"),
-    "DRV8353": ("DRV8353SRTAT", "Package_DFN_QFN:QFN-40-1EP_6x6mm_P0.5mm",
+    "DRV8353": ("DRV8353SRTAT", "Package_DFN_QFN:QFN-40-1EP_6x6mm_P0.5mm_EP4.6x4.6mm",
                 "TI SLVSDY6A pp6-7", "datasheet"),
     # --- inductors -----------------------------------------------------
     "68u SPM10065VC-680M-D": ("SPM10065VC-680M-D",
@@ -74,7 +74,7 @@ MPN_TABLE: dict[str, tuple[str, str, str, str]] = {
                             "TI lm4040-n A grade", "datasheet"),
     "TLV76033DBZR": ("TLV76033DBZR", "Package_TO_SOT_SMD:SOT-23",
                      "TI tlv760", "datasheet"),
-    "LM5164DDAR": ("LM5164DDAR", "Package_SO:HSOP-8-1EP_3.9x4.9mm_P1.27mm",
+    "LM5164DDAR": ("LM5164DDAR", "Package_SO:HSOP-8-1EP_3.9x4.9mm_P1.27mm_EP2.3x2.3mm",
                    "TI LM5164", "datasheet"),
     "TPS3823-33DBVR": ("TPS3823-33DBVR", "Package_TO_SOT_SMD:SOT-23-5",
                        "TI tps3823", "datasheet"),
@@ -153,7 +153,7 @@ MPN_PREFIX: list[tuple[str, tuple[str, str, str, str]]] = [
                           "Infineon IRFP4568 150 V (dump FET)", "series")),
     ("3.9u 2A", ("SRN6045TA-3R9M", "Inductor_SMD:L_Bourns_SRN6045TA",
                   "Bourns SRN6045TA series", "series")),
-    ("KLKD020CN 20A 600VDC", ("KLKD020.T", "Fuse:Fuseholder_Littelfuse_100_KM_KLKD",
+    ("KLKD020CN 20A 600VDC", ("KLKD020.T", "Fuse:Fuseholder_Littelfuse_100_series_5x20mm",
                                "Littelfuse KLKD 20 A 600 VDC", "series")),
     ("330p 50V C0G 5%", ("GRM2165C1H331JA01D", "Capacitor_SMD:C_0805_2012Metric",
                          "Murata GRM216 C0G 50 V", "series")),
@@ -239,10 +239,10 @@ MPN_PREFIX: list[tuple[str, tuple[str, str, str, str]]] = [
                 "Diodes Inc BAT54S", "series")),
     ("BAT54WS", ("BAT54WS-7-F", "Package_TO_SOT_SMD:SOD-323",
                  "Diodes Inc BAT54WS", "series")),
-    ("PESD3V3U1UL", ("PESD3V3U1UL,315", "Package_TO_SOT_SMD:SOD-882",
+    ("PESD3V3U1UL", ("PESD3V3U1UL,315", "Diode_SMD:D_SOD-882",
                      "Nexperia PESD3V3U1UL", "series")),
     # --- connectors / protection ---------------------------------------
-    ("KLKD020CN", ("KLKD020.T", "Fuse:Fuseholder_Littelfuse_100_KM_KLKD",
+    ("KLKD020CN", ("KLKD020.T", "Fuse:Fuseholder_Littelfuse_100_series_5x20mm",
                    "Littelfuse KLKD 20 A 600 VDC", "series")),
     # --- generic resistors: bare value, default 0805 1 % ---------------
     ("100k G-S", ("CRCW0805100KFKEA", "Resistor_SMD:R_0805_2012Metric",
@@ -320,8 +320,8 @@ MPN_PREFIX: list[tuple[str, tuple[str, str, str, str]]] = [
     ("100u 100V provisional", ("UHE2A101MPD", "Capacitor_THT:CP_Radial_D10.0mm_P5.00mm",
                                "Nichicon UHE 100 V 100 uF", "series")),
     # --- remaining ICs --------------------------------------------------
-    ("TPSI3052DWZR", ("TPSI3052DWZR", "Package_SO:SOIC-8_5.23x5.23mm_P1.27mm",
-                      "TI TPSI3052 isolated driver", "datasheet")),
+    ("TPSI3052DWZR", ("TPSI3052DWZR", "Package_SO:SOIC-8_5.3x5.3mm_P1.27mm",
+                      "TI TPSI3052DWZR isolated driver, 8-pin SOIC", "datasheet")),
     ("STM32G474VET6", ("STM32G474VET6", "Package_QFP:LQFP-100_14x14mm_P0.5mm",
                        "ST STM32G474VE", "datasheet")),
     ("R-78HB12-0.5", ("R-78HB12-0.5", "Converter_DCDC:Converter_DCDC_RECOM_R-78HB-0.5_THT",
@@ -329,10 +329,10 @@ MPN_PREFIX: list[tuple[str, tuple[str, str, str, str]]] = [
     # --- connectors, switches and harness parts ------------------------
     # The schematic uses the VALUE field to carry a net description for these,
     # so each needs an explicit physical part choice.
-    ("Anderson 992G1 SB50", ("992G1-BK", "Connector:Conn_01x01_Pin",
+    ("Anderson 992G1 SB50", ("992G1-BK", "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical",
                              "Anderson Powerpole SB50 housing, keyed",
                              "series")),
-    ("EXTERNAL_DUMP_RESISTOR", ("HSC3004R7J", "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm",
+    ("EXTERNAL_DUMP_RESISTOR", ("HSC3004R7J", "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal",
                                 "TE HSC300 4R7 300 W (external, off-board)",
                                 "series")),
     ("Kelvin BUS measurement", ("Conn_01x02", "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical",
@@ -365,7 +365,7 @@ MPN_PREFIX: list[tuple[str, tuple[str, str, str, str]]] = [
     ("1n brake filter", ("GRM216R71H102KA01D", "Capacitor_SMD:C_0805_2012Metric",
                          "Murata GRM216 50 V X7R", "series")),
     ("22R 1% RH05022R00FE02 pulse UNQUALIFIED",
-     ("RH05022R00FE02", "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm",
+     ("RH05022R00FE02", "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal",
       "Vishay RH050 22R 1 % - PULSE RATING NOT QUALIFIED (PROT-09)", "series")),
     ("2m 1% WSLP2512R0020FEA Kelvin",
      ("WSLP2512R0020FEA", "Resistor_SMD:R_2512_6332Metric",
@@ -386,9 +386,9 @@ MPN_PREFIX: list[tuple[str, tuple[str, str, str, str]]] = [
     ("RIGHT_FSR_34-00018_EXTERNAL", ("34-00018", "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical",
                                      "Interlink FSR 34-00018 (external pad)", "series")),
     # Named parts whose value string carries a qualifier
-    ("S1J-E3/61T 600V 1A", ("S1J-E3/61T", "Package_TO_SOT_SMD:SMA",
+    ("S1J-E3/61T 600V 1A", ("S1J-E3/61T", "Diode_SMD:D_SMA",
                             "Vishay S1J 600 V 1 A", "series")),
-    ("68u MSS1246T-683MLC 20%", ("MSS1246T-683MLC", "Inductor_SMD:L_Coilcraft_MSS1246",
+    ("68u MSS1246T-683MLC 20%", ("MSS1246T-683MLC", "Inductor_SMD:L_Coilcraft_MSS1246T-XXX",
                                  "Coilcraft MSS1246T 68 uH (L500, RAIL-03 open)",
                                  "series")),
     ("330p 50V C0G 5% candidate", ("GRM2165C1H331JA01D", "Capacitor_SMD:C_0805_2012Metric",
@@ -434,6 +434,30 @@ SIZE_OVERRIDE: dict[tuple[str, str], tuple[str, str, str]] = {
                      "Vishay CRCW 0603 0R jumper"),
     ("10R", "0603"): ("CRCW060310R0FKEA", "Resistor_SMD:R_0603_1608Metric",
                       "Vishay CRCW 0603 1 %"),
+    ("100R", "0603"): ("CRCW0603100RFKEA", "Resistor_SMD:R_0603_1608Metric",
+                       "Vishay CRCW 0603 1 %"),
+    ("120R", "0603"): ("CRCW0603120RFKEA", "Resistor_SMD:R_0603_1608Metric",
+                       "Vishay CRCW 0603 1 %"),
+    ("22R", "0603"): ("CRCW060322R0FKEA", "Resistor_SMD:R_0603_1608Metric",
+                      "Vishay CRCW 0603 1 %"),
+    ("47R", "0603"): ("CRCW060347R0FKEA", "Resistor_SMD:R_0603_1608Metric",
+                      "Vishay CRCW 0603 1 %"),
+    ("1k5", "0603"): ("CRCW06031K50FKEA", "Resistor_SMD:R_0603_1608Metric",
+                      "Vishay CRCW 0603 1 %"),
+    ("2k2", "0603"): ("CRCW06032K20FKEA", "Resistor_SMD:R_0603_1608Metric",
+                      "Vishay CRCW 0603 1 %"),
+    ("4k7", "0603"): ("CRCW06034K70FKEA", "Resistor_SMD:R_0603_1608Metric",
+                      "Vishay CRCW 0603 1 %"),
+    ("47k", "0603"): ("CRCW060347K0FKEA", "Resistor_SMD:R_0603_1608Metric",
+                      "Vishay CRCW 0603 1 %"),
+    ("22p", "0603"): ("GRM1885C1H220JA01D", "Capacitor_SMD:C_0603_1608Metric",
+                      "Murata GRM188 C0G 50 V"),
+    ("47p", "0603"): ("GRM1885C1H470JA01D", "Capacitor_SMD:C_0603_1608Metric",
+                      "Murata GRM188 C0G 50 V"),
+    ("1n", "0603"): ("GRM1885C1H102JA01D", "Capacitor_SMD:C_0603_1608Metric",
+                     "Murata GRM188 C0G 50 V"),
+    ("2n2", "0603"): ("GRM188R71H222KA01D", "Capacitor_SMD:C_0603_1608Metric",
+                      "Murata GRM188 50 V X7R"),
     ("100n", "0603"): ("GRM188R71E104KA01D", "Capacitor_SMD:C_0603_1608Metric",
                        "Murata GRM188R71E 25 V X7R"),
     ("1u", "0603"): ("GRM188R61C105KA12D", "Capacitor_SMD:C_0603_1608Metric",
@@ -456,10 +480,16 @@ def resolve(value: str, footprint: str = "") -> tuple[str, str, str, str] | None
     v = normalise(value)
     size = _size_of(footprint)
     if size:
-        for prefix, sz in SIZE_OVERRIDE:
+        # Longest-prefix so "100R" cannot be shadowed by "10R".
+        for prefix, sz in sorted(SIZE_OVERRIDE, key=lambda kv: len(kv[0]),
+                                 reverse=True):
             if sz == size and v.startswith(prefix):
                 mpn, fp, src = SIZE_OVERRIDE[(prefix, sz)]
                 return (mpn, fp, src, "series")
+        # Deliberately NOT a generic value->MPN derivation. An enumerated table
+        # is auditable; a regex that mints part numbers is not, and it would
+        # happily invent a CRCW code for a value no one checked exists. Unlisted
+        # values fall through and are reported as unresolved instead.
     if v in MPN_TABLE:
         return MPN_TABLE[v]
     # Longest-prefix match, so a value that carries a stale qualifier still
@@ -473,6 +503,41 @@ def resolve(value: str, footprint: str = "") -> tuple[str, str, str, str] | None
         if v.startswith(prefix):
             return entry
     return None
+
+
+def _reconcile(csv_fp: str, table_fp: str) -> str:
+    """Decide between the schematic's footprint and the table's.
+
+    Two different conflicts live here and they need opposite answers:
+
+    * **The table is fixing a broken name.** The schematic says
+      ``QFN-40-1EP_6x6mm_P0.5mm``, which does not exist in the KiCad library; the
+      table says ``..._EP4.6x4.6mm``, which does. The table must win or ERC warns
+      that the footprint cannot be found.
+
+    * **The schematic is fixing the table.** The schematic deliberately chose a
+      0603 part; the table defaulted to 0805. The schematic must win, or the MPN
+      quoted would not fit the land.
+
+    The rule that separates them: if both names refer to the *same* library and
+    the table's name is a strict extension of the schematic's (the library
+    prefix and shape stem match), the table is correcting a truncated name.
+    Otherwise the schematic made a sizing decision, and the schematic wins.
+    """
+    a, b = (csv_fp or "").strip(), (table_fp or "").strip()
+    if not a:
+        return b
+    if not b:
+        return a
+    if a == b:
+        return a
+    lib_a, _, stem_a = a.partition(":")
+    lib_b, _, stem_b = b.partition(":")
+    # same library, and the table's name extends the schematic's stem => the
+    # schematic's name was truncated/incomplete and the table repaired it
+    if lib_a == lib_b and stem_b.startswith(stem_a):
+        return b
+    return a
 
 
 def build(bom_path: Path = BOM_CSV) -> dict:
@@ -493,9 +558,16 @@ def build(bom_path: Path = BOM_CSV) -> dict:
                                "footprint": fp, "sheet": row.get("sheet", "")})
             continue
         mpn, mpn_fp, source, kind = hit
+        final_fp = _reconcile(fp, mpn_fp)
+        if final_fp != mpn_fp:
+            # The footprint that survived is not the one the table assumed, so
+            # the part number must be re-resolved for the surviving size.
+            again = resolve(value, final_fp)
+            if again is not None:
+                mpn, mpn_fp, source, kind = again
         parts[ref] = {
             "mpn": mpn,
-            "footprint": fp or mpn_fp,
+            "footprint": final_fp,
             "source": source,
             "kind": kind,
             "value": value,

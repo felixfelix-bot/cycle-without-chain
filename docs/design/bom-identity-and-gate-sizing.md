@@ -46,15 +46,18 @@ not, and that one was transcribed from the vendor drawing instead.
 
 ### 2.2 A gate that fails on the things that matter
 
-`check_bom.py` enforces:
+**Correction (see §4.5): the first version of this gate checked the wrong
+artifact and passed while 143 components still had no footprint.** It now checks
+the exported netlist, because the netlist is what the PCB editor imports:
 
-1. Reference-set equality between schematic and approved list, both directions.
-2. One MPN per populated reference.
-3. Every MPN has a library-qualified footprint (`Lib:Footprint`, not a bare name).
-4. Every MPN declares a source.
+1. Every netlist component carries a non-empty, library-qualified footprint.
+2. Reference-set equality between netlist and approved list, both directions.
+3. One MPN per populated reference.
+4. Every MPN declares a source and a provenance kind (`datasheet`/`series`).
 5. No MPN is claimed for two different footprints.
+6. Where both sources name a footprint, they must agree.
 
-Item 5 caught a real defect (see §4.2). Items 1–4 are PCB-03's exit criteria.
+Item 5 caught a real defect (§4.2); item 1 caught the one in §4.5.
 
 ### 2.3 A gate that reports what a reader needs
 
@@ -161,6 +164,58 @@ sizing continuous loss at the peak would over-build the gate drive for a duty
 cycle that never persists.
 
 ## 4. Defects found and fixed in this work
+
+### 4.5 The gate passed while the netlist had 143 empty footprints
+
+This is the most serious error in this work and it was committed and pushed as
+"PCB-03 CLOSED" before it was caught.
+
+`check_bom.py`'s first version read `approved-mpns.json` and required each
+*entry* to have a non-empty footprint. The table supplied one for every part, so
+the gate passed. The exported netlist was not consulted at all:
+
+```
+387 components, 143 with an EMPTY footprint field
+```
+
+The identical 143 references the work set out to fix. A footprint recorded only
+in an approved list is not on the board; the netlist is what the PCB editor
+imports, so the check was measuring the wrong object.
+
+Three things were wrong, and fixing one exposed the next:
+
+1. **Wrong artifact.** The gate read the approved list instead of the netlist.
+   Now the netlist is the authority and the list is checked against it.
+2. **Footprints never reached the schematic.** `Sheet.part()` took a footprint
+   defaulting to `''`, and most call sites omitted it. It now falls back to the
+   approved land pattern, so the netlist carries it. After this the netlist had
+   **0 blank footprints**.
+3. **Eleven footprint names in the table were invented and did not exist.**
+   Making the footprints reach the schematic caused ERC to report
+   `footprint_link_issues` warnings — 11 of them. Every one was a name I had
+   written without checking: `QFN-40-1EP_6x6mm_P0.5mm` (needs
+   `_EP4.6x4.6mm`), `SOIC-8_5.23x5.23mm` (the library has `5.3x5.3`),
+   `HSOP-8-1EP_3.9x4.9mm_P1.27mm` (needs `_EP2.3x2.3mm`),
+   `L_Coilcraft_MSS1246` (the real name is `MSS1246T-XXX`),
+   `Conn_01x01_Pin` and `Fuseholder_Littelfuse_100_KM_KLKD` (neither exists),
+   and `R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm` (needs `_Horizontal`). Each was
+   verified against `/usr/share/kicad/footprints` before correction. ERC returned
+   to 10 errors / 0 warnings.
+
+Two further defects surfaced only once the footprints were flowing:
+
+- **Precedence was backwards.** The stale `review-bom.csv` value was overriding
+  the corrected table, making every correction inert. `_reconcile()` now
+  distinguishes the two opposite conflicts: the table wins when repairing a
+  truncated library name, the schematic wins when it deliberately chose a
+  smaller package.
+- **Six parts had a 0603 land and an 0805 part number** (`100R 1%`). Caught by a
+  size-vs-MPN sanity check; the 0603 families were added to the table. A generic
+  value→MPN regex derivation was written and then removed: an enumerated table
+  is auditable, a regex that mints part numbers is not.
+
+The lesson recorded in the gate's own docstring: **check the artifact that ships,
+not the list that describes it.**
 
 Recorded because each was a real error in the tooling, and the point of the
 gates is that errors get found before copper.

@@ -86,6 +86,12 @@ class Sheet:
         return self.name.startswith(('fsr-', 'brake-intent-')) or self.name in ('brake-switch-harness', 'brake-dump-command', 'ctrl-supply', 'rail-partition', 'rail-passives')
     def part(self,a,ref,value,x,y,nets,footprint=''):
         libid=val(a[1]);self.syms[libid]=a
+        # An explicit footprint always wins. Otherwise use the approved land
+        # pattern, because the netlist (not the approved list) is what the PCB
+        # editor imports: a footprint recorded only in approved-mpns.json is not
+        # on the board. See check_bom.py for the netlist-level guard.
+        if not footprint:
+            footprint=_footprint_for(ref)
         fx, ry, vy, justify = x, y-5.08, y-2.54, ''
         if self.legibility_layout():
             if libid in ('Device:R', 'Device:C'):
@@ -117,8 +123,29 @@ local_drv=parse(dump(DRV)); local_drv[1]=q('DRV8353S')
 (ROOT/'Powerboard.kicad_sym').write_text('(kicad_symbol_lib (version 20241209) (generator "powerboard_generator") '+dump(local_drv)+')\n')
 (ROOT/'sym-lib-table').write_text('(sym_lib_table (version 7) (lib (name "Powerboard") (type "KiCad") (uri "${KIPRJMOD}/Powerboard.kicad_sym") (options "") (descr "TI DRV8353S SPI driver; pin table SLVSDY6A pp6-7")))\n')
 counters={'R':0,'C':0,'Q':0,'J':0}
+
+# Approved land patterns, loaded from approved-mpns.json (built by
+# build_approved_mpns.py). A footprint that exists only in an approved list is
+# NOT on the board: the netlist is what the PCB editor imports, so the schematic
+# itself has to carry the footprint or the part arrives with no land pattern.
+# PCB-03 was briefly marked closed on the strength of the list alone; the netlist
+# still had 143 empty footprints. This lookup is the fix.
+_APPROVED={}
+try:
+    import json as _json
+    from pathlib import Path as _Path
+    _ap=_Path(__file__).resolve().parent/'approved-mpns.json'
+    if _ap.is_file():
+        _APPROVED={k:v for k,v in _json.loads(_ap.read_text()).get('parts',{}).items()}
+except Exception:
+    _APPROVED={}
+
+def _footprint_for(ref):
+    return (_APPROVED.get(ref) or {}).get('footprint','') or ''
+
 def passive(s,kind,value,x,y,a,b,fp=''):
-    counters[kind]+=1;ref=kind+str(counters[kind]);s.part(R if kind=='R' else C,ref,value,x,y,{'1':a,'2':b},fp);return ref
+    counters[kind]+=1;ref=kind+str(counters[kind])
+    s.part(R if kind=='R' else C,ref,value,x,y,{'1':a,'2':b},fp);return ref
 
 root=Sheet('powerboard-reva','Pedal-by-wire: hierarchical engineering review',True)
 root.text('PARTIAL CIRCUIT MILESTONE - NOT A RELEASE DESIGN',25.4,25.4,2.54)

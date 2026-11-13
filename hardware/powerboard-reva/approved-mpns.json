@@ -53,9 +53,9 @@
    "sheet": "hub-driver"
   },
   "C14": {
-   "mpn": "GRM185R61A105KA61D",
+   "mpn": "GRM188R61C105KA12D",
    "footprint": "Capacitor_SMD:C_0603_1608Metric",
-   "source": "Murata GRM185R61A 10 V X7R",
+   "source": "Murata GRM188R61C 16 V X7R",
    "kind": "series",
    "value": "1u 10V X7R",
    "sheet": "hub-driver"
@@ -77,9 +77,9 @@
    "sheet": "hub-driver"
   },
   "C17": {
-   "mpn": "GRM188R61A104KA93D",
+   "mpn": "GRM188R71E104KA01D",
    "footprint": "Capacitor_SMD:C_0603_1608Metric",
-   "source": "Murata GRM188R61A 10 V X7R",
+   "source": "Murata GRM188R71E 25 V X7R",
    "kind": "series",
    "value": "100n 10V X7R",
    "sheet": "hub-driver"
@@ -277,9 +277,9 @@
    "sheet": "brake-chopper"
   },
   "C4": {
-   "mpn": "GRM185R61A105KA61D",
+   "mpn": "GRM188R61C105KA12D",
    "footprint": "Capacitor_SMD:C_0603_1608Metric",
-   "source": "Murata GRM185R61A 10 V X7R",
+   "source": "Murata GRM188R61C 16 V X7R",
    "kind": "series",
    "value": "1u 10V X7R",
    "sheet": "gen-driver"
@@ -293,9 +293,9 @@
    "sheet": "mcu-core"
   },
   "C400": {
-   "mpn": "GRM185R61A105KA61D",
+   "mpn": "GRM188R61C105KA12D",
    "footprint": "Capacitor_SMD:C_0603_1608Metric",
-   "source": "Murata GRM185R61A 10 V X7R",
+   "source": "Murata GRM188R61C 16 V X7R",
    "kind": "series",
    "value": "1u 10V X7R effective >=0.22u",
    "sheet": "entry-main"
@@ -325,9 +325,9 @@
    "sheet": "mcu-power"
   },
   "C410": {
-   "mpn": "GRM185R61A105KA61D",
+   "mpn": "GRM188R61C105KA12D",
    "footprint": "Capacitor_SMD:C_0603_1608Metric",
-   "source": "Murata GRM185R61A 10 V X7R",
+   "source": "Murata GRM188R61C 16 V X7R",
    "kind": "series",
    "value": "1u 10V X7R effective >=0.22u",
    "sheet": "entry-pre"
@@ -573,9 +573,9 @@
    "sheet": "rail-passives"
   },
   "C52": {
-   "mpn": "GRM2165C1H102JA01D",
+   "mpn": "GRM1885C1H102JA01D",
    "footprint": "Capacitor_SMD:C_0603_1608Metric",
-   "source": "Murata GRM216 C0G 50 V",
+   "source": "Murata GRM188 C0G 50 V",
    "kind": "series",
    "value": "1n C0G",
    "sheet": "mcu-analog"
@@ -605,57 +605,57 @@
    "sheet": "rail-passives"
   },
   "C53": {
-   "mpn": "GRM2165C1H102JA01D",
+   "mpn": "GRM1885C1H102JA01D",
    "footprint": "Capacitor_SMD:C_0603_1608Metric",
-   "source": "Murata GRM216 C0G 50 V",
+   "source": "Murata GRM188 C0G 50 V",
    "kind": "series",
    "value": "1n C0G",
    "sheet": "mcu-analog"
   },
   "C54": {
-   "mpn": "GRM2165C1H102JA01D",
+   "mpn": "GRM1885C1H102JA01D",
    "footprint": "Capacitor_SMD:C_0603_1608Metric",
-   "source": "Murata GRM216 C0G 50 V",
+   "source": "Murata GRM188 C0G 50 V",
    "kind": "series",
    "value": "1n C0G",
    "sheet": "mcu-analog"
   },
   "C55": {
-   "mpn": "GRM2165C1H102JA01D",
+   "mpn": "GRM1885C1H102JA01D",
    "footprint": "Capacitor_SMD:C_0603_1608Metric",
-   "source": "Murata GRM216 C0G 50 V",
+   "source": "Murata GRM188 C0G 50 V",
    "kind": "series",
    "value": "1n C0G",
    "sheet": "mcu-analog"
   },
   "C56": {
-   "mpn": "GRM2165C1H102JA01D",
+   "mpn": "GRM1885C1H102JA01D",
    "footprint": "Capacitor_SMD:C_0603_1608Metric",
-   "source": "Murata GRM216 C0G 50 V",
+   "source": "Murata GRM188 C0G 50 V",
    "kind": "series",
    "value": "1n C0G",
    "sheet": "mcu-analog"
   },
   "C57": {
-   "mpn": "GRM2165C1H102JA01D",
+   "mpn": "GRM1885C1H102JA01D",
    "footprint": "Capacitor_SMD:C_0603_1608Metric",
-   "source": "Murata GRM216 C0G 50 V",
+   "source": "Murata GRM188 C0G 50 V",
    "kind": "series",
    "value": "1n C0G",
    "sheet": "mcu-analog"
   },
   "C58": {
-   "mpn": "GRM216R71H102KA01D",
+   "mpn": "GRM1885C1H102JA01D",
    "footprint": "Capacitor_SMD:C_0603_1608Metric",
-   "source": "Murata GRM216 50 V X7R",
+   "source": "Murata GRM188 C0G 50 V",
    "kind": "series",
    "value": "1n brake filter",
    "sheet": "mcu-analog"
   },
   "C59": {
-   "mpn": "GRM216R71H102KA01D",
+   "mpn": "GRM1885C1H102JA01D",
    "footprint": "Capacitor_SMD:C_0603_1608Metric",
-   "source": "Murata GRM216 50 V X7R",
+   "source": "Murata GRM188 C0G 50 V",
    "kind": "series",
    "value": "1n Hall filter",
    "sheet": "mcu-sensors"
@@ -669,57 +669,57 @@
    "sheet": "gen-driver"
   },
   "C60": {
-   "mpn": "GRM216R71H102KA01D",
+   "mpn": "GRM1885C1H102JA01D",
    "footprint": "Capacitor_SMD:C_0603_1608Metric",
-   "source": "Murata GRM216 50 V X7R",
+   "source": "Murata GRM188 C0G 50 V",
    "kind": "series",
    "value": "1n Hall filter",
    "sheet": "mcu-sensors"
   },
   "C61": {
-   "mpn": "GRM216R71H102KA01D",
+   "mpn": "GRM1885C1H102JA01D",
    "footprint": "Capacitor_SMD:C_0603_1608Metric",
-   "source": "Murata GRM216 50 V X7R",
+   "source": "Murata GRM188 C0G 50 V",
    "kind": "series",
    "value": "1n Hall filter",
    "sheet": "mcu-sensors"
   },
   "C62": {
-   "mpn": "GRM216R71H102KA01D",
+   "mpn": "GRM1885C1H102JA01D",
    "footprint": "Capacitor_SMD:C_0603_1608Metric",
-   "source": "Murata GRM216 50 V X7R",
+   "source": "Murata GRM188 C0G 50 V",
    "kind": "series",
    "value": "1n Hall filter",
    "sheet": "mcu-sensors"
   },
   "C63": {
-   "mpn": "GRM216R71H102KA01D",
+   "mpn": "GRM1885C1H102JA01D",
    "footprint": "Capacitor_SMD:C_0603_1608Metric",
-   "source": "Murata GRM216 50 V X7R",
+   "source": "Murata GRM188 C0G 50 V",
    "kind": "series",
    "value": "1n Hall filter",
    "sheet": "mcu-sensors"
   },
   "C64": {
-   "mpn": "GRM216R71H102KA01D",
+   "mpn": "GRM1885C1H102JA01D",
    "footprint": "Capacitor_SMD:C_0603_1608Metric",
-   "source": "Murata GRM216 50 V X7R",
+   "source": "Murata GRM188 C0G 50 V",
    "kind": "series",
    "value": "1n Hall filter",
    "sheet": "mcu-sensors"
   },
   "C65": {
-   "mpn": "GRM216R71H102KA01D",
+   "mpn": "GRM1885C1H102JA01D",
    "footprint": "Capacitor_SMD:C_0603_1608Metric",
-   "source": "Murata GRM216 50 V X7R",
+   "source": "Murata GRM188 C0G 50 V",
    "kind": "series",
    "value": "1n encoder filter",
    "sheet": "mcu-sensors"
   },
   "C66": {
-   "mpn": "GRM216R71H102KA01D",
+   "mpn": "GRM1885C1H102JA01D",
    "footprint": "Capacitor_SMD:C_0603_1608Metric",
-   "source": "Murata GRM216 50 V X7R",
+   "source": "Murata GRM188 C0G 50 V",
    "kind": "series",
    "value": "1n encoder filter",
    "sheet": "mcu-sensors"
@@ -749,9 +749,9 @@
    "sheet": "gen-fast-oc"
   },
   "C7": {
-   "mpn": "GRM188R61A104KA93D",
+   "mpn": "GRM188R71E104KA01D",
    "footprint": "Capacitor_SMD:C_0603_1608Metric",
-   "source": "Murata GRM188R61A 10 V X7R",
+   "source": "Murata GRM188R71E 25 V X7R",
    "kind": "series",
    "value": "100n 10V X7R",
    "sheet": "gen-driver"
@@ -1006,7 +1006,7 @@
   },
   "F1": {
    "mpn": "KLKD020.T",
-   "footprint": "Fuse:Fuseholder_Littelfuse_100_KM_KLKD",
+   "footprint": "Fuse:Fuseholder_Littelfuse_100_series_5x20mm",
    "source": "Littelfuse KLKD 20 A 600 VDC",
    "kind": "series",
    "value": "KLKD020CN 20A 600VDC",
@@ -1062,7 +1062,7 @@
   },
   "J40": {
    "mpn": "992G1-BK",
-   "footprint": "Connector:Conn_01x01_Pin",
+   "footprint": "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical",
    "source": "Anderson Powerpole SB50 housing, keyed",
    "kind": "series",
    "value": "Anderson 992G1 SB50 keyed SOURCE",
@@ -1118,7 +1118,7 @@
   },
   "J6": {
    "mpn": "HSC3004R7J",
-   "footprint": "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm",
+   "footprint": "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal",
    "source": "TE HSC300 4R7 300 W (external, off-board)",
    "kind": "series",
    "value": "EXTERNAL_DUMP_RESISTOR",
@@ -1150,7 +1150,7 @@
   },
   "L500": {
    "mpn": "MSS1246T-683MLC",
-   "footprint": "Inductor_SMD:L_Coilcraft_MSS1246",
+   "footprint": "Inductor_SMD:L_Coilcraft_MSS1246T-XXX",
    "source": "Coilcraft MSS1246T 68 uH (L500, RAIL-03 open)",
    "kind": "series",
    "value": "68u MSS1246T-683MLC 20%",
@@ -1558,7 +1558,7 @@
   },
   "R116": {
    "mpn": "RH05022R00FE02",
-   "footprint": "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm",
+   "footprint": "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal",
    "source": "Vishay RH050 22R 1 % - PULSE RATING NOT QUALIFIED (PROT-09)",
    "kind": "series",
    "value": "22R 1% RH05022R00FE02 pulse UNQUALIFIED",
@@ -2533,9 +2533,9 @@
    "sheet": "mcu-power"
   },
   "R69": {
-   "mpn": "CRCW0805100RFKEA",
+   "mpn": "CRCW0603100RFKEA",
    "footprint": "Resistor_SMD:R_0603_1608Metric",
-   "source": "Vishay CRCW 0805 1 %",
+   "source": "Vishay CRCW 0603 1 %",
    "kind": "series",
    "value": "100R 1%",
    "sheet": "mcu-analog"
@@ -2549,41 +2549,41 @@
    "sheet": "gen-bridge"
   },
   "R70": {
-   "mpn": "CRCW0805100RFKEA",
+   "mpn": "CRCW0603100RFKEA",
    "footprint": "Resistor_SMD:R_0603_1608Metric",
-   "source": "Vishay CRCW 0805 1 %",
+   "source": "Vishay CRCW 0603 1 %",
    "kind": "series",
    "value": "100R 1%",
    "sheet": "mcu-analog"
   },
   "R71": {
-   "mpn": "CRCW0805100RFKEA",
+   "mpn": "CRCW0603100RFKEA",
    "footprint": "Resistor_SMD:R_0603_1608Metric",
-   "source": "Vishay CRCW 0805 1 %",
+   "source": "Vishay CRCW 0603 1 %",
    "kind": "series",
    "value": "100R 1%",
    "sheet": "mcu-analog"
   },
   "R72": {
-   "mpn": "CRCW0805100RFKEA",
+   "mpn": "CRCW0603100RFKEA",
    "footprint": "Resistor_SMD:R_0603_1608Metric",
-   "source": "Vishay CRCW 0805 1 %",
+   "source": "Vishay CRCW 0603 1 %",
    "kind": "series",
    "value": "100R 1%",
    "sheet": "mcu-analog"
   },
   "R73": {
-   "mpn": "CRCW0805100RFKEA",
+   "mpn": "CRCW0603100RFKEA",
    "footprint": "Resistor_SMD:R_0603_1608Metric",
-   "source": "Vishay CRCW 0805 1 %",
+   "source": "Vishay CRCW 0603 1 %",
    "kind": "series",
    "value": "100R 1%",
    "sheet": "mcu-analog"
   },
   "R74": {
-   "mpn": "CRCW0805100RFKEA",
+   "mpn": "CRCW0603100RFKEA",
    "footprint": "Resistor_SMD:R_0603_1608Metric",
-   "source": "Vishay CRCW 0805 1 %",
+   "source": "Vishay CRCW 0603 1 %",
    "kind": "series",
    "value": "100R 1%",
    "sheet": "mcu-analog"
@@ -2822,7 +2822,7 @@
   },
   "U1": {
    "mpn": "DRV8353SRTAT",
-   "footprint": "Package_DFN_QFN:QFN-40-1EP_6x6mm_P0.5mm",
+   "footprint": "Package_DFN_QFN:QFN-40-1EP_6x6mm_P0.5mm_EP4.6x4.6mm",
    "source": "TI SLVSDY6A pp6-7",
    "kind": "datasheet",
    "value": "DRV8353SRTAT",
@@ -2910,7 +2910,7 @@
   },
   "U2": {
    "mpn": "DRV8353SRTAT",
-   "footprint": "Package_DFN_QFN:QFN-40-1EP_6x6mm_P0.5mm",
+   "footprint": "Package_DFN_QFN:QFN-40-1EP_6x6mm_P0.5mm_EP4.6x4.6mm",
    "source": "TI SLVSDY6A pp6-7",
    "kind": "datasheet",
    "value": "DRV8353SRTAT",
@@ -3014,16 +3014,16 @@
   },
   "U400": {
    "mpn": "TPSI3052DWZR",
-   "footprint": "Package_SO:SOIC-8_5.23x5.23mm_P1.27mm",
-   "source": "TI TPSI3052 isolated driver",
+   "footprint": "Package_SO:SOIC-8_5.3x5.3mm_P1.27mm",
+   "source": "TI TPSI3052DWZR isolated driver, 8-pin SOIC",
    "kind": "datasheet",
    "value": "TPSI3052DWZR",
    "sheet": "entry-main"
   },
   "U401": {
    "mpn": "TPSI3052DWZR",
-   "footprint": "Package_SO:SOIC-8_5.23x5.23mm_P1.27mm",
-   "source": "TI TPSI3052 isolated driver",
+   "footprint": "Package_SO:SOIC-8_5.3x5.3mm_P1.27mm",
+   "source": "TI TPSI3052DWZR isolated driver, 8-pin SOIC",
    "kind": "datasheet",
    "value": "TPSI3052DWZR",
    "sheet": "entry-pre"
@@ -3038,7 +3038,7 @@
   },
   "U500": {
    "mpn": "LM5164DDAR",
-   "footprint": "Package_SO:HSOP-8-1EP_3.9x4.9mm_P1.27mm",
+   "footprint": "Package_SO:HSOP-8-1EP_3.9x4.9mm_P1.27mm_EP2.3x2.3mm",
    "source": "TI LM5164",
    "kind": "datasheet",
    "value": "LM5164DDAR",
@@ -3046,7 +3046,7 @@
   },
   "U501": {
    "mpn": "LM5164DDAR",
-   "footprint": "Package_SO:HSOP-8-1EP_3.9x4.9mm_P1.27mm",
+   "footprint": "Package_SO:HSOP-8-1EP_3.9x4.9mm_P1.27mm_EP2.3x2.3mm",
    "source": "TI LM5164",
    "kind": "datasheet",
    "value": "LM5164DDAR",

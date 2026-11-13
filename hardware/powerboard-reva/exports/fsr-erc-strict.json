@@ -1,7 +1,7 @@
 {
     "$schema": "https://schemas.kicad.org/erc.v1.json",
     "coordinate_units": "mm",
-    "date": "2026-11-11T11:55:40+0100",
+    "date": "2026-11-13T11:25:47+0100",
     "included_severities": [
         "error",
         "warning"
@@ -26,7 +26,7 @@
                                 "x": 0.508,
                                 "y": 0.762
                             },
-                            "uuid": "3bd07154-d6d7-44e6-89a5-2ca98f8c4705"
+                            "uuid": "625fae9e-7a35-47fb-b43f-c7529009842a"
                         }
                     ],
                     "severity": "error",
@@ -41,7 +41,7 @@
                                 "x": 1.016,
                                 "y": 0.762
                             },
-                            "uuid": "96cbe12c-3361-4115-a98f-7e223c3ed646"
+                            "uuid": "1e05abdc-328a-4814-8b56-372901a00804"
                         }
                     ],
                     "severity": "error",
@@ -56,7 +56,7 @@
                                 "x": 1.016,
                                 "y": 0.8128
                             },
-                            "uuid": "bae356db-0596-4b93-a056-76b0c4ec51e6"
+                            "uuid": "06479833-8005-4282-ac65-3116da4ad308"
                         }
                     ],
                     "severity": "error",
@@ -97,7 +97,7 @@
                                 "x": 0.4318,
                                 "y": 0.508
                             },
-                            "uuid": "3cd2dec5-bfbc-445a-81d4-d53589e49a18"
+                            "uuid": "b8430229-e067-48b6-85f0-8a2822bf448c"
                         }
                     ],
                     "severity": "error",
@@ -138,7 +138,7 @@
                                 "x": 1.0922,
                                 "y": 0.6604
                             },
-                            "uuid": "3b19fff2-4324-4035-a19e-6725381384a1"
+                            "uuid": "0666eb20-e994-436f-b599-ca53b03cb0c6"
                         }
                     ],
                     "severity": "error",
@@ -214,7 +214,7 @@
                                 "x": 0.4318,
                                 "y": 1.778
                             },
-                            "uuid": "b0ec734b-4b5f-48bc-b7a7-aa8e24e0edb4"
+                            "uuid": "664c54ab-f4be-416b-8ea9-41fbbfbeca0e"
                         }
                     ],
                     "severity": "error",
@@ -250,7 +250,7 @@
                                 "x": 0.4318,
                                 "y": 0.7112
                             },
-                            "uuid": "46be5bc3-1721-4aba-b04e-c7548234999c"
+                            "uuid": "63e7c572-85ba-4f60-82ea-8bff405d289c"
                         }
                     ],
                     "severity": "error",
@@ -265,7 +265,7 @@
                                 "x": 0.4318,
                                 "y": 0.8128
                             },
-                            "uuid": "cfce5b6d-8ffb-413d-a9bd-8b2b2e6cd177"
+                            "uuid": "c8087869-bcf1-47be-892f-5cd472047336"
                         }
                     ],
                     "severity": "error",
@@ -286,7 +286,7 @@
                                 "x": 0.4318,
                                 "y": 0.8128
                             },
-                            "uuid": "ac3ba867-5e42-4857-bd18-3975d85add5d"
+                            "uuid": "2d043920-fa5b-4dd0-83a7-3130da6d813a"
                         }
                     ],
                     "severity": "error",
@@ -307,7 +307,7 @@
                                 "x": 0.5588,
                                 "y": 0.9144
                             },
-                            "uuid": "ea5a09ce-6d87-467c-80b1-f1c5899ceb48"
+                            "uuid": "b77c3a7e-ee11-45fb-9afb-c3f960c16991"
                         }
                     ],
                     "severity": "error",

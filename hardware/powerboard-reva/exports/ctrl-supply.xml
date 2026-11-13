@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <export version="E">
   <design>
-    <source>/home/c08r4d0r/worktrees/cycle-l501-nrnd/hardware/powerboard-reva/powerboard-reva.kicad_sch</source>
-    <date>2026-11-11T11:55:39+0100</date>
+    <source>/home/c08r4d0r/repos/cycle-without-chain/hardware/powerboard-reva/powerboard-reva.kicad_sch</source>
+    <date>2026-11-13T11:25:46+0100</date>
     <tool>Eeschema 9.0.9-9.0.9~ubuntu24.04.1</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -584,8 +584,9 @@
   <components>
     <comp ref="C1">
       <value>47n 100V X7R</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -599,8 +600,9 @@
     </comp>
     <comp ref="C2">
       <value>1u 16V X7R</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -614,8 +616,9 @@
     </comp>
     <comp ref="C3">
       <value>1u 16V X7R</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -629,8 +632,9 @@
     </comp>
     <comp ref="C4">
       <value>1u 10V X7R</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -644,8 +648,9 @@
     </comp>
     <comp ref="C5">
       <value>100n 25V X7R</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -659,8 +664,9 @@
     </comp>
     <comp ref="C6">
       <value>10u 25V X7R</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -674,8 +680,9 @@
     </comp>
     <comp ref="C7">
       <value>100n 10V X7R</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -689,8 +696,9 @@
     </comp>
     <comp ref="R1">
       <value>100k</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -704,8 +712,9 @@
     </comp>
     <comp ref="R2">
       <value>10k</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -719,8 +728,9 @@
     </comp>
     <comp ref="R3">
       <value>10k</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -734,8 +744,9 @@
     </comp>
     <comp ref="R4">
       <value>10k</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -749,8 +760,9 @@
     </comp>
     <comp ref="U1">
       <value>DRV8353SRTAT</value>
+      <footprint>Package_DFN_QFN:QFN-40-1EP_6x6mm_P0.5mm_EP4.6x4.6mm</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Package_DFN_QFN:QFN-40-1EP_6x6mm_P0.5mm_EP4.6x4.6mm</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -761,9 +773,10 @@
       <tstamps>81441505-3887-55b1-b81a-412319c16edc</tstamps>
     </comp>
     <comp ref="C8">
-      <value>1u 100V X7R provisional</value>
+      <value>1u 100V X7R</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -776,9 +789,10 @@
       <tstamps>4966091e-bb31-50c0-bc41-4d4d2978ef5c</tstamps>
     </comp>
     <comp ref="C9">
-      <value>1u 100V X7R provisional</value>
+      <value>1u 100V X7R</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -791,9 +805,10 @@
       <tstamps>7fa9ac31-bda9-56dc-b175-a53146dff049</tstamps>
     </comp>
     <comp ref="C10">
-      <value>1u 100V X7R provisional</value>
+      <value>1u 100V X7R</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -902,9 +917,10 @@
       <tstamps>157a1f25-31a0-5331-bb95-f02aa3a014da</tstamps>
     </comp>
     <comp ref="R5">
-      <value>4R7 provisional</value>
+      <value>3R3 1% gate</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -918,8 +934,9 @@
     </comp>
     <comp ref="R6">
       <value>100k G-S</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -932,9 +949,10 @@
       <tstamps>7383b301-6bfc-58ea-9b72-5e74ca661bcc</tstamps>
     </comp>
     <comp ref="R7">
-      <value>4R7 provisional</value>
+      <value>3R3 1% gate</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -948,8 +966,9 @@
     </comp>
     <comp ref="R8">
       <value>100k G-S</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -978,9 +997,10 @@
       <tstamps>e5e88ecc-971c-5bcc-8c0f-2f2c380b1318</tstamps>
     </comp>
     <comp ref="R10">
-      <value>4R7 provisional</value>
+      <value>3R3 1% gate</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -994,8 +1014,9 @@
     </comp>
     <comp ref="R11">
       <value>100k G-S</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -1008,9 +1029,10 @@
       <tstamps>4a721bb6-0608-5525-902f-26120b50eb8f</tstamps>
     </comp>
     <comp ref="R12">
-      <value>4R7 provisional</value>
+      <value>3R3 1% gate</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -1024,8 +1046,9 @@
     </comp>
     <comp ref="R13">
       <value>100k G-S</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -1054,9 +1077,10 @@
       <tstamps>bdb053bc-cf55-5040-bb2e-aca7f7a74122</tstamps>
     </comp>
     <comp ref="R15">
-      <value>4R7 provisional</value>
+      <value>3R3 1% gate</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -1070,8 +1094,9 @@
     </comp>
     <comp ref="R16">
       <value>100k G-S</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -1084,9 +1109,10 @@
       <tstamps>b2e6bfdb-e53b-529e-957b-c3213640f0a1</tstamps>
     </comp>
     <comp ref="R17">
-      <value>4R7 provisional</value>
+      <value>3R3 1% gate</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -1100,8 +1126,9 @@
     </comp>
     <comp ref="R18">
       <value>100k G-S</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -1131,8 +1158,9 @@
     </comp>
     <comp ref="C11">
       <value>47n 100V X7R</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -1146,8 +1174,9 @@
     </comp>
     <comp ref="C12">
       <value>1u 16V X7R</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -1161,8 +1190,9 @@
     </comp>
     <comp ref="C13">
       <value>1u 16V X7R</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -1176,8 +1206,9 @@
     </comp>
     <comp ref="C14">
       <value>1u 10V X7R</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -1191,8 +1222,9 @@
     </comp>
     <comp ref="C15">
       <value>100n 25V X7R</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -1206,8 +1238,9 @@
     </comp>
     <comp ref="C16">
       <value>10u 25V X7R</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -1221,8 +1254,9 @@
     </comp>
     <comp ref="C17">
       <value>100n 10V X7R</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -1236,8 +1270,9 @@
     </comp>
     <comp ref="R20">
       <value>100k</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -1251,8 +1286,9 @@
     </comp>
     <comp ref="R21">
       <value>10k</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -1266,8 +1302,9 @@
     </comp>
     <comp ref="R22">
       <value>10k</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -1281,8 +1318,9 @@
     </comp>
     <comp ref="R23">
       <value>10k</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -1296,8 +1334,9 @@
     </comp>
     <comp ref="U2">
       <value>DRV8353SRTAT</value>
+      <footprint>Package_DFN_QFN:QFN-40-1EP_6x6mm_P0.5mm_EP4.6x4.6mm</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Package_DFN_QFN:QFN-40-1EP_6x6mm_P0.5mm_EP4.6x4.6mm</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -1308,9 +1347,10 @@
       <tstamps>775528e9-f7b4-5773-8c49-e976cecb18e2</tstamps>
     </comp>
     <comp ref="C18">
-      <value>1u 100V X7R provisional</value>
+      <value>1u 100V X7R</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -1323,9 +1363,10 @@
       <tstamps>b5fef5db-7674-5340-a512-e9b3cd040844</tstamps>
     </comp>
     <comp ref="C19">
-      <value>1u 100V X7R provisional</value>
+      <value>1u 100V X7R</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -1338,9 +1379,10 @@
       <tstamps>7ca57ff7-97b0-56f8-8131-384969178b81</tstamps>
     </comp>
     <comp ref="C20">
-      <value>1u 100V X7R provisional</value>
+      <value>1u 100V X7R</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -1449,9 +1491,10 @@
       <tstamps>3b5168af-dc9f-5645-a426-ee13189dc7a0</tstamps>
     </comp>
     <comp ref="R24">
-      <value>4R7 provisional</value>
+      <value>3R3 1% gate</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -1465,8 +1508,9 @@
     </comp>
     <comp ref="R25">
       <value>100k G-S</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -1479,9 +1523,10 @@
       <tstamps>e9912644-34fc-5f58-b2ac-646cef3e3980</tstamps>
     </comp>
     <comp ref="R26">
-      <value>4R7 provisional</value>
+      <value>3R3 1% gate</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -1495,8 +1540,9 @@
     </comp>
     <comp ref="R27">
       <value>100k G-S</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -1525,9 +1571,10 @@
       <tstamps>ca337f1d-9a9e-5ca6-a27c-6c8f952d713c</tstamps>
     </comp>
     <comp ref="R29">
-      <value>4R7 provisional</value>
+      <value>3R3 1% gate</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -1541,8 +1588,9 @@
     </comp>
     <comp ref="R30">
       <value>100k G-S</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -1555,9 +1603,10 @@
       <tstamps>42125d1a-0dff-5555-8470-675a331853ff</tstamps>
     </comp>
     <comp ref="R31">
-      <value>4R7 provisional</value>
+      <value>3R3 1% gate</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -1571,8 +1620,9 @@
     </comp>
     <comp ref="R32">
       <value>100k G-S</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -1601,9 +1651,10 @@
       <tstamps>b228edd7-f86c-5f79-a450-ac9cade31952</tstamps>
     </comp>
     <comp ref="R34">
-      <value>4R7 provisional</value>
+      <value>3R3 1% gate</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -1617,8 +1668,9 @@
     </comp>
     <comp ref="R35">
       <value>100k G-S</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -1631,9 +1683,10 @@
       <tstamps>0be67648-834d-5ca4-9255-10a723a1c9ec</tstamps>
     </comp>
     <comp ref="R36">
-      <value>4R7 provisional</value>
+      <value>3R3 1% gate</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -1647,8 +1700,9 @@
     </comp>
     <comp ref="R37">
       <value>100k G-S</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -1677,9 +1731,10 @@
       <tstamps>10bcfc57-5fd5-5482-a7bc-80d6a99d6988</tstamps>
     </comp>
     <comp ref="C21">
-      <value>100u 100V provisional</value>
+      <value>100u 100V</value>
+      <footprint>Capacitor_THT:CP_Radial_D10.0mm_P5.00mm</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_THT:CP_Radial_D10.0mm_P5.00mm</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -1693,8 +1748,9 @@
     </comp>
     <comp ref="J1">
       <value>BUS_TEST_ONLY_NOT_SOURCE_INPUT</value>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -1708,8 +1764,9 @@
     </comp>
     <comp ref="J2">
       <value>MCU_RAIL_TEST_ONLY_NOT_INPUT</value>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -1723,8 +1780,9 @@
     </comp>
     <comp ref="J3">
       <value>GEN_MACHINE_PHASES</value>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -1738,8 +1796,9 @@
     </comp>
     <comp ref="J4">
       <value>HUB_MACHINE_PHASES</value>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -1753,8 +1812,9 @@
     </comp>
     <comp ref="J5">
       <value>SAFETY_FAULT_CHAIN_NC</value>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -1864,8 +1924,9 @@
     </comp>
     <comp ref="U3">
       <value>R-78HB12-0.5</value>
+      <footprint>Converter_DCDC:Converter_DCDC_RECOM_R-78HB-0.5_THT</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Converter_DCDC:Converter_DCDC_RECOM_R-78HB-0.5_THT</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -2605,8 +2666,9 @@
     </comp>
     <comp ref="J6">
       <value>EXTERNAL_DUMP_RESISTOR</value>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -2714,8 +2776,9 @@
     </comp>
     <comp ref="J7">
       <value>SWD_3V3_TARGET_REFERENCE</value>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -2729,8 +2792,9 @@
     </comp>
     <comp ref="J8">
       <value>RESET_BUTTON_NORMALLY_OPEN</value>
+      <footprint>Button_Switch_SMD:SW_SPST_TL3305A</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Button_Switch_SMD:SW_SPST_TL3305A</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -3368,8 +3432,9 @@
     </comp>
     <comp ref="J9">
       <value>GEN_HALL_3V3_ONLY</value>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -3383,8 +3448,9 @@
     </comp>
     <comp ref="J10">
       <value>HUB_HALL_3V3_ONLY</value>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -3398,8 +3464,9 @@
     </comp>
     <comp ref="J11">
       <value>OPTIONAL_ENCODER_3V3_ONLY</value>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -4409,8 +4476,9 @@
     </comp>
     <comp ref="C73">
       <value>470u 100V UHE2A471MHD +/-20%</value>
+      <footprint>Capacitor_THT:CP_Radial_D16.0mm_P7.50mm</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_THT:CP_Radial_D16.0mm_P7.50mm</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -4424,8 +4492,9 @@
     </comp>
     <comp ref="C74">
       <value>470u 100V UHE2A471MHD +/-20%</value>
+      <footprint>Capacitor_THT:CP_Radial_D16.0mm_P7.50mm</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_THT:CP_Radial_D16.0mm_P7.50mm</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -4439,8 +4508,9 @@
     </comp>
     <comp ref="D20">
       <value>STPS30100ST reverse clamp ONLY not reverse blocker</value>
+      <footprint>Package_TO_SOT_SMD:TO-277A</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Package_TO_SOT_SMD:TO-277A</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -4453,9 +4523,10 @@
       <tstamps>85981a4e-e8a2-586e-8150-b5c17ba83b28</tstamps>
     </comp>
     <comp ref="F1">
-      <value>KLKD020CN 20A 600VDC candidate AT SOURCE</value>
+      <value>KLKD020CN 20A 600VDC</value>
+      <footprint>Fuse:Fuseholder_Littelfuse_100_series_5x20mm</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Fuse:Fuseholder_Littelfuse_100_series_5x20mm</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -4469,8 +4540,9 @@
     </comp>
     <comp ref="J40">
       <value>Anderson 992G1 SB50 keyed SOURCE</value>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -4484,8 +4556,9 @@
     </comp>
     <comp ref="J43">
       <value>Kelvin BUS measurement isolated instrument ONLY</value>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -4499,8 +4572,9 @@
     </comp>
     <comp ref="R116">
       <value>22R 1% RH05022R00FE02 pulse UNQUALIFIED</value>
+      <footprint>Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -4514,8 +4588,9 @@
     </comp>
     <comp ref="R117">
       <value>2m 1% WSLP2512R0020FEA Kelvin</value>
+      <footprint>Resistor_SMD:R_2512_6332Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_2512_6332Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -4529,8 +4604,9 @@
     </comp>
     <comp ref="R118">
       <value>10k 1% RH02510K00FE02 always-on bleed</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -4592,8 +4668,9 @@
     </comp>
     <comp ref="J44">
       <value>LEFT_BINARY_SWITCH_ONLY</value>
+      <footprint>Button_Switch_SMD:SW_SPST_TL3305A</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Button_Switch_SMD:SW_SPST_TL3305A</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -4687,8 +4764,9 @@
     </comp>
     <comp ref="J45">
       <value>RIGHT_BINARY_SWITCH_ONLY</value>
+      <footprint>Button_Switch_SMD:SW_SPST_TL3305A</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Button_Switch_SMD:SW_SPST_TL3305A</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -4878,8 +4956,9 @@
     </comp>
     <comp ref="SW1">
       <value>NC_RELEASE_OPEN_ON_BRAKE_UNSELECTED</value>
+      <footprint>Button_Switch_SMD:SW_SPST_TL3305A</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Button_Switch_SMD:SW_SPST_TL3305A</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -4892,8 +4971,9 @@
     </comp>
     <comp ref="SW2">
       <value>NC_RELEASE_OPEN_ON_BRAKE_UNSELECTED</value>
+      <footprint>Button_Switch_SMD:SW_SPST_TL3305A</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Button_Switch_SMD:SW_SPST_TL3305A</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -4970,8 +5050,9 @@
     </comp>
     <comp ref="J46">
       <value>LEFT_FSR_34-00018_EXTERNAL</value>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -5124,7 +5205,7 @@
       <tstamps>8a7f5e26-47c6-552b-8fe9-7b2033c880ba</tstamps>
     </comp>
     <comp ref="D38">
-      <value>PESD3V3U1UL CANDIDATE</value>
+      <value>PESD3V3U1UL</value>
       <footprint>Diode_SMD:D_SOD-882</footprint>
       <fields>
         <field name="Footprint">Diode_SMD:D_SOD-882</field>
@@ -5140,7 +5221,7 @@
       <tstamps>1753ce91-3f63-5acc-8f93-926044b817aa</tstamps>
     </comp>
     <comp ref="D39">
-      <value>PESD3V3U1UL CANDIDATE</value>
+      <value>PESD3V3U1UL</value>
       <footprint>Diode_SMD:D_SOD-882</footprint>
       <fields>
         <field name="Footprint">Diode_SMD:D_SOD-882</field>
@@ -5156,7 +5237,7 @@
       <tstamps>1a2e4a58-4cf3-54ea-9096-5ee6f32e07ae</tstamps>
     </comp>
     <comp ref="D40">
-      <value>BAT54S CANDIDATE</value>
+      <value>BAT54S</value>
       <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
       <fields>
         <field name="Footprint">Package_TO_SOT_SMD:SOT-23</field>
@@ -5237,8 +5318,9 @@
     </comp>
     <comp ref="J47">
       <value>RIGHT_FSR_34-00018_EXTERNAL</value>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -5391,7 +5473,7 @@
       <tstamps>00336865-809e-569e-becd-d7fb1b3a66c4</tstamps>
     </comp>
     <comp ref="D41">
-      <value>PESD3V3U1UL CANDIDATE</value>
+      <value>PESD3V3U1UL</value>
       <footprint>Diode_SMD:D_SOD-882</footprint>
       <fields>
         <field name="Footprint">Diode_SMD:D_SOD-882</field>
@@ -5407,7 +5489,7 @@
       <tstamps>8bbeb155-4c1f-5cd4-a2ce-f83642877e17</tstamps>
     </comp>
     <comp ref="D42">
-      <value>PESD3V3U1UL CANDIDATE</value>
+      <value>PESD3V3U1UL</value>
       <footprint>Diode_SMD:D_SOD-882</footprint>
       <fields>
         <field name="Footprint">Diode_SMD:D_SOD-882</field>
@@ -5423,7 +5505,7 @@
       <tstamps>a595b5a2-2879-5fa3-8c80-bc40b8151de9</tstamps>
     </comp>
     <comp ref="D43">
-      <value>BAT54S CANDIDATE</value>
+      <value>BAT54S</value>
       <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
       <fields>
         <field name="Footprint">Package_TO_SOT_SMD:SOT-23</field>
@@ -5440,8 +5522,9 @@
     </comp>
     <comp ref="C400">
       <value>1u 10V X7R effective &gt;=0.22u</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -5455,8 +5538,9 @@
     </comp>
     <comp ref="C401">
       <value>100n 25V C0G 5% CDIV1</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -5470,8 +5554,9 @@
     </comp>
     <comp ref="C402">
       <value>470n 25V C0G 5% CDIV2</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -5484,7 +5569,7 @@
       <tstamps>3fed5a9b-6c8f-5684-9ad8-79ba2ea33116</tstamps>
     </comp>
     <comp ref="Q400">
-      <value>IRFP4568PbF 150V candidate</value>
+      <value>IRFP4568PbF 150V</value>
       <footprint>Package_TO_SOT_THT:TO-247-3_Vertical</footprint>
       <fields>
         <field name="Footprint">Package_TO_SOT_THT:TO-247-3_Vertical</field>
@@ -5499,7 +5584,7 @@
       <tstamps>a24a4d48-a9e4-516b-b313-062296038b39</tstamps>
     </comp>
     <comp ref="Q401">
-      <value>IRFP4568PbF 150V candidate</value>
+      <value>IRFP4568PbF 150V</value>
       <footprint>Package_TO_SOT_THT:TO-247-3_Vertical</footprint>
       <fields>
         <field name="Footprint">Package_TO_SOT_THT:TO-247-3_Vertical</field>
@@ -5515,8 +5600,9 @@
     </comp>
     <comp ref="R400">
       <value>20k 1% PXFR</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -5530,8 +5616,9 @@
     </comp>
     <comp ref="R401">
       <value>10k EN default OFF</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -5545,8 +5632,9 @@
     </comp>
     <comp ref="R402">
       <value>0R FIXED INHIBIT - no operational command source</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -5559,9 +5647,10 @@
       <tstamps>6f470f4b-c4e2-5808-9003-741254410283</tstamps>
     </comp>
     <comp ref="R403">
-      <value>10R 1% gate candidate</value>
+      <value>3R3 1% gate</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -5575,8 +5664,9 @@
     </comp>
     <comp ref="R404">
       <value>100k 1% G-S default OFF</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -5589,9 +5679,10 @@
       <tstamps>a8875387-a8d4-5ed1-9f32-3f1793752d8f</tstamps>
     </comp>
     <comp ref="R405">
-      <value>10R 1% gate candidate</value>
+      <value>3R3 1% gate</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -5605,8 +5696,9 @@
     </comp>
     <comp ref="R406">
       <value>100k 1% G-S default OFF</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -5620,8 +5712,9 @@
     </comp>
     <comp ref="U400">
       <value>TPSI3052DWZR</value>
+      <footprint>Package_SO:SOIC-8_5.3x5.3mm_P1.27mm</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Package_SO:SOIC-8_5.3x5.3mm_P1.27mm</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -5633,8 +5726,9 @@
     </comp>
     <comp ref="C410">
       <value>1u 10V X7R effective &gt;=0.22u</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -5648,8 +5742,9 @@
     </comp>
     <comp ref="C411">
       <value>100n 25V C0G 5% CDIV1</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -5663,8 +5758,9 @@
     </comp>
     <comp ref="C412">
       <value>470n 25V C0G 5% CDIV2</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -5677,7 +5773,7 @@
       <tstamps>479419d7-9d7a-5501-93ae-676b208c5bcd</tstamps>
     </comp>
     <comp ref="Q402">
-      <value>IRFP4568PbF 150V candidate</value>
+      <value>IRFP4568PbF 150V</value>
       <footprint>Package_TO_SOT_THT:TO-247-3_Vertical</footprint>
       <fields>
         <field name="Footprint">Package_TO_SOT_THT:TO-247-3_Vertical</field>
@@ -5692,7 +5788,7 @@
       <tstamps>30586664-8212-5aa0-b7e9-19367d109b07</tstamps>
     </comp>
     <comp ref="Q403">
-      <value>IRFP4568PbF 150V candidate</value>
+      <value>IRFP4568PbF 150V</value>
       <footprint>Package_TO_SOT_THT:TO-247-3_Vertical</footprint>
       <fields>
         <field name="Footprint">Package_TO_SOT_THT:TO-247-3_Vertical</field>
@@ -5708,8 +5804,9 @@
     </comp>
     <comp ref="R410">
       <value>20k 1% PXFR</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -5723,8 +5820,9 @@
     </comp>
     <comp ref="R411">
       <value>10k EN default OFF</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -5738,8 +5836,9 @@
     </comp>
     <comp ref="R412">
       <value>0R FIXED INHIBIT - no operational command source</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -5752,9 +5851,10 @@
       <tstamps>c618114c-f058-5423-8ce8-1e0bfce91686</tstamps>
     </comp>
     <comp ref="R413">
-      <value>10R 1% gate candidate</value>
+      <value>3R3 1% gate</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -5768,8 +5868,9 @@
     </comp>
     <comp ref="R414">
       <value>100k 1% G-S default OFF</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -5782,9 +5883,10 @@
       <tstamps>c9778427-f675-5392-9dd5-464fa7f8dfa2</tstamps>
     </comp>
     <comp ref="R415">
-      <value>10R 1% gate candidate</value>
+      <value>3R3 1% gate</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -5798,8 +5900,9 @@
     </comp>
     <comp ref="R416">
       <value>100k 1% G-S default OFF</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -5813,8 +5916,9 @@
     </comp>
     <comp ref="U401">
       <value>TPSI3052DWZR</value>
+      <footprint>Package_SO:SOIC-8_5.3x5.3mm_P1.27mm</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Package_SO:SOIC-8_5.3x5.3mm_P1.27mm</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -5858,8 +5962,9 @@
     </comp>
     <comp ref="C502">
       <value>2.2n 50V GCM155R71H222KA37D</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_SMD:C_0402_1005Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -5873,8 +5978,9 @@
     </comp>
     <comp ref="C503">
       <value>22u 25V TMK325B7226KMHT</value>
+      <footprint>Capacitor_SMD:C_1210_3225Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_SMD:C_1210_3225Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -5888,8 +5994,9 @@
     </comp>
     <comp ref="C504">
       <value>22u 25V TMK325B7226KMHT</value>
+      <footprint>Capacitor_SMD:C_1210_3225Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_SMD:C_1210_3225Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -5903,8 +6010,9 @@
     </comp>
     <comp ref="C505">
       <value>3.3n 100V CGA3E2X7R2A332K080AA</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -5917,9 +6025,10 @@
       <tstamps>76c242ba-8cda-547b-ad68-3ecff5d1ab2f</tstamps>
     </comp>
     <comp ref="C506">
-      <value>330p 50V C0G 5% candidate</value>
+      <value>330p 50V C0G 5%</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -5949,8 +6058,9 @@
     </comp>
     <comp ref="L500">
       <value>68u MSS1246T-683MLC 20%</value>
+      <footprint>Inductor_SMD:L_Coilcraft_MSS1246T-XXX</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Inductor_SMD:L_Coilcraft_MSS1246T-XXX</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -5963,9 +6073,10 @@
       <tstamps>36e7a7a7-ec5f-5040-a0b1-9ec7800be709</tstamps>
     </comp>
     <comp ref="R500">
-      <value>27.4k 1% 0.1W candidate</value>
+      <value>27.4k 1% 0.1W</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -5978,9 +6089,10 @@
       <tstamps>ce94bb21-b1ed-5515-880f-55e70f3488ee</tstamps>
     </comp>
     <comp ref="R501">
-      <value>87.3k 1% 0.1W candidate</value>
+      <value>87.3k 1% 0.1W</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -5994,8 +6106,9 @@
     </comp>
     <comp ref="R502">
       <value>49.9k 1% RG1608P-4992-B-T5</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -6008,9 +6121,10 @@
       <tstamps>e74c5e48-0931-58e5-a67f-78f55dd724d2</tstamps>
     </comp>
     <comp ref="R503">
-      <value>150k 1% 0.1W &gt;=100V candidate</value>
+      <value>150k 1% 0.1W &gt;=100V</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -6023,9 +6137,10 @@
       <tstamps>a7474b36-ae77-5afa-8441-c0af68dfa8af</tstamps>
     </comp>
     <comp ref="R504">
-      <value>1M 1% 0.1W &gt;=100V candidate</value>
+      <value>1M 1% 0.1W &gt;=100V</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -6038,9 +6153,10 @@
       <tstamps>d41dbed8-fc52-598d-95de-06a481aee1d7</tstamps>
     </comp>
     <comp ref="R505">
-      <value>52.3k 1% 0.1W candidate</value>
+      <value>52.3k 1% 0.1W</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -6054,8 +6170,9 @@
     </comp>
     <comp ref="U500">
       <value>LM5164DDAR</value>
+      <footprint>Package_SO:HSOP-8-1EP_3.9x4.9mm_P1.27mm_EP2.3x2.3mm</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Package_SO:HSOP-8-1EP_3.9x4.9mm_P1.27mm_EP2.3x2.3mm</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -6067,8 +6184,9 @@
     </comp>
     <comp ref="U501">
       <value>LM5164DDAR</value>
+      <footprint>Package_SO:HSOP-8-1EP_3.9x4.9mm_P1.27mm_EP2.3x2.3mm</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Package_SO:HSOP-8-1EP_3.9x4.9mm_P1.27mm_EP2.3x2.3mm</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -6156,8 +6274,9 @@
     </comp>
     <comp ref="C512">
       <value>2.2n 50V GCM155R71H222KA37D</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_SMD:C_0402_1005Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -6171,8 +6290,9 @@
     </comp>
     <comp ref="C513">
       <value>22u 25V TMK325B7226KMHT</value>
+      <footprint>Capacitor_SMD:C_1210_3225Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_SMD:C_1210_3225Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -6186,8 +6306,9 @@
     </comp>
     <comp ref="C514">
       <value>22u 25V TMK325B7226KMHT</value>
+      <footprint>Capacitor_SMD:C_1210_3225Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_SMD:C_1210_3225Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -6201,8 +6322,9 @@
     </comp>
     <comp ref="C515">
       <value>3.3n 100V CGA3E2X7R2A332K080AA</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -6215,9 +6337,10 @@
       <tstamps>fa905261-91d6-5310-855b-52fb97172ea6</tstamps>
     </comp>
     <comp ref="C516">
-      <value>56p 50V C0G candidate</value>
+      <value>56p 50V C0G</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -6230,9 +6353,10 @@
       <tstamps>853e1386-d085-53cf-ab12-a5c957fc0cfb</tstamps>
     </comp>
     <comp ref="C517">
-      <value>10u 25V X7R candidate</value>
+      <value>10u 25V X7R</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -6245,9 +6369,10 @@
       <tstamps>a4ee3440-4081-5d8a-a4c8-8400021743b9</tstamps>
     </comp>
     <comp ref="C518">
-      <value>22u 16V X7R candidate</value>
+      <value>22u 16V X7R</value>
+      <footprint>Capacitor_SMD:C_1206_3216Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_SMD:C_1206_3216Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -6260,9 +6385,10 @@
       <tstamps>89e94665-81b1-5b64-a312-3489d57c347c</tstamps>
     </comp>
     <comp ref="C519">
-      <value>22u 16V X7R candidate</value>
+      <value>22u 16V X7R</value>
+      <footprint>Capacitor_SMD:C_1206_3216Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_SMD:C_1206_3216Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -6276,8 +6402,9 @@
     </comp>
     <comp ref="C520">
       <value>100n 25V X7R</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -6291,8 +6418,9 @@
     </comp>
     <comp ref="C521">
       <value>100n 25V X7R</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -6306,8 +6434,9 @@
     </comp>
     <comp ref="C523">
       <value>100p 50V C0G OVP sense filter</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -6321,8 +6450,9 @@
     </comp>
     <comp ref="L501">
       <value>68u SPM10065VC-680M-D 20% AEC-Q200</value>
+      <footprint>Powerboard:L_TDK_SPM10065VC-D</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Powerboard:L_TDK_SPM10065VC-D</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -6335,7 +6465,7 @@
       <tstamps>cc1fc209-2abf-594c-82fe-a2367b0c2999</tstamps>
     </comp>
     <comp ref="L502">
-      <value>3.9u candidate 2A</value>
+      <value>3.9u 2A</value>
       <footprint>Inductor_SMD:L_Bourns_SRN6045TA</footprint>
       <fields>
         <field name="Footprint">Inductor_SMD:L_Bourns_SRN6045TA</field>
@@ -6352,8 +6482,9 @@
     </comp>
     <comp ref="R510">
       <value>100k 1% 0.1W TI reference</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -6367,8 +6498,9 @@
     </comp>
     <comp ref="R511">
       <value>453k 1% 0.1W TI reference</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -6382,8 +6514,9 @@
     </comp>
     <comp ref="R512">
       <value>49.9k 1% RG1608P-4992-B-T5</value>
+      <footprint>Resistor_SMD:R_0603_1608Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0603_1608Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -6397,8 +6530,9 @@
     </comp>
     <comp ref="R513">
       <value>453k 1% 0.1W TI reference</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -6411,9 +6545,10 @@
       <tstamps>a6f47da8-1173-5971-9ff9-d8114f7cbeea</tstamps>
     </comp>
     <comp ref="R514">
-      <value>82k 1% 0.1W &gt;=100V candidate</value>
+      <value>82k 1% 0.1W &gt;=100V</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -6427,8 +6562,9 @@
     </comp>
     <comp ref="R515">
       <value>100k 1% DELAY EN pulldown</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -6442,8 +6578,9 @@
     </comp>
     <comp ref="R516">
       <value>47k 1% EN series</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -6457,8 +6594,9 @@
     </comp>
     <comp ref="R517">
       <value>100k 1% DELAY EN pulldown</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -6472,8 +6610,9 @@
     </comp>
     <comp ref="R518">
       <value>100k 1% MAIN_PROVEN default low</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -6487,8 +6626,9 @@
     </comp>
     <comp ref="R519">
       <value>0R FIXED INHIBIT - no MAIN_PROVEN detector fitted</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -6502,8 +6642,9 @@
     </comp>
     <comp ref="R520">
       <value>10k CTRL PGOOD pullup</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -6517,8 +6658,9 @@
     </comp>
     <comp ref="R521">
       <value>47k 1% DRIVE_PG pullup (PGOOD abs max 14V)</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -6532,8 +6674,9 @@
     </comp>
     <comp ref="R523">
       <value>649k 0.1% DRIVE12 OVP upper leg</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -6547,8 +6690,9 @@
     </comp>
     <comp ref="R524">
       <value>118k 0.1% DRIVE12 OVP lower leg</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -7384,7 +7528,7 @@
       <uri>/usr/share/kicad/symbols//MCU_ST_STM32G4.kicad_sym</uri>
     </library>
     <library logical="Powerboard">
-      <uri>/home/c08r4d0r/worktrees/cycle-l501-nrnd/hardware/powerboard-reva/Powerboard.kicad_sym</uri>
+      <uri>/home/c08r4d0r/repos/cycle-without-chain/hardware/powerboard-reva/Powerboard.kicad_sym</uri>
     </library>
     <library logical="Switch">
       <uri>/usr/share/kicad/symbols//Switch.kicad_sym</uri>
