@@ -172,6 +172,24 @@ def check(path: Path) -> tuple[list[str], dict[str, int]]:
                 f"(e.g. '*.md') plus a section marker '§'; got {source!r}"
             )
 
+        # The bucket is this document's own claim about what work remains. A row
+        # whose status already says closed/resolved must not keep counting as
+        # open, or the remaining-work number is inflated and the reader is told
+        # two different things in one line. Applies both ways: bucket D is
+        # defined as resolved, so an open row there is equally wrong.
+        status = cells[6].strip().upper()
+        closed_status = status.startswith("CLOSED") or status.startswith("RESOLVED")
+        if closed_status and bucket in ("A", "B", "C"):
+            problems.append(
+                f"line {lineno} ({gate_id}): status says closed/resolved but bucket is "
+                f"{bucket}; move it to D or drop the claim"
+            )
+        elif bucket == "D" and not closed_status:
+            problems.append(
+                f"line {lineno} ({gate_id}): bucket D is 'resolved' but status "
+                f"{cells[6].strip()[:40]!r} does not say closed/resolved"
+            )
+
     stated = collect_summary(lines, summary_header)
     for bucket in BUCKETS:
         if stated.get(bucket) is None:

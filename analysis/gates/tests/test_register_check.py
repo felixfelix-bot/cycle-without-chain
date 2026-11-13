@@ -37,10 +37,10 @@ SUMMARY_HEADER = (
 )
 
 
-def row(gate_id="TST-01", bucket="A", source="precharge-review.md §Verdict"):
+def row(gate_id="TST-01", bucket="A", source="precharge-review.md §Verdict", status="open"):
     return (
         f"| {gate_id} | test | something | bad things | {bucket} "
-        f"| a calculation | open | {source} |\n"
+        f"| a calculation | {status} | {source} |\n"
     )
 
 
@@ -110,6 +110,39 @@ class RegisterCheckTest(unittest.TestCase):
     def test_missing_citation_fails(self):
         text = build([row(source="")], counts={"A": 1, "B": 0, "C": 0, "D": 0})
         self.assert_fails(self.run_check(text), "no citation")
+
+    def test_closed_row_outside_bucket_d_fails(self):
+        """A row whose status says closed cannot sit in bucket A/B/C.
+
+        The bucket is the register's own claim about what is left to do. A row
+        marked CLOSED or RESOLVED that still counts as open inflates the
+        remaining work and, worse, lets a reader believe a DoD document is more
+        complete than the status column says. The summary count is the number
+        people quote, so this has to be mechanically impossible.
+        """
+        for bucket in ("A", "B", "C"):
+            with self.subTest(bucket=bucket):
+                text = build([row(bucket=bucket, status="CLOSED — done")],
+                             counts={"A": 0, "B": 0, "C": 0, "D": 1})
+                self.assert_fails(self.run_check(text), "status says closed/resolved but bucket is")
+
+    def test_resolved_row_outside_bucket_d_fails(self):
+        text = build([row(bucket="A", status="RESOLVED in somebranch")],
+                     counts={"A": 0, "B": 0, "C": 0, "D": 1})
+        self.assert_fails(self.run_check(text), "status says closed/resolved but bucket is")
+
+    def test_closed_row_in_bucket_d_passes(self):
+        """Positive control: the rule must not fire on correct placement."""
+        text = build([row(bucket="D", status="CLOSED — done")],
+                     counts={"A": 0, "B": 0, "C": 0, "D": 1})
+        result = self.run_check(text)
+        self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
+
+    def test_open_row_in_bucket_d_fails(self):
+        """The converse: bucket D claims resolved, so an open row there is wrong too."""
+        text = build([row(bucket="D", status="open")],
+                     counts={"A": 0, "B": 0, "C": 0, "D": 1})
+        self.assert_fails(self.run_check(text), "bucket D is 'resolved' but status")
 
     def test_citation_without_document_fails(self):
         text = build([row(source="see the review")], counts={"A": 1, "B": 0, "C": 0, "D": 0})
