@@ -384,6 +384,40 @@ merged board itself.
 `powerboard-reva-routed-v2.kicad_pcb` is therefore an **intermediate artifact, not
 an improvement on v1**. v1 remains the better board.
 
+### Three more attempts at making the copper visible to the router
+
+All three failed, and each failure is recorded because each looked reasonable.
+
+**Keepout cells.** Delete non-target tracks but leave circular keepout zones where
+they were, so the router must go around them. Crashed: `ZONE(board)` plus
+`SetOutline()` on a loaded board dumped core (`timeout: the monitored command
+dumped core`). Zone construction through this API on an already-populated board
+is not reliable.
+
+**Netless tracks as obstacles.** Keep the tracks but clear their net codes, so
+they are copper with no connection target. `SaveBoard` wrote a file that
+`LoadBoard` then **returned `None` for** -- the board was destroyed on save, and
+`ExportSpecctraDSN` failed on it. A board file that will not reload is worse than
+no file.
+
+**Full DSN with the optimizer disabled.** Export the routed board so all 2708
+tracks are present as wires, and route with `--router.optimizer.enabled=false`
+intending gap-fill only. This one is the most promising: FreeRouting reports a
+**baseline of 545 unrouted items**, i.e. it now sees the real problem rather than
+an empty board. It did not finish inside 20 minutes.
+
+### Where that leaves it
+
+The correct approach is established even though it is not complete: **the router
+must be given the existing copper, and told not to optimise.** Earlier attempts
+failed either by hiding the copper (199 shorts) or by letting the optimizer
+rewrite all 2708 tracks (endless `normalizeTraces` oscillation warnings on
+`OC_HIGH_REF`, `LOGIC3V3_EXT`, `LEFT_SWITCH_ADC`).
+
+What is not established is that gap-fill converges in reasonable time on a board
+this size. That is the open question, and it needs an unattended run rather than
+another iteration of guessing.
+
 Also still absent by intent: the **GEN and HUB power stages** are not autorouted.
 Their loop geometry is what the OC-03 envelope assumes.
 
