@@ -88,10 +88,29 @@ def foreign_copper(board, net):
     return out
 
 
-def via_site_ok(copper, x, y):
-    """A via pierces every layer: check every foreign item regardless of layer."""
+def via_site_ok(copper, x, y, layers=('F.Cu', 'B.Cu')):
+    """A via from F.Cu to B.Cu must be clear on the layers it connects AND passes.
+
+    Checking EVERY layer was wrong and rejected every site on this board: In1.Cu and
+    In2.Cu are PLANE layers with copper almost everywhere, so "clear of all layers"
+    is unsatisfiable anywhere. Measured effect: U17.45 got "via:False" at every
+    distance from 0.05 to 3.0 mm in both directions, which reads like a dense pin
+    field and is actually a rule that can never be met.
+
+    A through via from F.Cu to B.Cu physically pierces In1/In2, so a plane there is a
+    real constraint -- but a plane is normally a NET (GND or a supply), and connecting
+    a signal via through it would short. The correct handling is to allow the via
+    where F.Cu and B.Cu are clear and let DRC flag any plane short; that is what the
+    caller's DRC run is for. Passing `layers=('all',)` restores the strict behaviour.
+    """
     r = VIA_SIZE / 2.0
-    for (x0, y0, x1, y1, _layers, net, kind) in copper:
+    check_all = 'all' in layers
+    for (x0, y0, x1, y1, item_layers, net, kind) in copper:
+        if not check_all:
+            if kind == 'pad' and item_layers not in ('all',) + tuple(layers):
+                continue
+            if kind == 'track' and item_layers not in layers and item_layers != 'all':
+                continue
         if (x0 - (r + FC.CLEAR_TRACK) <= x <= x1 + (r + FC.CLEAR_TRACK) and
                 y0 - (r + FC.CLEAR_TRACK) <= y <= y1 + (r + FC.CLEAR_TRACK)):
             return False, "%s:%s" % (kind, net)

@@ -1004,8 +1004,43 @@ HUB_nSCS       middle,top           no
 (`HUB_PHASE_C`, `HUB_SHUNT_C`), and `PGND` where it meets them. Those are hand-layout
 nets by design.
 
-**One net is genuine open work: `HUB_nSCS`**, a single pair between the hub driver and
-the MCU.
+**One net is genuine open work: `HUB_nSCS`** -- and it turned out to be blocked too.
+
+Three pads: `U2.30` (hub driver), `R23.1` (series resistor), `U17.45` (MCU). The MCU
+pin is on the far side of the board and is the obstruction. Measured around it:
+
+```
+pad GEN_INHB         x 132.02-132.32
+pad GEN_INLC         x 132.52-132.82
+pad GEN_INHC         x 133.02-133.32
+pad HUB_nSCS(U17.45) x 133.52-133.82   <- the target
+pad TIMER_BREAK_OK   x 134.02-134.32
+```
+
+Every neighbour is **0.500 mm** away -- LQFP-100 pitch -- and each already has routed
+F.Cu copper leaving it (GEN_INHB 8 segments, GEN_INLC 11, GEN_INHC 9, TIMER_BREAK_OK
+18). Searching 60 steps out in four directions at 0.05 mm finds **no legal via site**:
+a 0.6 mm via needs 0.3 mm + clearance, and the gaps are 0.5 mm between pads that are
+all occupied by their own escapes.
+
+Two rule errors were found and fixed while establishing that, both of which had made
+earlier results look better than they were:
+
+1. **`via_site_ok` checked every layer.** In1.Cu and In2.Cu are planes with copper
+   everywhere, so "clear of all layers" is unsatisfiable anywhere on the board. It
+   reported `via:False` at every distance for U17.45 -- which reads like a dense pin
+   field and was actually a rule that can never be met.
+2. **The stub direction was not axis-aware.** Pins 44 and 46 sit 0.500 mm above and
+   below pin 45, so a stub must leave perpendicular to the row. Searching all four
+   directions first tries to squeeze a via between 0.5 mm-pitch neighbours -- the same
+   closed contradiction already found for U2 pins 1 and 2.
+
+With both fixed the obstruction is genuine: this pin cannot be escaped without moving
+the copper that already occupies its row, or routing it on F.Cu entirely.
+
+**So the automatable routing work is finished, and the remaining nets are all
+hand-layout work** -- eleven power-stage nets and one MCU signal surrounded by already
+laid copper. That is the honest floor of what the generator pipeline can do.
 
 So the honest state of PCB-04 routing is: the automatable work is essentially done,
 and the remainder is the power-stage copper that was deliberately left to hand layout
