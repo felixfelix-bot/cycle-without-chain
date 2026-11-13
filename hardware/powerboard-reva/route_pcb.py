@@ -103,13 +103,30 @@ def main() -> int:
         print("FAIL: freerouting not on PATH")
         return 1
 
+    # 100 passes on 271 nets / 387 parts did not finish in 30 minutes -- the
+    # router kept optimising. Bound it: fewer passes and a hard timeout, so a
+    # routing attempt either produces a session or fails within a known window.
+    # A partial route is still useful (it shows which nets are hard), and it is
+    # honest about being partial rather than consuming an unbounded wall clock.
+    passes = os.environ.get("FREEROUTING_PASSES", "20")
+    timeout_s = int(os.environ.get("FREEROUTING_TIMEOUT", "1500"))
     cmd = [FREEROUTING,
            "-de", DSN,
            "-do", SES,
-           "-mp", "100",          # max passes
+           "-mp", passes,
            "--gui", "false"]
-    print("running: %s" % " ".join(cmd))
-    r = subprocess.run(cmd, capture_output=True, text=True, timeout=1800)
+    print("running (max %s passes, timeout %ds): %s"
+          % (passes, timeout_s, " ".join(cmd)))
+    try:
+        r = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout_s)
+    except subprocess.TimeoutExpired:
+        print("FAIL: routing exceeded %ds. Partial state:" % timeout_s)
+        print("  DSN kept at %s" % DSN)
+        if os.path.exists(SES):
+            print("  SES produced: %d bytes" % os.path.getsize(SES))
+        else:
+            print("  no SES written; nothing was routed")
+        return 1
     if r.returncode != 0:
         print("FAIL: freerouting exit %d" % r.returncode)
         print((r.stdout or "")[-3000:])

@@ -144,6 +144,32 @@ density limit, and stating that is more useful than a suppressed check.
 - **The 160 × 130 mm envelope is provisional.** Derived from measured footprint
   area, but never checked against bike mounting or thermal requirements.
 
+## 6a. Routing: first attempt timed out, and that is a finding
+
+The first FreeRouting run used `-mp 100` (100 optimisation passes) and was killed
+by a **1800 s timeout without producing a session file.** 387 parts, 271 nets and
+four layers is simply a lot of routing for one pass budget, and the router keeps
+optimising rather than stopping at "connected".
+
+What that means concretely: **no tracks exist.** The board is still at the placed
+state, not a partially-routed one — a timeout with no SES means nothing was
+written, not that some nets got done.
+
+The pipeline now bounds the attempt (`FREEROUTING_PASSES`, `FREEROUTING_TIMEOUT`)
+so a run either produces a session or fails inside a known window, and reports
+whether an SES exists on failure. An unbounded wall clock on a router is not a
+plan.
+
+Two things this rules out as causes, checked before blaming the router:
+- The DSN exports cleanly at 178 KB with all 271 nets, so the input is well formed.
+- The board passes its own geometric placement checks with zero courtyard
+  overlaps, so the router is not fighting a pile of overlapping parts.
+
+The remaining unknown is whether the board is *routable* at 4 layers with this
+part density, which only a completed run will answer. If bounded runs also fail,
+the options are more layers, a larger board, or manual routing of the power stage
+with autorouting only for the analog blocks.
+
 ## 7. What PCB-04 still owes
 
 1. Routing, which is the bulk of the work and cannot start on the 150 unsettled
