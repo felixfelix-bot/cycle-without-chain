@@ -43,8 +43,50 @@ jobs:
       - name: Install test dependencies
         run: pip install --no-cache-dir pytest pyyaml
 
+      # ngspice is required, not optional. Two hardware suites raise
+      # RuntimeError rather than skipping when it is missing, so a runner
+      # without it fails rather than reporting a green lane it never graded.
+      # Deliberately NOT `|| true`: a missing simulator must be loud.
+      - name: Install ngspice
+        run: |
+          set -e
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ngspice
+          ngspice --version | head -1
+
       - name: Gate suite self-tests
         run: python3 -m pytest tests/gates -q
+
+      # The next three suites existed and passed locally but no workflow ran
+      # them, so a regression in the schematic, the analysis models or the
+      # SPICE decks would have merged green. They are separate steps so the
+      # failing suite is named in the summary rather than inferred from one
+      # composite exit code.
+      #
+      # PYTHONPATH is set per suite because both trees use flat imports
+      # (`import model`, `import verify_exports`) rather than packages, so a
+      # single root-level invocation cannot collect them.
+      - name: Hardware suite (schematic, netlist, calculators, SPICE)
+        env:
+          PYTHONPATH: hardware/powerboard-reva
+        run: python3 -m pytest hardware/powerboard-reva/tests -q
+
+      - name: Analysis suite (closed-form budgets and corner sweeps)
+        env:
+          PYTHONPATH: .
+        run: |
+          set -e
+          # The analysis tree has several modules named `model.py` and
+          # `test_model.py` at sibling paths, so a single `pytest analysis`
+          # aborts on duplicate basenames. Each directory is collected on its
+          # own instead; a bare root invocation is not "more thorough", it just
+          # fails collection.
+          for d in analysis/*/; do
+            if ls "$d"test_*.py >/dev/null 2>&1 || ls "$d"tests/*.py >/dev/null 2>&1; then
+              echo "--- $d"
+              PYTHONPATH="$d" python3 -m pytest "$d" -q
+            fi
+          done
 
       - name: Run the release gates
         env:
