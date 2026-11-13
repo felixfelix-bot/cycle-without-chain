@@ -317,16 +317,72 @@ wording — *"Track has unconnected end"* — pointed at a missing interconnect
 rather than a missing track, which is what identified it. Carrying vias took
 unconnected from 499 to 418 and dangling from 199 to 0.
 
-### What the remaining 418 are
+### What the remaining 418 actually are — corrected
 
-They are the **inter-block connections**, exactly as predicted: U504's pad in one
-block and the `DRIVE_EN` track ending in another; U17's pad and a
-`BRAKE_DUMP_PWM` stub. Densest offenders are R416, U2, Q12, C412, U17 — all
-parts whose nets span block boundaries.
+The first version of this section said all 418 were inter-block gaps. **That was
+wrong**, and the correction matters because it changes what work is left.
 
-This is not a defect in the merge; it is the merge doing what it was built to do.
-Joining those nets is a separate step: either route the inter-block nets
-explicitly on the merged board, or route overlapping pairs of blocks.
+Splitting the 418 by whether their nets are entirely inside settled blocks:
+
+| Category | Count |
+|---|---|
+| Involve a net that touches an excluded block | **375** |
+| Entirely within settled nets (real inter-block gaps) | **43** |
+
+So the bulk is the deliberately-excluded power-stage circuitry, not merge gaps.
+Named evidence for the first row: `PRE_SOURCE` (6 refs, **6 on unsettled
+sheets**), `Q403_GATE` (3 refs, 3 unsettled), `CTRL3V3` (10 refs, 10 unsettled).
+Those nets were never in scope for autorouting, so their being unconnected is
+expected rather than a failure of the merge.
+
+The **43** real gaps are exactly what they should be — signals that necessarily
+cross block boundaries:
+
+- **SPI to the drivers:** `DRV_MOSI`, `DRV_SCK`, `DRV_MISO`
+- **Gate drives:** `GEN_INHA/INHB/INHC`, `GEN_INLA/INLB/INLC`, and the six HUB
+  equivalents (12 nets at 2 gaps each)
+- **Sensing:** `GEN_SOB/SOC`, `HUB_SOA/SOB/SOC_ADC`, `OC_HIGH_REF`, `OC_LOW_REF`
+- **Inputs:** `GEN_HALL_1..3`, `HUB_HALL_1..3`, `ENC_A`, `ENC_B`,
+  `LEFT_FSR_ADC`, `RIGHT_FSR_ADC`
+- **Control:** `OC_OK`, `MCU_ARM`, `ARM_CLEAN`, `RESET_REQUEST`, `WDI`,
+  `TIMER_BREAK_OK`, `FSR_SAMPLE_ENABLE`, `BRAKE_DUMP_PWM`
+
+That is a finite, named list of 43, which is a tractable target: route them
+explicitly on the merged board, or route overlapping block pairs that contain
+both ends.
+
+### Attempted: routing the 43 separately. It made things worse.
+
+The 40 nets that exist as pads (43 minus 3 that are net-name variants) were
+extracted into a sub-board with every non-target pad cleared, leaving 141 target
+pads. FreeRouting converged well on that problem -- **score 973.60, 2 unrouted,
+0 violations** -- and produced 820 segments. Merging them onto the routed board
+gave 3528 items total, 0 unmatched nets.
+
+DRC then got **worse**:
+
+| Metric | Before | After |
+|---|---|---|
+| unconnected | 418 | **368** (better) |
+| clearance | 27 | **365** |
+| shorting items | 0 | **199** |
+| tracks crossing | 0 | **180** |
+| hole-to-hole | 0 | 21 |
+
+**Why: the inter-block pass was routed blind to the existing copper.** The
+prepare step cleared non-target *pads* so the router would not try to connect
+them, but the router had no knowledge of the 2708 tracks already on the board, so
+it drew new tracks straight across them. Named example: a 42.8 mm `GEN_INLC` track
+on In1.Cu shorting against both `RESET_INV` and `MCU_VDDA`.
+
+The router's own "0 violations" is therefore not evidence of a clean result -- it
+was clean *in a world where the other 2708 tracks did not exist*. A sub-board
+approach only works if the existing copper is represented in it, which means
+importing the merged tracks into the sub-board before routing, or routing on the
+merged board itself.
+
+`powerboard-reva-routed-v2.kicad_pcb` is therefore an **intermediate artifact, not
+an improvement on v1**. v1 remains the better board.
 
 Also still absent by intent: the **GEN and HUB power stages** are not autorouted.
 Their loop geometry is what the OC-03 envelope assumes.

@@ -24,16 +24,27 @@ OUT = os.path.join(HERE, "powerboard-reva-routed.kicad_pcb")
 
 
 def main() -> int:
+    """Usage: merge_tracks.py [in.json] [out.kicad_pcb] [base.kicad_pcb]
+
+    The base matters: merging onto the unrouted master is right for the first
+    pass, but merging inter-block tracks must land on the ALREADY ROUTED board or
+    the first pass's tracks are discarded. It defaults to the unrouted master, so
+    every existing caller keeps its meaning and the routed-base case must ask for
+    it explicitly.
+    """
     tracks_path = sys.argv[1] if len(sys.argv) > 1 else TRACKS
     out_path = sys.argv[2] if len(sys.argv) > 2 else OUT
+    base_path = sys.argv[3] if len(sys.argv) > 3 else MASTER
     if not os.path.exists(tracks_path):
         print("FAIL: %s missing; run route_board_blocks.py first" % tracks_path)
         return 1
     tracks = json.load(open(tracks_path, encoding="utf-8"))
     print("segments to merge: %d" % len(tracks))
 
-    board = pcbnew.LoadBoard(MASTER)
+    board = pcbnew.LoadBoard(base_path)
     before = len(list(board.GetTracks()))
+    print("base: %s (%d existing tracks)"
+          % (os.path.basename(base_path), before))
 
     # NET IDENTITY MUST BE BY NAME, NOT CODE.
     #
