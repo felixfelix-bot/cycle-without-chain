@@ -312,12 +312,21 @@ section quotes the conservative figure rather than the flattering one.
 
 ### 2.4 What is still open about `L501`
 
-- **The footprint is still blank, and that is now a measured statement, not a
-  deferral.** TDK's land is A 2.95 / B 6.10 / C 4.50 mm. The nearest stock KiCad
-  land, `Inductor_SMD:L_Coilcraft_XAL1010-XXX`, is **2.38 mm wide on a 6.65 mm
-  pitch** — it does not match, and would be a wrong pad geometry that only shows
-  up at assembly. A custom land must be drawn from the vendor drawing. The field
-  is left empty rather than filled with a plausible-looking wrong footprint.
+- **The footprint is drawn, and the drawing is now the record.** TDK's land is
+  A 2.95 / B 6.10 / C 4.50 mm against a 12.0 mm envelope. Those are consistent in
+  exactly one reading — `(12.0 - 6.10) / 2 = 2.95 = A` — so the envelope is the
+  pad outer-edge span and B is the **inner gap**, not a centre-to-centre pitch.
+  Pads are 2.95 × 4.50 mm at x = ±4.525, giving outer edges at ±6.0 and inner
+  edges at ±3.05. The land lives in-repo at
+  `powerboard.pretty/L_TDK_SPM10065VC-D.kicad_mod` and is wired as
+  `powerboard:L_TDK_SPM10065VC-D` through the project `fp-lib-table`, so it
+  travels with the repo instead of depending on one machine's KiCad install.
+  No stock KiCad land matches: `L_Coilcraft_XAL1010-XXX` is 2.38 mm wide on a
+  6.65 mm pitch, and a test asserts that negative control still fails.
+- **The vendor's 4.2 ±0.2 mm dimension is NOT modelled.** Which feature it
+  dimensions is ambiguous from the datasheet's text layer, and inventing a pad
+  height from it is the exact "plausible-looking wrong footprint" this gate
+  existed to prevent. It stays open below.
 - **"AEC-Q200" is in the value string but the part is not automotive-qualified
   for this application.** It is an automotive-grade part used in a non-automotive
   design; the string records the vendor grade, and no qualification claim is made.
