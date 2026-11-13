@@ -9,8 +9,15 @@ rather than prose.
 
 import json
 import unittest
+from pathlib import Path
 
 import oc_envelope as oce
+
+# Resolve artefacts next to the module rather than against the process CWD. The
+# bare filename form only worked when the suite was launched from
+# hardware/powerboard-reva; CI runs it from the repo root and the file was not
+# found. A test that passes only from one directory is a latent false-green.
+BOARD = Path(__file__).resolve().parents[1]
 
 
 class TestReproducesDocumentedScreen(unittest.TestCase):
@@ -115,7 +122,7 @@ class TestNoSafetyClaim(unittest.TestCase):
 class TestResultsArtifact(unittest.TestCase):
     def test_results_file_matches_module(self):
         r = oce.evaluate()
-        with open("oc-envelope-results.json", encoding="utf-8") as fh:
+        with open(BOARD / "oc-envelope-results.json", encoding="utf-8") as fh:
             saved = json.load(fh)
         self.assertAlmostEqual(saved["envelope"]["low"]["earliest_a"],
                                r["envelope"]["low"]["earliest_a"], places=9)
