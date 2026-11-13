@@ -31,6 +31,21 @@ LTO was chosen over LFP for cycle life, cold-charge tolerance and safety, at a
 higher cost per Wh. That trade is the operator's, and this record does not claim
 LTO is cheaper, lighter or better on every axis.
 
+> **OPEN DISCREPANCY — cell charge ceiling.** This document uses **2.8 V/cell**,
+> giving a 20s maximum of **56.0 V**. A later analysis
+> (`analysis/storage/lto_bus.py`, PR #31) adopts **2.7 V/cell**, giving
+> **54.0 V**, on the grounds that 2.7 V is Toshiba's family-wide figure and that
+> no 2.9 Ah cell datasheet states a cell-level ceiling at all. The 2.8 V figure
+> here traces to a **reseller page** (`lifepo4cells.eu`), not to Toshiba.
+>
+> Neither figure is adopted over the other yet: this is a sourcing question an
+> engineer should settle by reading the Toshiba catalogue, not by picking the
+> more convenient number. 54.0 V is the safer choice for cell life and is used
+> in the new analysis; 56.0 V remains this document's figure until reconciled.
+> **What is NOT in dispute: 58.4 V is unreachable by a 20s LTO pack under either
+> reading** (it would need 2.92 V/cell), so the legacy envelope is wrong either
+> way.
+
 **D1 — Preferred LTO series count to evaluate first: 20s.** Using Toshiba SCiB
 2.9 Ah high-power cells at 2.4 V nominal, 2.8 V maximum and 1.8 V minimum
 (catalogue values, not a qualified pack specification):
