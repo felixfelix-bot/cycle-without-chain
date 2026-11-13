@@ -791,9 +791,48 @@ already exists must be visible to whatever adds more.**
 The higher segment count in run B (7032 vs 2718) is the cost of routing around
 copper instead of through it, and it is the correct trade.
 
-**What remains:** 389 unconnected is still above v1's 418 only because more of the
-board is now covered; the in-scope inter-block figure is 10. The 27 clearance errors
-are all on U504 and are a footprint defect, not a routing one.
+**What remains is now classified, not just counted.**
+
+389 unconnected items involve **94 distinct pads** across **62 nets**. Sorted by
+whether the net's *remote* pads sit in one of the `reserved` blocks -- the power
+stages that are deliberately not autorouted, because their copper geometry is what
+the OC-03 envelope and the gate-resistor sizing assume:
+
+```
+unconnected nets whose remote pads are in a RESERVED block   34
+unconnected nets with no reserved partner -- real work       28
+```
+
+The 34 are **correct by design**. They are the generator and hub bridge phases,
+their gate-drive lines (`HUB_GHA/B/C`, `HUB_GLA/B/C`), the shunt sense paths, and
+the precharge chain. Those must be hand-laid; an autorouter is the wrong instrument
+for them, which is why they were excluded in the first place.
+
+The 28 that remain are a real, finite list:
+
+```
+ANALOG_OK        DRIVE12       DRIVE_EN        DRIVE_FAULT      DRIVE_NQ
+FAULT_CHAIN_SENSE  GEN_INLA    GEN_SOA_ADC     GEN_SOB_ADC      GEN_SOC_ADC
+GEN_nSCS         HUB_CPH       HUB_CPL         HUB_DVDD         HUB_ENABLE
+HUB_INHC         HUB_INLA      HUB_SOA         HUB_SOB          HUB_SOC
+HUB_VCP          HUB_VGLS      HUB_nFAULT      HUB_nSCS         LEFT_SWITCH_ADC
+REF2V5           RIGHT_SWITCH_ADC              SINK12
+```
+
+`U2`, the HUB DRV8353, accounts for the largest share: 57 pads, 37 distinct nets, and
+only 17 of those nets have any copper. Its gate-drive outputs correctly have none
+(the reserved bridge owns them), but its internal rails (`HUB_CPH`, `HUB_CPL`,
+`HUB_DVDD`, `HUB_VCP`, `HUB_VGLS`) are local decoupling that the block pass did not
+join.
+
+**A correction to the clearance attribution.** The section above says the 27
+clearance errors are "a footprint defect on U504". They were not. KiCad requires the
+design-rules file to match the BOARD filename -- `powerboard-reva-board.kicad_pcb`
+needs `powerboard-reva-board.kicad_dru` -- and only `powerboard-reva.kicad_dru`
+existed, so the 0.15 mm pad-pitch rule was never loaded on any DRC run of the routed
+board. Every one of the 27 read `actual 0.1500 mm` against `clearance 0.2000 mm`:
+exactly the value the rule permits. Copying the rules file to the matching name drops
+clearance **27 -> 0**.
 
 **Clearance is unchanged at 27 and every one of them is on U504** -- my own latch
 footprint (VSSOP-8, 0.5 mm pitch, 0.35 mm pads on a 0.5 mm pitch land). It was
