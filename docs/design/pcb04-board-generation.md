@@ -515,12 +515,39 @@ them.** The start pad is reachable to everywhere except the far pad, which means
 the two pads sit in two different connected regions of free space -- separated by
 a wall the route cannot cross at any clearance tried.
 
-What that wall is has not been identified. Candidates, in order of likelihood:
-the two-pad nets whose second pad is on the *other* driver (GEN_INHA connects U1,
-the GEN DRV8353, to U17, the MCU: pin 32 to pin 40), so a route must traverse the
-whole board through the region the block-routing pass already filled; and the
-existing 2708 tracks form barriers the maze router treats as impassable at 0.10 mm
-resolution.
+The wall has since been identified by flooding both sides separately and dilating
+one region until it touched the other (`diagnose_wall.py`):
+
+```
+region A (U1 pin 32):    1478657 cells
+region C (U17 pin 40):      6149 cells
+overlap: 0
+narrowest crossing: 17 cells (1.70 mm) at 123.80, 7.90 mm
+```
+
+The destination is not walled off by routed copper -- it is trapped inside the
+**STM32's own LQFP-100 pin field**. 6,149 cells is about 61 mm^2, the pin field
+around U17, not the board.
+
+The arithmetic explains it exactly:
+
+```
+LQFP-100: 0.3 mm pads on 0.5 mm pitch -> pad-to-pad gap 0.20 mm
+escape clearance 0.05 mm each side    -> corridor 0.20 - 0.10 = 0.10 mm
+grid cell 0.10 mm                     -> the corridor is EXACTLY ONE CELL
+```
+
+A one-cell corridor is not a corridor a flood fill or A* will reliably follow: any
+rounding in the grid, and any cell whose centre falls marginally inside the
+clearance disc, closes it. The pads are free; the gaps between them are a single
+cell wide and the discretisation destroys them.
+
+So the failure is **grid resolution against a 0.5 mm pitch**, which is a different
+problem from clearance (fixed) and different from routing order (fixed). Reaching
+these pins needs a proper **fan-out**: short escape stubs placed by pitch-aware
+code that knows the pin order, not a cell-by-cell search. That is what the
+autorouter's fanout pass exists to do, and it is also what hand routing in KiCad
+does naturally.
 
 **This is where the work stops.** Six router bugs were found and fixed, a
 pitch-specific design rule was added and verified, and the remaining obstacle is a
