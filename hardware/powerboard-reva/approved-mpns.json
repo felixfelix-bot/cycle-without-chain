@@ -2,12 +2,12 @@
  "generated_from": "review-bom.csv",
  "note": "Derived from the schematic BOM. 'datasheet' means the part number was read from the named datasheet; 'series' means the MPN follows the manufacturer's published series naming and has NOT been individually audited for this design.",
  "counts": {
-  "references": 387,
-  "resolved": 387,
+  "references": 397,
+  "resolved": 397,
   "unresolved": 0,
   "by_kind": {
-   "datasheet": 59,
-   "series": 328
+   "datasheet": 64,
+   "series": 333
   }
  },
  "unresolved": [],
@@ -1004,6 +1004,30 @@
    "value": "S1J-E3/61T 600V 1A",
    "sheet": "ctrl-supply"
   },
+  "D520": {
+   "mpn": "SS14-E3/61T",
+   "footprint": "Diode_SMD:D_SMA",
+   "source": "Vishay SS14 40 V 1 A Schottky, 3V3 logic OR only",
+   "kind": "datasheet",
+   "value": "SS14 40V 1A OVP trip wired-OR",
+   "sheet": "rail-passives"
+  },
+  "D521": {
+   "mpn": "SS14-E3/61T",
+   "footprint": "Diode_SMD:D_SMA",
+   "source": "Vishay SS14 40 V 1 A Schottky, 3V3 logic OR only",
+   "kind": "datasheet",
+   "value": "SS14 40V 1A PGOOD wired-OR",
+   "sheet": "rail-passives"
+  },
+  "D522": {
+   "mpn": "SS14-E3/61T",
+   "footprint": "Diode_SMD:D_SMA",
+   "source": "Vishay SS14 40 V 1 A Schottky, 3V3 logic OR only",
+   "kind": "datasheet",
+   "value": "SS14 40V 1A manual reset wired-OR",
+   "sheet": "rail-passives"
+  },
   "F1": {
    "mpn": "KLKD020.T",
    "footprint": "Fuse:Fuseholder_Littelfuse_100_series_5x20mm",
@@ -1107,6 +1131,14 @@
    "kind": "series",
    "value": "RIGHT_FSR_34-00018_EXTERNAL",
    "sheet": "fsr-right"
+  },
+  "J48": {
+   "mpn": "Conn_01x02",
+   "footprint": "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical",
+   "source": "2-pin header, manual reset switch to PGND",
+   "kind": "series",
+   "value": "Conn_01x02 reset header, SW to PGND",
+   "sheet": "rail-passives"
   },
   "J5": {
    "mpn": "Conn_01x02",
@@ -2396,6 +2428,38 @@
    "value": "118k 0.1% DRIVE12 OVP lower leg",
    "sheet": "rail-passives"
   },
+  "R525": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "100k 1% DRIVE latch D tied low",
+   "sheet": "rail-passives"
+  },
+  "R526": {
+   "mpn": "CRCW080547K0FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "47k 1% DRIVE_FAULT pullup",
+   "sheet": "rail-passives"
+  },
+  "R527": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "100k 1% manual reset series (SW to PGND)",
+   "sheet": "rail-passives"
+  },
+  "R528": {
+   "mpn": "CRCW080510K0FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "10k 1% DRIVE_NQ load, keeps Q_N defined",
+   "sheet": "rail-passives"
+  },
   "R53": {
    "mpn": "CRCW080510K0FKEA",
    "footprint": "Resistor_SMD:R_0805_2012Metric",
@@ -3066,6 +3130,22 @@
    "source": "TI SBOS589D",
    "kind": "datasheet",
    "value": "TLV1701AIDBVR",
+   "sheet": "rail-partition"
+  },
+  "U504": {
+   "mpn": "SN74LVC1G74DCUR",
+   "footprint": "Package_SO:VSSOP-8_2.3x2mm_P0.5mm",
+   "source": "TI SCES470F",
+   "kind": "datasheet",
+   "value": "SN74LVC1G74DCUR",
+   "sheet": "rail-partition"
+  },
+  "U505": {
+   "mpn": "SN74LVC1G08DBVR",
+   "footprint": "Package_TO_SOT_SMD:SOT-23-5",
+   "source": "TI SN74LVC1G08",
+   "kind": "datasheet",
+   "value": "SN74LVC1G08DBVR",
    "sheet": "rail-partition"
   },
   "U510": {

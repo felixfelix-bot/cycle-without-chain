@@ -400,6 +400,23 @@ MPN_PREFIX: list[tuple[str, tuple[str, str, str, str]]] = [
     # Named parts whose value string carries a qualifier
     ("S1J-E3/61T 600V 1A", ("S1J-E3/61T", "Diode_SMD:D_SMA",
                             "Vishay S1J 600 V 1 A", "series")),
+    # Three SS14 wired-OR diodes landed with the reset/PGOOD/OVP trip rework and
+    # were in the netlist without an approved MPN, so the BOM gate failed on a
+    # clean clone (caught by verifying there rather than in the working tree).
+    # SS14 is 1 A 40 V SMA; the 40 V rating is adequate for a 3V3 logic OR and
+    # is NOT used anywhere on the 56 V bus.
+    ("SS14 40V 1A OVP trip wired-OR", ("SS14-E3/61T", "Diode_SMD:D_SMA",
+                                       "Vishay SS14 40 V 1 A Schottky, 3V3 logic OR only",
+                                       "datasheet")),
+    ("SS14 40V 1A PGOOD wired-OR", ("SS14-E3/61T", "Diode_SMD:D_SMA",
+                                    "Vishay SS14 40 V 1 A Schottky, 3V3 logic OR only",
+                                    "datasheet")),
+    ("SS14 40V 1A manual reset wired-OR", ("SS14-E3/61T", "Diode_SMD:D_SMA",
+                                           "Vishay SS14 40 V 1 A Schottky, 3V3 logic OR only",
+                                           "datasheet")),
+    ("Conn_01x02 reset header, SW to PGND", ("Conn_01x02", "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical",
+                                             "2-pin header, manual reset switch to PGND",
+                                             "series")),
     ("68u MSS1246T-683MLC 20%", ("MSS1246T-683MLC", "Inductor_SMD:L_Coilcraft_MSS1246T-XXX",
                                  "Coilcraft MSS1246T 68 uH (L500, RAIL-03 open)",
                                  "series")),
