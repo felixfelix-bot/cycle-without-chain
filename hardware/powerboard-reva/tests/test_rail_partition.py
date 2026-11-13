@@ -16,11 +16,21 @@ P=Path(__file__).resolve().parents[1]
 EXPECTED={'U3':['DC_LINK','PGND','SINK12'],
           'U501':['PGND','DC_LINK','DRIVE_UVLO','DRIVE_RON','DRIVE_FB','DRIVE_PG','DRIVE_BST','DRIVE_SW','PGND'],
           'U502':['LOGIC3V3_EXT','MCU3V3_EN','DRIVE12','PGND','MCU_SW','MCU_BST'],
-          'U503':['REF2V5','PGND','DRIVE_OV_SENSE','DRIVE_UVLO','SINK12'],
+          'U503':['REF2V5','PGND','DRIVE_OV_SENSE','DRIVE_OV_TRIP','SINK12'],
+          # RAIL-16 latch: CLK=DRIVE_EN, D tied low, Q_N loaded, Q gates the buck,
+          # CLR_N is the wired-OR fault node, PRE_N tied high, VCC from SAFETY3V3.
+          'U504':['DRIVE_EN','DRIVE_LATCH_D','DRIVE_NQ','PGND','DRIVE_EN_GATED',
+                  'DRIVE_FAULT','SAFETY3V3','SAFETY3V3'],
+          # RAIL-19: DRIVE_PG finally has a consumer.
+          'U505':['DRIVE_EN_GATED','DRIVE_PG','PGND','DRIVE_FAULT','SAFETY3V3'],
           'L501':['DRIVE_SW','DRIVE12'],'L502':['MCU_SW','LOGIC3V3_EXT'],
           'R519':['MAIN_PROVEN_IN','PGND'],'R402':['MAIN_EN','PGND'],'R412':['PRE_EN','PGND'],
           'R521':['SINK12','DRIVE_PG'],'R523':['DRIVE12','DRIVE_OV_SENSE'],
-          'R524':['DRIVE_OV_SENSE','PGND'],'C523':['DRIVE_OV_SENSE','PGND']}
+          'R524':['DRIVE_OV_SENSE','PGND'],'C523':['DRIVE_OV_SENSE','PGND'],
+          'R514':['DRIVE_EN_GATED','DRIVE_UVLO'],
+          'R525':['DRIVE_LATCH_D','PGND'],'R526':['SAFETY3V3','DRIVE_FAULT'],
+          'D520':['DRIVE_OV_TRIP','DRIVE_FAULT'],'D521':['DRIVE_PG','DRIVE_FAULT'],
+          'D522':['DRIVE_RESET_SW','DRIVE_FAULT'],'J48':['DRIVE_RESET_SW','PGND']}
 
 ENDPOINTS=[('U1','3','DRIVE12'),('U2','3','DRIVE12'),('U4','2','SINK12'),('U6','3','SINK12'),
            ('U10','1','SINK12'),('U500','6','CTRL_PG'),('U510','1','CTRL_PG'),('U510','2','MAIN_PROVEN_IN')]
@@ -85,3 +95,53 @@ class RailTests(unittest.TestCase):
         before=(P/'exports/ctrl-supply.xml').read_bytes()
         corrupt('U3','3','SINK12')
         self.assertEqual(before,(P/'exports/ctrl-supply.xml').read_bytes())
+
+    # --- RAIL-16 / RAIL-19: the DRIVE12 fault latch ------------------------
+    # The OVP comparator used to pull DRIVE_UVLO directly. That is level
+    # protection, not a latch: with a permanently open R512 the rail hiccups
+    # between ~0 and 18 V forever instead of staying off. A D-flip-flop whose
+    # clear input is held by the fault makes the trip persistent, and gives
+    # DRIVE_PG (previously a pull-up with no consumer) a real function.
+
+    def test_latch_exists_and_is_powered_from_the_always_on_rail(self):
+        n = validate(load())
+        # U504 is the fault latch. It must run from SAFETY3V3, never from
+        # DRIVE12: a latch powered by the rail it is protecting loses state at
+        # exactly the moment it is needed.
+        vcc = [net for (ref, pin), net in n.items() if ref == 'U504' and pin == '8']
+        if vcc != ['SAFETY3V3']:
+            raise ValueError(f'latch VCC is {vcc}, not SAFETY3V3')
+        gnd = [net for (ref, pin), net in n.items() if ref == 'U504' and pin == '4']
+        if gnd != ['PGND']:
+            raise ValueError(f'latch GND is {gnd}, not PGND')
+
+    def test_latch_clear_is_driven_by_the_fault_not_by_the_rail(self):
+        n = validate(load())
+        clr = [net for (ref, pin), net in n.items() if ref == 'U504' and pin == '6']
+        if clr != ['DRIVE_FAULT']:
+            raise ValueError(f'latch CLR_N is {clr}, not the DRIVE_FAULT node')
+
+    def test_ovp_no_longer_drives_drive_uvlo_directly(self):
+        # The whole point: U503's output must reach the latch, not the buck.
+        n = validate(load())
+        out = [net for (ref, pin), net in n.items() if ref == 'U503' and pin == '4']
+        if out != ['DRIVE_OV_TRIP']:
+            raise ValueError(f'U503 output is {out}; it must be DRIVE_OV_TRIP, not DRIVE_UVLO')
+
+    def test_latch_output_reaches_the_buck_enable(self):
+        n = validate(load())
+        q = [net for (ref, pin), net in n.items() if ref == 'U504' and pin == '5']
+        if q != ['DRIVE_EN_GATED']:
+            raise ValueError(f'latch Q is {q}, not DRIVE_EN_GATED')
+        uvlo = [net for (ref, pin), net in n.items() if ref == 'U501' and pin == '3']
+        if uvlo != ['DRIVE_UVLO']:
+            raise ValueError(f'U501 EN/UVLO is {uvlo}')
+
+    def test_drive_pg_has_a_consumer(self):
+        # RAIL-19: a status net nothing reads is dead weight. PGOOD must gate
+        # the AND that produces DRIVE_EN_GATED.
+        n = validate(load())
+        consumers = {ref for (ref, pin), net in n.items() if net == 'DRIVE_PG' and ref != 'R521'}
+        if not consumers:
+            raise ValueError('DRIVE_PG still has no consumer besides its own pull-up')
+
