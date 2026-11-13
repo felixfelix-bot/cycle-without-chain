@@ -1,0 +1,36 @@
+{
+ "envelope": {
+  "low": {
+   "earliest_a": 16.92638706839777,
+   "latest_a": 23.084127026402157,
+   "spread_a": 6.157739958004388,
+   "corners": 128
+  },
+  "high": {
+   "earliest_a": -23.084127026402157,
+   "latest_a": -16.926387068397776,
+   "spread_a": 6.157739958004381,
+   "corners": 128
+  }
+ },
+ "hysteresis": {
+  "hysteresis_v": 0.0012,
+  "band_a": 0.029999999999999995,
+  "band_nominal_a": 0.029999999999999995,
+  "band_min_a": 0.029126213592233004,
+  "band_max_a": 0.030927835051546393,
+  "note": "This is the current separation a latched comparator needs to release if hysteresis is the only mechanism. The binding figure is band_min_a, not the nominal one. It must be compared against measured noise and CSA settling residue, neither of which is characterised here."
+ },
+ "commissioning_cap_a": 10.0,
+ "cap_below_earliest_trip": true,
+ "cap_margin_a": 6.926387068397769,
+ "unbounded_terms": [
+  "CSA midpoint bias has no specified tolerance",
+  "shunt and offset thermal drift not characterised over range",
+  "trip latency between threshold crossing and latch not budgeted",
+  "low-side shunt blind during high-side conduction (register OC-04)",
+  "common reference fault not covered by a rail-tolerance term"
+ ],
+ "safety_claim": false,
+ "safety_claim_reason": "The static envelope is computable but a guaranteed trip point is not: five terms above are unbounded, so no current can be claimed safe to reach without damage. Register OC-03 stays open until midpoint error is bounded and thermal drift is characterised."
+}
