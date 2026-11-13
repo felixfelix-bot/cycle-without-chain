@@ -1,7 +1,7 @@
 (export (version "E")
   (design
     (source "/home/c08r4d0r/worktrees/cycle-ovp-latch/hardware/powerboard-reva/powerboard-reva.kicad_sch")
-    (date "2026-11-13T17:07:00+0100")
+    (date "2026-11-13T17:14:15+0100")
     (tool "Eeschema 9.0.9-9.0.9~ubuntu24.04.1")
     (sheet (number "1") (name "/") (tstamps "/")
       (title_block
@@ -5948,8 +5948,9 @@
       (tstamps "c26bb12b-69e1-5bf2-a96a-2d6fc8efa7e0"))
     (comp (ref "R525")
       (value "100k 1% DRIVE latch D tied low")
+      (footprint "Resistor_SMD:R_0805_2012Metric")
       (fields
-        (field (name "Footprint"))
+        (field (name "Footprint") "Resistor_SMD:R_0805_2012Metric")
         (field (name "Datasheet"))
         (field (name "Description")))
       (libsource (lib "Device") (part "R") (description "Resistor"))
@@ -5961,8 +5962,9 @@
       (tstamps "78ba64f2-780a-58fc-ba14-f162747431c9"))
     (comp (ref "R526")
       (value "47k 1% DRIVE_FAULT pullup")
+      (footprint "Resistor_SMD:R_0805_2012Metric")
       (fields
-        (field (name "Footprint"))
+        (field (name "Footprint") "Resistor_SMD:R_0805_2012Metric")
         (field (name "Datasheet"))
         (field (name "Description")))
       (libsource (lib "Device") (part "R") (description "Resistor"))
@@ -5974,8 +5976,9 @@
       (tstamps "f440c122-ed62-514e-bcd4-03e8d47f1250"))
     (comp (ref "R527")
       (value "100k 1% manual reset series (SW to PGND)")
+      (footprint "Resistor_SMD:R_0805_2012Metric")
       (fields
-        (field (name "Footprint"))
+        (field (name "Footprint") "Resistor_SMD:R_0805_2012Metric")
         (field (name "Datasheet"))
         (field (name "Description")))
       (libsource (lib "Device") (part "R") (description "Resistor"))
@@ -5987,8 +5990,9 @@
       (tstamps "da69f4f9-2659-55bb-a6a5-7a515a6d8962"))
     (comp (ref "R528")
       (value "10k 1% DRIVE_NQ load, keeps Q_N defined")
+      (footprint "Resistor_SMD:R_0805_2012Metric")
       (fields
-        (field (name "Footprint"))
+        (field (name "Footprint") "Resistor_SMD:R_0805_2012Metric")
         (field (name "Datasheet"))
         (field (name "Description")))
       (libsource (lib "Device") (part "R") (description "Resistor"))

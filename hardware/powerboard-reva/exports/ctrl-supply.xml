@@ -2,7 +2,7 @@
 <export version="E">
   <design>
     <source>/home/c08r4d0r/worktrees/cycle-ovp-latch/hardware/powerboard-reva/powerboard-reva.kicad_sch</source>
-    <date>2026-11-13T17:07:13+0100</date>
+    <date>2026-11-13T17:14:26+0100</date>
     <tool>Eeschema 9.0.9-9.0.9~ubuntu24.04.1</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -6800,8 +6800,9 @@
     </comp>
     <comp ref="R525">
       <value>100k 1% DRIVE latch D tied low</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -6815,8 +6816,9 @@
     </comp>
     <comp ref="R526">
       <value>47k 1% DRIVE_FAULT pullup</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -6830,8 +6832,9 @@
     </comp>
     <comp ref="R527">
       <value>100k 1% manual reset series (SW to PGND)</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -6845,8 +6848,9 @@
     </comp>
     <comp ref="R528">
       <value>10k 1% DRIVE_NQ load, keeps Q_N defined</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <fields>
-        <field name="Footprint"/>
+        <field name="Footprint">Resistor_SMD:R_0805_2012Metric</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>

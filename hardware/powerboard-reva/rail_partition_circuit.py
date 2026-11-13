@@ -179,19 +179,19 @@ def populate(g):
         # D tied low: with Q forced 0 on clear, the only way Q can be 1 again is a
         # clock edge while DRIVE_FAULT is released. D=1 would let a spurious clock
         # re-enable the rail, which is the failure this latch exists to prevent.
-        ('R525', '100k 1% DRIVE latch D tied low', 'DRIVE_LATCH_D', 'PGND', ''),
+        ('R525', '100k 1% DRIVE latch D tied low', 'DRIVE_LATCH_D', 'PGND', 'Resistor_SMD:R_0805_2012Metric'),
         # CLR_N node: DRIVE_FAULT is active-low, so it needs a pull-up to the
         # always-on rail. 47k matches R521's DRIVE_PG pull-up style and keeps the
         # total pull-up current on SINK12 trivial.
-        ('R526', '47k 1% DRIVE_FAULT pullup', 'SAFETY3V3', 'DRIVE_FAULT', ''),
+        ('R526', '47k 1% DRIVE_FAULT pullup', 'SAFETY3V3', 'DRIVE_FAULT', 'Resistor_SMD:R_0805_2012Metric'),
         # Manual reset: a normally-open switch to PGND on the same node. Only a
         # deliberate human action re-enables the drive domain; nothing derived
         # from DRIVE12 can, so the latch cannot re-arm itself by power cycling.
-        ('R527', '100k 1% manual reset series (SW to PGND)', 'DRIVE_FAULT', 'DRIVE_RESET_SW', ''),
+        ('R527', '100k 1% manual reset series (SW to PGND)', 'DRIVE_FAULT', 'DRIVE_RESET_SW', 'Resistor_SMD:R_0805_2012Metric'),
         # Q_N is the latch's complement. It is driven, not floating, so it needs a
         # named net rather than an explicit-NC marker (which would assert the pin
         # is deliberately unused -- it is not).
-        ('R528', '10k 1% DRIVE_NQ load, keeps Q_N defined', 'DRIVE_NQ', 'PGND', ''),
+        ('R528', '10k 1% DRIVE_NQ load, keeps Q_N defined', 'DRIVE_NQ', 'PGND', 'Resistor_SMD:R_0805_2012Metric'),
         # --- the DRIVE_FAULT wired-OR ----------------------------------------
         # DRIVE_FAULT must go low if ANY of three things happens: OVP trip,
         # PGOOD-low, or a manual reset. Diodes make that a wired-OR without a

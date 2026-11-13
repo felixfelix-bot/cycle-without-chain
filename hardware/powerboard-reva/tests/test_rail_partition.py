@@ -145,3 +145,18 @@ class RailTests(unittest.TestCase):
         if not consumers:
             raise ValueError('DRIVE_PG still has no consumer besides its own pull-up')
 
+    def test_every_rail_part_has_a_footprint(self):
+        """A part with no footprint cannot be ordered or placed.
+
+        The latch added U504, U505, R525-R528, D520-D522 and J48. Four of the
+        resistors were committed with an empty footprint field, and nothing
+        failed: check_bom.py grades approved-mpns.json rather than the generated
+        CSV, so a blank land pattern is invisible to it. This asserts on the BOM
+        that actually gets ordered.
+        """
+        board = Path(__file__).resolve().parents[1]
+        rows = [r for r in (board / "review-bom.csv").read_text(encoding="utf-8").splitlines() if r.strip()]
+        rail = [r for r in rows if r.split(",")[-1].strip() in ("rail-partition", "rail-passives")]
+        self.assertTrue(rail, "no rail-partition/rail-passives rows found in the BOM")
+        blank = [r.split(",")[0] for r in rail if not r.split(",")[2].strip()]
+        self.assertEqual(blank, [], f"rail parts with no footprint: {blank}")

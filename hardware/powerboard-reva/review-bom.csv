@@ -388,10 +388,10 @@ R521,47k 1% DRIVE_PG pullup (PGOOD abs max 14V),Resistor_SMD:R_0805_2012Metric,r
 R523,649k 0.1% DRIVE12 OVP upper leg,Resistor_SMD:R_0805_2012Metric,rail-passives
 R524,118k 0.1% DRIVE12 OVP lower leg,Resistor_SMD:R_0805_2012Metric,rail-passives
 C523,100p 50V C0G OVP sense filter,Capacitor_SMD:C_0805_2012Metric,rail-passives
-R525,100k 1% DRIVE latch D tied low,,rail-passives
-R526,47k 1% DRIVE_FAULT pullup,,rail-passives
-R527,100k 1% manual reset series (SW to PGND),,rail-passives
-R528,"10k 1% DRIVE_NQ load, keeps Q_N defined",,rail-passives
+R525,100k 1% DRIVE latch D tied low,Resistor_SMD:R_0805_2012Metric,rail-passives
+R526,47k 1% DRIVE_FAULT pullup,Resistor_SMD:R_0805_2012Metric,rail-passives
+R527,100k 1% manual reset series (SW to PGND),Resistor_SMD:R_0805_2012Metric,rail-passives
+R528,"10k 1% DRIVE_NQ load, keeps Q_N defined",Resistor_SMD:R_0805_2012Metric,rail-passives
 D520,SS14 40V 1A OVP trip wired-OR,Diode_SMD:D_SMA,rail-passives
 D521,SS14 40V 1A PGOOD wired-OR,Diode_SMD:D_SMA,rail-passives
 D522,SS14 40V 1A manual reset wired-OR,Diode_SMD:D_SMA,rail-passives
