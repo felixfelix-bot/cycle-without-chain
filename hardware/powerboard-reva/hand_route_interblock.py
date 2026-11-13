@@ -120,23 +120,41 @@ class Grid:
                         self.blocked[self.idx(nx, ny)] = 1
 
     def block_pad(self, pad):
+        """Block a RECTANGLE, not a disc.
+
+        THIS WAS THE BUG THAT MADE THE ROUTER USELESS. A DRV8353 pin is
+        0.25 x 0.82 mm -- strongly elongated. Blocking a disc of radius
+        max(w,h)/2 + clearance gives 0.41 + 0.10 = 0.51 mm of blocked radius in
+        EVERY direction, including the narrow one where the pad only occupies
+        0.125 mm. That is four times too much, and in a 0.5 mm-pitch pin field the
+        over-blocked discs of neighbouring pads merge into a continuous wall: the
+        GEN_INHA pad measured exactly 49 reachable cells out of 199087 free, a
+        7x7 pocket, so A* correctly reported "no path" and 34 of 40 nets failed.
+
+        A rectangle with per-axis half-extents + clearance leaves the legitimate
+        gap between adjacent pins open, which is where a real track goes.
+        """
         pos = pad.GetPosition()
         sz = pad.GetSize()
         x = pcbnew.ToMM(pos.x)
         y = pcbnew.ToMM(pos.y)
         w = pcbnew.ToMM(sz.x)
         h = pcbnew.ToMM(sz.y)
-        # Use the HALF-DIAGONAL of the pad plus clearance, not the half of the
-        # longer side. With ~1200 pads on a 160x130 board, block_pad is called
-        # once per pad and each call marks a disc; sizing that disc from
-        # max(w,h)/2 under-states the corner reach, and doing it from the full
-        # diagonal over-states. Neither is the bug that made A* fail everywhere,
-        # but this is the correct radius.
-        r = math.hypot(w, h) / 2.0 + CLEARANCE_PAD
+        # Pad orientation matters for elongated parts. GetOrientation() is in
+        # tenths of a degree; swap the extents when the pad is closer to vertical.
+        try:
+            deg = pad.GetOrientation().AsDegrees()
+        except Exception:                             # noqa: BLE001
+            deg = 0.0
+        if 45.0 <= (deg % 180.0) < 135.0:
+            w, h = h, w
+        rx = w / 2.0 + CLEARANCE_PAD
+        ry = h / 2.0 + CLEARANCE_PAD
         cx, cy = self.mm_to_cell(x, y)
-        rc = int(math.ceil(r / GRID))
-        for dy in range(-rc, rc + 1):
-            for dx in range(-rc, rc + 1):
+        rcx = int(math.ceil(rx / GRID))
+        rcy = int(math.ceil(ry / GRID))
+        for dy in range(-rcy, rcy + 1):
+            for dx in range(-rcx, rcx + 1):
                 nx, ny = cx + dx, cy + dy
                 if 0 <= nx < self.w and 0 <= ny < self.h:
                     self.blocked[self.idx(nx, ny)] = 1
@@ -329,15 +347,32 @@ def main() -> int:
                 # inside a ring of blocked cells, so A* failed on all 40 nets
                 # while 60% of the board was empty.
                 grid.blocked = bytearray(static.blocked)
+                # Free this net's own pads using the SAME geometry that blocked
+                # them: per-axis rectangle extents plus CLEARANCE_PAD.
+                #
+                # This used CLEARANCE (0.30) on a circle of radius max/2 while
+                # block_pad now blocks a rectangle at CLEARANCE_PAD (0.10). A
+                # SMALLER free region cannot clear a LARGER blocked one, so every
+                # pad stayed sealed and A* returned no path -- while a flood fill
+                # on the same map showed 224349 reachable cells, which is what
+                # proved the search and the map disagreed rather than the board
+                # being unroutable.
                 for p in pads:
                     pos = p.GetPosition()
                     cx, cy = grid.mm_to_cell(pcbnew.ToMM(pos.x),
                                              pcbnew.ToMM(pos.y))
                     sz = p.GetSize()
-                    r = max(pcbnew.ToMM(sz.x), pcbnew.ToMM(sz.y)) / 2.0 + CLEARANCE
-                    rc = int(math.ceil(r / GRID))
-                    for dy in range(-rc, rc + 1):
-                        for dx in range(-rc, rc + 1):
+                    pw, ph = pcbnew.ToMM(sz.x), pcbnew.ToMM(sz.y)
+                    try:
+                        deg = p.GetOrientation().AsDegrees()
+                    except Exception:                 # noqa: BLE001
+                        deg = 0.0
+                    if 45.0 <= (deg % 180.0) < 135.0:
+                        pw, ph = ph, pw
+                    rcx = int(math.ceil((pw / 2.0 + CLEARANCE_PAD) / GRID))
+                    rcy = int(math.ceil((ph / 2.0 + CLEARANCE_PAD) / GRID))
+                    for dy in range(-rcy, rcy + 1):
+                        for dx in range(-rcx, rcx + 1):
                             nx, ny = cx + dx, cy + dy
                             if 0 <= nx < grid.w and 0 <= ny < grid.h:
                                 grid.blocked[grid.idx(nx, ny)] = 0

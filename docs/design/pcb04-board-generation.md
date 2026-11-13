@@ -441,10 +441,51 @@ Getting out requires either via-based escape from an inner layer or a clearance
 model that distinguishes "approach a pad I must connect to" from "cross between
 two pads I must not touch" -- and the latter is what a uniform grid cannot express.
 
-So: a uniform-clearance grid router is the wrong instrument for fine-pitch escape
+A uniform-clearance grid router is the wrong instrument for fine-pitch escape
 routing. The autorouter has the machinery for it (fanout passes, per-layer
 clearance rules); it just could not be made to work on this board within the
 attempts recorded above.
+
+### Confirmed by BFS, and the geometry that settles it
+
+Two more bugs were found after that paragraph was first written:
+
+5. **Discs instead of rectangles.** `block_pad` blocked a circle of radius
+   max(w,h)/2 while a DRV8353 pin is 0.25 x 0.82 mm -- so the narrow axis was
+   over-blocked by 4x and adjacent pins' discs merged into a wall. Replaced with
+   per-axis rectangles plus an orientation swap for elongated pads. Reachable
+   cells from the GEN_INHA pad went from **49 to 224349** on a 199087-free-cell
+   board, i.e. from a sealed pocket to the whole board.
+6. **Freeing smaller than blocking.** The per-net pad-freeing still used
+   `CLEARANCE` (0.30) on a circle while `block_pad` used `CLEARANCE_PAD` (0.10) on
+   a rectangle. A smaller free region cannot clear a larger blocked one, so every
+   pad stayed sealed even after bug 5 was fixed.
+
+After both fixes the pads are reachable and the search still reports no path. To
+settle whether that was an algorithm fault, the same map was searched with plain
+**BFS** -- complete, heuristic-free, no `seen` set to get wrong:
+
+```
+BFS found path: False
+A*  found path: False
+```
+
+They agree. So the negative result is a property of the geometry, not of the
+router:
+
+```
+U1 pin 32 at 0.5 mm pitch: pad 0.25 mm wide, gap to the next pad 0.25 mm
+DRC clearance 0.15 mm each side -> a track needs 0.15 + 0.20 + 0.15 = 0.50 mm
+```
+
+**A 0.25 mm gap cannot hold a 0.50 mm track.** The inner pins of a 0.5 mm-pitch QFN
+are not reachable from outside on the same layer at this clearance and track
+width. They require either a finer track with a reduced clearance rule, a via
+placed inside the pad fan-out, or escape routing on a layer that starts beneath the
+part. All three are layout decisions, not router heuristics.
+
+That is the real reason 34 of 40 nets failed, and no amount of further work on the
+maze router would have changed it.
 
 ### Where that leaves it
 
