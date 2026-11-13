@@ -311,8 +311,26 @@ def add_edge_cuts(board):
 
 
 def setup_stackup(board):
-    """4 layers: signal / ground / power / signal (see pcb04-board-sizing §2)."""
+    """4 layers: signal / ground / power / signal (see pcb04-board-sizing §2).
+
+    Layer *type* matters, not just layer count. SetCopperLayerCount(4) creates all
+    four as `signal`, which tells the router that every layer is fair game for
+    routing. That contradicts the stackup this project documented: L2 is a ground
+    plane and L3 a power plane. With all four declared signal, the router has to
+    fit 277 nets into four general-purpose layers with no reference plane, which
+    is the most likely reason two routing attempts failed to converge.
+
+    Marking planes as planes (and later pouring them) means the router routes on
+    F.Cu and B.Cu with a solid reference underneath, which is both routable and
+    the electrically correct thing for the analog sensing this board carries.
+    """
     board.SetCopperLayerCount(4)
+    for layer, kind in ((pcbnew.In1_Cu, "power"),
+                        (pcbnew.In2_Cu, "power")):
+        # KiCad's layer type is what the PCB editor and DSN export read. Setting
+        # these to `power` marks them as plane layers; the actual zones are poured
+        # separately. "mixed" is not a valid type here.
+        board.SetLayerType(layer, pcbnew.LT_POWER)
 
 
 def setup_design_rules(board):
