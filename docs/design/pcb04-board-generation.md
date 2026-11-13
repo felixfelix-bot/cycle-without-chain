@@ -76,6 +76,51 @@ placement can change that. This cleared **22 violations that were rule-scale
 errors, not layout defects**. 0.15 mm is fabricable on standard 1 oz prototype.
 Routing copper keeps the 0.2 mm default. Nothing else is loosened.
 
+## 4a. Does the 0.15 mm rule violate G5's "no automatic relaxation"?
+
+`pcb-quality-gates.md` G5 says: *"No automatic relaxation of rules to obtain
+green."* The pad-clearance rule above is a relaxation, so it has to be tested
+against that clause rather than assumed compliant. Three things distinguish it:
+
+1. **It is not automatic.** It lives in a reviewed file, applies to one
+   condition (`Pad` vs `Pad`), and states its reason inline. G5 targets rules
+   being loosened by a script until DRC passes.
+2. **It is not to obtain green.** The 22 violations it removes are geometry the
+   vendor's land pattern requires; the board is not "passing" anything that was
+   previously a real risk. If a pad pair were genuinely too close for fabrication,
+   this rule would hide it — so the constraint is checked independently below.
+3. **It is bounded to 0.15 mm and to pads.** Routing copper keeps 0.2 mm. No
+   other constraint is touched.
+
+The independent check that the rule is not hiding a real risk: the tightest pad
+gap on the board is measured directly, per package, and compared against a
+stated fabrication floor (0.15 mm for 1 oz proto). If any pair were tighter than
+0.15 mm, it would be a genuine defect that this rule would mask — so the check
+must be:
+
+```
+min over all (pad, pad) pairs on the same layer of (gap) >= 0.15 mm
+```
+
+**Measured.** Independent sweep over all 1208 named pads, every pair on a shared
+layer with different nets, using axis-aligned bounding-box gaps:
+
+**minimum pad-to-pad gap between different nets = 0.1500 mm**, at U7 pads 1
+(`RESET_INV`) and 2 (`SAFETY3V3`) — that is, exactly the VSSOP-8 the rule was
+written for, and exactly the value the rule declares.
+
+So the rule is not masking anything. The tightest gap on the board equals the
+rule's floor to four decimal places, and no pair is closer. Had any pair been
+tighter than 0.15 mm, this sweep would have found it and the rule would have been
+hiding a genuine defect.
+
+One false start worth recording: the first sweep reported a minimum of **0.0000
+mm** on Q13 (TDSON-8), where pad 5 (`DUMP_LOW`) shares a rectangle with the
+unnamed exposed-pad aperture. Those unnamed pads are paste/thermal apertures of
+the same tab, not separate nets — the sweep now skips pads with no number, since
+a pad with no net cannot be a clearance risk between nets. Counting them would
+have reported a short that does not exist.
+
 ## 5. Silkscreen: a genuine density limit, reported not suppressed
 
 The remaining **147** violations are all silkscreen. Two fixes were attempted:
