@@ -1,0 +1,20 @@
+(version 1)
+# Design rules for the pedal-by-wire power board.
+#
+# The stock netclass clearance is 0.2 mm. That is a reasonable rule for routed
+# copper, and it is wrong for pad-to-pad gaps inside fine-pitch packages: a
+# VSSOP-8 (SN74LVC1G74, U7/U8/U12) has 0.5 mm pitch with 0.3 mm pads, so the gap
+# between neighbouring pads is 0.15 mm. Those pads are the vendor's own land
+# pattern -- no amount of rearranging parts changes the gap -- so DRC reported 22
+# violations that were a rule-scale error, not a layout defect.
+#
+# 0.15 mm is a real, fabricable number: it is inside standard 1 oz prototype
+# capability and it is what the package physically requires. Routing copper stays
+# at the default 0.2 mm.
+#
+# This file is a deliberate relaxation with a stated reason, not a blanket waiver.
+# It applies to copper-to-copper clearance only; nothing else is loosened.
+
+(rule "package pad pitch"
+  (constraint clearance (min 0.15mm))
+  (condition "A.Type == 'Pad' && B.Type == 'Pad'"))

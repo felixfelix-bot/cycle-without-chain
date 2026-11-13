@@ -329,14 +329,26 @@ MPN_PREFIX: list[tuple[str, tuple[str, str, str, str]]] = [
     # --- connectors, switches and harness parts ------------------------
     # The schematic uses the VALUE field to carry a net description for these,
     # so each needs an explicit physical part choice.
-    ("Anderson 992G1 SB50", ("992G1-BK", "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical",
-                             "Anderson Powerpole SB50 housing, keyed",
-                             "series")),
+    # The pack connector carries the full DC_LINK current (~13 A continuous at
+    # 150-250 W crank, 145 kg vehicle) at up to 56 V. It was previously mapped to
+    # a 1x01 2.54 mm pin header: one ~1 mm pin rated around 3 A, incapable of
+    # carrying the load and unable to receive pin 2 (PGND) at all, so the netlist
+    # had a live node with nowhere to go. Caught by gen_pcb.py's pad-parity check.
+    # XT60 is 2-pole, keyed, polarity-proof on mating, ~60 A continuous, and both
+    # its pads are 4.5 mm drills for real cable. The SB50 housing remains the
+    # off-board harness choice; this is the board-side land.
+    ("Anderson 992G1 SB50", ("AMASS_XT60-F", "Connector_AMASS:AMASS_XT60-F_1x02_P7.20mm_Vertical",
+                             "AMASS XT60 female board land, keyed 2-pole; SB50 stays the harness end",
+                             "datasheet")),
     ("EXTERNAL_DUMP_RESISTOR", ("HSC3004R7J", "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal",
                                 "TE HSC300 4R7 300 W (external, off-board)",
                                 "series")),
-    ("Kelvin BUS measurement", ("Conn_01x02", "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical",
-                                "2-pin header, instrument Kelvin pair", "series")),
+    # J43 is DECLARED as Conn_01x04 in entry_circuit.py and the design doc
+    # specifies all four: pins 1/2 shunt-side sense, pin 3 DC_LINK, pin 4 PGND.
+    # The footprint was 1x02, so pins 3 and 4 had no pad — two live nets lost.
+    ("Kelvin BUS measurement", ("Conn_01x04", "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical",
+                                "4-pin header: sensor+/sensor-/DC_LINK/PGND, isolated instrument only",
+                                "series")),
     ("GEN_MACHINE_PHASES", ("Conn_01x03", "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical",
                             "3-pin phase header", "series")),
     ("HUB_MACHINE_PHASES", ("Conn_01x03", "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical",

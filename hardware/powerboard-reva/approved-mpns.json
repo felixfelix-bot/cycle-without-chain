@@ -6,8 +6,8 @@
   "resolved": 387,
   "unresolved": 0,
   "by_kind": {
-   "datasheet": 58,
-   "series": 329
+   "datasheet": 59,
+   "series": 328
   }
  },
  "unresolved": [],
@@ -1061,17 +1061,17 @@
    "sheet": "external-boundaries"
   },
   "J40": {
-   "mpn": "992G1-BK",
-   "footprint": "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical",
-   "source": "Anderson Powerpole SB50 housing, keyed",
-   "kind": "series",
+   "mpn": "AMASS_XT60-F",
+   "footprint": "Connector_AMASS:AMASS_XT60-F_1x02_P7.20mm_Vertical",
+   "source": "AMASS XT60 female board land, keyed 2-pole; SB50 stays the harness end",
+   "kind": "datasheet",
    "value": "Anderson 992G1 SB50 keyed SOURCE",
    "sheet": "dc-entry"
   },
   "J43": {
-   "mpn": "Conn_01x02",
-   "footprint": "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical",
-   "source": "2-pin header, instrument Kelvin pair",
+   "mpn": "Conn_01x04",
+   "footprint": "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical",
+   "source": "4-pin header: sensor+/sensor-/DC_LINK/PGND, isolated instrument only",
    "kind": "series",
    "value": "Kelvin BUS measurement isolated instrument ONLY",
    "sheet": "dc-entry"
