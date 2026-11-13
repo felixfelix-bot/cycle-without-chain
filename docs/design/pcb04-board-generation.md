@@ -878,10 +878,55 @@ is no placement that satisfies both. The escape must be a **stub to a free area,
 a via** -- which is exactly what `fanout_checked.py` does, and why its construction
 is the right one and this direct-via shortcut is not.
 
-**Current state is a trade, not a win:** unconnected 389 -> 387, but clearance 0 -> 2
-and hole_clearance 0 -> 4, all from the two vias that cannot legally sit where they
-are. The board with two more nets joined and four new violations is **not** an
-improvement over the board with neither, and it is not adopted.
+**That attempt was a trade, not a win:** unconnected 389 -> 387, but clearance 0 -> 2
+and hole_clearance 0 -> 4, from the two vias that cannot legally sit where they are.
+It was **not** adopted.
+
+### Stub-then-via, with the via site SEARCHED: 4 of 5 nets, no new violations
+
+The construction the limit demands is a stub to free area, then a via
+(`route_u2_escape.py`). The via site is not assumed -- it is walked outward from the
+pad in 0.05 mm steps and accepted only if it satisfies, simultaneously:
+
+  * netclass clearance to every foreign track and pad on **every layer** it pierces,
+  * 0.25 mm hole clearance to every foreign via and THT pad,
+  * a stub length under 3.0 mm.
+
+Nothing is inserted until the stub, the via and the B.Cu run all pass.
+
+```
+routed 4 nets, failed 1
+   OK   HUB_CPH    54 B.Cu segs, stubs [0.95, 0.05] mm
+   OK   HUB_CPL    80 B.Cu segs, stubs [0.30, 0.05] mm
+   OK   HUB_VCP    45 B.Cu segs, stubs [0.95, 0.05] mm
+   OK   HUB_VGLS  132 B.Cu segs, stubs [1.50, 0.90] mm
+   FAIL HUB_DVDD    U2.38 no legal via site within 3.0 mm
+```
+
+DRC confirms it is a real improvement rather than a quiet regression:
+
+```
+                        before   after
+unconnected                389     385
+clearance                    0       0
+hole_clearance               0       0
+shorting                     0       0
+tracks_crossing              0       0
+via_dangling                 5       5
+silk_overlap               118     118
+silk_over_copper            32      32
+```
+
+**Four nets joined, zero new violations.** The stub lengths are informative: three of
+the eight sites need only 0.05 mm, i.e. the via goes just clear of the pad, exactly
+as the pitch allows. `HUB_VGLS` needs 1.50 mm, because its pad is boxed in and the
+escape has to travel.
+
+`HUB_DVDD` (U2 pin 38) has no legal via site within 3.0 mm. That is a genuine
+geometry limit for this net, not a search failure -- the search is exhaustive over
+four directions at 0.05 mm resolution.
+
+The board is now 8,929 tracks and 406 vias with 385 unconnected.
 
 **A correction to the clearance attribution.** The section above says the 27
 clearance errors are "a footprint defect on U504". They were not. KiCad requires the
