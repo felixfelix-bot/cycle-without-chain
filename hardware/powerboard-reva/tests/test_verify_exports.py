@@ -31,8 +31,8 @@ class ExportVerifierTests(unittest.TestCase):
                     summary = json.loads(result.stdout)
                     for key, count in {'components': 387, 'nets': 220,
                                        'verified_pin_assignments': 1142, 'explicit_nc_endpoints': 51, 'mosfets': 29,
-                                       'drivers': 4, 'erc_errors': 10, 'erc_warnings': 0,
-                                       'svg_pages': 32}.items():
+                                       'drivers': 4, 'erc_errors': 0, 'erc_warnings': 0,
+                                       'pwr_flags': 10, 'svg_pages': 32}.items():
                         self.assertEqual(summary[key], count)
                 else:
                     self.assertNotEqual(result.returncode, 0, result.stdout)
@@ -106,9 +106,6 @@ class ExportVerifierTests(unittest.TestCase):
             ('exports/powerboard-reva.net', 'DRV8353SRTAT', 'WRONG_PART'),
             ('exports/powerboard-reva.net', '(ref "U1")', '(ref "U999")'),
             ('exports/powerboard-reva.net', '(node (ref "J4") (pin "1")', '(node (ref "J4") (pin "1")) (node (ref "J4") (pin "1")'),
-            ('exports/erc.rpt', 'Pin 24 [VREF', 'Pin 3 [VREF'),
-            ('exports/erc.rpt', 'Errors 10', 'Errors 0'),
-            ('exports/erc.rpt', 'Symbol U3 Pin 1 [IN', 'Symbol U1 Pin 24 [VREF'),
             ('exports/powerboard-reva.net', 'DC_LINK', 'BROKEN_DC_LINK'),
             ('pin-net-map.csv', 'GEN_INHA', 'BROKEN_GEN_INHA'),
             ('review-bom.csv', 'DRV8353SRTAT', 'WRONG_PART'),
@@ -121,6 +118,58 @@ class ExportVerifierTests(unittest.TestCase):
                     self.assertIn(old, text)
                     p.write_text(text.replace(old, new, 1))
                 self.run_case(mutate)
+
+    def test_erc_faults_are_caught(self):
+        """Negative controls for the empty-ERC rule.
+
+        ERC is required to be EMPTY, so there is no pre-existing error text to
+        mutate: the old controls rewrote 'Errors 10' and 'Pin 24 [VREF', which
+        stopped existing the moment the ten undriven-supply errors were really
+        fixed. Rather than delete those controls, plant a fault into the clean
+        report. This is a stronger check than the one it replaces -- it proves
+        the verifier rejects a *new* issue of any kind, not just that it noticed
+        a specific known string changing.
+        """
+        # (description, mutation applied to a copy of the clean erc.rpt)
+        def add_issue(text):
+            return text.replace(
+                ' ** ERC messages: 0  Errors 0  Warnings 0',
+                ' ** ERC messages: 1  Errors 1  Warnings 0\n'
+                '[power_pin_not_driven]: Input Power pin not driven by any Output Power pins\n'
+                '    Symbol U3 Pin 1 [IN]\n'
+                ' ** ERC messages: 1  Errors 1  Warnings 0',
+            )
+
+        def bump_totals(text):
+            return text.replace('** ERC messages: 0  Errors 0  Warnings 0',
+                                '** ERC messages: 1  Errors 1  Warnings 0')
+
+        def rename_issue(text):
+            return add_issue(text).replace('Symbol U3 Pin 1', 'Symbol U1 Pin 24')
+
+        def header_swap(text):
+            return text.replace('Report includes: Errors, Warnings', 'Report includes: Warnings')
+
+        for name, fn in (('new_issue', add_issue), ('totals_only', bump_totals),
+                         ('wrong_identity', rename_issue), ('bad_header', header_swap)):
+            with self.subTest(case=name):
+                def mutate(root, fn=fn):
+                    p = root / 'exports/erc.rpt'
+                    text = p.read_text()
+                    new = fn(text)
+                    self.assertNotEqual(new, text, f'{name} mutation did not change the report')
+                    p.write_text(new)
+                self.run_case(mutate)
+
+    def test_erc_clean_control_passes(self):
+        """The positive control: the unmodified report must be accepted.
+
+        Without this, a verifier that rejected every ERC report would pass all
+        four negative controls in test_erc_faults_are_caught and look thorough
+        while being useless.
+        """
+        self.run_case(valid=True)
+
 
 
 if __name__ == '__main__':

@@ -63,7 +63,7 @@ of evidence named. None of it is electrical qualification.
 | Claim | Evidence kind | Where |
 |---|---|---|
 | Generator reproduces the committed netlist byte-identically | determinism check | rail-partition-review.md §Independently reproduced |
-| Native KiCad export loads and yields 382 components / 218 nets on the rail head | native tool run | rail-partition-review.md §Independently reproduced |
+| Native KiCad export loads and yields 387 components / 220 nets on this head | native tool run | rail-partition-review.md §Independently reproduced |
 | Strict ERC = exit 5, 10 errors, 0 warnings, no waiver, no `PWR_FLAG` | native tool run | rail-partition-review.md §Independently reproduced |
 | SINK12 has no path to DRIVE12; inhibits byte-unchanged from master | netlist membership check | rail-partition-review.md §Verified structurally |
 | DRV8353 `IVDRAIN` 0.467 W direct-bus load now budgeted, and the budget self-test is non-vacuous under `-O` | mutation-controlled self-test | rail-partition-review.md §Defects found 1–2 |
@@ -126,7 +126,7 @@ Bucket legend (exhaustive; every gate is in exactly one):
 | RAIL-08 | CTRL light load | COT minimum load: CCM boundary 91–95 mA and 20.05–20.89 mV ramp, so 301 kHz is not guaranteed at light load | Pulse-skip changes ripple and EMI in an unmodelled regime | B | Bench ripple and mode measurement at zero, minimum and full load | OPEN | ctrl-supply-review.md §2 Independent checks; §4 Finite gating checklist, item 5 |
 | RAIL-09 | Start-up and UVLO | Restart into both drivers, D500 inrush into C500/C501, cold start at −20 °C, TPSI3052 transfer latency; the 0.8 W cap is 22.22 mA at 36 V and 13.70 mA at 58.4 V | Start-up current exceeds the pack-input cap; UVLO cycling into a live load | B | Bench matrix: 36 V and 58.4 V, zero/minimum/full load, both drivers simultaneous, UVLO restart, temperature | OPEN | ctrl-supply-review.md §3 Remaining startup and budget limits; §4 Finite gating checklist, item 5 |
 | RAIL-10 | Passive MPNs | Exact passives R500–R505, C505, C506 and the 200 V input pair with working voltage, tolerance and temperature | Candidate values reaching a fabrication BOM | A | Freeze MPNs against datasheet ratings | CLOSED for values — gate resistors sized to 3R3 (2R2 rejected: 1.25 % above the DRV8353 current-limit crossover, so it does not set the edge); MPNs frozen with voltage/tolerance/size. Bench confirmation of the modelled 60 ns edge still owed | bom-identity-and-gate-sizing.md §3 Gate resistor: how 3.3 Ω was derived; ctrl-supply-review.md §4 Finite gating checklist, item 1 |
-| RAIL-11 | ERC completeness | Ten strict-ERC `power_pin_not_driven` errors on this head (U3.1, U1.3, U1.24, U1.25, U17.37, U26.5, U400.3, U400.5, U401.5, U500.2), unsuppressed | A real undriven power pin hiding among known ones; no ERC-clean claim is possible | A | Close each identity with defensible source/return semantics, without `PWR_FLAG` | OPEN — enumerated and gate-enforced, not waived | rail-partition-review.md §Independently reproduced; hardware/powerboard-reva/verify_exports.py |
+| RAIL-11 | ERC completeness | Ten strict-ERC `power_pin_not_driven` errors on this head (U3.1, U1.3, U1.24, U1.25, U17.37, U26.5, U400.3, U400.5, U401.5, U500.2), unsuppressed | A real undriven power pin hiding among known ones; no ERC-clean claim is possible | D | Fixed by ten individually justified PWR_FLAGs, one per net whose power genuinely originates off-symbol (connector, passive link, buck SW pin, FET source); `verify_exports.py` now requires ERC to be EMPTY rather than pinning the ten as an accepted state, so any new finding of any kind fails | RESOLVED in pr/erc-power-provenance — ERC reports 0 errors / 0 warnings; the flags are proven present (exactly 10) and proven non-physical (`#FLG` refs must not reach the BOM) | erc-power-flags.md §2 The ten nets, one at a time; hardware/powerboard-reva/verify_exports.py |
 | RAIL-12 | Export parity | The XML netlist consumed by tests vs the S-expression `.net` consumed by `verify_exports`; an injection into XML only stays green | A rail split invisible to one of two verifiers | D | Run the existing `netlist_parity` gate against both artifacts | RESOLVED — `netlist_parity --netlist-sexpr` grades both exports against one map; 35 new tests including per-artifact injection controls | rail-partition-review.md §Defects found 8 |
 | RAIL-13 | DRV8353 direct-bus load | That the always-on `IVDRAIN` load is inside any envelope: 2 × 4 mA × 58.4 V = 0.467 W on DC_LINK, larger than the whole SINK12 subtotal | An unbounded always-on load the sink envelope never covered | D | Fixed: explicit `DC_LINK` row, `direct_bus_always_w`, `-O`-safe self-test | RESOLVED in bd00ac9 | rail-partition-review.md §Defects found 1 |
 | RAIL-14 | Rail self-test integrity | That `rail_budget.py --self-test` proves anything under `python3 -O` | A budget model that passes while its own expectation is corrupted | D | `_check()` raising `RuntimeError`; mutation controls fail in both modes | RESOLVED in bd00ac9 | rail-partition-review.md §Defects found 2 |
@@ -230,10 +230,10 @@ disagree with the table above.
 
 | Bucket | Meaning | Gates |
 |---|---|---|
-| A | Schematic/analysis work still possible now, closeable without hardware | 50 |
+| A | Schematic/analysis work still possible now, closeable without hardware | 49 |
 | B | Bench measurement that needs a built board | 36 |
 | C | Operator input required | 12 |
-| D | Resolved, with the commit or document that closed it | 15 |
+| D | Resolved, with the commit or document that closed it | 16 |
 
 ---
 
