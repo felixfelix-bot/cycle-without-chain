@@ -245,7 +245,7 @@ R112,10k 0.1%,Resistor_SMD:R_0805_2012Metric,fast-oc-reference
 R113,10k 0.1%,Resistor_SMD:R_0805_2012Metric,fast-oc-reference
 R114,28k7 0.1%,Resistor_SMD:R_0805_2012Metric,fast-oc-reference
 R115,4k7 1%,Resistor_SMD:R_0805_2012Metric,fast-oc-reference
-J40,Anderson 992G1 SB50 keyed SOURCE,Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical,dc-entry
+J40,Anderson 992G1 SB50 keyed SOURCE,Connector_AMASS:AMASS_XT60-F_1x02_P7.20mm_Vertical,dc-entry
 F1,KLKD020CN 20A 600VDC,Fuse:Fuseholder_Littelfuse_100_series_5x20mm,dc-entry
 R116,22R 1% RH05022R00FE02 pulse UNQUALIFIED,Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal,dc-entry
 R117,2m 1% WSLP2512R0020FEA Kelvin,Resistor_SMD:R_2512_6332Metric,dc-entry
@@ -253,7 +253,7 @@ D20,STPS30100ST reverse clamp ONLY not reverse blocker,Package_TO_SOT_SMD:TO-277
 C73,470u 100V UHE2A471MHD +/-20%,Capacitor_THT:CP_Radial_D16.0mm_P7.50mm,dc-entry
 C74,470u 100V UHE2A471MHD +/-20%,Capacitor_THT:CP_Radial_D16.0mm_P7.50mm,dc-entry
 R118,10k 1% RH02510K00FE02 always-on bleed,Resistor_SMD:R_0805_2012Metric,dc-entry
-J43,Kelvin BUS measurement isolated instrument ONLY,Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical,dc-entry
+J43,Kelvin BUS measurement isolated instrument ONLY,Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical,dc-entry
 J44,LEFT_BINARY_SWITCH_ONLY,Button_Switch_SMD:SW_SPST_TL3305A,brake-intent-left
 R119,10k 1% signal current limit,Resistor_SMD:R_0805_2012Metric,brake-intent-left
 R120,10k 1% switch bias,Resistor_SMD:R_0805_2012Metric,brake-intent-left
@@ -356,6 +356,8 @@ R505,52.3k 1% 0.1W,Resistor_SMD:R_0805_2012Metric,ctrl-supply
 U510,SN74LVC1G08DBVR,Package_TO_SOT_SMD:SOT-23-5,rail-partition
 U501,LM5164DDAR,Package_SO:HSOP-8-1EP_3.9x4.9mm_P1.27mm_EP2.3x2.3mm,rail-partition
 U503,TLV1701AIDBVR,Package_TO_SOT_SMD:SOT-23-5,rail-partition
+U504,SN74LVC1G74DCUR,Package_SO:VSSOP-8_2.3x2mm_P0.5mm,rail-partition
+U505,SN74LVC1G08DBVR,Package_TO_SOT_SMD:SOT-23-5,rail-partition
 U502,AP63203WU,Package_TO_SOT_SMD:TSOT-23-6,rail-partition
 L501,68u SPM10065VC-680M-D 20% AEC-Q200,Powerboard:L_TDK_SPM10065VC-D,rail-passives
 L502,3.9u 2A,Inductor_SMD:L_Bourns_SRN6045TA,rail-passives
@@ -386,3 +388,11 @@ R521,47k 1% DRIVE_PG pullup (PGOOD abs max 14V),Resistor_SMD:R_0805_2012Metric,r
 R523,649k 0.1% DRIVE12 OVP upper leg,Resistor_SMD:R_0805_2012Metric,rail-passives
 R524,118k 0.1% DRIVE12 OVP lower leg,Resistor_SMD:R_0805_2012Metric,rail-passives
 C523,100p 50V C0G OVP sense filter,Capacitor_SMD:C_0805_2012Metric,rail-passives
+R525,100k 1% DRIVE latch D tied low,Resistor_SMD:R_0805_2012Metric,rail-passives
+R526,47k 1% DRIVE_FAULT pullup,Resistor_SMD:R_0805_2012Metric,rail-passives
+R527,100k 1% manual reset series (SW to PGND),Resistor_SMD:R_0805_2012Metric,rail-passives
+R528,"10k 1% DRIVE_NQ load, keeps Q_N defined",Resistor_SMD:R_0805_2012Metric,rail-passives
+D520,SS14 40V 1A OVP trip wired-OR,Diode_SMD:D_SMA,rail-passives
+D521,SS14 40V 1A PGOOD wired-OR,Diode_SMD:D_SMA,rail-passives
+D522,SS14 40V 1A manual reset wired-OR,Diode_SMD:D_SMA,rail-passives
+J48,"Conn_01x02 reset header, SW to PGND",Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical,rail-passives
