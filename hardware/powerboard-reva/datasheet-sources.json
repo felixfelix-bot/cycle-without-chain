@@ -43,6 +43,34 @@
   "url": "https://www.ti.com/lit/ds/symlink/sn74hc11.pdf",
   "sha256": "4c0a03cf0375be46807f0ef4932fb138572b2fb252d7ff7e8479fc0fc0d09cd1"
  },
+ "sn74lvc1g04": {
+  "url": "https://www.ti.com/lit/ds/symlink/sn74lvc1g04.pdf",
+  "sha256": "5322c1ab3cd3bd3f7af9c9bfa1c6139dad799d0968d9eea3ee2d84648ffc2e9e"
+ },
+ "sn74lvc1g08": {
+  "url": "https://www.ti.com/lit/ds/symlink/sn74lvc1g08.pdf",
+  "sha256": "f30261db71823981aa9057ced4846f1dee467d4ce67998e5a3366872a79f688d"
+ },
+ "sn74lvc1g11": {
+  "url": "https://www.ti.com/lit/ds/symlink/sn74lvc1g11.pdf",
+  "sha256": "ffd953703273b43844eae23cfbf31cfc801a3b9443f2c863d49dde62f5a9232b"
+ },
+ "sn74lvc1g32": {
+  "url": "https://www.ti.com/lit/ds/symlink/sn74lvc1g32.pdf",
+  "sha256": "58f445df950a01435493e62963d07d8d80813180c6da5b8ca5c853df364ebf93"
+ },
+ "sn74lvc1g74": {
+  "url": "https://www.ti.com/lit/ds/symlink/sn74lvc1g74.pdf",
+  "sha256": "e46a5a867fec742290000dca5ed3b291535f3c4418ef2ae267acc4ab51b26d8a"
+ },
+ "sn74lvc3g17": {
+  "url": "https://www.ti.com/lit/ds/symlink/sn74lvc3g17.pdf",
+  "sha256": "bcb966e7fbb682bb7f330c544326e32865abd9eb87c5ce7b6606f3447cb4a84c"
+ },
+ "stm32g474cb": {
+  "url": "https://web.archive.org/web/20261102200117/https://www.st.com/resource/en/datasheet/stm32g474cb.pdf",
+  "sha256": "b018e20dbe34b63a43e49365518b186ef0e0e8e899deeabc1c9f53a3a10c1add"
+ },
  "tlv1701": {
   "url": "https://www.ti.com/lit/ds/symlink/tlv1701.pdf",
   "sha256": "b971c8ca9ae7da43d67fa3486f202e6e688d8f5cc4b220268473fc0b4904c42b"

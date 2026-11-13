@@ -37,10 +37,22 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 PIN_MAP = HERE / "pin-net-map.csv"
+BOM = HERE / "review-bom.csv"
 DATA = HERE / "data"
 
-# schematic reference -> (datasheet table, human name)
-TARGETS = {
+# Schematic reference -> datasheet table. Parts are matched by BOM *value* so a
+# new reference of an already-audited part is covered automatically, rather than
+# needing this dict edited every time a gate is added.
+BY_VALUE = {
+    "SN74LVC3G17DCUR": "lvc/sn74lvc3g17dcur.json",
+    "SN74LVC1G11DBVR": "lvc/sn74lvc1g11dbvr.json",
+    "SN74LVC1G04DBVR": "lvc/sn74lvc1g04dbvr.json",
+    "SN74LVC1G32DBVR": "lvc/sn74lvc1g32dbvr.json",
+    "SN74LVC1G08DBVR": "lvc/sn74lvc1g08dbvr.json",
+    "SN74LVC1G74DCUR": "lvc/sn74lvc1g74dcur.json",
+}
+# Reference-specific tables where the value alone is ambiguous.
+BY_REF = {
     "U17": ("stm32g474ve-lqfp100-pins.json", "STM32G474VET6 LQFP100"),
 }
 
@@ -81,19 +93,40 @@ def main(argv: list[str] | None = None) -> int:
         return 2
 
     rows = list(csv.DictReader(PIN_MAP.open(newline="", encoding="utf-8")))
+    bom = {r["reference"]: r["value"]
+           for r in csv.DictReader(BOM.open(newline="", encoding="utf-8"))}
     total_ok = total_bad = 0
+    unnamed: list[str] = []
     any_table = False
 
-    for ref, (fname, human) in sorted(TARGETS.items()):
+    refs = sorted({r["ref"] for r in rows if r["ref"].startswith("U")
+                   and r["ref"][1:].isdigit()}, key=lambda s: int(s[1:]))
+    for ref in refs:
+        fname = None
+        human = None
+        if ref in BY_REF:
+            fname, human = BY_REF[ref]
+        else:
+            val = (bom.get(ref) or "").strip()
+            if val in BY_VALUE:
+                fname, human = BY_VALUE[val], val
+        if not fname:
+            continue
         path = DATA / fname
         if not path.is_file():
-            print("%s: table missing (%s) — SKIPPED, not passed" % (ref, fname))
+            print("%s (%s): table missing (%s) — SKIPPED, not passed"
+                  % (ref, human, fname))
             continue
         any_table = True
         table = load_table(path)
         part = [r for r in rows if r["ref"] == ref]
         if not part:
-            print("%s: no pins in pin-net-map.csv — SKIPPED" % ref)
+            continue
+        # A '~' pin name means the symbol does not name its pins. That is not a
+        # match and not a mismatch: it is an unauditable part, and saying so is
+        # the whole point. Treating it as a pass is how a check lies.
+        if any((r["pin_name"] or "").strip() == "~" for r in part):
+            unnamed.append("%s (%s)" % (ref, human))
             continue
         ok, bad = audit(table, part)
         total_ok += len(ok)
@@ -107,12 +140,19 @@ def main(argv: list[str] | None = None) -> int:
         print("FAIL: no datasheet tables found; nothing was audited", file=sys.stderr)
         return 2
 
+    if unnamed:
+        print()
+        print("UNNAMED PINS — present in the BOM but not auditable:")
+        for u in unnamed:
+            print("   %s: symbol pins are '~'; give it named pins" % u)
+
     print()
     if total_bad:
         print("FAIL: %d pin mismatch(es) out of %d checked"
               % (total_bad, total_ok + total_bad))
         return 1
-    print("PASS: %d pins match their datasheet tables" % total_ok)
+    print("PASS: %d pins match their datasheet tables (%d part(s) unauditable)"
+          % (total_ok, len(unnamed)))
     return 0
 
 
