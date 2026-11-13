@@ -825,6 +825,64 @@ only 17 of those nets have any copper. Its gate-drive outputs correctly have non
 `HUB_DVDD`, `HUB_VCP`, `HUB_VGLS`) are local decoupling that the block pass did not
 join.
 
+### U2's local decoupling: 2 of 5 routed, and a hard geometric limit found
+
+The five missed nets were attacked directly (`route_u2_bcu.py`). Four distinct bugs
+had to be fixed before anything routed at all, and two nets then routed cleanly.
+
+**Bug 1 -- a 2D grid over a 4-layer board.** The first attempt built one obstacle map
+from every track on every layer and searched it in two dimensions. Measured layer
+distribution:
+
+```
+F.Cu 4932   In1.Cu 2213   In2.Cu 1243   B.Cu 222      (B.Cu = 2.6%)
+```
+
+B.Cu is **97.4% empty**, but projecting all four layers onto one plane made the board
+look full, and five nets spanning 5-15 mm reported "no path".
+
+**Bug 2 -- SMD pads blocked a B.Cu search.** Of 1,415 pads, **1,341 are SMD** and
+exist only on F.Cu. Blocking them on the B.Cu map reproduced the same false "full
+board" on a nearly empty layer.
+
+**Bug 3 -- verification disagreed with the search.** `FC.stub_clear()` checks against
+`FC.existing_copper()`, which ignores layers -- correct for the F.Cu fan-out it was
+written for, wrong for B.Cu. Paths were found and then rejected against F.Cu copper
+(`blocked by pad:HUB_VGLS`, `blocked by track:DRV_MISO`). Replaced with a layer-aware
+check.
+
+**Bug 4 -- a static obstacle snapshot.** Nets were routed in sequence against a map
+taken before the loop, so net 2 collided with net 1's own fresh copper
+(`blocked by via:HUB_CPH`, `blocked by B.Cu track:HUB_CPH`). The map is now rebuilt
+from the live board each iteration.
+
+With those four fixed: **HUB_CPH and HUB_VCP route, 47 and 44 segments on B.Cu.**
+
+Then the limit:
+
+```
+5 vias placed at pad centres -> 6 clearance + 4 hole_clearance violations
+shrink via 0.6 -> 0.45 mm     -> 4 via_diameter + 4 drill_out_of_range (below fab min)
+```
+
+The constraint chain is closed:
+
+```
+0.5 mm pin pitch  ->  a via must be <= ~0.45 mm to clear its neighbour
+board minimum     ->  a via must be >= ~0.5 mm  to be fabricable
+=> no via fits on a 0.5 mm-pitch pad centre
+```
+
+HUB_CPH is U2 pin 2, HUB_CPL is U2 pin 1, **0.500 mm apart on the same axis**. There
+is no placement that satisfies both. The escape must be a **stub to a free area, then
+a via** -- which is exactly what `fanout_checked.py` does, and why its construction
+is the right one and this direct-via shortcut is not.
+
+**Current state is a trade, not a win:** unconnected 389 -> 387, but clearance 0 -> 2
+and hole_clearance 0 -> 4, all from the two vias that cannot legally sit where they
+are. The board with two more nets joined and four new violations is **not** an
+improvement over the board with neither, and it is not adopted.
+
 **A correction to the clearance attribution.** The section above says the 27
 clearance errors are "a footprint defect on U504". They were not. KiCad requires the
 design-rules file to match the BOARD filename -- `powerboard-reva-board.kicad_pcb`
