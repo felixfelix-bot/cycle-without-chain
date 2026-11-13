@@ -406,6 +406,46 @@ intending gap-fill only. This one is the most promising: FreeRouting reports a
 **baseline of 545 unrouted items**, i.e. it now sees the real problem rather than
 an empty board. It did not finish inside 20 minutes.
 
+### A hand-written maze router: also insufficient, for a measured reason
+
+The 43 nets were handed to a purpose-written grid A*, on the reasoning that 43
+two-point connections is a small, well-defined problem and keeps every placed
+segment inspectable. It routed 6 of 40 nets.
+
+Four bugs were found and fixed along the way, all real:
+
+1. **Collinearity typo.** `simplify()` compared `cy - cy` instead of `cy - by`, so
+   nothing collapsed and one net emitted 314 micro-segments. Each was added to the
+   obstacle map, letting a single net wall off a corridor.
+2. **Pads blocked then only partly freed.** The per-net grid copied the static map
+   and then called `block_pad()` on the net's *own* pads before clearing a 3x3
+   patch, sealing each pad inside a ring of blocked cells.
+3. **Inadmissible-ish search.** Skipping expansion on a `seen` *set* (rather than
+   re-expanding when a cheaper arrival appeared) discarded cheaper paths.
+4. **Multi-pad nets treated as pairs.** `DRV_SCK` has three pads, fanning out from
+   the MCU to both drivers; routing only the first two reported the net routed
+   while leaving a pad unconnected. Replaced with a nearest-neighbour spanning
+   tree.
+
+After all four, the failure that remained is **geometric, not algorithmic**:
+
+```
+GEN_INHA pad at 146.7, 78.7   (0.25 x 0.82 mm, a DRV8353 pin)
+reachable from that pad: 49 cells of 199087 free cells -- a 7x7 pocket
+```
+
+A 21x21 dump of the pad map around it shows why: the pad sits in the middle of a
+dense pin field, with neighbouring pads forming a continuous blocked wall on every
+side. It is not a bug in the router; the pad is enclosed by real copper geometry.
+Getting out requires either via-based escape from an inner layer or a clearance
+model that distinguishes "approach a pad I must connect to" from "cross between
+two pads I must not touch" -- and the latter is what a uniform grid cannot express.
+
+So: a uniform-clearance grid router is the wrong instrument for fine-pitch escape
+routing. The autorouter has the machinery for it (fanout passes, per-layer
+clearance rules); it just could not be made to work on this board within the
+attempts recorded above.
+
 ### Where that leaves it
 
 The correct approach is established even though it is not complete: **the router
