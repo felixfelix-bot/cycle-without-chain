@@ -739,6 +739,62 @@ via_dangling             0                3
 blocks harvested zero segments this run, and that turned out to be a real bug
 rather than a router limitation -- see 6b.
 
+### Running steps 3-5 in the corrected order: 9,226 segments, zero shorts
+
+The pipeline was then run in the order the measurement demands, on the route-first
+board (2,194 existing tracks):
+
+```
+step 4  block routing with --base powerboard-reva-board.kicad_pcb
+        15 of 15 blocks, 7032 segments harvested
+step 5  merge onto the route-first board
+        2194 -> 9226 tracks, 7032 added, 0 skipped, 0 unmatched nets
+        dedupe_vias: 398 vias, 218 same-net duplicates removed,
+                     no cross-net coincident vias
+```
+
+DRC on the final board:
+
+```
+unconnected        389      (was 418 on v1; 499 on the route-first board alone)
+clearance           27      (identical to v1 -- all on U504, the latch footprint)
+silk_overlap       118
+silk_over_copper     32
+via_dangling         5
+shorting             0
+tracks_crossing      0
+holes_co_located     0
+hole_to_hole         0
+```
+
+**Zero shorts, zero crossings, zero co-located holes, zero hole-to-hole.** That is
+the first merged board in this whole effort with no electrical geometry errors.
+
+**The one thing that made it work: `--base`.**
+
+`route_board_blocks.py` accepts `--base` to choose which board the block pass routes
+onto. It was run twice before without it:
+
+```
+run A  no --base   blocks routed against the UNROUTED board
+                   2718 segments, merge -> 199 shorts, 304 crossings
+run B  --base ...   blocks routed against the 2194 inter-block tracks
+                   7032 segments, merge -> 0 shorts, 0 crossings
+```
+
+Passing the board as a positional argument does nothing -- the flag is `--base`, and
+a positional is silently ignored, so the router produced a clean-looking result for
+a board state that did not exist. That is the same blind-routing failure for the
+third time in this document, and the fix every time is the same: **the copper that
+already exists must be visible to whatever adds more.**
+
+The higher segment count in run B (7032 vs 2718) is the cost of routing around
+copper instead of through it, and it is the correct trade.
+
+**What remains:** 389 unconnected is still above v1's 418 only because more of the
+board is now covered; the in-scope inter-block figure is 10. The 27 clearance errors
+are all on U504 and are a footprint defect, not a routing one.
+
 **Clearance is unchanged at 27 and every one of them is on U504** -- my own latch
 footprint (VSSOP-8, 0.5 mm pitch, 0.35 mm pads on a 0.5 mm pitch land). It was
 carried in from the schematic work, not caused by routing, and it is a real
