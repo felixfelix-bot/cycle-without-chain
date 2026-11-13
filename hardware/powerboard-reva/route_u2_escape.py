@@ -136,9 +136,20 @@ def stub_ok(copper, net, x0, y0, x1, y1):
     return True, None
 
 
-def find_site(board, copper, net, px, py, dirs):
-    """Walk outward from the pad and return the first fully legal via site."""
-    for dist in [VIA_STEP * i for i in range(1, int(STUB_MAX / VIA_STEP) + 1)]:
+def find_site(board, copper, net, px, py, dirs, pad_half=0.0):
+    """Walk outward from the pad and return the first fully legal via site.
+
+    The site must be OUTSIDE the pad, not merely clear of other copper: the first
+    attempt placed a via 0.05 mm from a pad centre and INSIDE a 1.45 mm pad
+    (C11.1 spans y 106.565-108.015, via at 107.340). The stub was then a 0.05 mm
+    segment entirely within the pad, which KiCad treats as degenerate, and the
+    connection was reported unconnected even though the geometry looked right.
+
+    pad_half pushes the search start past the pad's own extent so the stub is a
+    real segment on the surface rather than a zero-length artefact inside a pad.
+    """
+    start = max(1, int((pad_half + VIA_STEP) / VIA_STEP))
+    for dist in [VIA_STEP * i for i in range(start, int(STUB_MAX / VIA_STEP) + 1)]:
         for (dx, dy) in dirs:
             x = px + dx * dist
             y = py + dy * dist
@@ -184,7 +195,9 @@ def main():
             px, py = pcbnew.ToMM(pos.x), pcbnew.ToMM(pos.y)
             # Try perpendicular to the package axis first, then all four ways.
             dirs = [(0, 1), (0, -1), (1, 0), (-1, 0)]
-            site = find_site(board, copper, net, px, py, dirs)
+            sz = pad.GetSize()
+            pad_half = max(pcbnew.ToMM(sz.x), pcbnew.ToMM(sz.y)) / 2.0
+            site = find_site(board, copper, net, px, py, dirs, pad_half)
             if site is None:
                 failed.append((net, "%s.%s no legal via site within %.1f mm"
                                % (ref, num, STUB_MAX)))

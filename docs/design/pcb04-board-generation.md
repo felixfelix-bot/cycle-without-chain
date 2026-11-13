@@ -928,6 +928,49 @@ four directions at 0.05 mm resolution.
 
 The board is now 8,929 tracks and 406 vias with 385 unconnected.
 
+### The 385 figure is not a connectivity list, and that had to be checked
+
+After the escape, DRC still listed `HUB_CPH` as unconnected -- **paired with
+`PRE_VDDM`**, a net it shares no pad with. A pad cannot be "unconnected to" a pad on
+another net, so the pairing itself was the tell. Auditing the copper directly
+(`audit_escape.py`) gives the real answer:
+
+```
+                        before escape        after escape
+HUB_CPH   2 pads    [False, False]   ->   [True, True]
+HUB_CPL   2 pads    [False, False]   ->   [True, True]
+HUB_VCP   2 pads    [False, False]   ->   [True, True]
+HUB_VGLS  2 pads    [False, False]   ->   [True, True]
+HUB_DVDD  2 pads    [False, False]   ->   [False, False]
+```
+
+**The escape genuinely connects four nets.** DRC was not reporting that they were
+unrouted; it was reporting something else and labelling it "missing connection".
+
+Counting the pairs in the DRC report settles what:
+
+```
+unconnected pairs reported: 308
+pairs whose two ends are the SAME net: 121   (39%)
+```
+
+**61% of the "missing connection" pairs link two different nets.** That is not a
+description of unrouted copper. It means the 385 total -- and the 418 and 499 figures
+quoted earlier in this document -- are not a count of unconnected pins. They are a
+count of DRC items in a category that mixes genuine same-net disconnects with
+cross-net pairings.
+
+Consequences, stated plainly:
+
+* the "389 -> 385" improvement was measured on a metric that does not measure what it
+  was claimed to measure, so the claim is withdrawn;
+* the correct in-scope figure is the **121 same-net pairs**, not 385;
+* every earlier comparison that used the unconnected total inherits the same fault.
+
+The layer-aware audit in `audit_escape.py` is the reliable instrument: it asks
+whether a net's own copper reaches each of its own pads, which is the question that
+was always meant.
+
 **A correction to the clearance attribution.** The section above says the 27
 clearance errors are "a footprint defect on U504". They were not. KiCad requires the
 design-rules file to match the BOARD filename -- `powerboard-reva-board.kicad_pcb`
