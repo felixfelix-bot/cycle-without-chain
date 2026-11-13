@@ -26,7 +26,10 @@ def validate(parts,nets):
         for k,a,b,v in [('R','MCU_VREF',n('EXC_CABLE'),'10k 1% FSR excitation'),('R',n('RETURN_CABLE'),n('SENSE'),'1k 1% FSR return'),('R',n('SENSE'),'PGND','10k 0.1% FSR measure'),('C',n('SENSE'),'PGND','100n FSR sense'),('R',n('SENSE'),n('OP_IN'),'10k 1% OPA input limit'),('R',n('ISO_OUT'),n('ADC'),'1k 1% ADC isolation'),('R',n('ADC'),'PGND','10k 1% ADC bleed'),('C',n('ADC'),'PGND','100n ADC reservoir'),('C','MCU_VREF','PGND','100n OPA bypass'),('C','LOGIC3V3_EXT','PGND','100n mux bypass'),('R','FSR_SAMPLE_ENABLE','PGND','100k enable default off')]:element(k,a,b,v)
         for i,leg in enumerate(['EXC_CABLE','RETURN_CABLE']):
             d='D'+str(38+j*3+i)
-            if parts.get(d)!='PESD3V3U1UL CANDIDATE':raise ValueError('missing candidate TVS')
+            # The TVS is no longer a candidate: its MPN is frozen in
+            # approved-mpns.json (Nexperia PESD3V3U1UL), so the assertion follows
+            # the decided value rather than the old provisional label.
+            if parts.get(d)!='PESD3V3U1UL':raise ValueError('missing PESD3V3U1UL TVS')
             pin(d,1,n(leg));pin(d,2,'PGND')
         for p,net in {1:'PGND',2:'MCU_VREF',3:n('SENSE')}.items():pin('D'+str(40+j*3),p,net)
         for p,net in {1:'PGND',2:side+'_SWITCH_EXT'}.items():pin('J'+str(44+j),p,net)

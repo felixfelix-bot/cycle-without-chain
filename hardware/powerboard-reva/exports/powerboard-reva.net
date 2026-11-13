@@ -1,7 +1,7 @@
 (export (version "E")
   (design
-    (source "/home/c08r4d0r/worktrees/cycle-l501-nrnd/hardware/powerboard-reva/powerboard-reva.kicad_sch")
-    (date "2026-11-11T11:55:33+0100")
+    (source "/home/c08r4d0r/repos/cycle-without-chain/hardware/powerboard-reva/powerboard-reva.kicad_sch")
+    (date "2026-11-13T11:11:25+0100")
     (tool "Eeschema 9.0.9-9.0.9~ubuntu24.04.1")
     (sheet (number "1") (name "/") (tstamps "/")
       (title_block
@@ -671,7 +671,7 @@
       (sheetpath (names "/GEN DRV8353S driver and three low-side current channels/") (tstamps "/b0ef88a7-f146-50a3-8599-2c16938e4020/"))
       (tstamps "81441505-3887-55b1-b81a-412319c16edc"))
     (comp (ref "C8")
-      (value "1u 100V X7R provisional")
+      (value "1u 100V X7R")
       (fields
         (field (name "Footprint"))
         (field (name "Datasheet"))
@@ -684,7 +684,7 @@
       (sheetpath (names "/GEN 100 V MOSFET bridge - schematic only/") (tstamps "/55549894-7a70-5e10-8933-9a2dbb219eb3/"))
       (tstamps "4966091e-bb31-50c0-bc41-4d4d2978ef5c"))
     (comp (ref "C9")
-      (value "1u 100V X7R provisional")
+      (value "1u 100V X7R")
       (fields
         (field (name "Footprint"))
         (field (name "Datasheet"))
@@ -697,7 +697,7 @@
       (sheetpath (names "/GEN 100 V MOSFET bridge - schematic only/") (tstamps "/55549894-7a70-5e10-8933-9a2dbb219eb3/"))
       (tstamps "7fa9ac31-bda9-56dc-b175-a53146dff049"))
     (comp (ref "C10")
-      (value "1u 100V X7R provisional")
+      (value "1u 100V X7R")
       (fields
         (field (name "Footprint"))
         (field (name "Datasheet"))
@@ -794,7 +794,7 @@
       (sheetpath (names "/GEN 100 V MOSFET bridge - schematic only/") (tstamps "/55549894-7a70-5e10-8933-9a2dbb219eb3/"))
       (tstamps "157a1f25-31a0-5331-bb95-f02aa3a014da"))
     (comp (ref "R5")
-      (value "4R7 provisional")
+      (value "3R3 1% gate")
       (fields
         (field (name "Footprint"))
         (field (name "Datasheet"))
@@ -820,7 +820,7 @@
       (sheetpath (names "/GEN 100 V MOSFET bridge - schematic only/") (tstamps "/55549894-7a70-5e10-8933-9a2dbb219eb3/"))
       (tstamps "7383b301-6bfc-58ea-9b72-5e74ca661bcc"))
     (comp (ref "R7")
-      (value "4R7 provisional")
+      (value "3R3 1% gate")
       (fields
         (field (name "Footprint"))
         (field (name "Datasheet"))
@@ -860,7 +860,7 @@
       (sheetpath (names "/GEN 100 V MOSFET bridge - schematic only/") (tstamps "/55549894-7a70-5e10-8933-9a2dbb219eb3/"))
       (tstamps "e5e88ecc-971c-5bcc-8c0f-2f2c380b1318"))
     (comp (ref "R10")
-      (value "4R7 provisional")
+      (value "3R3 1% gate")
       (fields
         (field (name "Footprint"))
         (field (name "Datasheet"))
@@ -886,7 +886,7 @@
       (sheetpath (names "/GEN 100 V MOSFET bridge - schematic only/") (tstamps "/55549894-7a70-5e10-8933-9a2dbb219eb3/"))
       (tstamps "4a721bb6-0608-5525-902f-26120b50eb8f"))
     (comp (ref "R12")
-      (value "4R7 provisional")
+      (value "3R3 1% gate")
       (fields
         (field (name "Footprint"))
         (field (name "Datasheet"))
@@ -926,7 +926,7 @@
       (sheetpath (names "/GEN 100 V MOSFET bridge - schematic only/") (tstamps "/55549894-7a70-5e10-8933-9a2dbb219eb3/"))
       (tstamps "bdb053bc-cf55-5040-bb2e-aca7f7a74122"))
     (comp (ref "R15")
-      (value "4R7 provisional")
+      (value "3R3 1% gate")
       (fields
         (field (name "Footprint"))
         (field (name "Datasheet"))
@@ -952,7 +952,7 @@
       (sheetpath (names "/GEN 100 V MOSFET bridge - schematic only/") (tstamps "/55549894-7a70-5e10-8933-9a2dbb219eb3/"))
       (tstamps "b2e6bfdb-e53b-529e-957b-c3213640f0a1"))
     (comp (ref "R17")
-      (value "4R7 provisional")
+      (value "3R3 1% gate")
       (fields
         (field (name "Footprint"))
         (field (name "Datasheet"))
@@ -1146,7 +1146,7 @@
       (sheetpath (names "/HUB DRV8353S driver and three low-side current channels/") (tstamps "/7a4041ff-bd2a-5ef8-a31e-bd1429141d1e/"))
       (tstamps "775528e9-f7b4-5773-8c49-e976cecb18e2"))
     (comp (ref "C18")
-      (value "1u 100V X7R provisional")
+      (value "1u 100V X7R")
       (fields
         (field (name "Footprint"))
         (field (name "Datasheet"))
@@ -1159,7 +1159,7 @@
       (sheetpath (names "/HUB 100 V MOSFET bridge - schematic only/") (tstamps "/f77e7d93-1920-5ec7-bdd8-a541cd02fd2c/"))
       (tstamps "b5fef5db-7674-5340-a512-e9b3cd040844"))
     (comp (ref "C19")
-      (value "1u 100V X7R provisional")
+      (value "1u 100V X7R")
       (fields
         (field (name "Footprint"))
         (field (name "Datasheet"))
@@ -1172,7 +1172,7 @@
       (sheetpath (names "/HUB 100 V MOSFET bridge - schematic only/") (tstamps "/f77e7d93-1920-5ec7-bdd8-a541cd02fd2c/"))
       (tstamps "7ca57ff7-97b0-56f8-8131-384969178b81"))
     (comp (ref "C20")
-      (value "1u 100V X7R provisional")
+      (value "1u 100V X7R")
       (fields
         (field (name "Footprint"))
         (field (name "Datasheet"))
@@ -1269,7 +1269,7 @@
       (sheetpath (names "/HUB 100 V MOSFET bridge - schematic only/") (tstamps "/f77e7d93-1920-5ec7-bdd8-a541cd02fd2c/"))
       (tstamps "3b5168af-dc9f-5645-a426-ee13189dc7a0"))
     (comp (ref "R24")
-      (value "4R7 provisional")
+      (value "3R3 1% gate")
       (fields
         (field (name "Footprint"))
         (field (name "Datasheet"))
@@ -1295,7 +1295,7 @@
       (sheetpath (names "/HUB 100 V MOSFET bridge - schematic only/") (tstamps "/f77e7d93-1920-5ec7-bdd8-a541cd02fd2c/"))
       (tstamps "e9912644-34fc-5f58-b2ac-646cef3e3980"))
     (comp (ref "R26")
-      (value "4R7 provisional")
+      (value "3R3 1% gate")
       (fields
         (field (name "Footprint"))
         (field (name "Datasheet"))
@@ -1335,7 +1335,7 @@
       (sheetpath (names "/HUB 100 V MOSFET bridge - schematic only/") (tstamps "/f77e7d93-1920-5ec7-bdd8-a541cd02fd2c/"))
       (tstamps "ca337f1d-9a9e-5ca6-a27c-6c8f952d713c"))
     (comp (ref "R29")
-      (value "4R7 provisional")
+      (value "3R3 1% gate")
       (fields
         (field (name "Footprint"))
         (field (name "Datasheet"))
@@ -1361,7 +1361,7 @@
       (sheetpath (names "/HUB 100 V MOSFET bridge - schematic only/") (tstamps "/f77e7d93-1920-5ec7-bdd8-a541cd02fd2c/"))
       (tstamps "42125d1a-0dff-5555-8470-675a331853ff"))
     (comp (ref "R31")
-      (value "4R7 provisional")
+      (value "3R3 1% gate")
       (fields
         (field (name "Footprint"))
         (field (name "Datasheet"))
@@ -1401,7 +1401,7 @@
       (sheetpath (names "/HUB 100 V MOSFET bridge - schematic only/") (tstamps "/f77e7d93-1920-5ec7-bdd8-a541cd02fd2c/"))
       (tstamps "b228edd7-f86c-5f79-a450-ac9cade31952"))
     (comp (ref "R34")
-      (value "4R7 provisional")
+      (value "3R3 1% gate")
       (fields
         (field (name "Footprint"))
         (field (name "Datasheet"))
@@ -1427,7 +1427,7 @@
       (sheetpath (names "/HUB 100 V MOSFET bridge - schematic only/") (tstamps "/f77e7d93-1920-5ec7-bdd8-a541cd02fd2c/"))
       (tstamps "0be67648-834d-5ca4-9255-10a723a1c9ec"))
     (comp (ref "R36")
-      (value "4R7 provisional")
+      (value "3R3 1% gate")
       (fields
         (field (name "Footprint"))
         (field (name "Datasheet"))
@@ -1467,7 +1467,7 @@
       (sheetpath (names "/HUB 100 V MOSFET bridge - schematic only/") (tstamps "/f77e7d93-1920-5ec7-bdd8-a541cd02fd2c/"))
       (tstamps "10bcfc57-5fd5-5482-a7bc-80d6a99d6988"))
     (comp (ref "C21")
-      (value "100u 100V provisional")
+      (value "100u 100V")
       (fields
         (field (name "Footprint"))
         (field (name "Datasheet"))
@@ -3889,7 +3889,7 @@
       (sheetpath (names "/Bounded bench DC entry - active pairs inhibited/") (tstamps "/24d0bbba-ff22-55f5-a84f-f92bfd449afd/"))
       (tstamps "85981a4e-e8a2-586e-8150-b5c17ba83b28"))
     (comp (ref "F1")
-      (value "KLKD020CN 20A 600VDC candidate AT SOURCE")
+      (value "KLKD020CN 20A 600VDC")
       (fields
         (field (name "Footprint"))
         (field (name "Datasheet"))
@@ -4474,7 +4474,7 @@
       (sheetpath (names "/LEFT selected FSR low-voltage bench frontend/") (tstamps "/9d871a9e-b403-5953-8411-631b56729075/"))
       (tstamps "8a7f5e26-47c6-552b-8fe9-7b2033c880ba"))
     (comp (ref "D38")
-      (value "PESD3V3U1UL CANDIDATE")
+      (value "PESD3V3U1UL")
       (footprint "Diode_SMD:D_SOD-882")
       (fields
         (field (name "Footprint") "Diode_SMD:D_SOD-882")
@@ -4488,7 +4488,7 @@
       (sheetpath (names "/LEFT FSR candidate ESD and secondary clamps - unqualified/") (tstamps "/3cb2b51d-6fd7-5308-b7fc-17af1e26510b/"))
       (tstamps "1753ce91-3f63-5acc-8f93-926044b817aa"))
     (comp (ref "D39")
-      (value "PESD3V3U1UL CANDIDATE")
+      (value "PESD3V3U1UL")
       (footprint "Diode_SMD:D_SOD-882")
       (fields
         (field (name "Footprint") "Diode_SMD:D_SOD-882")
@@ -4502,7 +4502,7 @@
       (sheetpath (names "/LEFT FSR candidate ESD and secondary clamps - unqualified/") (tstamps "/3cb2b51d-6fd7-5308-b7fc-17af1e26510b/"))
       (tstamps "1a2e4a58-4cf3-54ea-9096-5ee6f32e07ae"))
     (comp (ref "D40")
-      (value "BAT54S CANDIDATE")
+      (value "BAT54S")
       (footprint "Package_TO_SOT_SMD:SOT-23")
       (fields
         (field (name "Footprint") "Package_TO_SOT_SMD:SOT-23")
@@ -4707,7 +4707,7 @@
       (sheetpath (names "/RIGHT selected FSR low-voltage bench frontend/") (tstamps "/07cad214-3aa7-5faf-b878-71d3ff78856a/"))
       (tstamps "00336865-809e-569e-becd-d7fb1b3a66c4"))
     (comp (ref "D41")
-      (value "PESD3V3U1UL CANDIDATE")
+      (value "PESD3V3U1UL")
       (footprint "Diode_SMD:D_SOD-882")
       (fields
         (field (name "Footprint") "Diode_SMD:D_SOD-882")
@@ -4721,7 +4721,7 @@
       (sheetpath (names "/RIGHT FSR candidate ESD and secondary clamps - unqualified/") (tstamps "/c484344b-fa57-51e3-9efe-c91c71e57eaa/"))
       (tstamps "8bbeb155-4c1f-5cd4-a2ce-f83642877e17"))
     (comp (ref "D42")
-      (value "PESD3V3U1UL CANDIDATE")
+      (value "PESD3V3U1UL")
       (footprint "Diode_SMD:D_SOD-882")
       (fields
         (field (name "Footprint") "Diode_SMD:D_SOD-882")
@@ -4735,7 +4735,7 @@
       (sheetpath (names "/RIGHT FSR candidate ESD and secondary clamps - unqualified/") (tstamps "/c484344b-fa57-51e3-9efe-c91c71e57eaa/"))
       (tstamps "a595b5a2-2879-5fa3-8c80-bc40b8151de9"))
     (comp (ref "D43")
-      (value "BAT54S CANDIDATE")
+      (value "BAT54S")
       (footprint "Package_TO_SOT_SMD:SOT-23")
       (fields
         (field (name "Footprint") "Package_TO_SOT_SMD:SOT-23")
@@ -4788,7 +4788,7 @@
       (sheetpath (names "/MAIN back-to-back candidate - hardware inhibited/") (tstamps "/84ab3338-d859-5b7b-a68e-a72aedfc13e7/"))
       (tstamps "3fed5a9b-6c8f-5684-9ad8-79ba2ea33116"))
     (comp (ref "Q400")
-      (value "IRFP4568PbF 150V candidate")
+      (value "IRFP4568PbF 150V")
       (footprint "Package_TO_SOT_THT:TO-247-3_Vertical")
       (fields
         (field (name "Footprint") "Package_TO_SOT_THT:TO-247-3_Vertical")
@@ -4801,7 +4801,7 @@
       (sheetpath (names "/MAIN back-to-back candidate - hardware inhibited/") (tstamps "/84ab3338-d859-5b7b-a68e-a72aedfc13e7/"))
       (tstamps "a24a4d48-a9e4-516b-b313-062296038b39"))
     (comp (ref "Q401")
-      (value "IRFP4568PbF 150V candidate")
+      (value "IRFP4568PbF 150V")
       (footprint "Package_TO_SOT_THT:TO-247-3_Vertical")
       (fields
         (field (name "Footprint") "Package_TO_SOT_THT:TO-247-3_Vertical")
@@ -4853,7 +4853,7 @@
       (sheetpath (names "/MAIN back-to-back candidate - hardware inhibited/") (tstamps "/84ab3338-d859-5b7b-a68e-a72aedfc13e7/"))
       (tstamps "6f470f4b-c4e2-5808-9003-741254410283"))
     (comp (ref "R403")
-      (value "10R 1% gate candidate")
+      (value "3R3 1% gate")
       (fields
         (field (name "Footprint"))
         (field (name "Datasheet"))
@@ -4879,7 +4879,7 @@
       (sheetpath (names "/MAIN back-to-back candidate - hardware inhibited/") (tstamps "/84ab3338-d859-5b7b-a68e-a72aedfc13e7/"))
       (tstamps "a8875387-a8d4-5ed1-9f32-3f1793752d8f"))
     (comp (ref "R405")
-      (value "10R 1% gate candidate")
+      (value "3R3 1% gate")
       (fields
         (field (name "Footprint"))
         (field (name "Datasheet"))
@@ -4955,7 +4955,7 @@
       (sheetpath (names "/PRE back-to-back candidate - hardware inhibited/") (tstamps "/af136be2-19b5-51aa-9308-d9ca05a8c19d/"))
       (tstamps "479419d7-9d7a-5501-93ae-676b208c5bcd"))
     (comp (ref "Q402")
-      (value "IRFP4568PbF 150V candidate")
+      (value "IRFP4568PbF 150V")
       (footprint "Package_TO_SOT_THT:TO-247-3_Vertical")
       (fields
         (field (name "Footprint") "Package_TO_SOT_THT:TO-247-3_Vertical")
@@ -4968,7 +4968,7 @@
       (sheetpath (names "/PRE back-to-back candidate - hardware inhibited/") (tstamps "/af136be2-19b5-51aa-9308-d9ca05a8c19d/"))
       (tstamps "30586664-8212-5aa0-b7e9-19367d109b07"))
     (comp (ref "Q403")
-      (value "IRFP4568PbF 150V candidate")
+      (value "IRFP4568PbF 150V")
       (footprint "Package_TO_SOT_THT:TO-247-3_Vertical")
       (fields
         (field (name "Footprint") "Package_TO_SOT_THT:TO-247-3_Vertical")
@@ -5020,7 +5020,7 @@
       (sheetpath (names "/PRE back-to-back candidate - hardware inhibited/") (tstamps "/af136be2-19b5-51aa-9308-d9ca05a8c19d/"))
       (tstamps "c618114c-f058-5423-8ce8-1e0bfce91686"))
     (comp (ref "R413")
-      (value "10R 1% gate candidate")
+      (value "3R3 1% gate")
       (fields
         (field (name "Footprint"))
         (field (name "Datasheet"))
@@ -5046,7 +5046,7 @@
       (sheetpath (names "/PRE back-to-back candidate - hardware inhibited/") (tstamps "/af136be2-19b5-51aa-9308-d9ca05a8c19d/"))
       (tstamps "c9778427-f675-5392-9dd5-464fa7f8dfa2"))
     (comp (ref "R415")
-      (value "10R 1% gate candidate")
+      (value "3R3 1% gate")
       (fields
         (field (name "Footprint"))
         (field (name "Datasheet"))
@@ -5163,7 +5163,7 @@
       (sheetpath (names "/CTRL3V3 pack-side buck - unqualified, enables inhibited/") (tstamps "/1fcb8b82-3f40-5c33-a69b-b8aa5378ca6c/"))
       (tstamps "76c242ba-8cda-547b-ad68-3ecff5d1ab2f"))
     (comp (ref "C506")
-      (value "330p 50V C0G 5% candidate")
+      (value "330p 50V C0G 5%")
       (fields
         (field (name "Footprint"))
         (field (name "Datasheet"))
@@ -5203,7 +5203,7 @@
       (sheetpath (names "/CTRL3V3 pack-side buck - unqualified, enables inhibited/") (tstamps "/1fcb8b82-3f40-5c33-a69b-b8aa5378ca6c/"))
       (tstamps "36e7a7a7-ec5f-5040-a0b1-9ec7800be709"))
     (comp (ref "R500")
-      (value "27.4k 1% 0.1W candidate")
+      (value "27.4k 1% 0.1W")
       (fields
         (field (name "Footprint"))
         (field (name "Datasheet"))
@@ -5216,7 +5216,7 @@
       (sheetpath (names "/CTRL3V3 pack-side buck - unqualified, enables inhibited/") (tstamps "/1fcb8b82-3f40-5c33-a69b-b8aa5378ca6c/"))
       (tstamps "ce94bb21-b1ed-5515-880f-55e70f3488ee"))
     (comp (ref "R501")
-      (value "87.3k 1% 0.1W candidate")
+      (value "87.3k 1% 0.1W")
       (fields
         (field (name "Footprint"))
         (field (name "Datasheet"))
@@ -5242,7 +5242,7 @@
       (sheetpath (names "/CTRL3V3 pack-side buck - unqualified, enables inhibited/") (tstamps "/1fcb8b82-3f40-5c33-a69b-b8aa5378ca6c/"))
       (tstamps "e74c5e48-0931-58e5-a67f-78f55dd724d2"))
     (comp (ref "R503")
-      (value "150k 1% 0.1W >=100V candidate")
+      (value "150k 1% 0.1W >=100V")
       (fields
         (field (name "Footprint"))
         (field (name "Datasheet"))
@@ -5255,7 +5255,7 @@
       (sheetpath (names "/CTRL3V3 pack-side buck - unqualified, enables inhibited/") (tstamps "/1fcb8b82-3f40-5c33-a69b-b8aa5378ca6c/"))
       (tstamps "a7474b36-ae77-5afa-8441-c0af68dfa8af"))
     (comp (ref "R504")
-      (value "1M 1% 0.1W >=100V candidate")
+      (value "1M 1% 0.1W >=100V")
       (fields
         (field (name "Footprint"))
         (field (name "Datasheet"))
@@ -5268,7 +5268,7 @@
       (sheetpath (names "/CTRL3V3 pack-side buck - unqualified, enables inhibited/") (tstamps "/1fcb8b82-3f40-5c33-a69b-b8aa5378ca6c/"))
       (tstamps "d41dbed8-fc52-598d-95de-06a481aee1d7"))
     (comp (ref "R505")
-      (value "52.3k 1% 0.1W candidate")
+      (value "52.3k 1% 0.1W")
       (fields
         (field (name "Footprint"))
         (field (name "Datasheet"))
@@ -5421,7 +5421,7 @@
       (sheetpath (names "/Rail partition passive networks - unqualified/") (tstamps "/32cde797-c133-5f4e-a83a-5e2e784fbee4/"))
       (tstamps "fa905261-91d6-5310-855b-52fb97172ea6"))
     (comp (ref "C516")
-      (value "56p 50V C0G candidate")
+      (value "56p 50V C0G")
       (fields
         (field (name "Footprint"))
         (field (name "Datasheet"))
@@ -5434,7 +5434,7 @@
       (sheetpath (names "/Rail partition passive networks - unqualified/") (tstamps "/32cde797-c133-5f4e-a83a-5e2e784fbee4/"))
       (tstamps "853e1386-d085-53cf-ab12-a5c957fc0cfb"))
     (comp (ref "C517")
-      (value "10u 25V X7R candidate")
+      (value "10u 25V X7R")
       (fields
         (field (name "Footprint"))
         (field (name "Datasheet"))
@@ -5447,7 +5447,7 @@
       (sheetpath (names "/Rail partition passive networks - unqualified/") (tstamps "/32cde797-c133-5f4e-a83a-5e2e784fbee4/"))
       (tstamps "a4ee3440-4081-5d8a-a4c8-8400021743b9"))
     (comp (ref "C518")
-      (value "22u 16V X7R candidate")
+      (value "22u 16V X7R")
       (fields
         (field (name "Footprint"))
         (field (name "Datasheet"))
@@ -5460,7 +5460,7 @@
       (sheetpath (names "/Rail partition passive networks - unqualified/") (tstamps "/32cde797-c133-5f4e-a83a-5e2e784fbee4/"))
       (tstamps "89e94665-81b1-5b64-a312-3489d57c347c"))
     (comp (ref "C519")
-      (value "22u 16V X7R candidate")
+      (value "22u 16V X7R")
       (fields
         (field (name "Footprint"))
         (field (name "Datasheet"))
@@ -5513,8 +5513,9 @@
       (tstamps "3a9393a5-fbb6-5669-aa13-ce4dda7a035c"))
     (comp (ref "L501")
       (value "68u SPM10065VC-680M-D 20% AEC-Q200")
+      (footprint "Powerboard:L_TDK_SPM10065VC-D")
       (fields
-        (field (name "Footprint"))
+        (field (name "Footprint") "Powerboard:L_TDK_SPM10065VC-D")
         (field (name "Datasheet"))
         (field (name "Description")))
       (libsource (lib "Device") (part "L") (description "Inductor"))
@@ -5525,7 +5526,7 @@
       (sheetpath (names "/Rail partition passive networks - unqualified/") (tstamps "/32cde797-c133-5f4e-a83a-5e2e784fbee4/"))
       (tstamps "cc1fc209-2abf-594c-82fe-a2367b0c2999"))
     (comp (ref "L502")
-      (value "3.9u candidate 2A")
+      (value "3.9u 2A")
       (footprint "Inductor_SMD:L_Bourns_SRN6045TA")
       (fields
         (field (name "Footprint") "Inductor_SMD:L_Bourns_SRN6045TA")
@@ -5591,7 +5592,7 @@
       (sheetpath (names "/Rail partition passive networks - unqualified/") (tstamps "/32cde797-c133-5f4e-a83a-5e2e784fbee4/"))
       (tstamps "a6f47da8-1173-5971-9ff9-d8114f7cbeea"))
     (comp (ref "R514")
-      (value "82k 1% 0.1W >=100V candidate")
+      (value "82k 1% 0.1W >=100V")
       (fields
         (field (name "Footprint"))
         (field (name "Datasheet"))
@@ -6413,7 +6414,7 @@
     (library (logical "MCU_ST_STM32G4")
       (uri "/usr/share/kicad/symbols//MCU_ST_STM32G4.kicad_sym"))
     (library (logical "Powerboard")
-      (uri "/home/c08r4d0r/worktrees/cycle-l501-nrnd/hardware/powerboard-reva/Powerboard.kicad_sym"))
+      (uri "/home/c08r4d0r/repos/cycle-without-chain/hardware/powerboard-reva/Powerboard.kicad_sym"))
     (library (logical "Switch")
       (uri "/usr/share/kicad/symbols//Switch.kicad_sym"))
     (library (logical "Transistor_FET")

@@ -27,8 +27,8 @@ def populate(g):
         rc('C',base+2,'470n 25V C0G 5% CDIV2',330.2,96.52,mid,src)
         for j,drain in enumerate(('ENTRY_FUSED','BUS_SHUNT_HI' if branch=='MAIN' else 'PRECHARGE_R')):
             ref='Q'+str(400+k*2+j); gate=ref+'_GATE';x=88.9+j*177.8
-            part(fet,ref,'IRFP4568PbF 150V candidate',x,167.64,{'1':gate,'2':drain,'3':src},'Package_TO_SOT_THT:TO-247-3_Vertical')
-            rc('R',base+3+j*2,'10R 1% gate candidate',x-35.56,218.44,out,gate)
+            part(fet,ref,'IRFP4568PbF 150V',x,167.64,{'1':gate,'2':drain,'3':src},'Package_TO_SOT_THT:TO-247-3_Vertical')
+            rc('R',base+3+j*2,'3R3 1% gate',x-35.56,218.44,out,gate)
             rc('R',base+4+j*2,'100k 1% G-S default OFF',x+40.64,218.44,gate,src)
         s.text('Common-source node floats: NEVER PGND. CDIV2/CDIV1 worst 470*.95/(100*1.05)=4.25 > 3.',20.32,248.92)
         s.text('EN not gate feedback. No MAIN_PROVEN, timeout, PM-quiet or current detector claimed.',20.32,259.08)

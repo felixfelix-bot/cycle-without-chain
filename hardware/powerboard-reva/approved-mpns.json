@@ -1,0 +1,3112 @@
+{
+ "generated_from": "review-bom.csv",
+ "note": "Derived from the schematic BOM. 'datasheet' means the part number was read from the named datasheet; 'series' means the MPN follows the manufacturer's published series naming and has NOT been individually audited for this design.",
+ "counts": {
+  "references": 387,
+  "resolved": 387,
+  "unresolved": 0,
+  "by_kind": {
+   "datasheet": 58,
+   "series": 329
+  }
+ },
+ "unresolved": [],
+ "parts": {
+  "C1": {
+   "mpn": "GRM21BR72A473KA01L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR72A 100 V X7R",
+   "kind": "series",
+   "value": "47n 100V X7R",
+   "sheet": "gen-driver"
+  },
+  "C10": {
+   "mpn": "GRM21BR72A105KA01L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR72A 100 V X7R",
+   "kind": "series",
+   "value": "1u 100V X7R",
+   "sheet": "gen-bridge"
+  },
+  "C11": {
+   "mpn": "GRM21BR72A473KA01L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR72A 100 V X7R",
+   "kind": "series",
+   "value": "47n 100V X7R",
+   "sheet": "hub-driver"
+  },
+  "C12": {
+   "mpn": "GRM21BR61C105KA12L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR61C 16 V X7R",
+   "kind": "series",
+   "value": "1u 16V X7R",
+   "sheet": "hub-driver"
+  },
+  "C13": {
+   "mpn": "GRM21BR61C105KA12L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR61C 16 V X7R",
+   "kind": "series",
+   "value": "1u 16V X7R",
+   "sheet": "hub-driver"
+  },
+  "C14": {
+   "mpn": "GRM185R61A105KA61D",
+   "footprint": "Capacitor_SMD:C_0603_1608Metric",
+   "source": "Murata GRM185R61A 10 V X7R",
+   "kind": "series",
+   "value": "1u 10V X7R",
+   "sheet": "hub-driver"
+  },
+  "C15": {
+   "mpn": "GRM21BR71E104KA01L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR71E 25 V X7R",
+   "kind": "series",
+   "value": "100n 25V X7R",
+   "sheet": "hub-driver"
+  },
+  "C16": {
+   "mpn": "GRM21BR61E106KA73L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR61E 25 V X7R",
+   "kind": "series",
+   "value": "10u 25V X7R",
+   "sheet": "hub-driver"
+  },
+  "C17": {
+   "mpn": "GRM188R61A104KA93D",
+   "footprint": "Capacitor_SMD:C_0603_1608Metric",
+   "source": "Murata GRM188R61A 10 V X7R",
+   "kind": "series",
+   "value": "100n 10V X7R",
+   "sheet": "hub-driver"
+  },
+  "C18": {
+   "mpn": "GRM21BR72A105KA01L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR72A 100 V X7R",
+   "kind": "series",
+   "value": "1u 100V X7R",
+   "sheet": "hub-bridge"
+  },
+  "C19": {
+   "mpn": "GRM21BR72A105KA01L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR72A 100 V X7R",
+   "kind": "series",
+   "value": "1u 100V X7R",
+   "sheet": "hub-bridge"
+  },
+  "C2": {
+   "mpn": "GRM21BR61C105KA12L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR61C 16 V X7R",
+   "kind": "series",
+   "value": "1u 16V X7R",
+   "sheet": "gen-driver"
+  },
+  "C20": {
+   "mpn": "GRM21BR72A105KA01L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR72A 100 V X7R",
+   "kind": "series",
+   "value": "1u 100V X7R",
+   "sheet": "hub-bridge"
+  },
+  "C21": {
+   "mpn": "UHE2A101MPD",
+   "footprint": "Capacitor_THT:CP_Radial_D10.0mm_P5.00mm",
+   "source": "Nichicon UHE 100 V 100 uF",
+   "kind": "series",
+   "value": "100u 100V",
+   "sheet": "external-boundaries"
+  },
+  "C22": {
+   "mpn": "GRM32ER72A335KA35L",
+   "footprint": "Capacitor_SMD:C_1210_3225Metric",
+   "source": "Murata GRM32 100 V X7R",
+   "kind": "datasheet",
+   "value": "3.3u 100V GRM32ER72A335KA35L",
+   "sheet": "aux-supply"
+  },
+  "C23": {
+   "mpn": "GRM21BR61E106KA73L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR61E",
+   "kind": "datasheet",
+   "value": "10u 25V GRM21BR61E106KA73L",
+   "sheet": "aux-supply"
+  },
+  "C24": {
+   "mpn": "GRM21BR71E105KA99L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR71E",
+   "kind": "datasheet",
+   "value": "1u 25V GRM21BR71E105KA99L",
+   "sheet": "aux-supply"
+  },
+  "C25": {
+   "mpn": "GRM21BR71E104KA01L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR71E",
+   "kind": "datasheet",
+   "value": "100n 25V GRM21BR71E104KA01L",
+   "sheet": "aux-supply"
+  },
+  "C26": {
+   "mpn": "GRM2165C1H101JA01D",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM216 C0G 50 V",
+   "kind": "series",
+   "value": "100p C0G GRM21A5C1H101JA01D",
+   "sheet": "protection-comparators"
+  },
+  "C27": {
+   "mpn": "GRM21BR71E104KA01L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR71E",
+   "kind": "datasheet",
+   "value": "100n 25V GRM21BR71E104KA01L",
+   "sheet": "protection-comparators"
+  },
+  "C28": {
+   "mpn": "GRM2165C1H103JA01D",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM216 C0G 50 V",
+   "kind": "series",
+   "value": "10n 5% C0G GRM21A5C1H103JA01D",
+   "sheet": "fault-latch"
+  },
+  "C29": {
+   "mpn": "GRM21BR71E104KA01L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR71E",
+   "kind": "datasheet",
+   "value": "100n 25V GRM21BR71E104KA01L",
+   "sheet": "fault-latch"
+  },
+  "C3": {
+   "mpn": "GRM21BR61C105KA12L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR61C 16 V X7R",
+   "kind": "series",
+   "value": "1u 16V X7R",
+   "sheet": "gen-driver"
+  },
+  "C30": {
+   "mpn": "GRM21BR71E104KA01L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR71E",
+   "kind": "datasheet",
+   "value": "100n 25V GRM21BR71E104KA01L",
+   "sheet": "fault-latch"
+  },
+  "C31": {
+   "mpn": "GRM21BR71E104KA01L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR71E",
+   "kind": "datasheet",
+   "value": "100n 25V GRM21BR71E104KA01L",
+   "sheet": "fault-latch"
+  },
+  "C32": {
+   "mpn": "GRM21BR71E104KA01L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR71E",
+   "kind": "datasheet",
+   "value": "100n 25V GRM21BR71E104KA01L",
+   "sheet": "fault-interfaces"
+  },
+  "C33": {
+   "mpn": "GRM21BR71E104KA01L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR71E",
+   "kind": "datasheet",
+   "value": "100n 25V GRM21BR71E104KA01L",
+   "sheet": "fault-interfaces"
+  },
+  "C34": {
+   "mpn": "GRM21BR71E104KA01L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR71E",
+   "kind": "datasheet",
+   "value": "100n 25V GRM21BR71E104KA01L",
+   "sheet": "fault-interfaces"
+  },
+  "C35": {
+   "mpn": "GRM21BR71E104KA01L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR71E",
+   "kind": "datasheet",
+   "value": "100n 25V GRM21BR71E104KA01L",
+   "sheet": "fault-interfaces"
+  },
+  "C36": {
+   "mpn": "GRM21BR71E104KA01L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR71E",
+   "kind": "datasheet",
+   "value": "100n 25V GRM21BR71E104KA01L",
+   "sheet": "fault-interfaces"
+  },
+  "C37": {
+   "mpn": "GRM21BR71E104KA01L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR71E",
+   "kind": "datasheet",
+   "value": "100n 25V GRM21BR71E104KA01L",
+   "sheet": "fault-interfaces"
+  },
+  "C38": {
+   "mpn": "GRM21BR71E105KA99L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR71E",
+   "kind": "datasheet",
+   "value": "1u 25V GRM21BR71E105KA99L",
+   "sheet": "brake-chopper"
+  },
+  "C39": {
+   "mpn": "GRM21BR71E104KA01L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR71E",
+   "kind": "datasheet",
+   "value": "100n 25V GRM21BR71E104KA01L",
+   "sheet": "brake-chopper"
+  },
+  "C4": {
+   "mpn": "GRM185R61A105KA61D",
+   "footprint": "Capacitor_SMD:C_0603_1608Metric",
+   "source": "Murata GRM185R61A 10 V X7R",
+   "kind": "series",
+   "value": "1u 10V X7R",
+   "sheet": "gen-driver"
+  },
+  "C40": {
+   "mpn": "GRM188R71E104KA01D",
+   "footprint": "Capacitor_SMD:C_0603_1608Metric",
+   "source": "Murata GRM188R71E 25 V X7R",
+   "kind": "series",
+   "value": "100n NRST",
+   "sheet": "mcu-core"
+  },
+  "C400": {
+   "mpn": "GRM185R61A105KA61D",
+   "footprint": "Capacitor_SMD:C_0603_1608Metric",
+   "source": "Murata GRM185R61A 10 V X7R",
+   "kind": "series",
+   "value": "1u 10V X7R effective >=0.22u",
+   "sheet": "entry-main"
+  },
+  "C401": {
+   "mpn": "GRM21BR71E104KA01L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR71E 25 V X7R",
+   "kind": "series",
+   "value": "100n 25V C0G 5% CDIV1",
+   "sheet": "entry-main"
+  },
+  "C402": {
+   "mpn": "GRM21B5C1H474JA01L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21B C0G 50 V",
+   "kind": "series",
+   "value": "470n 25V C0G 5% CDIV2",
+   "sheet": "entry-main"
+  },
+  "C41": {
+   "mpn": "GRM188R71E104KA01D",
+   "footprint": "Capacitor_SMD:C_0603_1608Metric",
+   "source": "Murata GRM188R71E 25 V X7R",
+   "kind": "series",
+   "value": "100n 10V X7R pin24",
+   "sheet": "mcu-power"
+  },
+  "C410": {
+   "mpn": "GRM185R61A105KA61D",
+   "footprint": "Capacitor_SMD:C_0603_1608Metric",
+   "source": "Murata GRM185R61A 10 V X7R",
+   "kind": "series",
+   "value": "1u 10V X7R effective >=0.22u",
+   "sheet": "entry-pre"
+  },
+  "C411": {
+   "mpn": "GRM21BR71E104KA01L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR71E 25 V X7R",
+   "kind": "series",
+   "value": "100n 25V C0G 5% CDIV1",
+   "sheet": "entry-pre"
+  },
+  "C412": {
+   "mpn": "GRM21B5C1H474JA01L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21B C0G 50 V",
+   "kind": "series",
+   "value": "470n 25V C0G 5% CDIV2",
+   "sheet": "entry-pre"
+  },
+  "C42": {
+   "mpn": "GRM188R71E104KA01D",
+   "footprint": "Capacitor_SMD:C_0603_1608Metric",
+   "source": "Murata GRM188R71E 25 V X7R",
+   "kind": "series",
+   "value": "100n 10V X7R pin49",
+   "sheet": "mcu-power"
+  },
+  "C43": {
+   "mpn": "GRM188R71E104KA01D",
+   "footprint": "Capacitor_SMD:C_0603_1608Metric",
+   "source": "Murata GRM188R71E 25 V X7R",
+   "kind": "series",
+   "value": "100n 10V X7R pin64",
+   "sheet": "mcu-power"
+  },
+  "C44": {
+   "mpn": "GRM188R71E104KA01D",
+   "footprint": "Capacitor_SMD:C_0603_1608Metric",
+   "source": "Murata GRM188R71E 25 V X7R",
+   "kind": "series",
+   "value": "100n 10V X7R pin75",
+   "sheet": "mcu-power"
+  },
+  "C45": {
+   "mpn": "GRM188R71E104KA01D",
+   "footprint": "Capacitor_SMD:C_0603_1608Metric",
+   "source": "Murata GRM188R71E 25 V X7R",
+   "kind": "series",
+   "value": "100n 10V X7R pin100",
+   "sheet": "mcu-power"
+  },
+  "C46": {
+   "mpn": "GRM188R71E104KA01D",
+   "footprint": "Capacitor_SMD:C_0603_1608Metric",
+   "source": "Murata GRM188R71E 25 V X7R",
+   "kind": "series",
+   "value": "100n 10V X7R pin6",
+   "sheet": "mcu-power"
+  },
+  "C47": {
+   "mpn": "GRM188R60J475KE19D",
+   "footprint": "Capacitor_SMD:C_0603_1608Metric",
+   "source": "Murata GRM188R60J 6.3 V X5R",
+   "kind": "series",
+   "value": "4u7 10V X7R bulk",
+   "sheet": "mcu-power"
+  },
+  "C48": {
+   "mpn": "GRM188R71E104KA01D",
+   "footprint": "Capacitor_SMD:C_0603_1608Metric",
+   "source": "Murata GRM188R71E 25 V X7R",
+   "kind": "series",
+   "value": "100n 10V X7R",
+   "sheet": "mcu-power"
+  },
+  "C49": {
+   "mpn": "GRM188R61C105KA12D",
+   "footprint": "Capacitor_SMD:C_0603_1608Metric",
+   "source": "Murata GRM188R61C 16 V X7R",
+   "kind": "series",
+   "value": "1u 10V X7R",
+   "sheet": "mcu-power"
+  },
+  "C5": {
+   "mpn": "GRM21BR71E104KA01L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR71E 25 V X7R",
+   "kind": "series",
+   "value": "100n 25V X7R",
+   "sheet": "gen-driver"
+  },
+  "C50": {
+   "mpn": "GRM188R71E104KA01D",
+   "footprint": "Capacitor_SMD:C_0603_1608Metric",
+   "source": "Murata GRM188R71E 25 V X7R",
+   "kind": "series",
+   "value": "100n 10V X7R",
+   "sheet": "mcu-power"
+  },
+  "C500": {
+   "mpn": "22252C225KAT2A",
+   "footprint": "Capacitor_SMD:C_2225_5664Metric",
+   "source": "AVX 2225 200 V X7R",
+   "kind": "series",
+   "value": "2.2u 200V X7R 22252C225KAT2A",
+   "sheet": "ctrl-supply"
+  },
+  "C501": {
+   "mpn": "22252C225KAT2A",
+   "footprint": "Capacitor_SMD:C_2225_5664Metric",
+   "source": "AVX 2225 200 V X7R",
+   "kind": "series",
+   "value": "2.2u 200V X7R 22252C225KAT2A",
+   "sheet": "ctrl-supply"
+  },
+  "C502": {
+   "mpn": "GCM155R71H222KA37D",
+   "footprint": "Capacitor_SMD:C_0402_1005Metric",
+   "source": "Murata GCM155 50 V X7R",
+   "kind": "series",
+   "value": "2.2n 50V GCM155R71H222KA37D",
+   "sheet": "ctrl-supply"
+  },
+  "C503": {
+   "mpn": "TMK325B7226KMHT",
+   "footprint": "Capacitor_SMD:C_1210_3225Metric",
+   "source": "Taiyo Yuden TMK325 25 V X7R",
+   "kind": "series",
+   "value": "22u 25V TMK325B7226KMHT",
+   "sheet": "ctrl-supply"
+  },
+  "C504": {
+   "mpn": "TMK325B7226KMHT",
+   "footprint": "Capacitor_SMD:C_1210_3225Metric",
+   "source": "Taiyo Yuden TMK325 25 V X7R",
+   "kind": "series",
+   "value": "22u 25V TMK325B7226KMHT",
+   "sheet": "ctrl-supply"
+  },
+  "C505": {
+   "mpn": "CGA3E2X7R2A332K080AA",
+   "footprint": "Capacitor_SMD:C_0603_1608Metric",
+   "source": "TDK CGA3E2 100 V X7R",
+   "kind": "series",
+   "value": "3.3n 100V CGA3E2X7R2A332K080AA",
+   "sheet": "ctrl-supply"
+  },
+  "C506": {
+   "mpn": "GRM2165C1H331JA01D",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM216 C0G 50 V",
+   "kind": "series",
+   "value": "330p 50V C0G 5%",
+   "sheet": "ctrl-supply"
+  },
+  "C51": {
+   "mpn": "GRM188R61C105KA12D",
+   "footprint": "Capacitor_SMD:C_0603_1608Metric",
+   "source": "Murata GRM188R61C 16 V X7R",
+   "kind": "series",
+   "value": "1u 10V X7R",
+   "sheet": "mcu-power"
+  },
+  "C510": {
+   "mpn": "22252C225KAT2A",
+   "footprint": "Capacitor_SMD:C_2225_5664Metric",
+   "source": "AVX 2225 200 V X7R",
+   "kind": "series",
+   "value": "2.2u 200V X7R 22252C225KAT2A",
+   "sheet": "rail-passives"
+  },
+  "C511": {
+   "mpn": "22252C225KAT2A",
+   "footprint": "Capacitor_SMD:C_2225_5664Metric",
+   "source": "AVX 2225 200 V X7R",
+   "kind": "series",
+   "value": "2.2u 200V X7R 22252C225KAT2A",
+   "sheet": "rail-passives"
+  },
+  "C512": {
+   "mpn": "GCM155R71H222KA37D",
+   "footprint": "Capacitor_SMD:C_0402_1005Metric",
+   "source": "Murata GCM155 50 V X7R",
+   "kind": "series",
+   "value": "2.2n 50V GCM155R71H222KA37D",
+   "sheet": "rail-passives"
+  },
+  "C513": {
+   "mpn": "TMK325B7226KMHT",
+   "footprint": "Capacitor_SMD:C_1210_3225Metric",
+   "source": "Taiyo Yuden TMK325 25 V X7R",
+   "kind": "series",
+   "value": "22u 25V TMK325B7226KMHT",
+   "sheet": "rail-passives"
+  },
+  "C514": {
+   "mpn": "TMK325B7226KMHT",
+   "footprint": "Capacitor_SMD:C_1210_3225Metric",
+   "source": "Taiyo Yuden TMK325 25 V X7R",
+   "kind": "series",
+   "value": "22u 25V TMK325B7226KMHT",
+   "sheet": "rail-passives"
+  },
+  "C515": {
+   "mpn": "CGA3E2X7R2A332K080AA",
+   "footprint": "Capacitor_SMD:C_0603_1608Metric",
+   "source": "TDK CGA3E2 100 V X7R",
+   "kind": "series",
+   "value": "3.3n 100V CGA3E2X7R2A332K080AA",
+   "sheet": "rail-passives"
+  },
+  "C516": {
+   "mpn": "GRM2165C1H560JA01D",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM216 C0G 50 V",
+   "kind": "series",
+   "value": "56p 50V C0G",
+   "sheet": "rail-passives"
+  },
+  "C517": {
+   "mpn": "GRM21BR61E106KA73L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR61E 25 V X7R",
+   "kind": "series",
+   "value": "10u 25V X7R",
+   "sheet": "rail-passives"
+  },
+  "C518": {
+   "mpn": "GRM31CR61C226KA93L",
+   "footprint": "Capacitor_SMD:C_1206_3216Metric",
+   "source": "Murata GRM31CR61C 25 V X7R",
+   "kind": "series",
+   "value": "22u 16V X7R",
+   "sheet": "rail-passives"
+  },
+  "C519": {
+   "mpn": "GRM31CR61C226KA93L",
+   "footprint": "Capacitor_SMD:C_1206_3216Metric",
+   "source": "Murata GRM31CR61C 25 V X7R",
+   "kind": "series",
+   "value": "22u 16V X7R",
+   "sheet": "rail-passives"
+  },
+  "C52": {
+   "mpn": "GRM2165C1H102JA01D",
+   "footprint": "Capacitor_SMD:C_0603_1608Metric",
+   "source": "Murata GRM216 C0G 50 V",
+   "kind": "series",
+   "value": "1n C0G",
+   "sheet": "mcu-analog"
+  },
+  "C520": {
+   "mpn": "GRM21BR71E104KA01L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR71E 25 V X7R",
+   "kind": "series",
+   "value": "100n 25V X7R",
+   "sheet": "rail-passives"
+  },
+  "C521": {
+   "mpn": "GRM21BR71E104KA01L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR71E 25 V X7R",
+   "kind": "series",
+   "value": "100n 25V X7R",
+   "sheet": "rail-passives"
+  },
+  "C523": {
+   "mpn": "GRM2165C1H101JA01D",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM216 C0G 50 V",
+   "kind": "series",
+   "value": "100p 50V C0G OVP sense filter",
+   "sheet": "rail-passives"
+  },
+  "C53": {
+   "mpn": "GRM2165C1H102JA01D",
+   "footprint": "Capacitor_SMD:C_0603_1608Metric",
+   "source": "Murata GRM216 C0G 50 V",
+   "kind": "series",
+   "value": "1n C0G",
+   "sheet": "mcu-analog"
+  },
+  "C54": {
+   "mpn": "GRM2165C1H102JA01D",
+   "footprint": "Capacitor_SMD:C_0603_1608Metric",
+   "source": "Murata GRM216 C0G 50 V",
+   "kind": "series",
+   "value": "1n C0G",
+   "sheet": "mcu-analog"
+  },
+  "C55": {
+   "mpn": "GRM2165C1H102JA01D",
+   "footprint": "Capacitor_SMD:C_0603_1608Metric",
+   "source": "Murata GRM216 C0G 50 V",
+   "kind": "series",
+   "value": "1n C0G",
+   "sheet": "mcu-analog"
+  },
+  "C56": {
+   "mpn": "GRM2165C1H102JA01D",
+   "footprint": "Capacitor_SMD:C_0603_1608Metric",
+   "source": "Murata GRM216 C0G 50 V",
+   "kind": "series",
+   "value": "1n C0G",
+   "sheet": "mcu-analog"
+  },
+  "C57": {
+   "mpn": "GRM2165C1H102JA01D",
+   "footprint": "Capacitor_SMD:C_0603_1608Metric",
+   "source": "Murata GRM216 C0G 50 V",
+   "kind": "series",
+   "value": "1n C0G",
+   "sheet": "mcu-analog"
+  },
+  "C58": {
+   "mpn": "GRM216R71H102KA01D",
+   "footprint": "Capacitor_SMD:C_0603_1608Metric",
+   "source": "Murata GRM216 50 V X7R",
+   "kind": "series",
+   "value": "1n brake filter",
+   "sheet": "mcu-analog"
+  },
+  "C59": {
+   "mpn": "GRM216R71H102KA01D",
+   "footprint": "Capacitor_SMD:C_0603_1608Metric",
+   "source": "Murata GRM216 50 V X7R",
+   "kind": "series",
+   "value": "1n Hall filter",
+   "sheet": "mcu-sensors"
+  },
+  "C6": {
+   "mpn": "GRM21BR61E106KA73L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR61E 25 V X7R",
+   "kind": "series",
+   "value": "10u 25V X7R",
+   "sheet": "gen-driver"
+  },
+  "C60": {
+   "mpn": "GRM216R71H102KA01D",
+   "footprint": "Capacitor_SMD:C_0603_1608Metric",
+   "source": "Murata GRM216 50 V X7R",
+   "kind": "series",
+   "value": "1n Hall filter",
+   "sheet": "mcu-sensors"
+  },
+  "C61": {
+   "mpn": "GRM216R71H102KA01D",
+   "footprint": "Capacitor_SMD:C_0603_1608Metric",
+   "source": "Murata GRM216 50 V X7R",
+   "kind": "series",
+   "value": "1n Hall filter",
+   "sheet": "mcu-sensors"
+  },
+  "C62": {
+   "mpn": "GRM216R71H102KA01D",
+   "footprint": "Capacitor_SMD:C_0603_1608Metric",
+   "source": "Murata GRM216 50 V X7R",
+   "kind": "series",
+   "value": "1n Hall filter",
+   "sheet": "mcu-sensors"
+  },
+  "C63": {
+   "mpn": "GRM216R71H102KA01D",
+   "footprint": "Capacitor_SMD:C_0603_1608Metric",
+   "source": "Murata GRM216 50 V X7R",
+   "kind": "series",
+   "value": "1n Hall filter",
+   "sheet": "mcu-sensors"
+  },
+  "C64": {
+   "mpn": "GRM216R71H102KA01D",
+   "footprint": "Capacitor_SMD:C_0603_1608Metric",
+   "source": "Murata GRM216 50 V X7R",
+   "kind": "series",
+   "value": "1n Hall filter",
+   "sheet": "mcu-sensors"
+  },
+  "C65": {
+   "mpn": "GRM216R71H102KA01D",
+   "footprint": "Capacitor_SMD:C_0603_1608Metric",
+   "source": "Murata GRM216 50 V X7R",
+   "kind": "series",
+   "value": "1n encoder filter",
+   "sheet": "mcu-sensors"
+  },
+  "C66": {
+   "mpn": "GRM216R71H102KA01D",
+   "footprint": "Capacitor_SMD:C_0603_1608Metric",
+   "source": "Murata GRM216 50 V X7R",
+   "kind": "series",
+   "value": "1n encoder filter",
+   "sheet": "mcu-sensors"
+  },
+  "C67": {
+   "mpn": "GRM21BR71E104KA01L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR71E 25 V X7R",
+   "kind": "series",
+   "value": "100n X7R 25V",
+   "sheet": "gen-fast-oc"
+  },
+  "C68": {
+   "mpn": "GRM21BR71E104KA01L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR71E 25 V X7R",
+   "kind": "series",
+   "value": "100n X7R 25V",
+   "sheet": "gen-fast-oc"
+  },
+  "C69": {
+   "mpn": "GRM21BR71E104KA01L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR71E 25 V X7R",
+   "kind": "series",
+   "value": "100n X7R 25V",
+   "sheet": "gen-fast-oc"
+  },
+  "C7": {
+   "mpn": "GRM188R61A104KA93D",
+   "footprint": "Capacitor_SMD:C_0603_1608Metric",
+   "source": "Murata GRM188R61A 10 V X7R",
+   "kind": "series",
+   "value": "100n 10V X7R",
+   "sheet": "gen-driver"
+  },
+  "C70": {
+   "mpn": "GRM21BR71E104KA01L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR71E 25 V X7R",
+   "kind": "series",
+   "value": "100n X7R 25V",
+   "sheet": "hub-fast-oc"
+  },
+  "C71": {
+   "mpn": "GRM21BR71E104KA01L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR71E 25 V X7R",
+   "kind": "series",
+   "value": "100n X7R 25V",
+   "sheet": "hub-fast-oc"
+  },
+  "C72": {
+   "mpn": "GRM21BR71E104KA01L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR71E 25 V X7R",
+   "kind": "series",
+   "value": "100n X7R 25V",
+   "sheet": "hub-fast-oc"
+  },
+  "C73": {
+   "mpn": "UHE2A471MHD",
+   "footprint": "Capacitor_THT:CP_Radial_D16.0mm_P7.50mm",
+   "source": "Nichicon UHE 100 V",
+   "kind": "series",
+   "value": "470u 100V UHE2A471MHD +/-20%",
+   "sheet": "dc-entry"
+  },
+  "C74": {
+   "mpn": "UHE2A471MHD",
+   "footprint": "Capacitor_THT:CP_Radial_D16.0mm_P7.50mm",
+   "source": "Nichicon UHE 100 V",
+   "kind": "series",
+   "value": "470u 100V UHE2A471MHD +/-20%",
+   "sheet": "dc-entry"
+  },
+  "C75": {
+   "mpn": "GRM216R71H103KA01D",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM216 50 V X7R",
+   "kind": "series",
+   "value": "10n ADC filter",
+   "sheet": "brake-intent-left"
+  },
+  "C76": {
+   "mpn": "GRM216R71H103KA01D",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM216 50 V X7R",
+   "kind": "series",
+   "value": "10n ADC filter",
+   "sheet": "brake-intent-right"
+  },
+  "C77": {
+   "mpn": "GRM21BR71E104KA01L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR71E 25 V X7R",
+   "kind": "series",
+   "value": "100n AND decoupling",
+   "sheet": "brake-dump-command"
+  },
+  "C78": {
+   "mpn": "GRM21BR71E104KA01L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR71E 25 V X7R",
+   "kind": "series",
+   "value": "100n OR decoupling",
+   "sheet": "brake-dump-command"
+  },
+  "C79": {
+   "mpn": "GRM21BR71E104KA01L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR71E 25 V X7R",
+   "kind": "series",
+   "value": "100n FSR sense",
+   "sheet": "fsr-left"
+  },
+  "C8": {
+   "mpn": "GRM21BR72A105KA01L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR72A 100 V X7R",
+   "kind": "series",
+   "value": "1u 100V X7R",
+   "sheet": "gen-bridge"
+  },
+  "C80": {
+   "mpn": "GRM21BR71E104KA01L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR71E 25 V X7R",
+   "kind": "series",
+   "value": "100n OPA bypass",
+   "sheet": "fsr-left"
+  },
+  "C81": {
+   "mpn": "GRM21BR71E104KA01L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR71E 25 V X7R",
+   "kind": "series",
+   "value": "100n ADC reservoir",
+   "sheet": "fsr-left"
+  },
+  "C82": {
+   "mpn": "GRM21BR71E104KA01L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR71E 25 V X7R",
+   "kind": "series",
+   "value": "100n mux bypass",
+   "sheet": "fsr-left"
+  },
+  "C83": {
+   "mpn": "GRM21BR71E104KA01L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR71E 25 V X7R",
+   "kind": "series",
+   "value": "100n FSR sense",
+   "sheet": "fsr-right"
+  },
+  "C84": {
+   "mpn": "GRM21BR71E104KA01L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR71E 25 V X7R",
+   "kind": "series",
+   "value": "100n OPA bypass",
+   "sheet": "fsr-right"
+  },
+  "C85": {
+   "mpn": "GRM21BR71E104KA01L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR71E 25 V X7R",
+   "kind": "series",
+   "value": "100n ADC reservoir",
+   "sheet": "fsr-right"
+  },
+  "C86": {
+   "mpn": "GRM21BR71E104KA01L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR71E 25 V X7R",
+   "kind": "series",
+   "value": "100n mux bypass",
+   "sheet": "fsr-right"
+  },
+  "C9": {
+   "mpn": "GRM21BR72A105KA01L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "source": "Murata GRM21BR72A 100 V X7R",
+   "kind": "series",
+   "value": "1u 100V X7R",
+   "sheet": "gen-bridge"
+  },
+  "D20": {
+   "mpn": "STPS30100ST",
+   "footprint": "Package_TO_SOT_SMD:TO-277A",
+   "source": "ST STPS30100 100 V Schottky (clamp only)",
+   "kind": "series",
+   "value": "STPS30100ST reverse clamp ONLY not reverse blocker",
+   "sheet": "dc-entry"
+  },
+  "D32": {
+   "mpn": "PESD3V3U1UL,315",
+   "footprint": "Diode_SMD:D_SOD-882",
+   "source": "Nexperia PESD3V3U1UL",
+   "kind": "series",
+   "value": "PESD3V3U1UL",
+   "sheet": "brake-intent-left"
+  },
+  "D33": {
+   "mpn": "PESD3V3U1UL,315",
+   "footprint": "Diode_SMD:D_SOD-882",
+   "source": "Nexperia PESD3V3U1UL",
+   "kind": "series",
+   "value": "PESD3V3U1UL",
+   "sheet": "brake-intent-right"
+  },
+  "D36": {
+   "mpn": "BAT54S-7-F",
+   "footprint": "Package_TO_SOT_SMD:SOT-23",
+   "source": "Diodes Inc BAT54S",
+   "kind": "series",
+   "value": "BAT54S",
+   "sheet": "brake-intent-left"
+  },
+  "D37": {
+   "mpn": "BAT54S-7-F",
+   "footprint": "Package_TO_SOT_SMD:SOT-23",
+   "source": "Diodes Inc BAT54S",
+   "kind": "series",
+   "value": "BAT54S",
+   "sheet": "brake-intent-right"
+  },
+  "D38": {
+   "mpn": "PESD3V3U1UL,315",
+   "footprint": "Diode_SMD:D_SOD-882",
+   "source": "Nexperia PESD3V3U1UL",
+   "kind": "series",
+   "value": "PESD3V3U1UL",
+   "sheet": "fsr-protection-left"
+  },
+  "D39": {
+   "mpn": "PESD3V3U1UL,315",
+   "footprint": "Diode_SMD:D_SOD-882",
+   "source": "Nexperia PESD3V3U1UL",
+   "kind": "series",
+   "value": "PESD3V3U1UL",
+   "sheet": "fsr-protection-left"
+  },
+  "D40": {
+   "mpn": "BAT54S-7-F",
+   "footprint": "Package_TO_SOT_SMD:SOT-23",
+   "source": "Diodes Inc BAT54S",
+   "kind": "series",
+   "value": "BAT54S",
+   "sheet": "fsr-protection-left"
+  },
+  "D41": {
+   "mpn": "PESD3V3U1UL,315",
+   "footprint": "Diode_SMD:D_SOD-882",
+   "source": "Nexperia PESD3V3U1UL",
+   "kind": "series",
+   "value": "PESD3V3U1UL",
+   "sheet": "fsr-protection-right"
+  },
+  "D42": {
+   "mpn": "PESD3V3U1UL,315",
+   "footprint": "Diode_SMD:D_SOD-882",
+   "source": "Nexperia PESD3V3U1UL",
+   "kind": "series",
+   "value": "PESD3V3U1UL",
+   "sheet": "fsr-protection-right"
+  },
+  "D43": {
+   "mpn": "BAT54S-7-F",
+   "footprint": "Package_TO_SOT_SMD:SOT-23",
+   "source": "Diodes Inc BAT54S",
+   "kind": "series",
+   "value": "BAT54S",
+   "sheet": "fsr-protection-right"
+  },
+  "D500": {
+   "mpn": "S1J-E3/61T",
+   "footprint": "Diode_SMD:D_SMA",
+   "source": "Vishay S1J 600 V 1 A",
+   "kind": "series",
+   "value": "S1J-E3/61T 600V 1A",
+   "sheet": "ctrl-supply"
+  },
+  "F1": {
+   "mpn": "KLKD020.T",
+   "footprint": "Fuse:Fuseholder_Littelfuse_100_KM_KLKD",
+   "source": "Littelfuse KLKD 20 A 600 VDC",
+   "kind": "series",
+   "value": "KLKD020CN 20A 600VDC",
+   "sheet": "dc-entry"
+  },
+  "J1": {
+   "mpn": "Conn_01x02",
+   "footprint": "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical",
+   "source": "2-pin bench bus input",
+   "kind": "series",
+   "value": "BUS_TEST_ONLY_NOT_SOURCE_INPUT",
+   "sheet": "external-boundaries"
+  },
+  "J10": {
+   "mpn": "Conn_01x05",
+   "footprint": "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical",
+   "source": "5-pin Hall header",
+   "kind": "series",
+   "value": "HUB_HALL_3V3_ONLY",
+   "sheet": "mcu-sensors"
+  },
+  "J11": {
+   "mpn": "Conn_01x05",
+   "footprint": "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical",
+   "source": "5-pin encoder header",
+   "kind": "series",
+   "value": "OPTIONAL_ENCODER_3V3_ONLY",
+   "sheet": "mcu-sensors"
+  },
+  "J2": {
+   "mpn": "Conn_01x02",
+   "footprint": "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical",
+   "source": "2-pin MCU rail test point",
+   "kind": "series",
+   "value": "MCU_RAIL_TEST_ONLY_NOT_INPUT",
+   "sheet": "external-boundaries"
+  },
+  "J3": {
+   "mpn": "Conn_01x03",
+   "footprint": "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical",
+   "source": "3-pin phase header",
+   "kind": "series",
+   "value": "GEN_MACHINE_PHASES",
+   "sheet": "external-boundaries"
+  },
+  "J4": {
+   "mpn": "Conn_01x03",
+   "footprint": "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical",
+   "source": "3-pin phase header",
+   "kind": "series",
+   "value": "HUB_MACHINE_PHASES",
+   "sheet": "external-boundaries"
+  },
+  "J40": {
+   "mpn": "992G1-BK",
+   "footprint": "Connector:Conn_01x01_Pin",
+   "source": "Anderson Powerpole SB50 housing, keyed",
+   "kind": "series",
+   "value": "Anderson 992G1 SB50 keyed SOURCE",
+   "sheet": "dc-entry"
+  },
+  "J43": {
+   "mpn": "Conn_01x02",
+   "footprint": "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical",
+   "source": "2-pin header, instrument Kelvin pair",
+   "kind": "series",
+   "value": "Kelvin BUS measurement isolated instrument ONLY",
+   "sheet": "dc-entry"
+  },
+  "J44": {
+   "mpn": "TL3305AF160QG",
+   "footprint": "Button_Switch_SMD:SW_SPST_TL3305A",
+   "source": "E-Switch TL3305 tactile, binary left",
+   "kind": "series",
+   "value": "LEFT_BINARY_SWITCH_ONLY",
+   "sheet": "brake-intent-left"
+  },
+  "J45": {
+   "mpn": "TL3305AF160QG",
+   "footprint": "Button_Switch_SMD:SW_SPST_TL3305A",
+   "source": "E-Switch TL3305 tactile, binary right",
+   "kind": "series",
+   "value": "RIGHT_BINARY_SWITCH_ONLY",
+   "sheet": "brake-intent-right"
+  },
+  "J46": {
+   "mpn": "34-00018",
+   "footprint": "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical",
+   "source": "Interlink FSR 34-00018 (external pad)",
+   "kind": "series",
+   "value": "LEFT_FSR_34-00018_EXTERNAL",
+   "sheet": "fsr-left"
+  },
+  "J47": {
+   "mpn": "34-00018",
+   "footprint": "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical",
+   "source": "Interlink FSR 34-00018 (external pad)",
+   "kind": "series",
+   "value": "RIGHT_FSR_34-00018_EXTERNAL",
+   "sheet": "fsr-right"
+  },
+  "J5": {
+   "mpn": "Conn_01x02",
+   "footprint": "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical",
+   "source": "2-pin NC fault-chain link",
+   "kind": "series",
+   "value": "SAFETY_FAULT_CHAIN_NC",
+   "sheet": "external-boundaries"
+  },
+  "J6": {
+   "mpn": "HSC3004R7J",
+   "footprint": "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm",
+   "source": "TE HSC300 4R7 300 W (external, off-board)",
+   "kind": "series",
+   "value": "EXTERNAL_DUMP_RESISTOR",
+   "sheet": "brake-chopper"
+  },
+  "J7": {
+   "mpn": "Conn_01x06",
+   "footprint": "Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical",
+   "source": "6-pin SWD header",
+   "kind": "series",
+   "value": "SWD_3V3_TARGET_REFERENCE",
+   "sheet": "mcu-core"
+  },
+  "J8": {
+   "mpn": "TL3305AF160QG",
+   "footprint": "Button_Switch_SMD:SW_SPST_TL3305A",
+   "source": "E-Switch TL3305 tactile, NO wiring",
+   "kind": "series",
+   "value": "RESET_BUTTON_NORMALLY_OPEN",
+   "sheet": "mcu-core"
+  },
+  "J9": {
+   "mpn": "Conn_01x05",
+   "footprint": "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical",
+   "source": "5-pin Hall header",
+   "kind": "series",
+   "value": "GEN_HALL_3V3_ONLY",
+   "sheet": "mcu-sensors"
+  },
+  "L500": {
+   "mpn": "MSS1246T-683MLC",
+   "footprint": "Inductor_SMD:L_Coilcraft_MSS1246",
+   "source": "Coilcraft MSS1246T 68 uH (L500, RAIL-03 open)",
+   "kind": "series",
+   "value": "68u MSS1246T-683MLC 20%",
+   "sheet": "ctrl-supply"
+  },
+  "L501": {
+   "mpn": "SPM10065VC-680M-D",
+   "footprint": "Powerboard:L_TDK_SPM10065VC-D",
+   "source": "TDK catalogue 20250303 p3",
+   "kind": "datasheet",
+   "value": "68u SPM10065VC-680M-D 20% AEC-Q200",
+   "sheet": "rail-passives"
+  },
+  "L502": {
+   "mpn": "SRN6045TA-3R9M",
+   "footprint": "Inductor_SMD:L_Bourns_SRN6045TA",
+   "source": "Bourns SRN6045TA series",
+   "kind": "series",
+   "value": "3.9u 2A",
+   "sheet": "rail-passives"
+  },
+  "Q1": {
+   "mpn": "CSD19532Q5B",
+   "footprint": "Package_TO_SOT_SMD:TDSON-8-1",
+   "source": "TI SLPS414 Rev. B",
+   "kind": "datasheet",
+   "value": "CSD19532Q5B",
+   "sheet": "gen-bridge"
+  },
+  "Q10": {
+   "mpn": "CSD19532Q5B",
+   "footprint": "Package_TO_SOT_SMD:TDSON-8-1",
+   "source": "TI SLPS414 Rev. B",
+   "kind": "datasheet",
+   "value": "CSD19532Q5B",
+   "sheet": "hub-bridge"
+  },
+  "Q11": {
+   "mpn": "CSD19532Q5B",
+   "footprint": "Package_TO_SOT_SMD:TDSON-8-1",
+   "source": "TI SLPS414 Rev. B",
+   "kind": "datasheet",
+   "value": "CSD19532Q5B",
+   "sheet": "hub-bridge"
+  },
+  "Q12": {
+   "mpn": "CSD19532Q5B",
+   "footprint": "Package_TO_SOT_SMD:TDSON-8-1",
+   "source": "TI SLPS414 Rev. B",
+   "kind": "datasheet",
+   "value": "CSD19532Q5B",
+   "sheet": "hub-bridge"
+  },
+  "Q13": {
+   "mpn": "CSD19532Q5B",
+   "footprint": "Package_TO_SOT_SMD:TDSON-8-1",
+   "source": "TI SLPS414 Rev. B",
+   "kind": "datasheet",
+   "value": "CSD19532Q5B",
+   "sheet": "brake-chopper"
+  },
+  "Q14": {
+   "mpn": "2N7002K-T1-GE3",
+   "footprint": "Package_TO_SOT_SMD:SOT-23",
+   "source": "Vishay 2N7002K",
+   "kind": "series",
+   "value": "2N7002",
+   "sheet": "gen-fast-oc"
+  },
+  "Q15": {
+   "mpn": "2N7002K-T1-GE3",
+   "footprint": "Package_TO_SOT_SMD:SOT-23",
+   "source": "Vishay 2N7002K",
+   "kind": "series",
+   "value": "2N7002",
+   "sheet": "gen-fast-oc"
+  },
+  "Q16": {
+   "mpn": "2N7002K-T1-GE3",
+   "footprint": "Package_TO_SOT_SMD:SOT-23",
+   "source": "Vishay 2N7002K",
+   "kind": "series",
+   "value": "2N7002",
+   "sheet": "gen-fast-oc"
+  },
+  "Q17": {
+   "mpn": "2N7002K-T1-GE3",
+   "footprint": "Package_TO_SOT_SMD:SOT-23",
+   "source": "Vishay 2N7002K",
+   "kind": "series",
+   "value": "2N7002",
+   "sheet": "gen-fast-oc"
+  },
+  "Q18": {
+   "mpn": "2N7002K-T1-GE3",
+   "footprint": "Package_TO_SOT_SMD:SOT-23",
+   "source": "Vishay 2N7002K",
+   "kind": "series",
+   "value": "2N7002",
+   "sheet": "gen-fast-oc"
+  },
+  "Q19": {
+   "mpn": "2N7002K-T1-GE3",
+   "footprint": "Package_TO_SOT_SMD:SOT-23",
+   "source": "Vishay 2N7002K",
+   "kind": "series",
+   "value": "2N7002",
+   "sheet": "gen-fast-oc"
+  },
+  "Q2": {
+   "mpn": "CSD19532Q5B",
+   "footprint": "Package_TO_SOT_SMD:TDSON-8-1",
+   "source": "TI SLPS414 Rev. B",
+   "kind": "datasheet",
+   "value": "CSD19532Q5B",
+   "sheet": "gen-bridge"
+  },
+  "Q20": {
+   "mpn": "2N7002K-T1-GE3",
+   "footprint": "Package_TO_SOT_SMD:SOT-23",
+   "source": "Vishay 2N7002K",
+   "kind": "series",
+   "value": "2N7002",
+   "sheet": "hub-fast-oc"
+  },
+  "Q21": {
+   "mpn": "2N7002K-T1-GE3",
+   "footprint": "Package_TO_SOT_SMD:SOT-23",
+   "source": "Vishay 2N7002K",
+   "kind": "series",
+   "value": "2N7002",
+   "sheet": "hub-fast-oc"
+  },
+  "Q22": {
+   "mpn": "2N7002K-T1-GE3",
+   "footprint": "Package_TO_SOT_SMD:SOT-23",
+   "source": "Vishay 2N7002K",
+   "kind": "series",
+   "value": "2N7002",
+   "sheet": "hub-fast-oc"
+  },
+  "Q23": {
+   "mpn": "2N7002K-T1-GE3",
+   "footprint": "Package_TO_SOT_SMD:SOT-23",
+   "source": "Vishay 2N7002K",
+   "kind": "series",
+   "value": "2N7002",
+   "sheet": "hub-fast-oc"
+  },
+  "Q24": {
+   "mpn": "2N7002K-T1-GE3",
+   "footprint": "Package_TO_SOT_SMD:SOT-23",
+   "source": "Vishay 2N7002K",
+   "kind": "series",
+   "value": "2N7002",
+   "sheet": "hub-fast-oc"
+  },
+  "Q25": {
+   "mpn": "2N7002K-T1-GE3",
+   "footprint": "Package_TO_SOT_SMD:SOT-23",
+   "source": "Vishay 2N7002K",
+   "kind": "series",
+   "value": "2N7002",
+   "sheet": "hub-fast-oc"
+  },
+  "Q3": {
+   "mpn": "CSD19532Q5B",
+   "footprint": "Package_TO_SOT_SMD:TDSON-8-1",
+   "source": "TI SLPS414 Rev. B",
+   "kind": "datasheet",
+   "value": "CSD19532Q5B",
+   "sheet": "gen-bridge"
+  },
+  "Q4": {
+   "mpn": "CSD19532Q5B",
+   "footprint": "Package_TO_SOT_SMD:TDSON-8-1",
+   "source": "TI SLPS414 Rev. B",
+   "kind": "datasheet",
+   "value": "CSD19532Q5B",
+   "sheet": "gen-bridge"
+  },
+  "Q400": {
+   "mpn": "IRFP4568PBF",
+   "footprint": "Package_TO_SOT_THT:TO-247-3_Vertical",
+   "source": "Infineon IRFP4568 150 V (dump FET)",
+   "kind": "series",
+   "value": "IRFP4568PbF 150V",
+   "sheet": "entry-main"
+  },
+  "Q401": {
+   "mpn": "IRFP4568PBF",
+   "footprint": "Package_TO_SOT_THT:TO-247-3_Vertical",
+   "source": "Infineon IRFP4568 150 V (dump FET)",
+   "kind": "series",
+   "value": "IRFP4568PbF 150V",
+   "sheet": "entry-main"
+  },
+  "Q402": {
+   "mpn": "IRFP4568PBF",
+   "footprint": "Package_TO_SOT_THT:TO-247-3_Vertical",
+   "source": "Infineon IRFP4568 150 V (dump FET)",
+   "kind": "series",
+   "value": "IRFP4568PbF 150V",
+   "sheet": "entry-pre"
+  },
+  "Q403": {
+   "mpn": "IRFP4568PBF",
+   "footprint": "Package_TO_SOT_THT:TO-247-3_Vertical",
+   "source": "Infineon IRFP4568 150 V (dump FET)",
+   "kind": "series",
+   "value": "IRFP4568PbF 150V",
+   "sheet": "entry-pre"
+  },
+  "Q5": {
+   "mpn": "CSD19532Q5B",
+   "footprint": "Package_TO_SOT_SMD:TDSON-8-1",
+   "source": "TI SLPS414 Rev. B",
+   "kind": "datasheet",
+   "value": "CSD19532Q5B",
+   "sheet": "gen-bridge"
+  },
+  "Q6": {
+   "mpn": "CSD19532Q5B",
+   "footprint": "Package_TO_SOT_SMD:TDSON-8-1",
+   "source": "TI SLPS414 Rev. B",
+   "kind": "datasheet",
+   "value": "CSD19532Q5B",
+   "sheet": "gen-bridge"
+  },
+  "Q7": {
+   "mpn": "CSD19532Q5B",
+   "footprint": "Package_TO_SOT_SMD:TDSON-8-1",
+   "source": "TI SLPS414 Rev. B",
+   "kind": "datasheet",
+   "value": "CSD19532Q5B",
+   "sheet": "hub-bridge"
+  },
+  "Q8": {
+   "mpn": "CSD19532Q5B",
+   "footprint": "Package_TO_SOT_SMD:TDSON-8-1",
+   "source": "TI SLPS414 Rev. B",
+   "kind": "datasheet",
+   "value": "CSD19532Q5B",
+   "sheet": "hub-bridge"
+  },
+  "Q9": {
+   "mpn": "CSD19532Q5B",
+   "footprint": "Package_TO_SOT_SMD:TDSON-8-1",
+   "source": "TI SLPS414 Rev. B",
+   "kind": "datasheet",
+   "value": "CSD19532Q5B",
+   "sheet": "hub-bridge"
+  },
+  "R1": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "100k",
+   "sheet": "gen-driver"
+  },
+  "R10": {
+   "mpn": "CRCW08053R30FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 % (sized: 3.3 ohm, 60 ns edge)",
+   "kind": "series",
+   "value": "3R3 1% gate",
+   "sheet": "gen-bridge"
+  },
+  "R100": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "100k 1% gate default",
+   "sheet": "gen-fast-oc"
+  },
+  "R101": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "100k 1% gate default",
+   "sheet": "gen-fast-oc"
+  },
+  "R102": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "100k 1% open SO bias",
+   "sheet": "hub-fast-oc"
+  },
+  "R103": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "100k 1% gate default",
+   "sheet": "hub-fast-oc"
+  },
+  "R104": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "100k 1% gate default",
+   "sheet": "hub-fast-oc"
+  },
+  "R105": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "100k 1% open SO bias",
+   "sheet": "hub-fast-oc"
+  },
+  "R106": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "100k 1% gate default",
+   "sheet": "hub-fast-oc"
+  },
+  "R107": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "100k 1% gate default",
+   "sheet": "hub-fast-oc"
+  },
+  "R108": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "100k 1% open SO bias",
+   "sheet": "hub-fast-oc"
+  },
+  "R109": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "100k 1% gate default",
+   "sheet": "hub-fast-oc"
+  },
+  "R11": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 % (gate-source pulldown)",
+   "kind": "series",
+   "value": "100k G-S",
+   "sheet": "gen-bridge"
+  },
+  "R110": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "100k 1% gate default",
+   "sheet": "hub-fast-oc"
+  },
+  "R111": {
+   "mpn": "ERA-6AEB2872V",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Panasonic ERA-6A 0.1 % 25 ppm/K",
+   "kind": "series",
+   "value": "28k7 0.1%",
+   "sheet": "fast-oc-reference"
+  },
+  "R112": {
+   "mpn": "ERA-6AEB103V",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Panasonic ERA-6A 0.1 % 25 ppm/K",
+   "kind": "series",
+   "value": "10k 0.1%",
+   "sheet": "fast-oc-reference"
+  },
+  "R113": {
+   "mpn": "ERA-6AEB103V",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Panasonic ERA-6A 0.1 % 25 ppm/K",
+   "kind": "series",
+   "value": "10k 0.1%",
+   "sheet": "fast-oc-reference"
+  },
+  "R114": {
+   "mpn": "ERA-6AEB2872V",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Panasonic ERA-6A 0.1 % 25 ppm/K",
+   "kind": "series",
+   "value": "28k7 0.1%",
+   "sheet": "fast-oc-reference"
+  },
+  "R115": {
+   "mpn": "CRCW08054K70FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "4k7 1%",
+   "sheet": "fast-oc-reference"
+  },
+  "R116": {
+   "mpn": "RH05022R00FE02",
+   "footprint": "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm",
+   "source": "Vishay RH050 22R 1 % - PULSE RATING NOT QUALIFIED (PROT-09)",
+   "kind": "series",
+   "value": "22R 1% RH05022R00FE02 pulse UNQUALIFIED",
+   "sheet": "dc-entry"
+  },
+  "R117": {
+   "mpn": "WSLP2512R0020FEA",
+   "footprint": "Resistor_SMD:R_2512_6332Metric",
+   "source": "Vishay WSLP2512 2 mOhm 1 % Kelvin",
+   "kind": "series",
+   "value": "2m 1% WSLP2512R0020FEA Kelvin",
+   "sheet": "dc-entry"
+  },
+  "R118": {
+   "mpn": "CRCW080510K0FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "10k 1% RH02510K00FE02 always-on bleed",
+   "sheet": "dc-entry"
+  },
+  "R119": {
+   "mpn": "CRCW080510K0FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "10k 1% signal current limit",
+   "sheet": "brake-intent-left"
+  },
+  "R12": {
+   "mpn": "CRCW08053R30FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 % (sized: 3.3 ohm, 60 ns edge)",
+   "kind": "series",
+   "value": "3R3 1% gate",
+   "sheet": "gen-bridge"
+  },
+  "R120": {
+   "mpn": "CRCW080510K0FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "10k 1% switch bias",
+   "sheet": "brake-intent-left"
+  },
+  "R121": {
+   "mpn": "CRCW080510K0FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "10k 1% signal current limit",
+   "sheet": "brake-intent-right"
+  },
+  "R122": {
+   "mpn": "CRCW080510K0FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "10k 1% switch bias",
+   "sheet": "brake-intent-right"
+  },
+  "R123": {
+   "mpn": "CRCW080510K0FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "10k dump PWM default off",
+   "sheet": "brake-dump-command"
+  },
+  "R124": {
+   "mpn": "CRCW08054K70FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "4k7 1% EOL OFFBOARD",
+   "sheet": "brake-switch-harness"
+  },
+  "R125": {
+   "mpn": "CRCW080510K0FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "10k 1% EOL OFFBOARD",
+   "sheet": "brake-switch-harness"
+  },
+  "R126": {
+   "mpn": "CRCW08054K70FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "4k7 1% EOL OFFBOARD",
+   "sheet": "brake-switch-harness"
+  },
+  "R127": {
+   "mpn": "CRCW080510K0FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "10k 1% EOL OFFBOARD",
+   "sheet": "brake-switch-harness"
+  },
+  "R128": {
+   "mpn": "CRCW080510K0FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "10k 1% FSR excitation",
+   "sheet": "fsr-left"
+  },
+  "R129": {
+   "mpn": "CRCW08051K00FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "1k 1% FSR return",
+   "sheet": "fsr-left"
+  },
+  "R13": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 % (gate-source pulldown)",
+   "kind": "series",
+   "value": "100k G-S",
+   "sheet": "gen-bridge"
+  },
+  "R130": {
+   "mpn": "ERA-6AEB103V",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Panasonic ERA-6A 0.1 % 25 ppm/K",
+   "kind": "series",
+   "value": "10k 0.1% FSR measure",
+   "sheet": "fsr-left"
+  },
+  "R131": {
+   "mpn": "CRCW080510K0FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "10k 1% OPA input limit",
+   "sheet": "fsr-left"
+  },
+  "R132": {
+   "mpn": "CRCW08051K00FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "1k 1% ADC isolation",
+   "sheet": "fsr-left"
+  },
+  "R133": {
+   "mpn": "CRCW080510K0FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "10k 1% ADC bleed",
+   "sheet": "fsr-left"
+  },
+  "R134": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "100k enable default off",
+   "sheet": "fsr-left"
+  },
+  "R135": {
+   "mpn": "CRCW080510K0FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "10k 1% FSR excitation",
+   "sheet": "fsr-right"
+  },
+  "R136": {
+   "mpn": "CRCW08051K00FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "1k 1% FSR return",
+   "sheet": "fsr-right"
+  },
+  "R137": {
+   "mpn": "ERA-6AEB103V",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Panasonic ERA-6A 0.1 % 25 ppm/K",
+   "kind": "series",
+   "value": "10k 0.1% FSR measure",
+   "sheet": "fsr-right"
+  },
+  "R138": {
+   "mpn": "CRCW080510K0FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "10k 1% OPA input limit",
+   "sheet": "fsr-right"
+  },
+  "R139": {
+   "mpn": "CRCW08051K00FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "1k 1% ADC isolation",
+   "sheet": "fsr-right"
+  },
+  "R14": {
+   "mpn": "WSLP25123L000FEA",
+   "footprint": "Resistor_SMD:R_2512_6332Metric",
+   "source": "Vishay WSLP2512 series",
+   "kind": "series",
+   "value": "2m 1% 3W WSLP2512",
+   "sheet": "gen-bridge"
+  },
+  "R140": {
+   "mpn": "CRCW080510K0FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "10k 1% ADC bleed",
+   "sheet": "fsr-right"
+  },
+  "R141": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "100k enable default off",
+   "sheet": "fsr-right"
+  },
+  "R15": {
+   "mpn": "CRCW08053R30FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 % (sized: 3.3 ohm, 60 ns edge)",
+   "kind": "series",
+   "value": "3R3 1% gate",
+   "sheet": "gen-bridge"
+  },
+  "R16": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 % (gate-source pulldown)",
+   "kind": "series",
+   "value": "100k G-S",
+   "sheet": "gen-bridge"
+  },
+  "R17": {
+   "mpn": "CRCW08053R30FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 % (sized: 3.3 ohm, 60 ns edge)",
+   "kind": "series",
+   "value": "3R3 1% gate",
+   "sheet": "gen-bridge"
+  },
+  "R18": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 % (gate-source pulldown)",
+   "kind": "series",
+   "value": "100k G-S",
+   "sheet": "gen-bridge"
+  },
+  "R19": {
+   "mpn": "WSLP25123L000FEA",
+   "footprint": "Resistor_SMD:R_2512_6332Metric",
+   "source": "Vishay WSLP2512 series",
+   "kind": "series",
+   "value": "2m 1% 3W WSLP2512",
+   "sheet": "gen-bridge"
+  },
+  "R2": {
+   "mpn": "CRCW080510K0FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "10k",
+   "sheet": "gen-driver"
+  },
+  "R20": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "100k",
+   "sheet": "hub-driver"
+  },
+  "R21": {
+   "mpn": "CRCW080510K0FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "10k",
+   "sheet": "hub-driver"
+  },
+  "R22": {
+   "mpn": "CRCW080510K0FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "10k",
+   "sheet": "hub-driver"
+  },
+  "R23": {
+   "mpn": "CRCW080510K0FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "10k",
+   "sheet": "hub-driver"
+  },
+  "R24": {
+   "mpn": "CRCW08053R30FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 % (sized: 3.3 ohm, 60 ns edge)",
+   "kind": "series",
+   "value": "3R3 1% gate",
+   "sheet": "hub-bridge"
+  },
+  "R25": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 % (gate-source pulldown)",
+   "kind": "series",
+   "value": "100k G-S",
+   "sheet": "hub-bridge"
+  },
+  "R26": {
+   "mpn": "CRCW08053R30FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 % (sized: 3.3 ohm, 60 ns edge)",
+   "kind": "series",
+   "value": "3R3 1% gate",
+   "sheet": "hub-bridge"
+  },
+  "R27": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 % (gate-source pulldown)",
+   "kind": "series",
+   "value": "100k G-S",
+   "sheet": "hub-bridge"
+  },
+  "R28": {
+   "mpn": "WSLP25123L000FEA",
+   "footprint": "Resistor_SMD:R_2512_6332Metric",
+   "source": "Vishay WSLP2512 series",
+   "kind": "series",
+   "value": "2m 1% 3W WSLP2512",
+   "sheet": "hub-bridge"
+  },
+  "R29": {
+   "mpn": "CRCW08053R30FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 % (sized: 3.3 ohm, 60 ns edge)",
+   "kind": "series",
+   "value": "3R3 1% gate",
+   "sheet": "hub-bridge"
+  },
+  "R3": {
+   "mpn": "CRCW080510K0FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "10k",
+   "sheet": "gen-driver"
+  },
+  "R30": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 % (gate-source pulldown)",
+   "kind": "series",
+   "value": "100k G-S",
+   "sheet": "hub-bridge"
+  },
+  "R31": {
+   "mpn": "CRCW08053R30FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 % (sized: 3.3 ohm, 60 ns edge)",
+   "kind": "series",
+   "value": "3R3 1% gate",
+   "sheet": "hub-bridge"
+  },
+  "R32": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 % (gate-source pulldown)",
+   "kind": "series",
+   "value": "100k G-S",
+   "sheet": "hub-bridge"
+  },
+  "R33": {
+   "mpn": "WSLP25123L000FEA",
+   "footprint": "Resistor_SMD:R_2512_6332Metric",
+   "source": "Vishay WSLP2512 series",
+   "kind": "series",
+   "value": "2m 1% 3W WSLP2512",
+   "sheet": "hub-bridge"
+  },
+  "R34": {
+   "mpn": "CRCW08053R30FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 % (sized: 3.3 ohm, 60 ns edge)",
+   "kind": "series",
+   "value": "3R3 1% gate",
+   "sheet": "hub-bridge"
+  },
+  "R35": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 % (gate-source pulldown)",
+   "kind": "series",
+   "value": "100k G-S",
+   "sheet": "hub-bridge"
+  },
+  "R36": {
+   "mpn": "CRCW08053R30FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 % (sized: 3.3 ohm, 60 ns edge)",
+   "kind": "series",
+   "value": "3R3 1% gate",
+   "sheet": "hub-bridge"
+  },
+  "R37": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 % (gate-source pulldown)",
+   "kind": "series",
+   "value": "100k G-S",
+   "sheet": "hub-bridge"
+  },
+  "R38": {
+   "mpn": "WSLP25123L000FEA",
+   "footprint": "Resistor_SMD:R_2512_6332Metric",
+   "source": "Vishay WSLP2512 series",
+   "kind": "series",
+   "value": "2m 1% 3W WSLP2512",
+   "sheet": "hub-bridge"
+  },
+  "R39": {
+   "mpn": "CRCW08051K00FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "1k 1% CRCW08051K00FKEA",
+   "sheet": "aux-supply"
+  },
+  "R4": {
+   "mpn": "CRCW080510K0FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "10k",
+   "sheet": "gen-driver"
+  },
+  "R40": {
+   "mpn": "CRCW08054K70FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "4k7 1% CRCW08054K70FKEA",
+   "sheet": "aux-supply"
+  },
+  "R400": {
+   "mpn": "CRCW080520K0FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "20k 1% PXFR",
+   "sheet": "entry-main"
+  },
+  "R401": {
+   "mpn": "CRCW080510K0FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "10k EN default OFF",
+   "sheet": "entry-main"
+  },
+  "R402": {
+   "mpn": "CRCW08050000Z0EA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 0R jumper",
+   "kind": "series",
+   "value": "0R FIXED INHIBIT - no operational command source",
+   "sheet": "entry-main"
+  },
+  "R403": {
+   "mpn": "CRCW08053R30FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 % (sized: 3.3 ohm, 60 ns edge)",
+   "kind": "series",
+   "value": "3R3 1% gate",
+   "sheet": "entry-main"
+  },
+  "R404": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "100k 1% G-S default OFF",
+   "sheet": "entry-main"
+  },
+  "R405": {
+   "mpn": "CRCW08053R30FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 % (sized: 3.3 ohm, 60 ns edge)",
+   "kind": "series",
+   "value": "3R3 1% gate",
+   "sheet": "entry-main"
+  },
+  "R406": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "100k 1% G-S default OFF",
+   "sheet": "entry-main"
+  },
+  "R41": {
+   "mpn": "ERA-6AEB1123V",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Panasonic ERA-6A 0.1 % 25 ppm/K",
+   "kind": "series",
+   "value": "112k 0.1% ERA-6AEB1123V",
+   "sheet": "protection-comparators"
+  },
+  "R410": {
+   "mpn": "CRCW080520K0FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "20k 1% PXFR",
+   "sheet": "entry-pre"
+  },
+  "R411": {
+   "mpn": "CRCW080510K0FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "10k EN default OFF",
+   "sheet": "entry-pre"
+  },
+  "R412": {
+   "mpn": "CRCW08050000Z0EA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 0R jumper",
+   "kind": "series",
+   "value": "0R FIXED INHIBIT - no operational command source",
+   "sheet": "entry-pre"
+  },
+  "R413": {
+   "mpn": "CRCW08053R30FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 % (sized: 3.3 ohm, 60 ns edge)",
+   "kind": "series",
+   "value": "3R3 1% gate",
+   "sheet": "entry-pre"
+  },
+  "R414": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "100k 1% G-S default OFF",
+   "sheet": "entry-pre"
+  },
+  "R415": {
+   "mpn": "CRCW08053R30FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 % (sized: 3.3 ohm, 60 ns edge)",
+   "kind": "series",
+   "value": "3R3 1% gate",
+   "sheet": "entry-pre"
+  },
+  "R416": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "100k 1% G-S default OFF",
+   "sheet": "entry-pre"
+  },
+  "R42": {
+   "mpn": "ERA-6AEB1133V",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Panasonic ERA-6A 0.1 % 25 ppm/K",
+   "kind": "series",
+   "value": "113k 0.1% ERA-6AEB1133V",
+   "sheet": "protection-comparators"
+  },
+  "R43": {
+   "mpn": "ERA-6AEB103V",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Panasonic ERA-6A 0.1 % 25 ppm/K",
+   "kind": "series",
+   "value": "10k 0.1% ERA-6AEB103V",
+   "sheet": "protection-comparators"
+  },
+  "R44": {
+   "mpn": "ERA-6AEB334V",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Panasonic ERA-6A 0.1 % 25 ppm/K",
+   "kind": "series",
+   "value": "330k 0.1% ERA-6AEB334V",
+   "sheet": "protection-comparators"
+  },
+  "R45": {
+   "mpn": "CRCW08051K00FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "1k 1% CRCW08051K00FKEA",
+   "sheet": "protection-comparators"
+  },
+  "R46": {
+   "mpn": "ERA-6AEB303V",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Panasonic ERA-6A 0.1 % 25 ppm/K",
+   "kind": "series",
+   "value": "30k 0.1% ERA-6AEB303V",
+   "sheet": "protection-comparators"
+  },
+  "R47": {
+   "mpn": "ERA-6AEB103V",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Panasonic ERA-6A 0.1 % 25 ppm/K",
+   "kind": "series",
+   "value": "10k 0.1% ERA-6AEB103V",
+   "sheet": "protection-comparators"
+  },
+  "R48": {
+   "mpn": "ERA-6AEB202V",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Panasonic ERA-6A 0.1 % 25 ppm/K",
+   "kind": "series",
+   "value": "2k 0.1% ERA-6AEB202V",
+   "sheet": "protection-comparators"
+  },
+  "R49": {
+   "mpn": "ERA-6AEB103V",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Panasonic ERA-6A 0.1 % 25 ppm/K",
+   "kind": "series",
+   "value": "10k 0.1% ERA-6AEB103V",
+   "sheet": "protection-comparators"
+  },
+  "R5": {
+   "mpn": "CRCW08053R30FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 % (sized: 3.3 ohm, 60 ns edge)",
+   "kind": "series",
+   "value": "3R3 1% gate",
+   "sheet": "gen-bridge"
+  },
+  "R50": {
+   "mpn": "CRCW080510K0FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "10k 1% CRCW080510K0FKEA",
+   "sheet": "protection-comparators"
+  },
+  "R500": {
+   "mpn": "CRCW080527K4FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "27.4k 1% 0.1W",
+   "sheet": "ctrl-supply"
+  },
+  "R501": {
+   "mpn": "CRCW080587K6FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 % (87k6 nearest E96)",
+   "kind": "series",
+   "value": "87.3k 1% 0.1W",
+   "sheet": "ctrl-supply"
+  },
+  "R502": {
+   "mpn": "RG1608P-4992-B-T5",
+   "footprint": "Resistor_SMD:R_0603_1608Metric",
+   "source": "Susumu RG1608P 0.1 %",
+   "kind": "series",
+   "value": "49.9k 1% RG1608P-4992-B-T5",
+   "sheet": "ctrl-supply"
+  },
+  "R503": {
+   "mpn": "CRCW0805150KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 % 150 k",
+   "kind": "series",
+   "value": "150k 1% 0.1W >=100V",
+   "sheet": "ctrl-supply"
+  },
+  "R504": {
+   "mpn": "CRCW08051M00FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 % 1 M",
+   "kind": "series",
+   "value": "1M 1% 0.1W >=100V",
+   "sheet": "ctrl-supply"
+  },
+  "R505": {
+   "mpn": "CRCW080552K3FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "52.3k 1% 0.1W",
+   "sheet": "ctrl-supply"
+  },
+  "R51": {
+   "mpn": "CRCW08054K70FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "4k7 1% CRCW08054K70FKEA",
+   "sheet": "protection-comparators"
+  },
+  "R510": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "100k 1% 0.1W TI reference",
+   "sheet": "rail-passives"
+  },
+  "R511": {
+   "mpn": "CRCW0805453KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "453k 1% 0.1W TI reference",
+   "sheet": "rail-passives"
+  },
+  "R512": {
+   "mpn": "RG1608P-4992-B-T5",
+   "footprint": "Resistor_SMD:R_0603_1608Metric",
+   "source": "Susumu RG1608P 0.1 %",
+   "kind": "series",
+   "value": "49.9k 1% RG1608P-4992-B-T5",
+   "sheet": "rail-passives"
+  },
+  "R513": {
+   "mpn": "CRCW0805453KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "453k 1% 0.1W TI reference",
+   "sheet": "rail-passives"
+  },
+  "R514": {
+   "mpn": "CRCW080582K0FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "82k 1% 0.1W >=100V",
+   "sheet": "rail-passives"
+  },
+  "R515": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "100k 1% DELAY EN pulldown",
+   "sheet": "rail-passives"
+  },
+  "R516": {
+   "mpn": "CRCW080547K0FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "47k 1% EN series",
+   "sheet": "rail-passives"
+  },
+  "R517": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "100k 1% DELAY EN pulldown",
+   "sheet": "rail-passives"
+  },
+  "R518": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "100k 1% MAIN_PROVEN default low",
+   "sheet": "rail-passives"
+  },
+  "R519": {
+   "mpn": "CRCW08050000Z0EA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 0R jumper",
+   "kind": "series",
+   "value": "0R FIXED INHIBIT - no MAIN_PROVEN detector fitted",
+   "sheet": "rail-passives"
+  },
+  "R52": {
+   "mpn": "CRCW080510K0FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "10k 1% CRCW080510K0FKEA",
+   "sheet": "fault-latch"
+  },
+  "R520": {
+   "mpn": "CRCW080510K0FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "10k CTRL PGOOD pullup",
+   "sheet": "rail-passives"
+  },
+  "R521": {
+   "mpn": "CRCW080547K0FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "47k 1% DRIVE_PG pullup (PGOOD abs max 14V)",
+   "sheet": "rail-passives"
+  },
+  "R523": {
+   "mpn": "ERA-6AEB6493V",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Panasonic ERA-6A 0.1 % 25 ppm/K",
+   "kind": "series",
+   "value": "649k 0.1% DRIVE12 OVP upper leg",
+   "sheet": "rail-passives"
+  },
+  "R524": {
+   "mpn": "ERA-6AEB1183V",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Panasonic ERA-6A 0.1 % 25 ppm/K",
+   "kind": "series",
+   "value": "118k 0.1% DRIVE12 OVP lower leg",
+   "sheet": "rail-passives"
+  },
+  "R53": {
+   "mpn": "CRCW080510K0FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "10k 1% CRCW080510K0FKEA",
+   "sheet": "fault-latch"
+  },
+  "R54": {
+   "mpn": "CRCW08051K00FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "1k 1% CRCW08051K00FKEA",
+   "sheet": "fault-latch"
+  },
+  "R55": {
+   "mpn": "CRCW080510K0FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "10k 1% CRCW080510K0FKEA",
+   "sheet": "fault-latch"
+  },
+  "R56": {
+   "mpn": "CRCW080510K0FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "10k 1% CRCW080510K0FKEA",
+   "sheet": "fault-latch"
+  },
+  "R57": {
+   "mpn": "CRCW080510K0FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "10k 1% CRCW080510K0FKEA",
+   "sheet": "fault-latch"
+  },
+  "R58": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "100k CRCW0805100KFKEA",
+   "sheet": "fault-latch"
+  },
+  "R59": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "100k CRCW0805100KFKEA",
+   "sheet": "fault-latch"
+  },
+  "R6": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 % (gate-source pulldown)",
+   "kind": "series",
+   "value": "100k G-S",
+   "sheet": "gen-bridge"
+  },
+  "R60": {
+   "mpn": "CRCW08051K00FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "1k 1% CRCW08051K00FKEA",
+   "sheet": "fault-latch"
+  },
+  "R61": {
+   "mpn": "CRCW08051K00FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "1k 1% CRCW08051K00FKEA",
+   "sheet": "fault-latch"
+  },
+  "R62": {
+   "mpn": "CRCW080510R0FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "10R CRCW080510R0FKEA",
+   "sheet": "brake-chopper"
+  },
+  "R63": {
+   "mpn": "CRCW08052R20FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "2R2 CRCW08052R20FKEA",
+   "sheet": "brake-chopper"
+  },
+  "R64": {
+   "mpn": "CRCW080510K0FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "10k CRCW080510K0FKEA",
+   "sheet": "brake-chopper"
+  },
+  "R65": {
+   "mpn": "CRCW060310K0FKEA",
+   "footprint": "Resistor_SMD:R_0603_1608Metric",
+   "source": "Vishay CRCW 0603 1 %",
+   "kind": "series",
+   "value": "10k NRST",
+   "sheet": "mcu-core"
+  },
+  "R66": {
+   "mpn": "CRCW060310K0FKEA",
+   "footprint": "Resistor_SMD:R_0603_1608Metric",
+   "source": "Vishay CRCW 0603 1 %",
+   "kind": "series",
+   "value": "10k BOOT0",
+   "sheet": "mcu-core"
+  },
+  "R67": {
+   "mpn": "CRCW06030000Z0EA",
+   "footprint": "Resistor_SMD:R_0603_1608Metric",
+   "source": "Vishay CRCW 0603 0R jumper",
+   "kind": "series",
+   "value": "0R analog supply link",
+   "sheet": "mcu-power"
+  },
+  "R68": {
+   "mpn": "CRCW06030000Z0EA",
+   "footprint": "Resistor_SMD:R_0603_1608Metric",
+   "source": "Vishay CRCW 0603 0R jumper",
+   "kind": "series",
+   "value": "0R analog supply link",
+   "sheet": "mcu-power"
+  },
+  "R69": {
+   "mpn": "CRCW0805100RFKEA",
+   "footprint": "Resistor_SMD:R_0603_1608Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "100R 1%",
+   "sheet": "mcu-analog"
+  },
+  "R7": {
+   "mpn": "CRCW08053R30FKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 % (sized: 3.3 ohm, 60 ns edge)",
+   "kind": "series",
+   "value": "3R3 1% gate",
+   "sheet": "gen-bridge"
+  },
+  "R70": {
+   "mpn": "CRCW0805100RFKEA",
+   "footprint": "Resistor_SMD:R_0603_1608Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "100R 1%",
+   "sheet": "mcu-analog"
+  },
+  "R71": {
+   "mpn": "CRCW0805100RFKEA",
+   "footprint": "Resistor_SMD:R_0603_1608Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "100R 1%",
+   "sheet": "mcu-analog"
+  },
+  "R72": {
+   "mpn": "CRCW0805100RFKEA",
+   "footprint": "Resistor_SMD:R_0603_1608Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "100R 1%",
+   "sheet": "mcu-analog"
+  },
+  "R73": {
+   "mpn": "CRCW0805100RFKEA",
+   "footprint": "Resistor_SMD:R_0603_1608Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "100R 1%",
+   "sheet": "mcu-analog"
+  },
+  "R74": {
+   "mpn": "CRCW0805100RFKEA",
+   "footprint": "Resistor_SMD:R_0603_1608Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "100R 1%",
+   "sheet": "mcu-analog"
+  },
+  "R75": {
+   "mpn": "CRCW060310K0FKEA",
+   "footprint": "Resistor_SMD:R_0603_1608Metric",
+   "source": "Vishay CRCW 0603 1 %",
+   "kind": "series",
+   "value": "10k brake sense",
+   "sheet": "mcu-analog"
+  },
+  "R76": {
+   "mpn": "CRCW0603100KFKEA",
+   "footprint": "Resistor_SMD:R_0603_1608Metric",
+   "source": "Vishay CRCW 0603 1 %",
+   "kind": "series",
+   "value": "100k brake default",
+   "sheet": "mcu-analog"
+  },
+  "R77": {
+   "mpn": "CRCW060310K0FKEA",
+   "footprint": "Resistor_SMD:R_0603_1608Metric",
+   "source": "Vishay CRCW 0603 1 %",
+   "kind": "series",
+   "value": "10k Hall pullup",
+   "sheet": "mcu-sensors"
+  },
+  "R78": {
+   "mpn": "CRCW06031K00FKEA",
+   "footprint": "Resistor_SMD:R_0603_1608Metric",
+   "source": "Vishay CRCW 0603 1 %",
+   "kind": "series",
+   "value": "1k Hall series",
+   "sheet": "mcu-sensors"
+  },
+  "R79": {
+   "mpn": "CRCW060310K0FKEA",
+   "footprint": "Resistor_SMD:R_0603_1608Metric",
+   "source": "Vishay CRCW 0603 1 %",
+   "kind": "series",
+   "value": "10k Hall pullup",
+   "sheet": "mcu-sensors"
+  },
+  "R8": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 % (gate-source pulldown)",
+   "kind": "series",
+   "value": "100k G-S",
+   "sheet": "gen-bridge"
+  },
+  "R80": {
+   "mpn": "CRCW06031K00FKEA",
+   "footprint": "Resistor_SMD:R_0603_1608Metric",
+   "source": "Vishay CRCW 0603 1 %",
+   "kind": "series",
+   "value": "1k Hall series",
+   "sheet": "mcu-sensors"
+  },
+  "R81": {
+   "mpn": "CRCW060310K0FKEA",
+   "footprint": "Resistor_SMD:R_0603_1608Metric",
+   "source": "Vishay CRCW 0603 1 %",
+   "kind": "series",
+   "value": "10k Hall pullup",
+   "sheet": "mcu-sensors"
+  },
+  "R82": {
+   "mpn": "CRCW06031K00FKEA",
+   "footprint": "Resistor_SMD:R_0603_1608Metric",
+   "source": "Vishay CRCW 0603 1 %",
+   "kind": "series",
+   "value": "1k Hall series",
+   "sheet": "mcu-sensors"
+  },
+  "R83": {
+   "mpn": "CRCW060310K0FKEA",
+   "footprint": "Resistor_SMD:R_0603_1608Metric",
+   "source": "Vishay CRCW 0603 1 %",
+   "kind": "series",
+   "value": "10k Hall pullup",
+   "sheet": "mcu-sensors"
+  },
+  "R84": {
+   "mpn": "CRCW06031K00FKEA",
+   "footprint": "Resistor_SMD:R_0603_1608Metric",
+   "source": "Vishay CRCW 0603 1 %",
+   "kind": "series",
+   "value": "1k Hall series",
+   "sheet": "mcu-sensors"
+  },
+  "R85": {
+   "mpn": "CRCW060310K0FKEA",
+   "footprint": "Resistor_SMD:R_0603_1608Metric",
+   "source": "Vishay CRCW 0603 1 %",
+   "kind": "series",
+   "value": "10k Hall pullup",
+   "sheet": "mcu-sensors"
+  },
+  "R86": {
+   "mpn": "CRCW06031K00FKEA",
+   "footprint": "Resistor_SMD:R_0603_1608Metric",
+   "source": "Vishay CRCW 0603 1 %",
+   "kind": "series",
+   "value": "1k Hall series",
+   "sheet": "mcu-sensors"
+  },
+  "R87": {
+   "mpn": "CRCW060310K0FKEA",
+   "footprint": "Resistor_SMD:R_0603_1608Metric",
+   "source": "Vishay CRCW 0603 1 %",
+   "kind": "series",
+   "value": "10k Hall pullup",
+   "sheet": "mcu-sensors"
+  },
+  "R88": {
+   "mpn": "CRCW06031K00FKEA",
+   "footprint": "Resistor_SMD:R_0603_1608Metric",
+   "source": "Vishay CRCW 0603 1 %",
+   "kind": "series",
+   "value": "1k Hall series",
+   "sheet": "mcu-sensors"
+  },
+  "R89": {
+   "mpn": "CRCW060310K0FKEA",
+   "footprint": "Resistor_SMD:R_0603_1608Metric",
+   "source": "Vishay CRCW 0603 1 %",
+   "kind": "series",
+   "value": "10k encoder pullup",
+   "sheet": "mcu-sensors"
+  },
+  "R9": {
+   "mpn": "WSLP25123L000FEA",
+   "footprint": "Resistor_SMD:R_2512_6332Metric",
+   "source": "Vishay WSLP2512 series",
+   "kind": "series",
+   "value": "2m 1% 3W WSLP2512",
+   "sheet": "gen-bridge"
+  },
+  "R90": {
+   "mpn": "CRCW06031K00FKEA",
+   "footprint": "Resistor_SMD:R_0603_1608Metric",
+   "source": "Vishay CRCW 0603 1 %",
+   "kind": "series",
+   "value": "1k encoder series",
+   "sheet": "mcu-sensors"
+  },
+  "R91": {
+   "mpn": "CRCW060310K0FKEA",
+   "footprint": "Resistor_SMD:R_0603_1608Metric",
+   "source": "Vishay CRCW 0603 1 %",
+   "kind": "series",
+   "value": "10k encoder pullup",
+   "sheet": "mcu-sensors"
+  },
+  "R92": {
+   "mpn": "CRCW06031K00FKEA",
+   "footprint": "Resistor_SMD:R_0603_1608Metric",
+   "source": "Vishay CRCW 0603 1 %",
+   "kind": "series",
+   "value": "1k encoder series",
+   "sheet": "mcu-sensors"
+  },
+  "R93": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "100k 1% open SO bias",
+   "sheet": "gen-fast-oc"
+  },
+  "R94": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "100k 1% gate default",
+   "sheet": "gen-fast-oc"
+  },
+  "R95": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "100k 1% gate default",
+   "sheet": "gen-fast-oc"
+  },
+  "R96": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "100k 1% open SO bias",
+   "sheet": "gen-fast-oc"
+  },
+  "R97": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "100k 1% gate default",
+   "sheet": "gen-fast-oc"
+  },
+  "R98": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "100k 1% gate default",
+   "sheet": "gen-fast-oc"
+  },
+  "R99": {
+   "mpn": "CRCW0805100KFKEA",
+   "footprint": "Resistor_SMD:R_0805_2012Metric",
+   "source": "Vishay CRCW 0805 1 %",
+   "kind": "series",
+   "value": "100k 1% open SO bias",
+   "sheet": "gen-fast-oc"
+  },
+  "SW1": {
+   "mpn": "TL3305AF160QG",
+   "footprint": "Button_Switch_SMD:SW_SPST_TL3305A",
+   "source": "E-Switch TL3305 tactile, NC wiring",
+   "kind": "series",
+   "value": "NC_RELEASE_OPEN_ON_BRAKE_UNSELECTED",
+   "sheet": "brake-switch-harness"
+  },
+  "SW2": {
+   "mpn": "TL3305AF160QG",
+   "footprint": "Button_Switch_SMD:SW_SPST_TL3305A",
+   "source": "E-Switch TL3305 tactile, NC wiring",
+   "kind": "series",
+   "value": "NC_RELEASE_OPEN_ON_BRAKE_UNSELECTED",
+   "sheet": "brake-switch-harness"
+  },
+  "U1": {
+   "mpn": "DRV8353SRTAT",
+   "footprint": "Package_DFN_QFN:QFN-40-1EP_6x6mm_P0.5mm",
+   "source": "TI SLVSDY6A pp6-7",
+   "kind": "datasheet",
+   "value": "DRV8353SRTAT",
+   "sheet": "gen-driver"
+  },
+  "U10": {
+   "mpn": "UCC27511DBVR",
+   "footprint": "Package_TO_SOT_SMD:SOT-23-6",
+   "source": "TI ucc27511, VIN_L 1.0-1.2 V",
+   "kind": "datasheet",
+   "value": "UCC27511DBVR",
+   "sheet": "brake-chopper"
+  },
+  "U11": {
+   "mpn": "SN74LVC3G17DCUR",
+   "footprint": "Package_SO:VSSOP-8_2.3x2mm_P0.5mm",
+   "source": "TI SCES470F, VT- 0.84 V min @3 V",
+   "kind": "datasheet",
+   "value": "SN74LVC3G17DCUR",
+   "sheet": "fault-interfaces"
+  },
+  "U12": {
+   "mpn": "SN74LVC3G17DCUR",
+   "footprint": "Package_SO:VSSOP-8_2.3x2mm_P0.5mm",
+   "source": "TI SCES470F, VT- 0.84 V min @3 V",
+   "kind": "datasheet",
+   "value": "SN74LVC3G17DCUR",
+   "sheet": "fault-interfaces"
+  },
+  "U13": {
+   "mpn": "SN74LVC1G11DBVR",
+   "footprint": "Package_TO_SOT_SMD:SOT-23-6",
+   "source": "TI SCES487I, VIH 2 V / VIL 0.8 V @3 V",
+   "kind": "datasheet",
+   "value": "SN74LVC1G11DBVR",
+   "sheet": "fault-interfaces"
+  },
+  "U14": {
+   "mpn": "SN74LVC1G11DBVR",
+   "footprint": "Package_TO_SOT_SMD:SOT-23-6",
+   "source": "TI SCES487I, VIH 2 V / VIL 0.8 V @3 V",
+   "kind": "datasheet",
+   "value": "SN74LVC1G11DBVR",
+   "sheet": "fault-interfaces"
+  },
+  "U15": {
+   "mpn": "SN74LVC1G04DBVR",
+   "footprint": "Package_TO_SOT_SMD:SOT-23-5",
+   "source": "TI SN74LVC1G04",
+   "kind": "datasheet",
+   "value": "SN74LVC1G04DBVR",
+   "sheet": "fault-interfaces"
+  },
+  "U16": {
+   "mpn": "SN74LVC1G11DBVR",
+   "footprint": "Package_TO_SOT_SMD:SOT-23-6",
+   "source": "TI SCES487I, VIH 2 V / VIL 0.8 V @3 V",
+   "kind": "datasheet",
+   "value": "SN74LVC1G11DBVR",
+   "sheet": "fault-interfaces"
+  },
+  "U17": {
+   "mpn": "STM32G474VET6",
+   "footprint": "Package_QFP:LQFP-100_14x14mm_P0.5mm",
+   "source": "ST STM32G474VE",
+   "kind": "datasheet",
+   "value": "STM32G474VET6",
+   "sheet": "mcu-core"
+  },
+  "U18": {
+   "mpn": "TLV3202AIDR",
+   "footprint": "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm",
+   "source": "TI TLV3202 40 ns comparator",
+   "kind": "series",
+   "value": "TLV3202IDR",
+   "sheet": "gen-fast-oc"
+  },
+  "U19": {
+   "mpn": "TLV3202AIDR",
+   "footprint": "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm",
+   "source": "TI TLV3202 40 ns comparator",
+   "kind": "series",
+   "value": "TLV3202IDR",
+   "sheet": "gen-fast-oc"
+  },
+  "U2": {
+   "mpn": "DRV8353SRTAT",
+   "footprint": "Package_DFN_QFN:QFN-40-1EP_6x6mm_P0.5mm",
+   "source": "TI SLVSDY6A pp6-7",
+   "kind": "datasheet",
+   "value": "DRV8353SRTAT",
+   "sheet": "hub-driver"
+  },
+  "U20": {
+   "mpn": "TLV3202AIDR",
+   "footprint": "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm",
+   "source": "TI TLV3202 40 ns comparator",
+   "kind": "series",
+   "value": "TLV3202IDR",
+   "sheet": "gen-fast-oc"
+  },
+  "U21": {
+   "mpn": "TLV3202AIDR",
+   "footprint": "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm",
+   "source": "TI TLV3202 40 ns comparator",
+   "kind": "series",
+   "value": "TLV3202IDR",
+   "sheet": "hub-fast-oc"
+  },
+  "U22": {
+   "mpn": "TLV3202AIDR",
+   "footprint": "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm",
+   "source": "TI TLV3202 40 ns comparator",
+   "kind": "series",
+   "value": "TLV3202IDR",
+   "sheet": "hub-fast-oc"
+  },
+  "U23": {
+   "mpn": "TLV3202AIDR",
+   "footprint": "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm",
+   "source": "TI TLV3202 40 ns comparator",
+   "kind": "series",
+   "value": "TLV3202IDR",
+   "sheet": "hub-fast-oc"
+  },
+  "U24": {
+   "mpn": "SN74LVC1G32DBVR",
+   "footprint": "Package_TO_SOT_SMD:SOT-23-5",
+   "source": "TI SN74LVC1G32",
+   "kind": "datasheet",
+   "value": "SN74LVC1G32DBVR",
+   "sheet": "brake-dump-command"
+  },
+  "U25": {
+   "mpn": "SN74LVC1G08DBVR",
+   "footprint": "Package_TO_SOT_SMD:SOT-23-5",
+   "source": "TI SN74LVC1G08",
+   "kind": "datasheet",
+   "value": "SN74LVC1G08DBVR",
+   "sheet": "brake-dump-command"
+  },
+  "U26": {
+   "mpn": "OPA333AIDBVR",
+   "footprint": "Package_TO_SOT_SMD:SOT-23-5",
+   "source": "TI OPA333 zero-drift",
+   "kind": "series",
+   "value": "OPA333AIDBVR",
+   "sheet": "fsr-left"
+  },
+  "U27": {
+   "mpn": "TMUX1511PWR",
+   "footprint": "Package_SO:TSSOP-14_4.4x5mm_P0.65mm",
+   "source": "TI TMUX1511 4x SPST, \u00a75.5 37 uA typ",
+   "kind": "datasheet",
+   "value": "TMUX1511PWR",
+   "sheet": "fsr-left"
+  },
+  "U28": {
+   "mpn": "OPA333AIDBVR",
+   "footprint": "Package_TO_SOT_SMD:SOT-23-5",
+   "source": "TI OPA333 zero-drift",
+   "kind": "series",
+   "value": "OPA333AIDBVR",
+   "sheet": "fsr-right"
+  },
+  "U29": {
+   "mpn": "TMUX1511PWR",
+   "footprint": "Package_SO:TSSOP-14_4.4x5mm_P0.65mm",
+   "source": "TI TMUX1511 4x SPST, \u00a75.5 37 uA typ",
+   "kind": "datasheet",
+   "value": "TMUX1511PWR",
+   "sheet": "fsr-right"
+  },
+  "U3": {
+   "mpn": "R-78HB12-0.5",
+   "footprint": "Converter_DCDC:Converter_DCDC_RECOM_R-78HB-0.5_THT",
+   "source": "RECOM R-78HB12-0.5, 17-72 V in",
+   "kind": "datasheet",
+   "value": "R-78HB12-0.5",
+   "sheet": "aux-supply"
+  },
+  "U4": {
+   "mpn": "TLV76033DBZR",
+   "footprint": "Package_TO_SOT_SMD:SOT-23",
+   "source": "TI tlv760",
+   "kind": "datasheet",
+   "value": "TLV76033DBZR",
+   "sheet": "aux-supply"
+  },
+  "U400": {
+   "mpn": "TPSI3052DWZR",
+   "footprint": "Package_SO:SOIC-8_5.23x5.23mm_P1.27mm",
+   "source": "TI TPSI3052 isolated driver",
+   "kind": "datasheet",
+   "value": "TPSI3052DWZR",
+   "sheet": "entry-main"
+  },
+  "U401": {
+   "mpn": "TPSI3052DWZR",
+   "footprint": "Package_SO:SOIC-8_5.23x5.23mm_P1.27mm",
+   "source": "TI TPSI3052 isolated driver",
+   "kind": "datasheet",
+   "value": "TPSI3052DWZR",
+   "sheet": "entry-pre"
+  },
+  "U5": {
+   "mpn": "LM4040AIM3-2.5/NOPB",
+   "footprint": "Package_TO_SOT_SMD:SOT-23",
+   "source": "TI lm4040-n A grade",
+   "kind": "datasheet",
+   "value": "LM4040AIM3-2.5/NOPB",
+   "sheet": "aux-supply"
+  },
+  "U500": {
+   "mpn": "LM5164DDAR",
+   "footprint": "Package_SO:HSOP-8-1EP_3.9x4.9mm_P1.27mm",
+   "source": "TI LM5164",
+   "kind": "datasheet",
+   "value": "LM5164DDAR",
+   "sheet": "ctrl-supply"
+  },
+  "U501": {
+   "mpn": "LM5164DDAR",
+   "footprint": "Package_SO:HSOP-8-1EP_3.9x4.9mm_P1.27mm",
+   "source": "TI LM5164",
+   "kind": "datasheet",
+   "value": "LM5164DDAR",
+   "sheet": "rail-partition"
+  },
+  "U502": {
+   "mpn": "AP63203WU-7",
+   "footprint": "Package_TO_SOT_SMD:TSOT-23-6",
+   "source": "Diodes Inc AP63203 3.3 V 2 A sync buck",
+   "kind": "datasheet",
+   "value": "AP63203WU",
+   "sheet": "rail-partition"
+  },
+  "U503": {
+   "mpn": "TLV1701AIDBVR",
+   "footprint": "Package_TO_SOT_SMD:SOT-23-5",
+   "source": "TI SBOS589D",
+   "kind": "datasheet",
+   "value": "TLV1701AIDBVR",
+   "sheet": "rail-partition"
+  },
+  "U510": {
+   "mpn": "SN74LVC1G08DBVR",
+   "footprint": "Package_TO_SOT_SMD:SOT-23-5",
+   "source": "TI SN74LVC1G08",
+   "kind": "datasheet",
+   "value": "SN74LVC1G08DBVR",
+   "sheet": "rail-partition"
+  },
+  "U6": {
+   "mpn": "LM339BIDR",
+   "footprint": "Package_SO:SOIC-14_3.9x8.7mm_P1.27mm",
+   "source": "TI lm339b \u00a76.7",
+   "kind": "datasheet",
+   "value": "LM339BIDR",
+   "sheet": "protection-comparators"
+  },
+  "U7": {
+   "mpn": "SN74LVC1G74DCUR",
+   "footprint": "Package_SO:VSSOP-8_2.3x2mm_P0.5mm",
+   "source": "TI SCES470F",
+   "kind": "datasheet",
+   "value": "SN74LVC1G74DCUR",
+   "sheet": "fault-latch"
+  },
+  "U8": {
+   "mpn": "SN74LVC1G74DCUR",
+   "footprint": "Package_SO:VSSOP-8_2.3x2mm_P0.5mm",
+   "source": "TI SCES470F",
+   "kind": "datasheet",
+   "value": "SN74LVC1G74DCUR",
+   "sheet": "fault-latch"
+  },
+  "U9": {
+   "mpn": "TPS3823-33DBVR",
+   "footprint": "Package_TO_SOT_SMD:SOT-23-5",
+   "source": "TI tps3823",
+   "kind": "datasheet",
+   "value": "TPS3823-33DBVR",
+   "sheet": "fault-latch"
+  }
+ }
+}

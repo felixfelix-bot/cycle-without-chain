@@ -6,7 +6,7 @@ def populate(g):
     s.text('36-58.4V bench interface, 15A TARGET ONLY. Disconnect PM machines before source removal.',20.32,22.86)
     def part(lib,name,ref,value,x,y,nets):s.part(stock(lib,name),ref,value,x,y,nets)
     part('Connector_Generic','Conn_01x02','J40','Anderson 992G1 SB50 keyed SOURCE',50.8,53.34,{'1':'SOURCE_POS','2':'PGND'})
-    part('Device','Fuse','F1','KLKD020CN 20A 600VDC candidate AT SOURCE',114.3,53.34,{'1':'SOURCE_POS','2':'ENTRY_FUSED'})
+    part('Device','Fuse','F1','KLKD020CN 20A 600VDC',114.3,53.34,{'1':'SOURCE_POS','2':'ENTRY_FUSED'})
     # J41/J42 removed, not left as a parallel bypass of the active pairs.
     passive(s,'R','22R 1% RH05022R00FE02 pulse UNQUALIFIED',139.7,114.3,'PRECHARGE_R','BUS_SHUNT_HI')
     passive(s,'R','2m 1% WSLP2512R0020FEA Kelvin',241.3,114.3,'BUS_SHUNT_HI','DC_LINK')

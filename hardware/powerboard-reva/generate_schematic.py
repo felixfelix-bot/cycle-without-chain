@@ -145,17 +145,17 @@ for idx,prefix in enumerate(['GEN','HUB']):
     s.save();sheets.append(s)
     b=Sheet(prefix.lower()+'-bridge',prefix+' 100 V MOSFET bridge - schematic only')
     b.text('CSD19532Q5B stock KiCad symbol / pad map. Gates: 4; drains: 5; sources: 1,2,3.',20.32,15.24)
-    b.text('Labels are electrical connections. Rgate=4R7 provisional. Kelvin shunts: no routing qualified.',20.32,22.86)
+    b.text('Labels are electrical connections. Rgate=3R3 (RAIL-10, sized in size_gate_resistors.py). Kelvin shunts: no routing qualified.',20.32,22.86)
     for j,p in enumerate('ABC'):
         x=63.5+j*116.84
         for high,y in [(True,63.5),(False,134.62)]:
             gate=n(('GH' if high else 'GL')+p);gnet=gate+'_FET';src=n('PHASE_'+p) if high else n('SHUNT_'+p);drain='DC_LINK' if high else n('PHASE_'+p)
             counters['Q']+=1;ref='Q'+str(counters['Q']); nets={num: (gnet if name=='G' else drain if name=='D' else src) for num,name,*_ in pins(FET)}
             b.part(FET,ref,'CSD19532Q5B',x,y,nets,'Package_TO_SOT_SMD:TDSON-8-1')
-            passive(b,'R','4R7 provisional',x-27.94,y+10.16,gate,gnet)
+            passive(b,'R','3R3 1% gate',x-27.94,y+10.16,gate,gnet)
             passive(b,'R','100k G-S',x+35.56,y+10.16,gnet,src)
         passive(b,'R','2m 1% 3W WSLP2512',x,193.04,n('SHUNT_'+p),'PGND','Resistor_SMD:R_2512_6332Metric')
-        passive(b,'C','1u 100V X7R provisional',x,233.68,'DC_LINK','PGND')
+        passive(b,'C','1u 100V X7R',x,233.68,'DC_LINK','PGND')
     b.text('Shunt amplifier SPx taps SHUNT_x; SNx taps PGND: Kelvin layout mandatory. 15A RMS => 0.45W per shunt.',20.32,259.08)
     b.save();sheets.append(b)
 
@@ -170,7 +170,7 @@ for j,prefix in enumerate(['GEN','HUB']):
     x=177.8+j*116.84
     connector(prefix+'_MACHINE_PHASES',[prefix+'_PHASE_'+p for p in 'ABC'],x,48.26)
 connector('SAFETY_FAULT_CHAIN_NC',['SAFETY3V3','FAULT_CHAIN'],63.5,137.16)
-passive(s,'C','100u 100V provisional',63.5,190.5,'DC_LINK','PGND')
+passive(s,'C','100u 100V',63.5,190.5,'DC_LINK','PGND')
 s.text('Missing: source fuse, reverse blocking, precharge, DC contactor, bus current sensor and discharge.',20.32,228.6)
 s.text('Populated: OV chopper, fault latch, brake loop, watchdog, aux supply. Added: raw CSA window trip; timing/coverage unqualified.',20.32,236.22)
 s.text('MCU and sensor interfaces populated; firmware, thermal sensors, storage/BMS acceptance missing.',20.32,243.84)

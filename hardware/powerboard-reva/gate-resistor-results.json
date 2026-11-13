@@ -1,0 +1,111 @@
+{
+ "fet": {
+  "name": "CSD19532Q5B",
+  "vds_max": 100.0,
+  "qg_nc": 48.0,
+  "qgd_nc": 7.0,
+  "ciss_pf": 4700.0,
+  "coss_pf": 720.0,
+  "rg_internal_ohm": 1.0,
+  "tr_ns": 12.0,
+  "tf_ns": 9.0
+ },
+ "driver": {
+  "name": "DRV8353S",
+  "vdrive": 10.0,
+  "rg_int_ohm": 1.5,
+  "i_source_ma": 1000.0,
+  "i_sink_ma": 2000.0
+ },
+ "design_point": {
+  "vds": 52.0,
+  "i_load": 15.0,
+  "f_sw": 20000.0,
+  "l_loop_nh": 4.0
+ },
+ "candidates": [
+  {
+   "rg_ohm": 2.2,
+   "tau_ns": 22.09,
+   "t_sw_ns": 48.6,
+   "t_rc_ns": 48.6,
+   "t_limit_ns": 48.0,
+   "switching_loss_w": 0.7581,
+   "peak_gate_current_a": 2.128,
+   "driver_can_drive": false,
+   "dvdt_v_per_ns": 1.07
+  },
+  {
+   "rg_ohm": 3.3,
+   "tau_ns": 27.26,
+   "t_sw_ns": 59.97,
+   "t_rc_ns": 59.97,
+   "t_limit_ns": 48.0,
+   "switching_loss_w": 0.9356,
+   "peak_gate_current_a": 1.724,
+   "driver_can_drive": false,
+   "dvdt_v_per_ns": 0.867
+  },
+  {
+   "rg_ohm": 4.7,
+   "tau_ns": 33.84,
+   "t_sw_ns": 74.45,
+   "t_rc_ns": 74.45,
+   "t_limit_ns": 48.0,
+   "switching_loss_w": 1.1614,
+   "peak_gate_current_a": 1.389,
+   "driver_can_drive": false,
+   "dvdt_v_per_ns": 0.698
+  },
+  {
+   "rg_ohm": 6.8,
+   "tau_ns": 43.71,
+   "t_sw_ns": 96.16,
+   "t_rc_ns": 96.16,
+   "t_limit_ns": 48.0,
+   "switching_loss_w": 1.5001,
+   "peak_gate_current_a": 1.075,
+   "driver_can_drive": false,
+   "dvdt_v_per_ns": 0.541
+  },
+  {
+   "rg_ohm": 10.0,
+   "tau_ns": 58.75,
+   "t_sw_ns": 129.25,
+   "t_rc_ns": 129.25,
+   "t_limit_ns": 48.0,
+   "switching_loss_w": 2.0163,
+   "peak_gate_current_a": 0.8,
+   "driver_can_drive": true,
+   "dvdt_v_per_ns": 0.402
+  },
+  {
+   "rg_ohm": 15.0,
+   "tau_ns": 82.25,
+   "t_sw_ns": 180.95,
+   "t_rc_ns": 180.95,
+   "t_limit_ns": 48.0,
+   "switching_loss_w": 2.8228,
+   "peak_gate_current_a": 0.571,
+   "driver_can_drive": true,
+   "dvdt_v_per_ns": 0.287
+  },
+  {
+   "rg_ohm": 22.0,
+   "tau_ns": 115.15,
+   "t_sw_ns": 253.33,
+   "t_rc_ns": 253.33,
+   "t_limit_ns": 48.0,
+   "switching_loss_w": 3.9519,
+   "peak_gate_current_a": 0.408,
+   "driver_can_drive": true,
+   "dvdt_v_per_ns": 0.205
+  }
+ ],
+ "ringing": {
+  "f_ring_mhz": 93.78294959969854,
+  "z0_ohm": 2.3570226039551585,
+  "energy_uj": 0.9734399999999999
+ },
+ "chosen_ohm": 3.3
+}

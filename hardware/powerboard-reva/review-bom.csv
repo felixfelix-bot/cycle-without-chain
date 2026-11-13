@@ -12,29 +12,29 @@ R2,10k,,gen-driver
 R3,10k,,gen-driver
 R4,10k,,gen-driver
 Q1,CSD19532Q5B,Package_TO_SOT_SMD:TDSON-8-1,gen-bridge
-R5,4R7 provisional,,gen-bridge
+R5,3R3 1% gate,,gen-bridge
 R6,100k G-S,,gen-bridge
 Q2,CSD19532Q5B,Package_TO_SOT_SMD:TDSON-8-1,gen-bridge
-R7,4R7 provisional,,gen-bridge
+R7,3R3 1% gate,,gen-bridge
 R8,100k G-S,,gen-bridge
 R9,2m 1% 3W WSLP2512,Resistor_SMD:R_2512_6332Metric,gen-bridge
-C8,1u 100V X7R provisional,,gen-bridge
+C8,1u 100V X7R,,gen-bridge
 Q3,CSD19532Q5B,Package_TO_SOT_SMD:TDSON-8-1,gen-bridge
-R10,4R7 provisional,,gen-bridge
+R10,3R3 1% gate,,gen-bridge
 R11,100k G-S,,gen-bridge
 Q4,CSD19532Q5B,Package_TO_SOT_SMD:TDSON-8-1,gen-bridge
-R12,4R7 provisional,,gen-bridge
+R12,3R3 1% gate,,gen-bridge
 R13,100k G-S,,gen-bridge
 R14,2m 1% 3W WSLP2512,Resistor_SMD:R_2512_6332Metric,gen-bridge
-C9,1u 100V X7R provisional,,gen-bridge
+C9,1u 100V X7R,,gen-bridge
 Q5,CSD19532Q5B,Package_TO_SOT_SMD:TDSON-8-1,gen-bridge
-R15,4R7 provisional,,gen-bridge
+R15,3R3 1% gate,,gen-bridge
 R16,100k G-S,,gen-bridge
 Q6,CSD19532Q5B,Package_TO_SOT_SMD:TDSON-8-1,gen-bridge
-R17,4R7 provisional,,gen-bridge
+R17,3R3 1% gate,,gen-bridge
 R18,100k G-S,,gen-bridge
 R19,2m 1% 3W WSLP2512,Resistor_SMD:R_2512_6332Metric,gen-bridge
-C10,1u 100V X7R provisional,,gen-bridge
+C10,1u 100V X7R,,gen-bridge
 U2,DRV8353SRTAT,,hub-driver
 C11,47n 100V X7R,,hub-driver
 C12,1u 16V X7R,,hub-driver
@@ -48,35 +48,35 @@ R21,10k,,hub-driver
 R22,10k,,hub-driver
 R23,10k,,hub-driver
 Q7,CSD19532Q5B,Package_TO_SOT_SMD:TDSON-8-1,hub-bridge
-R24,4R7 provisional,,hub-bridge
+R24,3R3 1% gate,,hub-bridge
 R25,100k G-S,,hub-bridge
 Q8,CSD19532Q5B,Package_TO_SOT_SMD:TDSON-8-1,hub-bridge
-R26,4R7 provisional,,hub-bridge
+R26,3R3 1% gate,,hub-bridge
 R27,100k G-S,,hub-bridge
 R28,2m 1% 3W WSLP2512,Resistor_SMD:R_2512_6332Metric,hub-bridge
-C18,1u 100V X7R provisional,,hub-bridge
+C18,1u 100V X7R,,hub-bridge
 Q9,CSD19532Q5B,Package_TO_SOT_SMD:TDSON-8-1,hub-bridge
-R29,4R7 provisional,,hub-bridge
+R29,3R3 1% gate,,hub-bridge
 R30,100k G-S,,hub-bridge
 Q10,CSD19532Q5B,Package_TO_SOT_SMD:TDSON-8-1,hub-bridge
-R31,4R7 provisional,,hub-bridge
+R31,3R3 1% gate,,hub-bridge
 R32,100k G-S,,hub-bridge
 R33,2m 1% 3W WSLP2512,Resistor_SMD:R_2512_6332Metric,hub-bridge
-C19,1u 100V X7R provisional,,hub-bridge
+C19,1u 100V X7R,,hub-bridge
 Q11,CSD19532Q5B,Package_TO_SOT_SMD:TDSON-8-1,hub-bridge
-R34,4R7 provisional,,hub-bridge
+R34,3R3 1% gate,,hub-bridge
 R35,100k G-S,,hub-bridge
 Q12,CSD19532Q5B,Package_TO_SOT_SMD:TDSON-8-1,hub-bridge
-R36,4R7 provisional,,hub-bridge
+R36,3R3 1% gate,,hub-bridge
 R37,100k G-S,,hub-bridge
 R38,2m 1% 3W WSLP2512,Resistor_SMD:R_2512_6332Metric,hub-bridge
-C20,1u 100V X7R provisional,,hub-bridge
+C20,1u 100V X7R,,hub-bridge
 J1,BUS_TEST_ONLY_NOT_SOURCE_INPUT,,external-boundaries
 J2,MCU_RAIL_TEST_ONLY_NOT_INPUT,,external-boundaries
 J3,GEN_MACHINE_PHASES,,external-boundaries
 J4,HUB_MACHINE_PHASES,,external-boundaries
 J5,SAFETY_FAULT_CHAIN_NC,,external-boundaries
-C21,100u 100V provisional,,external-boundaries
+C21,100u 100V,,external-boundaries
 U3,R-78HB12-0.5,,aux-supply
 U4,TLV76033DBZR,Package_TO_SOT_SMD:SOT-23,aux-supply
 C22,3.3u 100V GRM32ER72A335KA35L,Capacitor_SMD:C_1210_3225Metric,aux-supply
@@ -246,7 +246,7 @@ R113,10k 0.1%,Resistor_SMD:R_0805_2012Metric,fast-oc-reference
 R114,28k7 0.1%,Resistor_SMD:R_0805_2012Metric,fast-oc-reference
 R115,4k7 1%,Resistor_SMD:R_0805_2012Metric,fast-oc-reference
 J40,Anderson 992G1 SB50 keyed SOURCE,,dc-entry
-F1,KLKD020CN 20A 600VDC candidate AT SOURCE,,dc-entry
+F1,KLKD020CN 20A 600VDC,,dc-entry
 R116,22R 1% RH05022R00FE02 pulse UNQUALIFIED,,dc-entry
 R117,2m 1% WSLP2512R0020FEA Kelvin,,dc-entry
 D20,STPS30100ST reverse clamp ONLY not reverse blocker,,dc-entry
@@ -291,9 +291,9 @@ R133,10k 1% ADC bleed,Resistor_SMD:R_0805_2012Metric,fsr-left
 C81,100n ADC reservoir,Capacitor_SMD:C_0805_2012Metric,fsr-left
 R134,100k enable default off,Resistor_SMD:R_0805_2012Metric,fsr-left
 C82,100n mux bypass,Capacitor_SMD:C_0805_2012Metric,fsr-left
-D38,PESD3V3U1UL CANDIDATE,Diode_SMD:D_SOD-882,fsr-protection-left
-D39,PESD3V3U1UL CANDIDATE,Diode_SMD:D_SOD-882,fsr-protection-left
-D40,BAT54S CANDIDATE,Package_TO_SOT_SMD:SOT-23,fsr-protection-left
+D38,PESD3V3U1UL,Diode_SMD:D_SOD-882,fsr-protection-left
+D39,PESD3V3U1UL,Diode_SMD:D_SOD-882,fsr-protection-left
+D40,BAT54S,Package_TO_SOT_SMD:SOT-23,fsr-protection-left
 J47,RIGHT_FSR_34-00018_EXTERNAL,,fsr-right
 R135,10k 1% FSR excitation,Resistor_SMD:R_0805_2012Metric,fsr-right
 R136,1k 1% FSR return,Resistor_SMD:R_0805_2012Metric,fsr-right
@@ -308,9 +308,9 @@ R140,10k 1% ADC bleed,Resistor_SMD:R_0805_2012Metric,fsr-right
 C85,100n ADC reservoir,Capacitor_SMD:C_0805_2012Metric,fsr-right
 R141,100k enable default off,Resistor_SMD:R_0805_2012Metric,fsr-right
 C86,100n mux bypass,Capacitor_SMD:C_0805_2012Metric,fsr-right
-D41,PESD3V3U1UL CANDIDATE,Diode_SMD:D_SOD-882,fsr-protection-right
-D42,PESD3V3U1UL CANDIDATE,Diode_SMD:D_SOD-882,fsr-protection-right
-D43,BAT54S CANDIDATE,Package_TO_SOT_SMD:SOT-23,fsr-protection-right
+D41,PESD3V3U1UL,Diode_SMD:D_SOD-882,fsr-protection-right
+D42,PESD3V3U1UL,Diode_SMD:D_SOD-882,fsr-protection-right
+D43,BAT54S,Package_TO_SOT_SMD:SOT-23,fsr-protection-right
 U400,TPSI3052DWZR,,entry-main
 R400,20k 1% PXFR,,entry-main
 R401,10k EN default OFF,,entry-main
@@ -318,11 +318,11 @@ R402,0R FIXED INHIBIT - no operational command source,,entry-main
 C400,1u 10V X7R effective >=0.22u,,entry-main
 C401,100n 25V C0G 5% CDIV1,,entry-main
 C402,470n 25V C0G 5% CDIV2,,entry-main
-Q400,IRFP4568PbF 150V candidate,Package_TO_SOT_THT:TO-247-3_Vertical,entry-main
-R403,10R 1% gate candidate,,entry-main
+Q400,IRFP4568PbF 150V,Package_TO_SOT_THT:TO-247-3_Vertical,entry-main
+R403,3R3 1% gate,,entry-main
 R404,100k 1% G-S default OFF,,entry-main
-Q401,IRFP4568PbF 150V candidate,Package_TO_SOT_THT:TO-247-3_Vertical,entry-main
-R405,10R 1% gate candidate,,entry-main
+Q401,IRFP4568PbF 150V,Package_TO_SOT_THT:TO-247-3_Vertical,entry-main
+R405,3R3 1% gate,,entry-main
 R406,100k 1% G-S default OFF,,entry-main
 U401,TPSI3052DWZR,,entry-pre
 R410,20k 1% PXFR,,entry-pre
@@ -331,11 +331,11 @@ R412,0R FIXED INHIBIT - no operational command source,,entry-pre
 C410,1u 10V X7R effective >=0.22u,,entry-pre
 C411,100n 25V C0G 5% CDIV1,,entry-pre
 C412,470n 25V C0G 5% CDIV2,,entry-pre
-Q402,IRFP4568PbF 150V candidate,Package_TO_SOT_THT:TO-247-3_Vertical,entry-pre
-R413,10R 1% gate candidate,,entry-pre
+Q402,IRFP4568PbF 150V,Package_TO_SOT_THT:TO-247-3_Vertical,entry-pre
+R413,3R3 1% gate,,entry-pre
 R414,100k 1% G-S default OFF,,entry-pre
-Q403,IRFP4568PbF 150V candidate,Package_TO_SOT_THT:TO-247-3_Vertical,entry-pre
-R415,10R 1% gate candidate,,entry-pre
+Q403,IRFP4568PbF 150V,Package_TO_SOT_THT:TO-247-3_Vertical,entry-pre
+R415,3R3 1% gate,,entry-pre
 R416,100k 1% G-S default OFF,,entry-pre
 U500,LM5164DDAR,,ctrl-supply
 D500,S1J-E3/61T 600V 1A,Diode_SMD:D_SMA,ctrl-supply
@@ -346,36 +346,36 @@ C502,2.2n 50V GCM155R71H222KA37D,,ctrl-supply
 C503,22u 25V TMK325B7226KMHT,,ctrl-supply
 C504,22u 25V TMK325B7226KMHT,,ctrl-supply
 C505,3.3n 100V CGA3E2X7R2A332K080AA,,ctrl-supply
-C506,330p 50V C0G 5% candidate,,ctrl-supply
-R500,27.4k 1% 0.1W candidate,,ctrl-supply
-R501,87.3k 1% 0.1W candidate,,ctrl-supply
+C506,330p 50V C0G 5%,,ctrl-supply
+R500,27.4k 1% 0.1W,,ctrl-supply
+R501,87.3k 1% 0.1W,,ctrl-supply
 R502,49.9k 1% RG1608P-4992-B-T5,,ctrl-supply
-R503,150k 1% 0.1W >=100V candidate,,ctrl-supply
-R504,1M 1% 0.1W >=100V candidate,,ctrl-supply
-R505,52.3k 1% 0.1W candidate,,ctrl-supply
+R503,150k 1% 0.1W >=100V,,ctrl-supply
+R504,1M 1% 0.1W >=100V,,ctrl-supply
+R505,52.3k 1% 0.1W,,ctrl-supply
 U510,SN74LVC1G08DBVR,Package_TO_SOT_SMD:SOT-23-5,rail-partition
 U501,LM5164DDAR,,rail-partition
 U503,TLV1701AIDBVR,Package_TO_SOT_SMD:SOT-23-5,rail-partition
 U502,AP63203WU,Package_TO_SOT_SMD:TSOT-23-6,rail-partition
-L501,68u SPM10065VC-680M-D 20% AEC-Q200,,rail-passives
-L502,3.9u candidate 2A,Inductor_SMD:L_Bourns_SRN6045TA,rail-passives
+L501,68u SPM10065VC-680M-D 20% AEC-Q200,Powerboard:L_TDK_SPM10065VC-D,rail-passives
+L502,3.9u 2A,Inductor_SMD:L_Bourns_SRN6045TA,rail-passives
 C510,2.2u 200V X7R 22252C225KAT2A,Capacitor_SMD:C_2225_5664Metric,rail-passives
 C511,2.2u 200V X7R 22252C225KAT2A,Capacitor_SMD:C_2225_5664Metric,rail-passives
 C512,2.2n 50V GCM155R71H222KA37D,,rail-passives
 C513,22u 25V TMK325B7226KMHT,,rail-passives
 C514,22u 25V TMK325B7226KMHT,,rail-passives
 C515,3.3n 100V CGA3E2X7R2A332K080AA,,rail-passives
-C516,56p 50V C0G candidate,,rail-passives
-C517,10u 25V X7R candidate,,rail-passives
-C518,22u 16V X7R candidate,,rail-passives
-C519,22u 16V X7R candidate,,rail-passives
+C516,56p 50V C0G,,rail-passives
+C517,10u 25V X7R,,rail-passives
+C518,22u 16V X7R,,rail-passives
+C519,22u 16V X7R,,rail-passives
 C520,100n 25V X7R,,rail-passives
 C521,100n 25V X7R,,rail-passives
 R510,100k 1% 0.1W TI reference,,rail-passives
 R511,453k 1% 0.1W TI reference,,rail-passives
 R512,49.9k 1% RG1608P-4992-B-T5,,rail-passives
 R513,453k 1% 0.1W TI reference,,rail-passives
-R514,82k 1% 0.1W >=100V candidate,,rail-passives
+R514,82k 1% 0.1W >=100V,,rail-passives
 R515,100k 1% DELAY EN pulldown,,rail-passives
 R516,47k 1% EN series,,rail-passives
 R517,100k 1% DELAY EN pulldown,,rail-passives

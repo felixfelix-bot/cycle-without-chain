@@ -80,28 +80,31 @@ def populate(g):
         # Isat 2.26 A / Irms 1.30 A). TDK SPM10065VC-D (production; the VT variant is NRND
         # with this part named as its replacement) 68 uH row: Isat 7.3 A at dL=-30%,
         # Itemp 3.4 A at dT=40 C, Rdc 114 mOhm typ / 131.1 mOhm max, 80 V rated.
-        # Footprint still blank: the vendor land pattern is A 2.95 / B 6.10 / C 4.50 mm
-        # (identical for VT and VC), and NO stock KiCad land matches it - the nearest,
-        # L_Coilcraft_XAL1010-XXX, is 2.38 wide on a 6.65 pitch. A custom land is required.
-        ('L501', '68u SPM10065VC-680M-D 20% AEC-Q200', 'DRIVE_SW', 'DRIVE12', ''),
-        ('L502', '3.9u candidate 2A', 'MCU_SW', 'LOGIC3V3_EXT', 'Inductor_SMD:L_Bourns_SRN6045TA'),
+        # Footprint: hand-authored from TDK catalogue
+        # inductor_automotive_power_spm10065vc-d_en (20250303) p3 RECOMMENDED LAND
+        # PATTERN - 12.0 span / 6.1 gap / 4.5 height, pad width 2.95 derived.
+        # NO stock KiCad land matches (nearest L_Coilcraft_XAL1010-XXX is 2.38 wide
+        # on a 6.65 pitch), hence Powerboard.pretty. RAIL-18.
+        ('L501', '68u SPM10065VC-680M-D 20% AEC-Q200', 'DRIVE_SW', 'DRIVE12',
+         'Powerboard:L_TDK_SPM10065VC-D'),
+        ('L502', '3.9u 2A', 'MCU_SW', 'LOGIC3V3_EXT', 'Inductor_SMD:L_Bourns_SRN6045TA'),
         ('C510', '2.2u 200V X7R 22252C225KAT2A', 'DC_LINK', 'PGND', 'Capacitor_SMD:C_2225_5664Metric'),
         ('C511', '2.2u 200V X7R 22252C225KAT2A', 'DC_LINK', 'PGND', 'Capacitor_SMD:C_2225_5664Metric'),
         ('C512', '2.2n 50V GCM155R71H222KA37D', 'DRIVE_BST', 'DRIVE_SW', ''),
         ('C513', '22u 25V TMK325B7226KMHT', 'DRIVE12', 'PGND', ''),
         ('C514', '22u 25V TMK325B7226KMHT', 'DRIVE12', 'PGND', ''),
         ('C515', '3.3n 100V CGA3E2X7R2A332K080AA', 'DRIVE_RAMP', 'DRIVE12', ''),
-        ('C516', '56p 50V C0G candidate', 'DRIVE_RAMP', 'DRIVE_FB', ''),
-        ('C517', '10u 25V X7R candidate', 'DRIVE12', 'PGND', ''),
-        ('C518', '22u 16V X7R candidate', 'LOGIC3V3_EXT', 'PGND', ''),
-        ('C519', '22u 16V X7R candidate', 'LOGIC3V3_EXT', 'PGND', ''),
+        ('C516', '56p 50V C0G', 'DRIVE_RAMP', 'DRIVE_FB', ''),
+        ('C517', '10u 25V X7R', 'DRIVE12', 'PGND', ''),
+        ('C518', '22u 16V X7R', 'LOGIC3V3_EXT', 'PGND', ''),
+        ('C519', '22u 16V X7R', 'LOGIC3V3_EXT', 'PGND', ''),
         ('C520', '100n 25V X7R', 'MCU_BST', 'MCU_SW', ''),
         ('C521', '100n 25V X7R', 'SAFETY3V3', 'PGND', ''),
         ('R510', '100k 1% 0.1W TI reference', 'DRIVE_RON', 'PGND', ''),
         ('R511', '453k 1% 0.1W TI reference', 'DRIVE12', 'DRIVE_FB', ''),
         ('R512', '49.9k 1% RG1608P-4992-B-T5', 'DRIVE_FB', 'PGND', ''),
         ('R513', '453k 1% 0.1W TI reference', 'DRIVE_SW', 'DRIVE_RAMP', ''),
-        ('R514', '82k 1% 0.1W >=100V candidate', 'DRIVE_EN', 'DRIVE_UVLO', ''),
+        ('R514', '82k 1% 0.1W >=100V', 'DRIVE_EN', 'DRIVE_UVLO', ''),
         ('R515', '100k 1% DELAY EN pulldown', 'DRIVE_UVLO', 'PGND', ''),
         ('R516', '47k 1% EN series', 'DRIVE_EN', 'MCU3V3_EN', ''),
         ('R517', '100k 1% DELAY EN pulldown', 'MCU3V3_EN', 'PGND', ''),

@@ -1,0 +1,9 @@
+(fp_lib_table
+	(version 7)
+	(lib (name "Powerboard")
+		(type "KiCad")
+		(uri "${KIPRJMOD}/Powerboard.pretty")
+		(options "")
+		(descr "Hand-authored footprints transcribed from vendor drawings; no stock KiCad land matches these parts")
+	)
+)

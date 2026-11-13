@@ -46,8 +46,8 @@ def populate(g):
         s.save();g['sheets'].append(s)
         s=Sheet('fsr-protection-'+side.lower(),side+' FSR candidate ESD and secondary clamps - unqualified')
         for i,leg in enumerate(['EXC_CABLE','RETURN_CABLE']):
-            s.part(stock('Device','D_TVS'),'D'+str(38+j*3+i),'PESD3V3U1UL CANDIDATE',76.2+i*152.4,76.2,{'1':n(leg),'2':'PGND'},'Diode_SMD:D_SOD-882')
-        s.part(stock('Diode','BAT54S'),'D'+str(40+j*3),'BAT54S CANDIDATE',152.4,160.02,{'1':'PGND','2':'MCU_VREF','3':n('SENSE')},'Package_TO_SOT_SMD:SOT-23')
+            s.part(stock('Device','D_TVS'),'D'+str(38+j*3+i),'PESD3V3U1UL',76.2+i*152.4,76.2,{'1':n(leg),'2':'PGND'},'Diode_SMD:D_SOD-882')
+        s.part(stock('Diode','BAT54S'),'D'+str(40+j*3),'BAT54S',152.4,160.02,{'1':'PGND','2':'MCU_VREF','3':n('SENSE')},'Package_TO_SOT_SMD:SOT-23')
         s.text('Connector TVS: cathode1 cable, anode2 ground. BAT54S: anode1 ground, cathode2 rail, junction3 sense.',20.32,22.86)
         s.text('NOT QUALIFIED: clamp voltage, leakage, negative pulses, rail sink / powered-off backfeed, ESD energy.',20.32,228.6)
         s.text('Battery short is a RELEASE BLOCKER. No external cable driver; segregated current-limited LV bench only.',20.32,241.3)
