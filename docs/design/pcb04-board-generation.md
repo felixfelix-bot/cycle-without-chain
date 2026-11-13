@@ -549,6 +549,47 @@ code that knows the pin order, not a cell-by-cell search. That is what the
 autorouter's fanout pass exists to do, and it is also what hand routing in KiCad
 does naturally.
 
+### The fan-out was implemented, and it made the board worse
+
+`fanout_escape.py` places one straight stub per fine-pitch pad along the package's
+outward normal, plus a through via just outside the body edge, then leaves routing
+to continue on B.Cu. It produced **57 stubs and 57 vias across 37 nets**.
+
+A real bug was caught by the output looking too uniform: every stub came out at
+exactly **0.100 mm**, the clamp floor. The width was derived as
+`pitch - max(size_x, size_y)`, but a perimeter pad's LONG axis is perpendicular to
+the pitch, so a VSSOP-8 pad of 1.250 x 0.350 against a 0.500 mm pitch gave
+`gap = -0.750 mm` and clamped. Replaced with the pad's extent **projected onto the
+pitch direction**, giving physically correct widths: **0.250 mm x20, 0.300 mm x35,
+0.350 mm x2**, matching QFN-40 / LQFP-100 / VSSOP-8.
+
+The stubs are correctly placed -- 57 of 57 escape points match the CSV, 56 vias sit
+at them -- but DRC on the result is worse than v1:
+
+```
+                v1      fanout
+unconnected    418      418
+clearance        0      119
+shorting         0       67
+hole_to_hole     0       38
+via_dangling     0       51
+tracks_crossing  0        9
+```
+
+The stubs were placed **geometrically without checking against existing copper**,
+so they run into the 2708 tracks already there and into each other's vias. The
+placement is a valid construction of an escape fan-out; it is not a valid insertion
+into this board.
+
+That is the same mistake as the inter-block merge (routing blind to existing
+copper), made again in a different mechanism. The lesson generalises: on this board
+no new copper can be added without a collision check against the copper already
+present, and both attempts that skipped it produced shorts.
+
+`powerboard-reva-fanout.kicad_pcb` is therefore recorded as a **negative result**,
+like `-v2`. It is not an improvement and should not be used. The escape widths it
+derives are correct and reusable; the insertion is not.
+
 **This is where the work stops.** Six router bugs were found and fixed, a
 pitch-specific design rule was added and verified, and the remaining obstacle is a
 connectivity question about the already-routed copper that would need either a
