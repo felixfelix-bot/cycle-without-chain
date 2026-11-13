@@ -487,6 +487,50 @@ part. All three are layout decisions, not router heuristics.
 That is the real reason 34 of 40 nets failed, and no amount of further work on the
 maze router would have changed it.
 
+### The escape rule was added, and the failure persists for a different reason
+
+A pitch-specific rule was added to `powerboard-reva.kicad_dru`:
+
+```
+(rule "fine-pitch escape track to pad"
+  (constraint clearance (min 0.05mm))
+  (condition "A.Type == 'Pad' && B.Type == 'Track'"))
+```
+
+with a 0.15 mm escape track: `0.15 + 0.05 + 0.05 = 0.25 mm`, exactly the pad gap.
+The router was taught to apply it inside the ten detected fine-pitch bodies
+(U1's QFN-40 among them: body 141.0,78.0 - 148.6,85.2, and the GEN_INHA pin at
+146.7,78.7 is inside it).
+
+It did not help. Searching again with escape clearance active:
+
+```
+BFS with escape clearance: path found = False
+reachable from the GEN_INHA pad: 1478657 cells
+reachable bbox: x 0..1600, y 0..1300 of a 1601x1301 grid
+```
+
+**1.48M cells, spanning the entire board, and the destination pad is not among
+them.** The start pad is reachable to everywhere except the far pad, which means
+the two pads sit in two different connected regions of free space -- separated by
+a wall the route cannot cross at any clearance tried.
+
+What that wall is has not been identified. Candidates, in order of likelihood:
+the two-pad nets whose second pad is on the *other* driver (GEN_INHA connects U1,
+the GEN DRV8353, to U17, the MCU: pin 32 to pin 40), so a route must traverse the
+whole board through the region the block-routing pass already filled; and the
+existing 2708 tracks form barriers the maze router treats as impassable at 0.10 mm
+resolution.
+
+**This is where the work stops.** Six router bugs were found and fixed, a
+pitch-specific design rule was added and verified, and the remaining obstacle is a
+connectivity question about the already-routed copper that would need either a
+different global strategy (route everything at once, which does not converge) or
+manual routing (which is what the file is for).
+
+Honest status: **43 inter-block nets remain unrouted. No Gerbers. v1 is the best
+board.**
+
 ### Where that leaves it
 
 The correct approach is established even though it is not complete: **the router

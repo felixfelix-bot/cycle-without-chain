@@ -64,7 +64,19 @@ NETS = [
     "TIMER_BREAK_OK", "FSR_SAMPLE_ENABLE", "BRAKE_DUMP_PWM",
 ]
 
-GRID = 0.25          # mm per cell
+# 0.10 mm cells, not 0.25.
+#
+# 0.05 mm escape clearance needs a grid fine enough that a "free" cell is actually
+# outside the clearance boundary -- at 0.25 mm a cell centre could sit 0.125 mm
+# from copper and still be marked free, silently violating the rule the route was
+# planned under. 0.05 mm cells would be exact but give 3.2M x 2.6M cells, far too
+# many to search.
+#
+# 0.10 mm is the compromise: 1600 x 1300 = 2.08M cells, and 0.05 mm clearance is
+# half a cell, so a routed path can be up to 0.05 mm optimistic. That is stated
+# rather than hidden, and it is why the DRC result is the authority on the
+# finished board rather than the router's own report.
+GRID = 0.10          # mm per cell
 # Two clearances, because they are two different constraints.
 #
 # Tracks need room to be routed between: 0.30 mm is right there.
@@ -82,6 +94,13 @@ GRID = 0.25          # mm per cell
 CLEARANCE_TRACK = 0.30
 CLEARANCE_PAD = 0.10
 CLEARANCE = CLEARANCE_TRACK   # kept for the track-blocking calls
+
+# Escape geometry for the fine-pitch QFN, matching powerboard-reva.kicad_dru:
+# 0.05 mm track-to-pad clearance with a 0.15 mm track. A 0.5 mm-pitch pin field
+# has a 0.25 mm pad-to-pad gap, and 0.15 + 0.05 + 0.05 = 0.25 exactly. Without
+# this every inner QFN pin was unreachable -- proven by BFS agreeing with A*.
+ESCAPE_WIDTH = 0.15
+ESCAPE_CLEARANCE = 0.05
 TRACK_W = 0.20       # mm, matches the netclass default
 SEARCH_MARGIN = 6.0  # mm of extra room around the two endpoints
 
@@ -119,8 +138,13 @@ class Grid:
                     if 0 <= nx < self.w and 0 <= ny < self.h:
                         self.blocked[self.idx(nx, ny)] = 1
 
-    def block_pad(self, pad):
+    def block_pad(self, pad, clearance=None):
         """Block a RECTANGLE, not a disc.
+
+        `clearance` overrides CLEARANCE_PAD for this call -- used to apply the
+        tighter escape rule inside a fine-pitch body without mutating a module
+        constant (which works but is fragile: any other reader of CLEARANCE_PAD
+        during the call sees the wrong value).
 
         THIS WAS THE BUG THAT MADE THE ROUTER USELESS. A DRV8353 pin is
         0.25 x 0.82 mm -- strongly elongated. Blocking a disc of radius
@@ -148,8 +172,9 @@ class Grid:
             deg = 0.0
         if 45.0 <= (deg % 180.0) < 135.0:
             w, h = h, w
-        rx = w / 2.0 + CLEARANCE_PAD
-        ry = h / 2.0 + CLEARANCE_PAD
+        c = CLEARANCE_PAD if clearance is None else clearance
+        rx = w / 2.0 + c
+        ry = h / 2.0 + c
         cx, cy = self.mm_to_cell(x, y)
         rcx = int(math.ceil(rx / GRID))
         rcy = int(math.ceil(ry / GRID))
@@ -241,6 +266,43 @@ def simplify(path):
     return out
 
 
+def fine_pitch_bodies(board, pitch_max_mm=0.65):
+    """Bounding boxes of fine-pitch parts, so escape routing can use tight rules.
+
+    A QFN on 0.5 mm pitch cannot be escaped at 0.2 mm track / 0.15 mm clearance.
+    Inside these boxes the router may use the 0.15 mm track and 0.05 mm clearance
+    the .kicad_dru rule permits; outside them it keeps the normal 0.20 mm track.
+    Returns a list of (x0, y0, x1, y1) in mm.
+    """
+    boxes = []
+    for fp in board.GetFootprints():
+        pads = [p for p in fp.Pads() if p.GetNumber()]
+        if len(pads) < 8:
+            continue
+        pts = sorted({(round(pcbnew.ToMM(p.GetPosition().x), 3),
+                       round(pcbnew.ToMM(p.GetPosition().y), 3)) for p in pads})
+        best = 1e9
+        for i in range(len(pts)):
+            for j in range(i + 1, min(i + 4, len(pts))):
+                d = math.hypot(pts[i][0] - pts[j][0], pts[i][1] - pts[j][1])
+                if 0.05 < d < best:
+                    best = d
+        if best > pitch_max_mm:
+            continue
+        bb = fp.GetBoundingBox(False, False)
+        boxes.append((pcbnew.ToMM(bb.GetX()), pcbnew.ToMM(bb.GetY()),
+                      pcbnew.ToMM(bb.GetX()) + pcbnew.ToMM(bb.GetWidth()),
+                      pcbnew.ToMM(bb.GetY()) + pcbnew.ToMM(bb.GetHeight())))
+    return boxes
+
+
+def in_any(boxes, x, y):
+    for x0, y0, x1, y1 in boxes:
+        if x0 <= x <= x1 and y0 <= y <= y1:
+            return True
+    return False
+
+
 def main() -> int:
     base = sys.argv[1] if len(sys.argv) > 1 else BASE
     out_path = sys.argv[2] if len(sys.argv) > 2 else OUT
@@ -280,10 +342,19 @@ def main() -> int:
             static.block_segment(pcbnew.ToMM(p.x), pcbnew.ToMM(p.y),
                                  pcbnew.ToMM(p.x), pcbnew.ToMM(p.y),
                                  pcbnew.ToMM(t.GetWidth()))
+    fine_boxes = fine_pitch_bodies(board)
+    print("fine-pitch bodies needing escape rules: %d" % len(fine_boxes))
     for fp in board.GetFootprints():
         for pad in fp.Pads():
             if pad.GetNetname() not in NETS:
-                static.block_pad(pad)
+                pos = pad.GetPosition()
+                px, py = pcbnew.ToMM(pos.x), pcbnew.ToMM(pos.y)
+                if in_any(fine_boxes, px, py):
+                    # Escape rule: 0.05 mm instead of 0.10 mm inside a fine-pitch
+                    # body, matching the .kicad_dru Track-Pad rule.
+                    static.block_pad(pad, clearance=ESCAPE_CLEARANCE)
+                else:
+                    static.block_pad(pad)
     print("obstacle grid: %d x %d cells" % (static.w, static.h))
 
     layers = [pcbnew.B_Cu, pcbnew.F_Cu, pcbnew.In2_Cu, pcbnew.In1_Cu]
