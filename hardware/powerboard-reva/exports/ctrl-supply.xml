@@ -2,7 +2,7 @@
 <export version="E">
   <design>
     <source>/home/c08r4d0r/worktrees/cycle-ovp-latch/hardware/powerboard-reva/powerboard-reva.kicad_sch</source>
-    <date>2026-11-13T16:52:50+0100</date>
+    <date>2026-11-13T17:07:13+0100</date>
     <tool>Eeschema 9.0.9-9.0.9~ubuntu24.04.1</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -4540,9 +4540,9 @@
     </comp>
     <comp ref="J40">
       <value>Anderson 992G1 SB50 keyed SOURCE</value>
-      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical</footprint>
+      <footprint>Connector_AMASS:AMASS_XT60-F_1x02_P7.20mm_Vertical</footprint>
       <fields>
-        <field name="Footprint">Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical</field>
+        <field name="Footprint">Connector_AMASS:AMASS_XT60-F_1x02_P7.20mm_Vertical</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>
@@ -4556,9 +4556,9 @@
     </comp>
     <comp ref="J43">
       <value>Kelvin BUS measurement isolated instrument ONLY</value>
-      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical</footprint>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical</footprint>
       <fields>
-        <field name="Footprint">Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical</field>
+        <field name="Footprint">Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical</field>
         <field name="Datasheet"/>
         <field name="Description"/>
       </fields>

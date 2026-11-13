@@ -1,7 +1,7 @@
 (export (version "E")
   (design
     (source "/home/c08r4d0r/worktrees/cycle-ovp-latch/hardware/powerboard-reva/powerboard-reva.kicad_sch")
-    (date "2026-11-13T16:52:39+0100")
+    (date "2026-11-13T17:07:00+0100")
     (tool "Eeschema 9.0.9-9.0.9~ubuntu24.04.1")
     (sheet (number "1") (name "/") (tstamps "/")
       (title_block
@@ -3974,9 +3974,9 @@
       (tstamps "5157da2e-1505-5931-bbc2-2eb22b71a1f1"))
     (comp (ref "J40")
       (value "Anderson 992G1 SB50 keyed SOURCE")
-      (footprint "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical")
+      (footprint "Connector_AMASS:AMASS_XT60-F_1x02_P7.20mm_Vertical")
       (fields
-        (field (name "Footprint") "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical")
+        (field (name "Footprint") "Connector_AMASS:AMASS_XT60-F_1x02_P7.20mm_Vertical")
         (field (name "Datasheet"))
         (field (name "Description")))
       (libsource (lib "Connector_Generic") (part "Conn_01x02") (description "Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"))
@@ -3988,9 +3988,9 @@
       (tstamps "c658e638-59bc-5f10-890c-ce73ac417aba"))
     (comp (ref "J43")
       (value "Kelvin BUS measurement isolated instrument ONLY")
-      (footprint "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical")
+      (footprint "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical")
       (fields
-        (field (name "Footprint") "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical")
+        (field (name "Footprint") "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical")
         (field (name "Datasheet"))
         (field (name "Description")))
       (libsource (lib "Connector_Generic") (part "Conn_01x04") (description "Generic connector, single row, 01x04, script generated (kicad-library-utils/schlib/autogen/connector/)"))
