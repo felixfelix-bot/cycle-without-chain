@@ -590,6 +590,49 @@ present, and both attempts that skipped it produced shorts.
 like `-v2`. It is not an improvement and should not be used. The escape widths it
 derives are correct and reusable; the insertion is not.
 
+### The checked fan-out: collision-tested, and it does not regress
+
+`fanout_checked.py` repeats the construction but tests every stub and every via
+against all existing copper first, and **skips** what does not fit rather than
+forcing it. Bounding-box tests are used throughout, so the result is a conservative
+subset: a skipped stub is an open item, an inserted short is a silent defect.
+
+Two things had to be fixed before it was honest:
+
+1. **Clearance was applied to the wrong pairs.** The first checked run used 0.05 mm
+   for every test and still showed 27 clearance violations. The `.kicad_dru` grants
+   a *track-to-pad* relaxation inside a fine-pitch body; against another **track** a
+   stub still owes the 0.20 mm netclass. Clearance now depends on what is being
+   tested against, not on where the stub sits.
+2. **The v1 baseline was wrong.** The comparison table above lists v1 clearance as
+   0. Running DRC on v1 directly gives **27 clearance, 118 silk_overlap, 32
+   silk_over_copper, 418 unconnected** -- the same 27 that was being attributed to
+   the fan-out. The fan-out adds **zero** new clearance violations, not 27.
+
+Result of the checked run: **14 stubs inserted, 43 skipped** (30 blocked by a track,
+11 by a via, 2 by via copper), 13 nets given escape points.
+
+```
+                        v1      blind     checked
+unconnected            418      418        418
+clearance               27      119         27
+shorting                 0       67          0
+hole_to_hole             0       38          0
+tracks_crossing          0        9          0
+via_dangling             0       51         14
+```
+
+So the collision check eliminates all 67 shorts and the crossings, and leaves only
+14 dangling vias -- stubs whose far end has nothing to connect to yet, because the
+remaining net segments are still unrouted. **That is the correct state**: copper
+that is known clear and correctly placed, waiting for the rest of the route.
+
+Only 14 of 57 pads could be escaped this way. The other 43 are blocked by the
+2708 tracks already routed through the pin fields -- which is the same conclusion
+the inter-block attempts reached from the other direction: **the board is full, and
+the existing routing is what blocks further progress.** Not the router, not the
+clearance, not the grid.
+
 **This is where the work stops.** Six router bugs were found and fixed, a
 pitch-specific design rule was added and verified, and the remaining obstacle is a
 connectivity question about the already-routed copper that would need either a
