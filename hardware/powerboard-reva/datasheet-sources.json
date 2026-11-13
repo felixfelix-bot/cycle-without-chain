@@ -1,42 +1,50 @@
 {
-  "lm339b": {
-    "url": "https://www.ti.com/lit/ds/symlink/lm339b.pdf",
-    "sha256": "2c7b0f58cb925a9ff3c8996cdd4b866d1c831fc913533b6889122d4ba34319fc"
-  },
-  "tps3823": {
-    "url": "https://www.ti.com/lit/ds/symlink/tps3823.pdf",
-    "sha256": "178af015417c5e7beb7c6d3b824cead3910cd17c46cdac666660019cdf2ff575"
-  },
-  "sn74hc00": {
-    "url": "https://www.ti.com/lit/ds/symlink/sn74hc00.pdf",
-    "sha256": "3d3bdace13c7ebeb542e516ae670fc9d7b0b551f9d5222579294e330af38c111"
-  },
-  "sn74hc11": {
-    "url": "https://www.ti.com/lit/ds/symlink/sn74hc11.pdf",
-    "sha256": "4c0a03cf0375be46807f0ef4932fb138572b2fb252d7ff7e8479fc0fc0d09cd1"
-  },
-  "ucc27511": {
-    "url": "https://www.ti.com/lit/ds/symlink/ucc27511.pdf",
-    "sha256": "781cc451dbb371a4137337a4bdecbe11a9f1ff8979a11e238e97d8a80a287b31"
-  },
-  "lm4040-n": {
-    "url": "https://www.ti.com/lit/ds/symlink/lm4040-n.pdf",
-    "sha256": "c06c6337438bd950ee514ddd863070ab505f5d90e2dabf9ffc4c4a0843058ff6"
-  },
-  "tlv760": {
-    "url": "https://www.ti.com/lit/ds/symlink/tlv760.pdf",
-    "sha256": "cbc82492fc6f0dcb87f1be90aa1fea13134a65aa283ae048f4b5772d47b2d844"
-  },
-  "r78hb": {
-    "url": "https://g.recomcdn.com/media/Datasheet/pdf/.fSx_VzyW/.t62b2d6a7acf719dba8f3/Datasheet-270/R-78HB-0_5.pdf",
-    "sha256": "457ccbb2825fd65f87237670a7ab3b9d1c9274c6889729e9323f73f6dde61c9c"
-  },
-  "drv8353": {
-    "url": "https://www.ti.com/lit/ds/symlink/drv8353.pdf",
-    "sha256": "8bb3a1d29ec9ea079d0ef452a2a0c614511f37575756b11a03646d8a82ed758c"
-  },
-  "bat54ws": {
-    "url": "https://www.diodes.com/assets/Datasheets/BAT54WS.pdf",
-    "sha256": "a910241faa214991993fa171bd226bdbb8730c0f453c18993c738d96226f26d6"
-  }
+ "bat54ws": {
+  "url": "https://www.diodes.com/assets/Datasheets/BAT54WS.pdf",
+  "sha256": "a910241faa214991993fa171bd226bdbb8730c0f453c18993c738d96226f26d6"
+ },
+ "drv8353": {
+  "url": "https://www.ti.com/lit/ds/symlink/drv8353.pdf",
+  "sha256": "8bb3a1d29ec9ea079d0ef452a2a0c614511f37575756b11a03646d8a82ed758c"
+ },
+ "irfp4568": {
+  "url": "https://docs.rs-online.com/b22f/0900766b8154410c.pdf",
+  "sha256": "fc390da2bcba48050d046ce430413abb0567e53b28d86ac8959d2b025b639e4c"
+ },
+ "lm339b": {
+  "url": "https://www.ti.com/lit/ds/symlink/lm339b.pdf",
+  "sha256": "2c7b0f58cb925a9ff3c8996cdd4b866d1c831fc913533b6889122d4ba34319fc"
+ },
+ "lm4040-n": {
+  "url": "https://www.ti.com/lit/ds/symlink/lm4040-n.pdf",
+  "sha256": "c06c6337438bd950ee514ddd863070ab505f5d90e2dabf9ffc4c4a0843058ff6"
+ },
+ "r78hb": {
+  "url": "https://g.recomcdn.com/media/Datasheet/pdf/.fSx_VzyW/.t62b2d6a7acf719dba8f3/Datasheet-270/R-78HB-0_5.pdf",
+  "sha256": "457ccbb2825fd65f87237670a7ab3b9d1c9274c6889729e9323f73f6dde61c9c"
+ },
+ "sn74hc00": {
+  "url": "https://www.ti.com/lit/ds/symlink/sn74hc00.pdf",
+  "sha256": "3d3bdace13c7ebeb542e516ae670fc9d7b0b551f9d5222579294e330af38c111"
+ },
+ "sn74hc11": {
+  "url": "https://www.ti.com/lit/ds/symlink/sn74hc11.pdf",
+  "sha256": "4c0a03cf0375be46807f0ef4932fb138572b2fb252d7ff7e8479fc0fc0d09cd1"
+ },
+ "tlv760": {
+  "url": "https://www.ti.com/lit/ds/symlink/tlv760.pdf",
+  "sha256": "cbc82492fc6f0dcb87f1be90aa1fea13134a65aa283ae048f4b5772d47b2d844"
+ },
+ "tps3823": {
+  "url": "https://www.ti.com/lit/ds/symlink/tps3823.pdf",
+  "sha256": "178af015417c5e7beb7c6d3b824cead3910cd17c46cdac666660019cdf2ff575"
+ },
+ "tpsi3052": {
+  "url": "https://www.ti.com/lit/ds/symlink/tpsi3052.pdf",
+  "sha256": "d3d3d6cd704f6e3b285216b1faa11138f079f4637d9fe10c99038ba5c06b4ab0"
+ },
+ "ucc27511": {
+  "url": "https://www.ti.com/lit/ds/symlink/ucc27511.pdf",
+  "sha256": "781cc451dbb371a4137337a4bdecbe11a9f1ff8979a11e238e97d8a80a287b31"
+ }
 }
