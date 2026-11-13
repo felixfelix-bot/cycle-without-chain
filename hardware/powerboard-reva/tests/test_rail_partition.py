@@ -110,7 +110,14 @@ class RailTests(unittest.TestCase):
         shown that it discriminates.
         """
         import re as _re
-        t = Path('/usr/share/kicad/footprints/Inductor_SMD.pretty/L_Coilcraft_XAL1010-XXX.kicad_mod').read_text(encoding='utf-8')
+        # The stock library lives in a machine-specific place. If it is absent this
+        # control cannot run, and a control that silently does nothing is worse than
+        # none -- so skip loudly rather than pass. CI images without KiCad libraries
+        # take this path; the primary land check above is unaffected.
+        stock = Path('/usr/share/kicad/footprints/Inductor_SMD.pretty/L_Coilcraft_XAL1010-XXX.kicad_mod')
+        if not stock.exists():
+            raise unittest.SkipTest(f'stock KiCad land not installed: {stock}')
+        t = stock.read_text(encoding='utf-8')
         pads = _re.findall(r'\(pad "(\d)" smd \w+\s*\(at ([-\d.]+) ([-\d.]+)\)\s*\(size ([\d.]+) ([\d.]+)\)', t)
         (_, x1, _, w1, _), (_, x2, _, _, _) = pads
         a = float(w1); b = float(x2) - float(x1) - a
