@@ -110,11 +110,33 @@ def main() -> int:
     # honest about being partial rather than consuming an unbounded wall clock.
     passes = os.environ.get("FREEROUTING_PASSES", "20")
     timeout_s = int(os.environ.get("FREEROUTING_TIMEOUT", "1500"))
-    cmd = [FREEROUTING,
-           "-de", DSN,
-           "-do", SES,
-           "-mp", passes,
-           "--gui", "false"]
+
+    # INVOKE THE JAR DIRECTLY WITH AN EXPLICIT HEAP.
+    #
+    # The /usr/local/bin/freerouting wrapper is `java -jar` with no -Xmx, so the
+    # JVM picks an ergonomic default of exactly 1 GB:
+    #     MaxHeapSize = 1073741824 {ergonomic}
+    # FreeRouting reports that as "1024 MB RAM" and its own log shows 2.85 GB
+    # allocated / 330 MB peak heap on a 12-part board. On 397 parts it is
+    # memory-bound, not pass-bound -- which is why three runs with pass counts of
+    # 100, 8 and 6 all died, and why cutting passes never helped.
+    #
+    # Meanwhile the host has 7.4 GB with 4.6 GB available. The default heap is
+    # the constraint, not the machine.
+    heap = os.environ.get("FREEROUTING_HEAP", "4g")
+    java = shutil.which("java")
+    jar = "/opt/freerouting/freerouting-2.5.0.jar"
+    if java and os.path.exists(jar):
+        cmd = [java, "-Xmx%s" % heap, "-Djava.awt.headless=true",
+               "-jar", jar, "--gui.enabled=false",
+               "-de", DSN, "-do", SES, "-mp", passes]
+    else:
+        # Fall back to the wrapper, and say so: the heap fix does not apply and
+        # the run is expected to be memory-bound.
+        print("WARNING: java or %s missing; using the wrapper with a 1 GB "
+              "default heap, which is the known bottleneck" % jar)
+        cmd = [FREEROUTING, "-de", DSN, "-do", SES, "-mp", passes,
+               "--gui", "false"]
     print("running (max %s passes, timeout %ds): %s"
           % (passes, timeout_s, " ".join(cmd)))
     try:

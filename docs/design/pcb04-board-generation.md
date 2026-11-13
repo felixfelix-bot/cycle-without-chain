@@ -144,6 +144,40 @@ density limit, and stating that is more useful than a suppressed check.
 - **The 160 × 130 mm envelope is provisional.** Derived from measured footprint
   area, but never checked against bike mounting or thermal requirements.
 
+## 6z. The stackup defect behind the routing failures
+
+`SetCopperLayerCount(4)` creates **all four layers as `signal`**. The documented
+stackup is signal / **ground** / **power** / signal, so the board file
+contradicted its own spec from the moment it was generated.
+
+Consequences, in order of severity:
+
+1. **No ground reference anywhere on the board.** Every analog block — the CSA
+   sense chains, the OC window comparators, the FSR frontends — was placed on a
+   board with no plane under it. That is not a routing nuisance; it is the thing
+   the whole ±3 % VREF assumption in the OC-03 envelope depends on.
+2. **The router was told all four layers are fair game**, so it had to fit 277
+   nets into four general-purpose layers with no plane to escape onto. Both
+   failed attempts (1800 s, then 1117 s) are consistent with that.
+
+Fixed with `SetLayerType(In1_Cu, LT_POWER)` and the same for In2. Verified at
+the DSN boundary rather than trusted at the API:
+
+```
+(layer In1.Cu
+  (type power)
+  ...
+```
+
+So the correction reaches the router, not just the `.kicad_pcb`.
+
+Two API notes worth keeping, because both cost time:
+- `SetLayerType` is a **BOARD** method; it is not on `BOARD_DESIGN_SETTINGS`. An
+  early probe used the settings object, found nothing, and wrongly concluded the
+  call did not exist.
+- `LT_POWER == 1`. Without checking, `GetLayerType` returning `1` looks like an
+  error code rather than "power".
+
 ## 6a. Routing: first attempt timed out, and that is a finding
 
 The first FreeRouting run used `-mp 100` (100 optimisation passes) and was killed
@@ -169,6 +203,81 @@ The remaining unknown is whether the board is *routable* at 4 layers with this
 part density, which only a completed run will answer. If bounded runs also fail,
 the options are more layers, a larger board, or manual routing of the power stage
 with autorouting only for the analog blocks.
+
+## 6b. The router was not too slow — it was memory-starved
+
+Three full-board routing attempts failed (1800 s at 100 passes, 1117 s at 8, then
+1200 s at 6). Cutting the pass count never helped, which was the clue: if passes
+were the problem, fewer passes would have finished sooner.
+
+Feasibility test: the same board reduced to **12 components routes in 5.21
+seconds** with `incomplete connections: 0, clearance violations: 0`. So
+FreeRouting works, the DSN is valid, and the geometry is routable.
+
+The router's own log gave the rest:
+
+```
+using 7.47 total CPU seconds, 2.85 GB total allocated,
+330.5 MB peak heap usage
+```
+
+and at startup it reports `1024 MB RAM`. The launcher is:
+
+```
+exec java -Djava.awt.headless=true -jar freerouting-2.5.0.jar ...
+```
+
+**No `-Xmx`.** The JVM therefore picks an ergonomic default, and on this host that
+default is exactly `MaxHeapSize = 1073741824` — 1 GB. FreeRouting is
+memory-bound at 397 parts, not pass-bound.
+
+The host has **7.4 GB total, 4.6 GB available**. `route_pcb.py` now invokes the
+jar directly with `-Xmx5g` (`FREEROUTING_HEAP`), falling back to the wrapper with
+a printed warning if java or the jar is missing — so a fallback run is never
+mistaken for a fixed one.
+
+**The heap fix did not solve it.** A fourth run with `-Xmx5g` confirmed live in
+the process table (`Xmx5g`) still timed out at 1500 s with no session file.
+
+So the 1 GB default heap was a **real defect** — an ergonomic JVM default
+starving a 397-part route — but it was **not the binding constraint**. This
+section originally presented it as the answer, which was wrong; the correction is
+recorded rather than edited away because "found a plausible cause" and "found the
+cause" are different claims and only the second one earns a fix.
+
+Four attempts: 1800 s @ 100 passes, 1117 s @ 8, 1200 s @ 6, 1500 s @ 15 with 5 GB.
+Every one produced no SES.
+
+## 6c. Scale, measured
+
+Rather than adjust the timeout a fifth time, a scaling test against slices of the
+real board:
+
+| Parts | Result | Time |
+|---|---|---|
+| 12 | routed, 0 incomplete, 0 clearance | **5.21 s** |
+| 80 | routed, 0 incomplete, 0 clearance, 744 track segments | **2 min 45 s** |
+| 397 | no session file, four attempts | > 20 min each |
+
+That is the answer to "is it memory or is it scale": **it is scale**, and the
+curve is steep. 80 parts already takes 165 s; the full board is five times the
+parts and adds the two 100 V bridges, the DRV8353 gate loops and the dense
+decoupling fields. Nothing in the 80-part run suggests it was near a resource
+ceiling — it reported 0 clearance violations throughout and finished normally.
+
+Practical consequence: **the router is not broken and the board is not unroutable
+one block at a time.** The full-board single-shot autoroute is the wrong tool at
+this size, and four timeouts were spent learning that.
+
+What this does not yet prove: that the blocks will join up. Routing 80 parts in
+isolation is easier than routing them with the other 317 nets demanding space.
+Block routing needs the inter-block nets handled deliberately, not by luck.
+
+**The lesson worth keeping:** three failed runs were diagnosed as "too much
+routing for the pass budget" because that is what the symptom looked like. The
+measurement that settled it was a deliberately tiny board — if 12 parts route in
+5 seconds and 397 time out, the problem is scale, and the next question is *which*
+resource, which the router's own log answered.
 
 ## 7. What PCB-04 still owes
 
