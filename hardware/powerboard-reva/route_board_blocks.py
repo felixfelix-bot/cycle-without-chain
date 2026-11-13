@@ -43,6 +43,11 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 MASTER = os.path.join(HERE, "powerboard-reva.kicad_pcb")
+# --base overrides which board the block pass routes onto. The ordering fix for
+# PCB-04 needs block routing to run AFTER the inter-block copper exists, so the
+# blocks route around it instead of consuming its space. Default keeps every
+# existing invocation meaning what it did.
+BASE = MASTER
 WORK = os.path.join(HERE, "routing", "blocks")
 PY = "/usr/bin/python3"
 
@@ -77,6 +82,14 @@ def block_members() -> dict[str, list[str]]:
 
 
 def main() -> int:
+    global BASE
+    argv = sys.argv[1:]
+    if "--base" in argv:
+        BASE = argv[argv.index("--base") + 1]
+        if not os.path.exists(BASE):
+            print("FAIL: --base %s does not exist" % BASE)
+            return 1
+        print("base board: %s" % os.path.basename(BASE))
     os.makedirs(WORK, exist_ok=True)
     members = block_members()
     results = []
@@ -89,7 +102,7 @@ def main() -> int:
             json.dump(members.get(block, []), fh)
         try:
             r = subprocess.run([PY, os.path.join(HERE, "route_one_block.py"),
-                                block, MASTER, WORK, out, members_json],
+                                block, BASE, WORK, out, members_json],
                                capture_output=True, text=True, timeout=1200)
         except subprocess.TimeoutExpired:
             print("%-16s TIMEOUT" % block)

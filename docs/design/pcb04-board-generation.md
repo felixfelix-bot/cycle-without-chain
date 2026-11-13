@@ -657,6 +657,88 @@ another iteration of guessing.
 Also still absent by intent: the **GEN and HUB power stages** are not autorouted.
 Their loop geometry is what the OC-03 envelope assumes.
 
+## 6a. The ordering fix: route the inter-block nets FIRST
+
+The three failures above all reached the same diagnosis from different
+directions: the board is full and **the existing block copper is what blocks
+progress**. That makes the remedy a question of order, not of router quality.
+
+`route_first.py` tests that directly. It takes the placed-but-unrouted board,
+deletes all copper, restricts the connection targets to the 40 inter-block nets,
+routes them, and leaves the result for the block pass to route *around*.
+
+Measured, not estimated:
+
+```
+inter-block pass:  39 of 40 nets, 833 tracks, GEN_INLA not routed
+block pass after:  15 of 15 block attempts, 1579 segments
+merged:            2194 segments, 0 skipped, 0 unmatched nets
+```
+
+**The measurement that matters, and the false start that nearly hid it.**
+
+The first merge landed the copper on the board the inter-block *preparation* step
+had produced, which had 1081 of its 1415 pads cleared to net 0 -- that is how the
+net set was restricted. DRC on that board reported **2 unconnected**, and that
+number is meaningless: a pad with no net cannot be unconnected to anything. The
+real figure only appears when the same copper is merged onto the genuine unrouted
+board, where every pad keeps its net:
+
+```
+                        v1        route-first      (board net)
+unconnected (all)      418              499
+unconnected (this scope) 52              10
+clearance               27               27
+silk_overlap           118              118
+silk_over_copper        32               32
+via_dangling             0                3
+```
+
+**In-scope unconnected fell 52 to 10.** The all-nets total rose because the block
+pass covered fewer parts this run (ov_chopper, brake_left, brake_right,
+aux_supply and rail_partition harvested 0 segments), so unrelated nets that v1
+happened to have routed are now open. That is a regression in scope the block
+pass owns, not one the ordering fix caused, and it is the next thing to fix.
+
+**Clearance is unchanged at 27 and every one of them is on U504** -- my own latch
+footprint (VSSOP-8, 0.5 mm pitch, 0.35 mm pads on a 0.5 mm pitch land). It was
+carried in from the schematic work, not caused by routing, and it is a real
+defect in a part I added: the land pattern cannot meet the clearance rule at that
+pitch. It needs either a finer design rule for that footprint (as the STM32 pin
+field already has) or a different package. Recorded as open.
+
+**Vias.** Two passes placing vias at the same coordinates produced 199
+`holes_co_located` warnings, all same-net and all on the 27 inter-block nets.
+`dedupe_vias.py` removes a via only when another via on the SAME net sits within
+a tolerance, and refuses to touch cross-net coincidences -- it reported **zero**
+of those, so none of the 199 was a short. 218 duplicates removed, 199 warnings
+and all 12 hole-to-hole gone.
+
+Two tooling defects had to be fixed to get here, both of which had been masking
+the question:
+
+1. `freerouting` is a shell wrapper installed by the ansible role, not a jar.
+   `java -jar /usr/local/bin/freerouting` fails with *Invalid or corrupt
+   jarfile*; the wrapper supplies the real jar itself.
+2. `route_board_blocks.py` called `g.region_for(ref, sheets)` against a function
+   that only existed as a closure inside `gen_pcb.main()`. The block router could
+   not run at all, and the failure looked like a routing problem. `region_for` is
+   now module-level and both callers share one definition of the block split.
+3. `merge_tracks.py` read `layer_id` while the extractor emitted `layer`, and
+   skipped 2075 of 2194 segments while printing a successful merge of 119. It now
+   accepts both spellings. A merge that silently drops 95 % of its input and
+   reports success is the worst kind of green.
+
+`tests/test_route_first.py` encodes the ordering claim: the result must reload,
+must use more than one layer, must carry at least 38 of the 40 declared nets, and
+must not carry copper on an undeclared net.
+
+**What this does and does not establish.** It establishes that the inter-block
+nets are routable when given the space first, which was the open question. It
+does not establish a finished board: 10 in-scope connections remain, 5 blocks
+harvested nothing, the GEN/HUB power stages are hand layout by intent, and no
+Gerbers exist.
+
 ## 7. What PCB-04 still owes
 
 1. Routing, which is the bulk of the work and cannot start on the 150 unsettled

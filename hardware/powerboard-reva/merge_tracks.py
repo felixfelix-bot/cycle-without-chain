@@ -85,7 +85,11 @@ def main() -> int:
             seg.SetEnd(pcbnew.VECTOR2I(pcbnew.FromMM(t["x2"]),
                                        pcbnew.FromMM(t["y2"])))
             seg.SetWidth(pcbnew.FromMM(t["width"]))
-            seg.SetLayer(int(t["layer_id"]))
+            # Accept both spellings: the block router emits "layer_id", but the
+            # extractor used for the route-first copper emits "layer". A silent
+            # key mismatch here skipped 2075 of 2194 segments and looked like a
+            # successful merge of 119.
+            seg.SetLayer(int(t.get("layer_id", t.get("layer"))))
             net = nets_by_name.get(t.get("netname"))
             if net is None:
                 unmatched += 1
