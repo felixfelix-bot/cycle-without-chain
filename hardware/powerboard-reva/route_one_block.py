@@ -44,6 +44,34 @@ def main() -> int:
         return 0
 
     board = pcbnew.LoadBoard(master_path)
+
+    # Count the block's nets BEFORE any removal. Iterating pads after Remove()
+    # returns bare SwigPyObject handles -- the same interpreter-damage pattern
+    # documented at the top of this file, and it crashed 14 of 15 blocks.
+    pad_total = pad_netted = 0
+    block_nets: set[str] = set()
+    for fp in board.GetFootprints():
+        if fp.GetReference() not in members:
+            continue
+        for pad in fp.Pads():
+            pad_total += 1
+            nm = pad.GetNetname()
+            if nm:
+                pad_netted += 1
+                block_nets.add(nm)
+    if pad_netted == 0:
+        # A block whose parts carry no nets cannot be routed; the router would
+        # return an empty session and "0 tracks" would look like a finished
+        # block. Five blocks did exactly that when handed the cleared board.
+        json.dump({"block": block, "parts": len(members), "tracks": [],
+                   "status": "fail",
+                   "why": "no netted pads for this block (%d pads, 0 with a net): "
+                          "route onto the real board, not the cleared copy"
+                          % pad_total}, open(out_path, "w"))
+        return 1
+    print("BLOCK %s pads=%d netted=%d nets=%d" % (block, pad_total, pad_netted,
+                                                  len(block_nets)))
+
     for fp in list(board.GetFootprints()):
         if fp.GetReference() not in members:
             board.Remove(fp)
