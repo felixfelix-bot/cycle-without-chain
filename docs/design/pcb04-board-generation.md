@@ -971,6 +971,46 @@ The layer-aware audit in `audit_escape.py` is the reliable instrument: it asks
 whether a net's own copper reaches each of its own pads, which is the question that
 was always meant.
 
+### The real list: 12 nets, 11 of them design-excluded
+
+Separating the report (`real_unconnected.py`):
+
+```
+pairs reported:                            273
+same-net (REAL):                           107
+cross-net (not a connectivity statement):  166
+distinct real nets:                         12
+```
+
+The twelve, and whether their pads live in a `reserved` block:
+
+```
+HUB_SHUNT_C    middle,reserved      YES
+PRE_SOURCE     reserved             YES
+PGND           bottom,middle,reserved,top  YES
+PRE_VDDM       reserved             YES
+CTRL3V3        middle,reserved      YES
+HUB_PHASE_C    middle,reserved      YES
+CTRL_RAW       reserved             YES
+CTRL_SW        reserved             YES
+Q403_GATE      reserved             YES
+CTRL_BST       reserved             YES
+CTRL_PG        middle,reserved      YES
+HUB_nSCS       middle,top           no
+```
+
+**Eleven of twelve involve a reserved power stage** -- the precharge chain
+(`PRE_SOURCE`, `PRE_VDDM`, `CTRL_*`, `Q403_GATE`), the hub bridge phase and shunt
+(`HUB_PHASE_C`, `HUB_SHUNT_C`), and `PGND` where it meets them. Those are hand-layout
+nets by design.
+
+**One net is genuine open work: `HUB_nSCS`**, a single pair between the hub driver and
+the MCU.
+
+So the honest state of PCB-04 routing is: the automatable work is essentially done,
+and the remainder is the power-stage copper that was deliberately left to hand layout
+plus one signal net.
+
 **A correction to the clearance attribution.** The section above says the 27
 clearance errors are "a footprint defect on U504". They were not. KiCad requires the
 design-rules file to match the BOARD filename -- `powerboard-reva-board.kicad_pcb`
