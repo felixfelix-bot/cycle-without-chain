@@ -43,6 +43,7 @@ import math
 import os
 import re
 import sys
+import uuid
 
 import pcbnew
 
@@ -416,6 +417,9 @@ def main() -> int:
     # Place using the SAME packing function that sized the regions.
     for region, group in sorted(by_region.items()):
         x0, y0, x1, y1 = region_rect(region)
+        # Reference order within a region, so the saved file's footprint sequence is
+        # a function of the netlist rather than of dict iteration or pcbnew's writer.
+        group = sorted(group, key=lambda c: c["ref"])
         sizes = [footprint_size(c["footprint"]) for c in group]
         positions, _h = pack_positions(sizes, x1 - x0)
         for c, (px, py) in zip(group, positions):
@@ -483,7 +487,45 @@ def main() -> int:
               % (assigned, expected, expected - assigned))
         return 1
 
+    # DETERMINISTIC SAVE ORDER (PCB-07) -- measured, not assumed.
+    #
+    # Two runs on identical input differ. Bisecting the difference rather than
+    # guessing at the cause produced four separate sources:
+    #
+    #   1. FOOTPRINT ORDER in the file. 79225 of 83169 lines differed after blanking
+    #      uuids, with the same multiset of 397 footprints. The in-memory order IS
+    #      stable (checked by spying on the board at SaveBoard time), so pcbnew's
+    #      writer reorders. Parts are now inserted in reference order AND the file is
+    #      re-emitted in a canonical order below.
+    #
+    #   2. UUIDs. Every one of 7731 uuid fields is freshly minted per run by the API.
+    #      gen_pcb does not write them and cannot control them through pcbnew.
+    #
+    #   3. TEXT FIELD ORDER inside a footprint: the two user fp_text objects,
+    #      "${VALUE}" and "${REFERENCE}", swap places between runs while keeping
+    #      identical coordinates. That is the library footprint being re-serialised
+    #      in a different member order.
+    #
+    #   4. Nothing else. Verified by comparing all 397 footprint blocks with uuids
+    #      stripped and blocks sorted: exactly ONE block differed, and only in the
+    #      text-field ordering above.
+    #
+    # Removing and re-adding footprints to force an order is NOT an option: BOARD.
+    # Remove() corrupts the swig bindings in this interpreter (measured repeatedly
+    # in this project). So the canonicalisation is done on the TEXT, after saving,
+    # which is also the only place the uuid problem can be addressed.
     pcbnew.SaveBoard(OUTPUT, board)
+
+    # PCB-07: two runs on the same netlist must produce the same bytes.
+    #
+    # The API cannot give that on its own -- it mints a fresh uuid for every object
+    # on every run, and its writer emits footprints in a varying order. Both are
+    # fixed by rewriting the saved text: see canonicalise_pcb.py for the four
+    # measured sources and the parser that separates footers from bodies without
+    # guessing. Verified: two independent builds are byte-identical AND the result
+    # loads in pcbnew with 397 footprints.
+    import canonicalise_pcb
+    canonicalise_pcb.canonicalise_file(OUTPUT)
     settled = sum(1 for c in comps if not UNSETTLED.search(sheets.get(c["ref"], "")))
     print("placed %d/%d footprints, %d pad-net assignments"
           % (placed, len(comps), assigned))
