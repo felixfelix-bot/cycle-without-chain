@@ -1,0 +1,37 @@
+test_export (test_brake_intent.BrakeTopology.test_export) ... ERROR
+test_mutations (test_brake_intent.BrakeTopology.test_mutations) ... ERROR
+
+======================================================================
+ERROR: test_export (test_brake_intent.BrakeTopology.test_export)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-brake-intent/hardware/powerboard-reva/tests/test_brake_intent.py", line 25, in test_export
+    def test_export(self):validate(*exported())
+                          ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/c08r4d0r/worktrees/cycle-brake-intent/hardware/powerboard-reva/tests/test_brake_intent.py", line 11, in validate
+    pin('U6',11,'FAULT_CHAIN'); pin('J5',2,'FAULT_CHAIN')
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/c08r4d0r/worktrees/cycle-brake-intent/hardware/powerboard-reva/tests/test_brake_intent.py", line 7, in pin
+    if nets.get((r,str(p))) != n: raise ValueError(f'{r}.{p} expected {n}')
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: U6.11 expected FAULT_CHAIN
+
+======================================================================
+ERROR: test_mutations (test_brake_intent.BrakeTopology.test_mutations)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-brake-intent/hardware/powerboard-reva/tests/test_brake_intent.py", line 27, in test_mutations
+    parts,nets=exported();validate(parts,nets)
+                          ^^^^^^^^^^^^^^^^^^^^
+  File "/home/c08r4d0r/worktrees/cycle-brake-intent/hardware/powerboard-reva/tests/test_brake_intent.py", line 11, in validate
+    pin('U6',11,'FAULT_CHAIN'); pin('J5',2,'FAULT_CHAIN')
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/c08r4d0r/worktrees/cycle-brake-intent/hardware/powerboard-reva/tests/test_brake_intent.py", line 7, in pin
+    if nets.get((r,str(p))) != n: raise ValueError(f'{r}.{p} expected {n}')
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: U6.11 expected FAULT_CHAIN
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.091s
+
+FAILED (errors=2)

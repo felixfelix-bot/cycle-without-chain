@@ -1,0 +1,67 @@
+Using SPARSE 1.3 as Direct Linear Solver
+
+Note: No compatibility mode selected!
+
+
+Circuit: explicit two-dff restart interlock ideal behavioral spice, not vendor models
+
+Reducing trtol to 1 for xspice 'A' devices
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+
+Initial Transient Solution
+--------------------------
+
+Node                                   Voltage
+----                                   -------
+vcc                                          0
+supervisor                                   0
+faults_ok                                  3.3
+healthy                                      0
+reset                                      3.3
+filtered                                   3.3
+schmitt                                      0
+one_v                                      3.3
+permit_v                                     0
+release_v                                    0
+enable                                       0
+ref                                        2.5
+bus                                         55
+sense                                  2.27445
+ov                                 0.000390061
+comp                                       3.3
+bcmp#branch                                  0
+benable#branch                               0
+bhealthy#branch                              0
+vbus#branch                       -0.000234336
+vref#branch                                  0
+vone#branch                                  0
+vreset#branch                      5.42101e-20
+vfault#branch                                0
+vsup#branch                                  0
+vcc#branch                         3.90061e-07
+aout#branch_1_0                              0
+aout#branch_1_1                              0
+
+
+No. of Data Rows : 30298
+initial_safe        =  0.000000e+00
+held_high_startup   =  0.000000e+00
+fresh_cycle_arms    =  3.300000e+00
+fault_immediate     =  0.000000e+00
+held_after_fault    =  0.000000e+00
+fresh_after_fault   =  3.300000e+00
+brownout_safe       =  0.000000e+00
+supervisor_wait     =  0.000000e+00
+held_after_brownout =  0.000000e+00
+fresh_after_brownout=  3.300000e+00
+low_through_recovery=  0.000000e+00
+first_rise_rejected =  0.000000e+00
+fresh_after_low     =  3.300000e+00
+bounce_rejected     =  0.000000e+00
+fresh_after_bounce  =  3.300000e+00
+stuck_high_safe     =  0.000000e+00
+stuck_low_safe      =  0.000000e+00
+ov_on               =  6.033102e+01
+ov_off              =  5.820313e+01
+ngspice-42 done

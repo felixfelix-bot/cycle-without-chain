@@ -1,0 +1,180 @@
+Source: https://www.ti.com/lit/ds/symlink/tlv3202.pdf
+Retrieved: 2026-11-10
+PDF SHA256: 358c30340b482fc4b8fb2a5ae8a32543ff758acbbce2b9c1556ac703df118f1b
+Extraction: pdftotext -layout; unedited selected line spans.
+
+--- extracted lines 117-163 ---
+5 Pin Configuration and Functions
+
+                                                                  OUT   1       5   VCC
+
+                                                                  GND   2
+
+                                                                  IN+   3       4   IN-
+
+
+
+                   Figure 5-1. TLV3201 DCK and DBV Packages 5-Pin SC70-5 and SOT-23 Top View
+
+Pin Functions: TLV3201
+            PIN
+                                 I/O                                                    DESCRIPTION
+ NAME              NO.
+ GND                2             —       Negative supply, ground
+ IN–                4             I       Negative input
+ IN+                3             I       Positive input
+ OUT                1             O       Output
+ VCC                5             —       Positive supply
+
+
+                                                       1OUT        1                8     VCC
+
+                                                           1IN-    2                7     2OUT
+
+                                                           1IN+    3                6     2IN-
+
+                                                           GND     4                5     2IN+
+
+
+
+                        Figure 5-2. TLV3202 D and DGK Packages 8-Pin SOIC and VSSOP Top View
+
+Pin Functions: TLV3202
+            PIN
+                                 I/O                                                    DESCRIPTION
+ NAME              NO.
+ 1IN–               2             I       Negative input, comparator 1
+ 1IN+               3             I       Positive input, comparator 1
+ 1OUT               1             O       Output, comparator 1
+ 2IN–               6             I       Negative input, comparator 2
+ 2IN+               5             I       Positive input, comparator 2
+ 2OUT               7             O       Output, comparator 2
+ GND                4             —       Negative supply, ground
+ VCC                8             —       Positive supply
+
+--- extracted lines 235-359 ---
+6.5 Electrical Characteristics: VCC = 5V
+at TA = 25°C and VCC = 5V (unless otherwise noted)
+                         PARAMETER                                          TEST CONDITIONS                         MIN           TYP            MAX         UNIT
+ OFFSET VOLTAGE
+                                                              VCM = VCC / 2                                                           1            3
+ VIO-TLV3201   Input offset voltage TLV3201                                                                                                                   mV
+                                                              TA = –40°C to 125°C                                                                  4
+                                                              VCM = VCC / 2                                                           1            5
+ VIO-TLV3202   Input offset voltage TLV3202                                                                                                                   mV
+                                                              TA = –40°C to 125°C                                                                  6
+ dVOS/dT       Input offset voltage drift                     TA = –40°C to 125°C                                                     1           10         µV/°C
+ PSRR          Power-supply rejection ratio                   VCM = VCC / 2, VCC = 2.5V to 5.5V                      65              85                       dB
+               Input hysteresis                                                                                                    1.2                        mV
+ INPUT BIAS CURRENT
+                                                              VCM = VCC / 2                                                           1           50          pA
+ IIB           Input bias current
+                                                              TA = –40°C to 125°C                                                                  5          nA
+                                                              VCM = VCC / 2                                                           1           50          pA
+ IIO           Input offset current
+                                                              TA = –40°C to 125°C                                                                 2.5         nA
+ INPUT VOLTAGE RANGE
+ VCM           Common-mode voltage                            TA = –40°C to 125°C                            (VEE) – 0.2                  (VCC) + 0.2          V
+ CMRR          Common-mode rejection ratio                    –0.2V < VCM < 5.2V                                     60              70                       dB
+ INPUT IMPEDANCE
+               Common mode                                                                                                    1013 || 2                      Ω ||pF
+               Differential                                                                                                   1013 || 4                      Ω ||pF
+ OUTPUT
+                                                              ISINK = 4mA                                                         175            190
+ VOL           Voltage output swing from lower rail                                                                                                           mV
+                                                              TA = –40°C to 125°C                                                                225
+                                                              ISOURCE = 4mA                                                       120            140
+ VOH           Voltage output swing from upper rail                                                                                                           mV
+                                                              TA = –40°C to 125°C                                                                170
+                                                              ISC sinking                                            40              48
+                                                              TA = –40°C to 125°C                                      See Figure 6-14
+ ISC           Short-circuit current (per comparator)                                                                                                         mA
+                                                              ISC sourcing                                           52              60
+                                                              TA = –40°C to 125°C                                      See Figure 6-14
+ POWER SUPPLY
+ VCC           Specified voltage                                                                                    2.7                           5.5          V
+                                                              TA = 25°C                                                              40           50
+ IQ            Quiescent current                                                                                                                              µA
+                                                              TA = –40°C to 125°C                                                                 65
+
+
+
+6.6 Switching Characteristics: VCC = 5V
+over operating free-air temperature range (unless otherwise noted)
+                       PARAMETER                                               TEST CONDITIONS                                 MIN        TYP      MAX         UNIT
+                                                                              Input overdrive = 20mV , CL = 15pF                            47          50
+                                                        Low to high           Input overdrive = 100mV , CL = 15pF                           43          50
+                                                                              TA = –40°C to 125°C                                                       55
+ tPD       Propagation delay time                                                                                                                               ns
+                                                                              Input overdrive = 20mV , CL = 15pF                            45          50
+                                                        High to low           Input overdrive = 100mV , CL = 15pF                           42          50
+                                                                              TA = –40°C to 125°C                                                       55
+           Propagation delay skew                       Input overdrive = 20mV , CL = 15pF                                                   2                  ns
+ tR        Rise time                                    10% to 90%                                                                         2.9                  ns
+ tF        Fall time                                    10% to 90%                                                                         3.7                  ns
+
+
+
+
+Copyright © 2024 Texas Instruments Incorporated                                                                            Submit Document Feedback                   5
+                                                         Product Folder Links: TLV3201 TLV3202
+TLV3201, TLV3202
+SBOS561C – MARCH 2012 – REVISED MAY 2024                                                                                                                    www.ti.com
+
+6.7 Electrical Characteristics: VCC = 2.7V
+at TA = 25°C and VCC = 2.7V (unless otherwise noted)
+                             PARAMETER                                          TEST CONDITIONS                          MIN          TYP            MAX         UNIT
+    OFFSET VOLTAGE
+                                                                  VCM = VCC / 2                                                           1            3
+    VIO-TLV3201   Input offset voltage TLV3201                                                                                                                    mV
+                                                                  TA = –40°C to 125°C                                                                  4
+                                                                  VCM = VCC / 2                                                           1            5
+    VIO-TLV3202   Input offset voltage TLV3202                                                                                                                    mV
+                                                                  TA = –40°C to 125°C                                                                  6
+    dVOS/dT       Input offset voltage drift                      TA = –40°C to 125°C                                                     1           10         µV/°C
+    PSRR          Power-supply rejection ratio                    VCM = VCC / 2, VCC = 2.5V to 5.5V                        65            85                       dB
+                  Input hysteresis                                                                                                     1.2                        mV
+    INPUT BIAS CURRENT
+                                                                  VCM = VCC / 2                                                           1           50          pA
+    IIB           Input bias current
+                                                                  TA = –40°C to 125°C                                                                  5          nA
+                                                                  VCM = VCC / 2                                                           1           50          pA
+    IIO           Input offset current
+                                                                  TA = –40°C to 125°C                                                                 2.5         nA
+    INPUT VOLTAGE RANGE
+    VCM           Common-mode voltage                             TA = –40°C to 125°C                           (VEE) – 0.2                   (VCC) + 0.2          V
+    CMRR          Common-mode rejection ratio                     –0.2V < VCM < 2.9V                                       56            68                       dB
+    INPUT IMPEDANCE
+                  Common mode                                                                                                     1013 || 2                      Ω ||pF
+                  Differential                                                                                                    1013 || 4                      Ω ||pF
+    OUTPUT
+                                                                  ISINK = 4mA                                                         230            260
+    VOL           Voltage output swing from lower rail                                                                                                            mV
+                                                                  TA = –40°C to 125°C                                                                325
+                                                                  ISOURCE = 4mA                                                       210            250
+    VOH           Voltage output swing from upper rail                                                                                                            mV
+                                                                  TA = –40°C to 125°C                                                                350
+                                                                  ISC sinking                                              13            19
+                                                                  TA = –40°C to 125°C                                       See Figure 6-14
+    ISC           Short-circuit current (per comparator)                                                                                                          mA
+                                                                  ISC sourcing                                             15            21
+                                                                  TA = –40°C to 125°C                                       See Figure 6-14
+    POWER SUPPLY
+    VCC           Specified voltage                                                                                       2.7                         5.5          V
+                                                                  TA = 25°C                                                              36           46
+    IQ            Quiescent current                                                                                                                               µA
+                                                                  TA = –40°C to 125°C                                                                 60
+
+
+6.8 Switching Characteristics: VCC = 2.7V
+over operating free-air temperature range (unless otherwise noted)
+                          PARAMETER                                               TEST CONDITIONS                                  MIN        TYP      MAX         UNIT
+                                                                                 Input overdrive = 20mV , CL = 15pF                             47          50
+                                                           Low to high           Input overdrive = 100mV , CL = 15pF                            42          50
+                                                                                 TA = –40°C to 125°C                                                        55
+    tPD       Propagation delay time                                                                                                                                ns
+                                                                                 Input overdrive = 20mV , CL = 15pF                             40          50
+                                                           High to low           Input overdrive = 100mV , CL = 15pF                            38          50
+                                                                                 TA = –40°C to 125°C                                                        55
+              Propagation delay skew                       Input overdrive = 20mV , CL = 15pF                                                    2                  ns
+    tR        Rise time                                    10% to 90%                                                                          4.8                  ns

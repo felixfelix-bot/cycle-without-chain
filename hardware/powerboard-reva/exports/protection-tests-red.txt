@@ -1,0 +1,25 @@
+test_adc (test_calculations.Calculations.test_adc) ... ok
+test_envelope (test_calculations.Calculations.test_envelope) ... ok
+test_invalid (test_calculations.Calculations.test_invalid) ... ok
+test_precharge (test_calculations.Calculations.test_precharge) ... ok
+test_protection (unittest.loader._FailedTest.test_protection) ... ERROR
+
+======================================================================
+ERROR: test_protection (unittest.loader._FailedTest.test_protection)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_protection
+Traceback (most recent call last):
+  File "/home/c08r4d0r/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/unittest/loader.py", line 419, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/c08r4d0r/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/unittest/loader.py", line 362, in _get_module_from_name
+    __import__(name)
+  File "/home/c08r4d0r/worktrees/cycle-powerboard-protection/hardware/powerboard-reva/tests/test_protection.py", line 2, in <module>
+    from protection_calculations import thresholds, corners, latch_next, energy_rise
+ModuleNotFoundError: No module named 'protection_calculations'
+
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.000s
+
+FAILED (errors=1)

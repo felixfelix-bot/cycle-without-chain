@@ -1,0 +1,1 @@
+(sym_lib_table (version 7) (lib (name "Powerboard") (type "KiCad") (uri "${KIPRJMOD}/Powerboard.kicad_sym") (options "") (descr "TI DRV8353S SPI driver; pin table SLVSDY6A pp6-7")))

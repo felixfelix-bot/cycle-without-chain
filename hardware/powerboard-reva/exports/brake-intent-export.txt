@@ -1,0 +1,48 @@
++ python3 generate_schematic.py
+Generated 23 hierarchical pages, 294 components, 901 pin assignments
++ kicad-cli sch export netlist -o exports/powerboard-reva.net powerboard-reva.kicad_sch
++ kicad-cli sch erc -o exports/erc.rpt powerboard-reva.kicad_sch
+Found 4 violations
+Saved ERC Report to exports/erc.rpt
++ kicad-cli sch export pdf -o exports/powerboard-reva.pdf powerboard-reva.kicad_sch
+Plotted to 'exports/powerboard-reva.pdf'.
+Done.
++ kicad-cli sch export svg -o exports/svg powerboard-reva.kicad_sch
+Plotted to '/home/c08r4d0r/worktrees/cycle-brake-intent/hardware/powerboard-reva/exports/svg/powerboard-reva.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-brake-intent/hardware/powerboard-reva/exports/svg/powerboard-reva-GEN DRV8353S driver and three low-side current channels.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-brake-intent/hardware/powerboard-reva/exports/svg/powerboard-reva-GEN 100 V MOSFET bridge - schematic only.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-brake-intent/hardware/powerboard-reva/exports/svg/powerboard-reva-HUB DRV8353S driver and three low-side current channels.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-brake-intent/hardware/powerboard-reva/exports/svg/powerboard-reva-HUB 100 V MOSFET bridge - schematic only.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-brake-intent/hardware/powerboard-reva/exports/svg/powerboard-reva-Unfinished safety _ control _ supply boundaries.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-brake-intent/hardware/powerboard-reva/exports/svg/powerboard-reva-Bus-fed auxiliary and independent safety supply.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-brake-intent/hardware/powerboard-reva/exports/svg/powerboard-reva-Autonomous OV chopper comparator and rail _ brake monitors.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-brake-intent/hardware/powerboard-reva/exports/svg/powerboard-reva-Release-before-rearm DFF memory.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-brake-intent/hardware/powerboard-reva/exports/svg/powerboard-reva-LVC Schmitt fault inputs without series diode offsets.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-brake-intent/hardware/powerboard-reva/exports/svg/powerboard-reva-Independent brake chopper power stage.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-brake-intent/hardware/powerboard-reva/exports/svg/powerboard-reva-STM32G474VET6 LQFP100: power, reset, debug and control.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-brake-intent/hardware/powerboard-reva/exports/svg/powerboard-reva-MCU 3V3 decoupling - external supervised rail.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-brake-intent/hardware/powerboard-reva/exports/svg/powerboard-reva-Six CSA ADC input filters and brake status sense.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-brake-intent/hardware/powerboard-reva/exports/svg/powerboard-reva-3V3 Hall interfaces and optional quadrature encoder.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-brake-intent/hardware/powerboard-reva/exports/svg/powerboard-reva-GEN independent raw CSA window trips.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-brake-intent/hardware/powerboard-reva/exports/svg/powerboard-reva-HUB independent raw CSA window trips.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-brake-intent/hardware/powerboard-reva/exports/svg/powerboard-reva-Ratiometric OC window and wired sink fault.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-brake-intent/hardware/powerboard-reva/exports/svg/powerboard-reva-Bounded bench DC entry - manual dead-circuit sequencing only.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-brake-intent/hardware/powerboard-reva/exports/svg/powerboard-reva-LEFT rider Hall and supervised binary interface.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-brake-intent/hardware/powerboard-reva/exports/svg/powerboard-reva-RIGHT rider Hall and supervised binary interface.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-brake-intent/hardware/powerboard-reva/exports/svg/powerboard-reva-Rider dump PWM OR independent emergency overvoltage.svg'.
+Plotted to '/home/c08r4d0r/worktrees/cycle-brake-intent/hardware/powerboard-reva/exports/svg/powerboard-reva-OFFBOARD supervised switch end-of-line network - candidate.svg'.
+Done.
++ python3 verify_exports.py
+{
+  "components": 294,
+  "nets": 172,
+  "verified_pin_assignments": 901,
+  "explicit_nc_endpoints": 40,
+  "mosfets": 25,
+  "drivers": 2,
+  "erc_errors": 4,
+  "erc_warnings": 0,
+  "erc_reason": "Four known undriven supply errors remain unresolved, NOT waived.",
+  "status": "PARTIAL_NOT_SAFE_TO_ENERGIZE",
+  "svg_pages": 23
+}

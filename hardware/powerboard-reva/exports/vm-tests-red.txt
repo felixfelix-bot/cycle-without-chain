@@ -1,0 +1,21 @@
+test_adc (test_calculations.Calculations.test_adc) ... ok
+test_envelope (test_calculations.Calculations.test_envelope) ... FAIL
+test_invalid (test_calculations.Calculations.test_invalid) ... ok
+test_precharge (test_calculations.Calculations.test_precharge) ... ok
+test_corners (test_protection.Protection.test_corners) ... ok
+test_energy (test_protection.Protection.test_energy) ... ok
+test_set_dominant (test_protection.Protection.test_set_dominant) ... ok
+test_thresholds (test_protection.Protection.test_thresholds) ... ok
+
+======================================================================
+FAIL: test_envelope (test_calculations.Calculations.test_envelope)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-powerboard-protection/hardware/powerboard-reva/tests/test_calculations.py", line 12, in test_envelope
+    self.assertAlmostEqual(x['vm_static_margin_V'], 63)
+AssertionError: 16.6 != 63 within 7 places (46.4 difference)
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.001s
+
+FAILED (failures=1)

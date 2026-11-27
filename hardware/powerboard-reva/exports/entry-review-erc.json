@@ -1,0 +1,166 @@
+{
+    "$schema": "https://schemas.kicad.org/erc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-11-10T13:15:23+0100",
+    "included_severities": [
+        "error",
+        "warning"
+    ],
+    "kicad_version": "9.0.9",
+    "sheets": [
+        {
+            "path": "/",
+            "uuid_path": "/001667bc-4fcf-5521-bd76-ec5b5d98ec86",
+            "violations": []
+        },
+        {
+            "path": "/GEN DRV8353S driver and three low-side current channels/",
+            "uuid_path": "/001667bc-4fcf-5521-bd76-ec5b5d98ec86/b0ef88a7-f146-50a3-8599-2c16938e4020",
+            "violations": [
+                {
+                    "description": "Input Power pin not driven by any Output Power pins",
+                    "items": [
+                        {
+                            "description": "Symbol U1 Pin 24 [VREF, Power input, Line]",
+                            "pos": {
+                                "x": 1.016,
+                                "y": 0.762
+                            },
+                            "uuid": "ec2143ee-0a82-4815-9eb7-463462e9687e"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "power_pin_not_driven"
+                },
+                {
+                    "description": "Input Power pin not driven by any Output Power pins",
+                    "items": [
+                        {
+                            "description": "Symbol U1 Pin 25 [AGND, Power input, Line]",
+                            "pos": {
+                                "x": 1.016,
+                                "y": 0.8128
+                            },
+                            "uuid": "3af66c31-13ee-4125-a23b-4810c01c71f8"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "power_pin_not_driven"
+                }
+            ]
+        },
+        {
+            "path": "/GEN 100 V MOSFET bridge - schematic only/",
+            "uuid_path": "/001667bc-4fcf-5521-bd76-ec5b5d98ec86/55549894-7a70-5e10-8933-9a2dbb219eb3",
+            "violations": []
+        },
+        {
+            "path": "/HUB DRV8353S driver and three low-side current channels/",
+            "uuid_path": "/001667bc-4fcf-5521-bd76-ec5b5d98ec86/7a4041ff-bd2a-5ef8-a31e-bd1429141d1e",
+            "violations": []
+        },
+        {
+            "path": "/HUB 100 V MOSFET bridge - schematic only/",
+            "uuid_path": "/001667bc-4fcf-5521-bd76-ec5b5d98ec86/f77e7d93-1920-5ec7-bdd8-a541cd02fd2c",
+            "violations": []
+        },
+        {
+            "path": "/Unfinished safety / control / supply boundaries/",
+            "uuid_path": "/001667bc-4fcf-5521-bd76-ec5b5d98ec86/a89ed20b-c3b3-52e7-b3d3-9d5c57e61824",
+            "violations": []
+        },
+        {
+            "path": "/Bus-fed auxiliary and independent safety supply/",
+            "uuid_path": "/001667bc-4fcf-5521-bd76-ec5b5d98ec86/07a1c2b2-e55c-5635-8e04-dd03dda5943a",
+            "violations": [
+                {
+                    "description": "Input Power pin not driven by any Output Power pins",
+                    "items": [
+                        {
+                            "description": "Symbol U3 Pin 1 [IN, Power input, Line]",
+                            "pos": {
+                                "x": 0.4318,
+                                "y": 0.508
+                            },
+                            "uuid": "d0d254cd-6a79-4c7c-8522-62725ccc347f"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "power_pin_not_driven"
+                }
+            ]
+        },
+        {
+            "path": "/Autonomous OV chopper comparator and rail / brake monitors/",
+            "uuid_path": "/001667bc-4fcf-5521-bd76-ec5b5d98ec86/2a4155e9-6c10-5a94-8cae-cbcd8e28dbd1",
+            "violations": []
+        },
+        {
+            "path": "/Release-before-rearm DFF memory/",
+            "uuid_path": "/001667bc-4fcf-5521-bd76-ec5b5d98ec86/76d48185-5b5e-52e6-9bbf-2f22212e005a",
+            "violations": []
+        },
+        {
+            "path": "/LVC Schmitt fault inputs without series diode offsets/",
+            "uuid_path": "/001667bc-4fcf-5521-bd76-ec5b5d98ec86/20832fb7-1c1d-5dfd-b8ae-8e3dd04b6119",
+            "violations": []
+        },
+        {
+            "path": "/Independent brake chopper power stage/",
+            "uuid_path": "/001667bc-4fcf-5521-bd76-ec5b5d98ec86/62e07239-627c-53bf-9814-7a2bba4007d8",
+            "violations": []
+        },
+        {
+            "path": "/STM32G474VET6 LQFP100: power, reset, debug and control/",
+            "uuid_path": "/001667bc-4fcf-5521-bd76-ec5b5d98ec86/34578ba7-f1c7-5b90-848e-ae5224af6886",
+            "violations": [
+                {
+                    "description": "Input Power pin not driven by any Output Power pins",
+                    "items": [
+                        {
+                            "description": "Symbol U17 Pin 37 [VDDA, Power input, Line]",
+                            "pos": {
+                                "x": 1.0922,
+                                "y": 0.6604
+                            },
+                            "uuid": "4881452f-615d-44d1-acb5-7ff1bd16f081"
+                        }
+                    ],
+                    "severity": "error",
+                    "type": "power_pin_not_driven"
+                }
+            ]
+        },
+        {
+            "path": "/MCU 3V3 decoupling - external supervised rail/",
+            "uuid_path": "/001667bc-4fcf-5521-bd76-ec5b5d98ec86/bf0cd064-9fda-564e-a6d6-d3ce9d73975e",
+            "violations": []
+        },
+        {
+            "path": "/Six CSA ADC input filters and brake status sense/",
+            "uuid_path": "/001667bc-4fcf-5521-bd76-ec5b5d98ec86/daf3cccb-bef3-5676-b611-9530e184d628",
+            "violations": []
+        },
+        {
+            "path": "/3V3 Hall interfaces and optional quadrature encoder/",
+            "uuid_path": "/001667bc-4fcf-5521-bd76-ec5b5d98ec86/ec602b0e-4669-57c5-8e64-6cacf764bc45",
+            "violations": []
+        },
+        {
+            "path": "/GEN independent raw CSA window trips/",
+            "uuid_path": "/001667bc-4fcf-5521-bd76-ec5b5d98ec86/e2ce7bc7-73a6-5132-a9b8-ad8d1d5d195e",
+            "violations": []
+        },
+        {
+            "path": "/HUB independent raw CSA window trips/",
+            "uuid_path": "/001667bc-4fcf-5521-bd76-ec5b5d98ec86/90ab2999-75ed-5303-bbb2-ae4c0bf0a2c9",
+            "violations": []
+        },
+        {
+            "path": "/Ratiometric OC window and wired sink fault/",
+            "uuid_path": "/001667bc-4fcf-5521-bd76-ec5b5d98ec86/4b3e7de2-0ca0-5258-a4bb-d421237bafb2",
+            "violations": []
+        }
+    ],
+    "source": "powerboard-reva.kicad_sch"
+}
