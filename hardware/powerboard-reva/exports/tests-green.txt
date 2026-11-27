@@ -1,0 +1,9 @@
+test_adc (test_calculations.Calculations.test_adc) ... ok
+test_envelope (test_calculations.Calculations.test_envelope) ... ok
+test_invalid (test_calculations.Calculations.test_invalid) ... ok
+test_precharge (test_calculations.Calculations.test_precharge) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.000s
+
+OK

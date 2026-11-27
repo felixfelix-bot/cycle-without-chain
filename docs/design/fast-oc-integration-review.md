@@ -1,0 +1,9 @@
+# Fast OC integration review — UNSAFE partial circuit
+
+Reviewed base 33811edd69f77d311ed172810cfd7d8c4c86c135 independently in entry-stage worktree. Native strict ERC exits 5 with four unresolved power_pin_not_driven violations (U1.24 VREF, U1.25 AGND, U3.1 IN, U17.37 VDDA); no flags or waivers added. Normal and optimized full suites rerun from hardware/powerboard-reva: 25 tests each pass; fresh entry-review-* evidence retained. An initial run from repository root failed imports; corrected working directory, not code or assertions.
+
+Actual TLV3202 custom pin mapping is OUT1/IN1-/IN1+/GND/IN2+/IN2-/OUT2/VCC. Lower comparator has SO on minus and LOW_REF on plus; low SO therefore drives sink gate HIGH. Upper has SO on plus, HIGH_REF on minus. DRV8353 positive SP-SN current decreases SO; both physical comparisons are consistent. Both outputs drive separate 2N7002s; no push-pull output short. Netlist assertion suite tests this independently of generated manifest.
+
+Material qualification gap remains: 2N7002 VGS(th) is NOT an on-state guarantee. At low rail and worst comparator VOH, available gate drive cannot be equated with 4.5/10V RDS(on) data. Nominal 0.702mA sink is small but worst-temperature VOL and delay at that gate voltage are unproved. Therefore OC shutdown is **not qualified**, even though logical polarity is correct. No material polarity correction was necessary. Consult fast-oc-milestone.md for current sign, blind intervals, latch path and source evidence.
+
+No cross-family review approval available. No energization, fabrication or riding authorization. Remaining blockers: sink VOL/propagation and supply-loss behavior, comparator/CSA/reference corners, shunt blind intervals, MOSFET SOA, transient clamp and thermal validation, firmware DRV configuration/readback, protected entry and storage acceptance. This consolidation does not close them.

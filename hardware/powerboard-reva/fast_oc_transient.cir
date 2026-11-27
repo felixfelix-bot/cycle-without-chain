@@ -1,0 +1,114 @@
+Six-CSA independent OC to existing two-DFF interlock: IDEAL, NOT vendor models
+* Provisional 0.8527131783/2.4472868217 V window: 1.65 V midpoint, gain20, 2mohm, nominal +/-20 A.
+* Raw CSA pins before ADC filters. CSA bandwidth, saturation/recovery, blanking,
+* comparator propagation delay/overdrive, minimum pulse width, hysteresis,
+* reference/offset tolerances, power sequencing and MOSFET turnoff are NOT modeled.
+* No real protection latency or minimum pulse capture qualification is claimed.
+* 1us pulse test is only an ideal resolved logic stimulus, NOT a silicon guarantee.
+* Shorter pulses may be lost by numerical resolution or digital inertial delays.
+* U14 third input is OC_OK (formerly tied SAFETY3V3); all other nets match schematic.
+* TIM1 BKIN (U17 pin46) and TIM8 BKIN (pin84) share TIMER_BREAK_OK, active LOW.
+.param FAULT_LEVEL=2.6 PULSE_WIDTH=100u
+.param INJECT_GEN_SOA=0
+VGEN_SOA GEN_SOA 0 PWL(0 1.65 6m 1.65 6.00001m {1.65+INJECT_GEN_SOA*(FAULT_LEVEL-1.65)} {6.00001m+PULSE_WIDTH} {1.65+INJECT_GEN_SOA*(FAULT_LEVEL-1.65)} {6.00002m+PULSE_WIDTH} 1.65 12m 1.65)
+.param INJECT_GEN_SOB=0
+VGEN_SOB GEN_SOB 0 PWL(0 1.65 6m 1.65 6.00001m {1.65+INJECT_GEN_SOB*(FAULT_LEVEL-1.65)} {6.00001m+PULSE_WIDTH} {1.65+INJECT_GEN_SOB*(FAULT_LEVEL-1.65)} {6.00002m+PULSE_WIDTH} 1.65 12m 1.65)
+.param INJECT_GEN_SOC=0
+VGEN_SOC GEN_SOC 0 PWL(0 1.65 6m 1.65 6.00001m {1.65+INJECT_GEN_SOC*(FAULT_LEVEL-1.65)} {6.00001m+PULSE_WIDTH} {1.65+INJECT_GEN_SOC*(FAULT_LEVEL-1.65)} {6.00002m+PULSE_WIDTH} 1.65 12m 1.65)
+.param INJECT_HUB_SOA=0
+VHUB_SOA HUB_SOA 0 PWL(0 1.65 6m 1.65 6.00001m {1.65+INJECT_HUB_SOA*(FAULT_LEVEL-1.65)} {6.00001m+PULSE_WIDTH} {1.65+INJECT_HUB_SOA*(FAULT_LEVEL-1.65)} {6.00002m+PULSE_WIDTH} 1.65 12m 1.65)
+.param INJECT_HUB_SOB=0
+VHUB_SOB HUB_SOB 0 PWL(0 1.65 6m 1.65 6.00001m {1.65+INJECT_HUB_SOB*(FAULT_LEVEL-1.65)} {6.00001m+PULSE_WIDTH} {1.65+INJECT_HUB_SOB*(FAULT_LEVEL-1.65)} {6.00002m+PULSE_WIDTH} 1.65 12m 1.65)
+.param INJECT_HUB_SOC=0
+VHUB_SOC HUB_SOC 0 PWL(0 1.65 6m 1.65 6.00001m {1.65+INJECT_HUB_SOC*(FAULT_LEVEL-1.65)} {6.00001m+PULSE_WIDTH} {1.65+INJECT_HUB_SOC*(FAULT_LEVEL-1.65)} {6.00002m+PULSE_WIDTH} 1.65 12m 1.65)
+Vcc SAFETY3V3 0 3.3
+Vwd WD_RESET_N 0 PWL(0 0 1m 0 1.001m 3.3 12m 3.3)
+Vanalog ANALOG_OK 0 3.3
+Vgen GEN_nFAULT 0 3.3
+Vhub HUB_nFAULT 0 3.3
+* MCU stuck high continuously; it cannot defeat hardware gating.
+Varm MCU_ARM 0 3.3
+Vreset RESET_REQUEST 0 PWL(0 3.3 3m 3.3 3.001m 0 4m 0 4.001m 3.3 9m 3.3 9.001m 0 10m 0 10.001m 3.3 12m 3.3)
+Rreset RESET_REQUEST RESET_RC 10k
+Creset RESET_RC 0 10n
+Sreset SAFETY3V3 RESET_CLEAN RESET_RC 0 SCHMITT
+Rresetout RESET_CLEAN 0 10k
+.model SCHMITT SW(Ron=1 Roff=1e12 Vt=1.4 Vh=.6)
+* Each comparator-driven ideal sink FET sinks the common OC_OK on either window violation.
+Roc SAFETY3V3 OC_OK 4.7k
+Vlogic LOGIC3V3_EXT 0 3.3
+Rlowtop LOGIC3V3_EXT OC_LOW_REF 28.7k
+Rlowbottom OC_LOW_REF 0 10k
+Rhightop LOGIC3V3_EXT OC_HIGH_REF 10k
+Rhighbottom OC_HIGH_REF 0 28.7k
+.model OC_SINK SW(Ron=10 Roff=1e12 Vt=1.65 Vh=0)
+Blo_GEN_SOA GEN_SOA_LO 0 V=V(GEN_SOA)<V(OC_LOW_REF) ? 3.3 : 0
+Bhi_GEN_SOA GEN_SOA_HI 0 V=V(GEN_SOA)>V(OC_HIGH_REF) ? 3.3 : 0
+Slo_GEN_SOA OC_OK 0 GEN_SOA_LO 0 OC_SINK
+Shi_GEN_SOA OC_OK 0 GEN_SOA_HI 0 OC_SINK
+Blo_GEN_SOB GEN_SOB_LO 0 V=V(GEN_SOB)<V(OC_LOW_REF) ? 3.3 : 0
+Bhi_GEN_SOB GEN_SOB_HI 0 V=V(GEN_SOB)>V(OC_HIGH_REF) ? 3.3 : 0
+Slo_GEN_SOB OC_OK 0 GEN_SOB_LO 0 OC_SINK
+Shi_GEN_SOB OC_OK 0 GEN_SOB_HI 0 OC_SINK
+Blo_GEN_SOC GEN_SOC_LO 0 V=V(GEN_SOC)<V(OC_LOW_REF) ? 3.3 : 0
+Bhi_GEN_SOC GEN_SOC_HI 0 V=V(GEN_SOC)>V(OC_HIGH_REF) ? 3.3 : 0
+Slo_GEN_SOC OC_OK 0 GEN_SOC_LO 0 OC_SINK
+Shi_GEN_SOC OC_OK 0 GEN_SOC_HI 0 OC_SINK
+Blo_HUB_SOA HUB_SOA_LO 0 V=V(HUB_SOA)<V(OC_LOW_REF) ? 3.3 : 0
+Bhi_HUB_SOA HUB_SOA_HI 0 V=V(HUB_SOA)>V(OC_HIGH_REF) ? 3.3 : 0
+Slo_HUB_SOA OC_OK 0 HUB_SOA_LO 0 OC_SINK
+Shi_HUB_SOA OC_OK 0 HUB_SOA_HI 0 OC_SINK
+Blo_HUB_SOB HUB_SOB_LO 0 V=V(HUB_SOB)<V(OC_LOW_REF) ? 3.3 : 0
+Bhi_HUB_SOB HUB_SOB_HI 0 V=V(HUB_SOB)>V(OC_HIGH_REF) ? 3.3 : 0
+Slo_HUB_SOB OC_OK 0 HUB_SOB_LO 0 OC_SINK
+Shi_HUB_SOB OC_OK 0 HUB_SOB_HI 0 OC_SINK
+Blo_HUB_SOC HUB_SOC_LO 0 V=V(HUB_SOC)<V(OC_LOW_REF) ? 3.3 : 0
+Bhi_HUB_SOC HUB_SOC_HI 0 V=V(HUB_SOC)>V(OC_HIGH_REF) ? 3.3 : 0
+Slo_HUB_SOC OC_OK 0 HUB_SOC_LO 0 OC_SINK
+Shi_HUB_SOC OC_OK 0 HUB_SOC_HI 0 OC_SINK
+* U11/U12 healthy fault inputs; reset retains the actual nominal RC/Schmitt.
+Banalog ANALOG_CLEAN 0 V=V(ANALOG_OK)>=2 ? 3.3 : 0
+Bgen GEN_OK 0 V=V(GEN_nFAULT)>=2 ? 3.3 : 0
+Bhub HUB_OK 0 V=V(HUB_nFAULT)>=2 ? 3.3 : 0
+Bwd WD_OK 0 V=V(WD_RESET_N)>=2 ? 3.3 : 0
+Barm ARM_CLEAN 0 V=V(MCU_ARM)>=2 ? 3.3 : 0
+* U13, U14, then U16: OC does NOT bypass or replace restart memory.
+Bfaults FAULTS_OK 0 V=(V(ANALOG_CLEAN)>=2 && V(GEN_OK)>=2 && V(HUB_OK)>=2) ? 3.3 : 0
+Bhealthy HEALTHY 0 V=(V(FAULTS_OK)>=2 && V(WD_OK)>=2 && V(OC_OK)>=2) ? 3.3 : 0
+Ainputs [HEALTHY RESET_CLEAN SAFETY3V3] [health clk one] ADC
+.model ADC adc_bridge(in_low=.8 in_high=2.0)
+Anothealth health clear INV
+Anotclock clk released_clk INV
+.model INV d_inverter(rise_delay=10n fall_delay=10n)
+* U7 D=1 CLK=RESET_INV CLR_N=HEALTHY, U8 D=RELEASE_SEEN CLK=RESET_CLEAN.
+Arelease one released_clk NULL clear release_seen_d release_n_d FF
+Apermit release_seen_d clk NULL clear permit_d fault_latch_d FF
+.model FF d_dff(clk_delay=20n set_delay=10n reset_delay=10n ic=0)
+Aout [permit_d release_seen_d release_n_d fault_latch_d released_clk] [PERMIT RELEASE_SEEN RELEASE_N FAULT_LATCH RESET_INV] DAC
+.model DAC dac_bridge(out_low=0 out_high=3.3 t_rise=10n t_fall=10n)
+Benable TIMER_BREAK_OK 0 V=(V(HEALTHY)>=2 && V(PERMIT)>=2 && V(ARM_CLEAN)>=2) ? V(SAFETY3V3) : 0
+Rgen TIMER_BREAK_OK GEN_ENABLE 1k
+Rhub TIMER_BREAK_OK HUB_ENABLE 1k
+* Loads avoid floating nodes; not a driver-input electrical model.
+Rgenload GEN_ENABLE 0 1G
+Rhubload HUB_ENABLE 0 1G
+.control
+tran 50n 12m
+meas tran startup_held FIND v(TIMER_BREAK_OK) AT=2m
+meas tran armed FIND v(TIMER_BREAK_OK) AT=5m
+meas tran mcu_stuck_high FIND v(MCU_ARM) AT=6.0005m
+meas tran oc_during FIND v(OC_OK) AT=6.0005m
+meas tran healthy_during FIND v(HEALTHY) AT=6.0005m
+meas tran oc_recovered FIND v(OC_OK) AT=7m
+meas tran permit_after FIND v(PERMIT) AT=7m
+meas tran fault_latched FIND v(FAULT_LATCH) AT=7m
+meas tran gen_after FIND v(GEN_ENABLE) AT=7m
+meas tran hub_after FIND v(HUB_ENABLE) AT=7m
+* Both pins are physically the SAME net, not independent simulated paths.
+meas tran tim1_after FIND v(TIMER_BREAK_OK) AT=7m
+meas tran tim8_after FIND v(TIMER_BREAK_OK) AT=7m
+meas tran held_recovery FIND v(TIMER_BREAK_OK) AT=8m
+meas tran fresh_cycle FIND v(TIMER_BREAK_OK) AT=11m
+quit
+.endc
+.end

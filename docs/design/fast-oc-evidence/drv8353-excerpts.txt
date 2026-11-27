@@ -1,0 +1,291 @@
+Source: https://www.ti.com/lit/ds/symlink/drv8353.pdf
+Retrieved: 2026-11-10
+PDF SHA256: 8bb3a1d29ec9ea079d0ef452a2a0c614511f37575756b11a03646d8a82ed758c
+Extraction: pdftotext -layout; unedited selected line spans.
+
+--- extracted lines 1746-1800 ---
+CURRENT SHUNT AMPLIFIER (SNx, SOx, SPx, VREF)
+                                                       CSA_GAIN = 00b                                           4.85        5      5.15
+                                                       CSA_GAIN = 01b                                            9.7       10      10.3
+                                          SPI Device
+                                                       CSA_GAIN = 10b                                           19.4       20      20.6
+                                                       CSA_GAIN = 11b                                           38.8       40      41.2
+GCSA           Amplifier gain                                                                                                              V/V
+                                                       GAIN = Tied to GND                                       4.85        5      5.15
+                                                       GAIN = 47 kΩ ± 5% tied to GND                             9.7       10      10.3
+                                          H/W Device
+                                                       GAIN = Hi-Z                                              19.4       20      20.6
+                                                       GAIN = Tied to DVDD                                      38.8       40      41.2
+                                                       VO_STEP = 0.5 V, GCSA = 5 V/V                                     250
+                                                       VO_STEP = 0.5 V, GCSA = 10 V/V                                    500
+tSET           Settling time to ±1%                                                                                                        ns
+                                                       VO_STEP = 0.5 V, GVSA = 20 V/V                                   1000
+                                                       VO_STEP = 0.5 V, GCSA = 40 V/V                                   2000
+VCOM           Common mode input range                                                                         –0.15               0.15    V
+VDIFF          Differential mode input range                                                                    –0.3                0.3    V
+VOFF           Input offset error                      VSP = VSN = 0 V                                           –3                  3     mV
+VDRIFT         Drift offset                            VSP = VSN = 0 V                                                     10             µV/°C
+                                                                                                                                VVREF –
+VLINEAR        SOx output voltage linear range                                                                  0.25                       V
+                                                                                                                                   0.25
+
+
+
+
+14        Submit Documentation Feedback                                                      Copyright © 2018–2019, Texas Instruments Incorporated
+
+                                        Product Folder Links: DRV8350 DRV8350R DRV8353 DRV8353R
+                                                                                                                      DRV8350, DRV8350R
+                                                                                                                      DRV8353, DRV8353R
+www.ti.com                                                                                         SLVSDY6A – AUGUST 2018 – REVISED JUNE 2019
+
+
+Electrical Characteristics (continued)
+at TA = –40°C to +125°C, VVM = 9 to 75 V, VVDRAIN = 9 to 100 V, VVIN = 48 V (unless otherwise noted)
+                     PARAMETER                                                TEST CONDITIONS                   MIN      TYP     MAX    UNIT
+                                                                                                                      VVREF –
+                                                          VSP = VSN = 0 V, VREF_DIV = 0b
+                                                                                                                          0.3
+                                             SPI Device
+                                                                                                                       VVREF /
+VBIAS           SOx output voltage bias                   VSP = VSN = 0 V, VREF_DIV = 1b                                                 V
+                                                                                                                            2
+                                                                                                                       VVREF /
+                                             H/W Device   VSP = VSN = 0 V
+                                                                                                                            2
+IBIAS           SPx/SNx input bias current                                                                                       250    µA
+VSLEW           SOx output slew rate                      60-pF load                                                       10           V/µs
+IVREF           VREF input current                        VVREF = 5 V                                                     1.5     2.5   mA
+                                                          DRV835x: 60-pF load                                              10           MHz
+UGB             Unity gain bandwidth
+                                                          DRV835xR: 60-pF load                                              1           MHz
+
+--- extracted lines 1870-1883 ---
+                                                           OCP_DEG = 00b                                                           1
+                                                           OCP_DEG = 01b                                                           2
+                VDS and VSENSE                SPI Device
+tOCP_DEG                                                   OCP_DEG = 10b                                                           4             µs
+                overcurrent deglitch time
+                                                           OCP_DEG = 11b                                                           8
+                                              H/W Device                                                                           4
+                                                           SEN_LVL = 00b                                                        0.25
+                                                           SEN_LVL = 01b                                                         0.5
+                VSENSE overcurrent trip       SPI Device
+VSEN_OCP                                                   SEN_LVL = 10b                                                        0.75             V
+                voltage
+                                                           SEN_LVL = 11b                                                           1
+                                              H/W Device                                                                           1
+
+--- extracted lines 3692-3739 ---
+8.3.4 Low-Side Current-Shunt Amplifiers (DRV8353 and DRV8353R Only)
+The DRV8353 and DRV8353R integrate three, high-performance low-side current-shunt amplifiers for current
+measurements using low-side shunt resistors in the external half-bridges. Low-side current measurements are
+commonly used to implement overcurrent protection, external torque control, or brushless DC commutation with
+the external controller. All three amplifiers can be used to sense the current in each of the half-bridge legs or one
+amplifier can be used to sense the sum of the half-bridge legs. The current shunt amplifiers include features such
+as programmable gain, offset calibration, unidirectional and bidirectional support, and a voltage reference pin
+(VREF).
+
+8.3.4.1 Bidirectional Current Sense Operation
+The SOx pin on the DRV8353 and DRV8353R outputs an analog voltage equal to the voltage across the SPx
+and SNx pins multiplied by the gain setting (GCSA). The gain setting is adjustable between four different levels (5
+V/V, 10 V/V, 20 V/V, and 40 V/V). Use Equation 3 to calculate the current through the shunt resistor.
+         VVREF
+                  VSOx
+     I     2
+        GCSA u RSENSE                                                                                           (3)
+
+                                                                     R2
+
+
+                                                                     R3
+
+
+                                                                     R4
+
+
+                                                                     R5
+                            SOx                  R6                                                 I
+
+                                                                             R1          SPx
+                     VCC                                               ±
+                                                                             R1                         RSENSE
+                           VREF                                        +
+                                                                                         SNx
+                           0.1 …F                                    R2
+
+                                       ½              +              R3
+                                                      ±
+                                                                     R4
+
+
+                                                                     R5
+
+
+
+
+                                     Figure 41. Bidirectional Current-Sense Configuration
+
+--- extracted lines 4381-4450 ---
+8.3.6.3 MOSFET VDS Overcurrent Protection (VDS_OCP)
+A MOSFET overcurrent event is sensed by monitoring the VDS voltage drop across the external MOSFET RDS(on).
+If the voltage across an enabled MOSFET exceeds the VVDS_OCP threshold for longer than the tOCP_DEG deglitch
+time, a VDS_OCP event is recognized and action is done according to the OCP_MODE. On hardware interface
+devices, the VVDS_OCP threshold is set with the VDS pin, the tOCP_DEG is fixed at 4 µs, and the OCP_MODE is
+configured for 8-ms automatic retry but can be disabled by tying the VDS pin to DVDD. On SPI devices, the
+VVDS_OCP threshold is set through the VDS_LVL SPI register, the tOCP_DEG is set through the OCP_DEG SPI
+register, and the OCP_MODE bit can operate in four different modes: VDS latched shutdown, VDS automatic retry,
+VDS report only, and VDS disabled.
+
+50     Submit Documentation Feedback                                         Copyright © 2018–2019, Texas Instruments Incorporated
+
+                                 Product Folder Links: DRV8350 DRV8350R DRV8353 DRV8353R
+                                                                                                      DRV8350, DRV8350R
+                                                                                                      DRV8353, DRV8353R
+www.ti.com                                                                            SLVSDY6A – AUGUST 2018 – REVISED JUNE 2019
+
+
+The MOSFET VDS overcurrent protection operates in cycle-by-cycle (CBC) mode by default. This can be disabled
+on SPI device variants through the SPI registers. When in cycle-by-cycle (CBC) mode a new rising edge on the
+PWM inputs will clear an existing overcurrent fault.
+Additionally, on SPI devices the OCP_ACT register setting can be set to change the VDS_OCP overcurrent
+response between linked and individual shutdown modes. When OCP_ACT is 0, a VDS_OCP fault will only
+effect the half-bridge in which it occurred. When OCP_ACT is 1, all three half-bridges will respond to a
+VDS_OCP fault on any of the other half-bridges. OCP_ACT defaults to 0, individual shutdown mode.
+
+8.3.6.3.1 VDS Latched Shutdown (OCP_MODE = 00b)
+After a VDS_OCP event in this mode, all the external MOSFETs are disabled and the nFAULT pin is driven low.
+The FAULT, VDS_OCP, and corresponding MOSFET OCP bits are latched high in the SPI registers. Normal
+operation continues (gate driver operation and the nFAULT pin is released) when the VDS_OCP condition is
+removed and a clear faults command is issued either through the CLR_FLT bit or an ENABLE reset pulse (tRST).
+
+8.3.6.3.2 VDS Automatic Retry (OCP_MODE = 01b)
+After a VDS_OCP event in this mode, all the external MOSFETs are disabled and the nFAULT pin is driven low.
+The FAULT, VDS_OCP, and corresponding MOSFET OCP bits are latched high in the SPI registers. Normal
+operation continues automatically (gate driver operation and the nFAULT pin is released) after the tRETRY time
+elapses. The FAULT, VDS_OCP, and MOSFET OCP bits stay latched until the tRETRY period expires.
+
+8.3.6.3.3 VDS Report Only (OCP_MODE = 10b)
+No protective action occurs after a VDS_OCP event in this mode. The overcurrent event is reported by driving
+the nFAULT pin low and latching the FAULT, VDS_OCP, and corresponding MOSFET OCP bits high in the SPI
+registers. The gate drivers continue to operate as normal. The external controller manages the overcurrent
+condition by acting appropriately. The reporting clears (nFAULT pin is released) when the VDS_OCP condition is
+removed and a clear faults command is issued either through the CLR_FLT bit or an ENABLE reset pulse (tRST).
+
+8.3.6.3.4 VDS Disabled (OCP_MODE = 11b)
+No action occurs after a VDS_OCP event in this mode.
+
+8.3.6.4 VSENSE Overcurrent Protection (SEN_OCP)
+Half-bridge overcurrent is also monitored by sensing the voltage drop across the external current-sense resistor
+with the SP pin. If at any time, the voltage on the SP input of the current-sense amplifier exceeds the VSEN_OCP
+threshold for longer than the tOCP_DEG deglitch time, a SEN_OCP event is recognized and action is done
+according to the OCP_MODE. On hardware interface devices, the VSENSE threshold is fixed at 1 V, tOCP_DEG is
+fixed at 4 µs, and the OCP_MODE for VSENSE is fixed for 8-ms automatic retry. On SPI devices, the VSENSE
+threshold is set through the SEN_LVL SPI register, the tOCP_DEG is set through the OCP_DEG SPI register, and
+the OCP_MODE bit can operate in four different modes: VSENSE latched shutdown, VSENSE automatic retry,
+VSENSE report only, and VSENSE disabled.
+The VSENSE overcurrent protection operates in cycle-by-cycle (CBC) mode by default. This can be disabled on
+SPI device variants through the SPI registers. When in cycle-by-cycle (CBC) mode a new rising edge on the
+PWM inputs will clear an existing overcurrent fault.
+Additionally, on SPI devices the OCP_ACT register setting can be set to change the SEN_OCP overcurrent
+response between linked and individual shutdown modes. When OCP_ACT is 0, a SEN_OCP fault will only
+effect the half-bridge in which it occurred. When OCP_ACT is 1, all three half-bridges will respond to a
+SEN_OCP fault on any of the other half-bridges. OCP_ACT defaults to 0, individual shutdown mode.
+
+8.3.6.4.1 VSENSE Latched Shutdown (OCP_MODE = 00b)
+After a SEN_OCP event in this mode, all the external MOSFETs are disabled and the nFAULT pin is driven low.
+The FAULT and SEN_OCP bits are latched high in the SPI registers. Normal operation continues (gate driver
+operation and the nFAULT pin is released) when the SEN_OCP condition is removed and a clear faults
+command is issued either through the CLR_FLT bit or an ENABLE reset pulse (tRST).
+
+--- extracted lines 5045-5134 ---
+8.6.2.4 OCP Control Register (address = 0x05h)
+The OCP control register is shown in Figure 60 and described in Table 17.
+Register access type: Read/Write
+                                                       Figure 60. OCP Control Register
+       10               9               8         7              6           5             4            3             2               1          0
+     TRETRY                 DEAD_TIME                 OCP_MODE                   OCP_DEG                                  VDS_LVL
+     R/W-0b                  R/W-01b                   R/W-01b                   R/W-01b                                  R/W-1101b
+
+                                                 Table 17. OCP Control Field Descriptions
+      Bit       Field                                     Type       Default       Description
+      10        TRETRY                                    R/W        0b            0b = VDS_OCP and SEN_OCP retry time is 8 ms
+                                                                                   1b = VDS_OCP and SEN_OCP retry time is 50 µs
+      9-8       DEAD_TIME                                 R/W        01b           00b = 50-ns dead time
+                                                                                   01b = 100-ns dead time
+                                                                                   10b = 200-ns dead time
+                                                                                   11b = 400-ns dead time
+      7-6       OCP_MODE                                  R/W        01b           00b = Overcurrent causes a latched fault
+                                                                                   01b = Overcurrent causes an automatic retrying fault
+                                                                                   10b = Overcurrent is report only but no action is taken
+                                                                                   11b = Overcurrent is not reported and no action is taken
+      5-4       OCP_DEG                                   R/W        10b           00b = Overcurrent deglitch of 1 µs
+                                                                                   01b = Overcurrent deglitch of 2 µs
+                                                                                   10b = Overcurrent deglitch of 4 µs
+                                                                                   11b = Overcurrent deglitch of 8 µs
+      3-0       VDS_LVL                                   R/W        1001b         0000b = 0.06 V
+                                                                                   0001b = 0.07 V
+                                                                                   0010b = 0.08 V
+                                                                                   0011b = 0.09 V
+                                                                                   0100b = 0.1 V
+                                                                                   0101b = 0.2 V
+                                                                                   0110b = 0.3 V
+                                                                                   0111b = 0.4 V
+                                                                                   1000b = 0.5 V
+                                                                                   1001b = 0.6 V
+                                                                                   1010b = 0.7 V
+                                                                                   1011b = 0.8 V
+                                                                                   1100b = 0.9 V
+                                                                                   1101b = 1 V
+                                                                                   1110b = 1.5 V
+                                                                                   1111b = 2 V
+
+
+
+
+62          Submit Documentation Feedback                                                           Copyright © 2018–2019, Texas Instruments Incorporated
+
+                                            Product Folder Links: DRV8350 DRV8350R DRV8353 DRV8353R
+                                                                                                                           DRV8350, DRV8350R
+                                                                                                                           DRV8353, DRV8353R
+www.ti.com                                                                                            SLVSDY6A – AUGUST 2018 – REVISED JUNE 2019
+
+
+8.6.2.5 CSA Control Register (DRV8353 and DRV8353R Only) (address = 0x06h)
+The CSA control register is shown in Figure 61 and described in Table 18.
+Register access type: Read/Write
+This register is only available with the DRV8353x family of devices.
+                                                   Figure 61. CSA Control Register
+     10               9          8             7               6           5             4             3             2            1               0
+    CSA           VREF          LS                   CSA                  DIS          CSA           CSA           CSA                 SEN
+    _FET          _DIV         _REF                 _GAIN                _SEN         _CAL_A        _CAL_B        _CAL_C               _LVL
+   R/W-0b        R/W-1b        R/W-0b              R/W-10b               R/W-0b        R/W-0b       R/W-0b        R/W-0b              R/W-11b
+
+                                              Table 18. CSA Control Field Descriptions
+     Bit      Field                                     Type       Default        Description
+     10       CSA_FET                                   R/W        0b             0b = Sense amplifier positive input is SPx
+                                                                                  1b = Sense amplifier positive input is SHx (also automatically
+                                                                                  sets the LS_REF bit to 1)
+      9       VREF_DIV                                  R/W        1b             0b = Sense amplifier reference voltage is VREF (unidirectional
+                                                                                  mode)
+                                                                                  1b = Sense amplifier reference voltage is VREF divided by 2
+      8       LS_REF                                    R/W        0b             0b = VDS_OCP for the low-side MOSFET is measured
+                                                                                  across SHx to SPx
+                                                                                  1b = VDS_OCP for the low-side MOSFET is measured across
+                                                                                  SHx to SNx
+     7-6      CSA_GAIN                                  R/W        10b            00b = 5-V/V shunt amplifier gain
+                                                                                  01b = 10-V/V shunt amplifier gain
+                                                                                  10b = 20-V/V shunt amplifier gain
+                                                                                  11b = 40-V/V shunt amplifier gain
+      5       DIS_SEN                                   R/W        0b             0b = Sense overcurrent fault is enabled
+                                                                                  1b = Sense overcurrent fault is disabled
+      4       CSA_CAL_A                                 R/W        0b             0b = Normal sense amplifier A operation
+                                                                                  1b = Short inputs to sense amplifier A for offset calibration
+      3       CSA_CAL_B                                 R/W        0b             0b = Normal sense amplifier B operation
+                                                                                  1b = Short inputs to sense amplifier B for offset calibration
+      2       CSA_CAL_C                                 R/W        0b             0b = Normal sense amplifier C operation
+                                                                                  1b = Short inputs to sense amplifier C for offset calibration
+     1-0      SEN_LVL                                   R/W        11b            00b = Sense OCP 0.25 V
+                                                                                  01b = Sense OCP 0.5 V
+                                                                                  10b = Sense OCP 0.75 V
+                                                                                  11b = Sense OCP 1 V

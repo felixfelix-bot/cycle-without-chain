@@ -1,0 +1,151 @@
+test_corrected_restart_contract (test_protection_spice.ProtectionSpice.test_corrected_restart_contract) ... 
+  test_corrected_restart_contract (test_protection_spice.ProtectionSpice.test_corrected_restart_contract) (name='initial_safe') ... FAIL
+  test_corrected_restart_contract (test_protection_spice.ProtectionSpice.test_corrected_restart_contract) (name='held_high_startup') ... FAIL
+  test_corrected_restart_contract (test_protection_spice.ProtectionSpice.test_corrected_restart_contract) (name='fault_immediate') ... FAIL
+  test_corrected_restart_contract (test_protection_spice.ProtectionSpice.test_corrected_restart_contract) (name='brownout_safe') ... FAIL
+  test_corrected_restart_contract (test_protection_spice.ProtectionSpice.test_corrected_restart_contract) (name='supervisor_wait') ... FAIL
+  test_corrected_restart_contract (test_protection_spice.ProtectionSpice.test_corrected_restart_contract) (name='held_after_brownout') ... FAIL
+  test_corrected_restart_contract (test_protection_spice.ProtectionSpice.test_corrected_restart_contract) (name='low_through_recovery') ... FAIL
+  test_corrected_restart_contract (test_protection_spice.ProtectionSpice.test_corrected_restart_contract) (name='first_rise_rejected') ... FAIL
+  test_corrected_restart_contract (test_protection_spice.ProtectionSpice.test_corrected_restart_contract) (name='bounce_rejected') ... FAIL
+  test_corrected_restart_contract (test_protection_spice.ProtectionSpice.test_corrected_restart_contract) (name='stuck_low_safe') ... FAIL
+  test_corrected_restart_contract (test_protection_spice.ProtectionSpice.test_corrected_restart_contract) (name='stuck_high_safe') ... FAIL
+  test_corrected_restart_contract (test_protection_spice.ProtectionSpice.test_corrected_restart_contract) (name='fresh_cycle_arms') ... FAIL
+  test_corrected_restart_contract (test_protection_spice.ProtectionSpice.test_corrected_restart_contract) (name='fresh_after_fault') ... FAIL
+  test_corrected_restart_contract (test_protection_spice.ProtectionSpice.test_corrected_restart_contract) (name='fresh_after_brownout') ... FAIL
+  test_corrected_restart_contract (test_protection_spice.ProtectionSpice.test_corrected_restart_contract) (name='fresh_after_low') ... FAIL
+  test_corrected_restart_contract (test_protection_spice.ProtectionSpice.test_corrected_restart_contract) (name='fresh_after_bounce') ... FAIL
+test_old_held_reset_is_negative_control (test_protection_spice.ProtectionSpice.test_old_held_reset_is_negative_control) ... ok
+
+======================================================================
+FAIL: test_corrected_restart_contract (test_protection_spice.ProtectionSpice.test_corrected_restart_contract) (name='initial_safe')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-fault-correction/hardware/powerboard-reva/tests/test_protection_spice.py", line 32, in test_corrected_restart_contract
+    self.assertIn(name, m)
+AssertionError: 'initial_safe' not found in {'ov_on': 60.33114, 'ov_off': 58.20219, 'enabled_before_fault': 3.3, 'disabled_during_reset_fault': 0.0, 'held_after_fault': 0.0, 'rearmed': 3.3, 'chopper_while_disabled': 3.298251}
+
+======================================================================
+FAIL: test_corrected_restart_contract (test_protection_spice.ProtectionSpice.test_corrected_restart_contract) (name='held_high_startup')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-fault-correction/hardware/powerboard-reva/tests/test_protection_spice.py", line 32, in test_corrected_restart_contract
+    self.assertIn(name, m)
+AssertionError: 'held_high_startup' not found in {'ov_on': 60.33114, 'ov_off': 58.20219, 'enabled_before_fault': 3.3, 'disabled_during_reset_fault': 0.0, 'held_after_fault': 0.0, 'rearmed': 3.3, 'chopper_while_disabled': 3.298251}
+
+======================================================================
+FAIL: test_corrected_restart_contract (test_protection_spice.ProtectionSpice.test_corrected_restart_contract) (name='fault_immediate')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-fault-correction/hardware/powerboard-reva/tests/test_protection_spice.py", line 32, in test_corrected_restart_contract
+    self.assertIn(name, m)
+AssertionError: 'fault_immediate' not found in {'ov_on': 60.33114, 'ov_off': 58.20219, 'enabled_before_fault': 3.3, 'disabled_during_reset_fault': 0.0, 'held_after_fault': 0.0, 'rearmed': 3.3, 'chopper_while_disabled': 3.298251}
+
+======================================================================
+FAIL: test_corrected_restart_contract (test_protection_spice.ProtectionSpice.test_corrected_restart_contract) (name='brownout_safe')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-fault-correction/hardware/powerboard-reva/tests/test_protection_spice.py", line 32, in test_corrected_restart_contract
+    self.assertIn(name, m)
+AssertionError: 'brownout_safe' not found in {'ov_on': 60.33114, 'ov_off': 58.20219, 'enabled_before_fault': 3.3, 'disabled_during_reset_fault': 0.0, 'held_after_fault': 0.0, 'rearmed': 3.3, 'chopper_while_disabled': 3.298251}
+
+======================================================================
+FAIL: test_corrected_restart_contract (test_protection_spice.ProtectionSpice.test_corrected_restart_contract) (name='supervisor_wait')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-fault-correction/hardware/powerboard-reva/tests/test_protection_spice.py", line 32, in test_corrected_restart_contract
+    self.assertIn(name, m)
+AssertionError: 'supervisor_wait' not found in {'ov_on': 60.33114, 'ov_off': 58.20219, 'enabled_before_fault': 3.3, 'disabled_during_reset_fault': 0.0, 'held_after_fault': 0.0, 'rearmed': 3.3, 'chopper_while_disabled': 3.298251}
+
+======================================================================
+FAIL: test_corrected_restart_contract (test_protection_spice.ProtectionSpice.test_corrected_restart_contract) (name='held_after_brownout')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-fault-correction/hardware/powerboard-reva/tests/test_protection_spice.py", line 32, in test_corrected_restart_contract
+    self.assertIn(name, m)
+AssertionError: 'held_after_brownout' not found in {'ov_on': 60.33114, 'ov_off': 58.20219, 'enabled_before_fault': 3.3, 'disabled_during_reset_fault': 0.0, 'held_after_fault': 0.0, 'rearmed': 3.3, 'chopper_while_disabled': 3.298251}
+
+======================================================================
+FAIL: test_corrected_restart_contract (test_protection_spice.ProtectionSpice.test_corrected_restart_contract) (name='low_through_recovery')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-fault-correction/hardware/powerboard-reva/tests/test_protection_spice.py", line 32, in test_corrected_restart_contract
+    self.assertIn(name, m)
+AssertionError: 'low_through_recovery' not found in {'ov_on': 60.33114, 'ov_off': 58.20219, 'enabled_before_fault': 3.3, 'disabled_during_reset_fault': 0.0, 'held_after_fault': 0.0, 'rearmed': 3.3, 'chopper_while_disabled': 3.298251}
+
+======================================================================
+FAIL: test_corrected_restart_contract (test_protection_spice.ProtectionSpice.test_corrected_restart_contract) (name='first_rise_rejected')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-fault-correction/hardware/powerboard-reva/tests/test_protection_spice.py", line 32, in test_corrected_restart_contract
+    self.assertIn(name, m)
+AssertionError: 'first_rise_rejected' not found in {'ov_on': 60.33114, 'ov_off': 58.20219, 'enabled_before_fault': 3.3, 'disabled_during_reset_fault': 0.0, 'held_after_fault': 0.0, 'rearmed': 3.3, 'chopper_while_disabled': 3.298251}
+
+======================================================================
+FAIL: test_corrected_restart_contract (test_protection_spice.ProtectionSpice.test_corrected_restart_contract) (name='bounce_rejected')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-fault-correction/hardware/powerboard-reva/tests/test_protection_spice.py", line 32, in test_corrected_restart_contract
+    self.assertIn(name, m)
+AssertionError: 'bounce_rejected' not found in {'ov_on': 60.33114, 'ov_off': 58.20219, 'enabled_before_fault': 3.3, 'disabled_during_reset_fault': 0.0, 'held_after_fault': 0.0, 'rearmed': 3.3, 'chopper_while_disabled': 3.298251}
+
+======================================================================
+FAIL: test_corrected_restart_contract (test_protection_spice.ProtectionSpice.test_corrected_restart_contract) (name='stuck_low_safe')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-fault-correction/hardware/powerboard-reva/tests/test_protection_spice.py", line 32, in test_corrected_restart_contract
+    self.assertIn(name, m)
+AssertionError: 'stuck_low_safe' not found in {'ov_on': 60.33114, 'ov_off': 58.20219, 'enabled_before_fault': 3.3, 'disabled_during_reset_fault': 0.0, 'held_after_fault': 0.0, 'rearmed': 3.3, 'chopper_while_disabled': 3.298251}
+
+======================================================================
+FAIL: test_corrected_restart_contract (test_protection_spice.ProtectionSpice.test_corrected_restart_contract) (name='stuck_high_safe')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-fault-correction/hardware/powerboard-reva/tests/test_protection_spice.py", line 32, in test_corrected_restart_contract
+    self.assertIn(name, m)
+AssertionError: 'stuck_high_safe' not found in {'ov_on': 60.33114, 'ov_off': 58.20219, 'enabled_before_fault': 3.3, 'disabled_during_reset_fault': 0.0, 'held_after_fault': 0.0, 'rearmed': 3.3, 'chopper_while_disabled': 3.298251}
+
+======================================================================
+FAIL: test_corrected_restart_contract (test_protection_spice.ProtectionSpice.test_corrected_restart_contract) (name='fresh_cycle_arms')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-fault-correction/hardware/powerboard-reva/tests/test_protection_spice.py", line 36, in test_corrected_restart_contract
+    self.assertIn(name, m)
+AssertionError: 'fresh_cycle_arms' not found in {'ov_on': 60.33114, 'ov_off': 58.20219, 'enabled_before_fault': 3.3, 'disabled_during_reset_fault': 0.0, 'held_after_fault': 0.0, 'rearmed': 3.3, 'chopper_while_disabled': 3.298251}
+
+======================================================================
+FAIL: test_corrected_restart_contract (test_protection_spice.ProtectionSpice.test_corrected_restart_contract) (name='fresh_after_fault')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-fault-correction/hardware/powerboard-reva/tests/test_protection_spice.py", line 36, in test_corrected_restart_contract
+    self.assertIn(name, m)
+AssertionError: 'fresh_after_fault' not found in {'ov_on': 60.33114, 'ov_off': 58.20219, 'enabled_before_fault': 3.3, 'disabled_during_reset_fault': 0.0, 'held_after_fault': 0.0, 'rearmed': 3.3, 'chopper_while_disabled': 3.298251}
+
+======================================================================
+FAIL: test_corrected_restart_contract (test_protection_spice.ProtectionSpice.test_corrected_restart_contract) (name='fresh_after_brownout')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-fault-correction/hardware/powerboard-reva/tests/test_protection_spice.py", line 36, in test_corrected_restart_contract
+    self.assertIn(name, m)
+AssertionError: 'fresh_after_brownout' not found in {'ov_on': 60.33114, 'ov_off': 58.20219, 'enabled_before_fault': 3.3, 'disabled_during_reset_fault': 0.0, 'held_after_fault': 0.0, 'rearmed': 3.3, 'chopper_while_disabled': 3.298251}
+
+======================================================================
+FAIL: test_corrected_restart_contract (test_protection_spice.ProtectionSpice.test_corrected_restart_contract) (name='fresh_after_low')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-fault-correction/hardware/powerboard-reva/tests/test_protection_spice.py", line 36, in test_corrected_restart_contract
+    self.assertIn(name, m)
+AssertionError: 'fresh_after_low' not found in {'ov_on': 60.33114, 'ov_off': 58.20219, 'enabled_before_fault': 3.3, 'disabled_during_reset_fault': 0.0, 'held_after_fault': 0.0, 'rearmed': 3.3, 'chopper_while_disabled': 3.298251}
+
+======================================================================
+FAIL: test_corrected_restart_contract (test_protection_spice.ProtectionSpice.test_corrected_restart_contract) (name='fresh_after_bounce')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/c08r4d0r/worktrees/cycle-fault-correction/hardware/powerboard-reva/tests/test_protection_spice.py", line 36, in test_corrected_restart_contract
+    self.assertIn(name, m)
+AssertionError: 'fresh_after_bounce' not found in {'ov_on': 60.33114, 'ov_off': 58.20219, 'enabled_before_fault': 3.3, 'disabled_during_reset_fault': 0.0, 'held_after_fault': 0.0, 'rearmed': 3.3, 'chopper_while_disabled': 3.298251}
+
+----------------------------------------------------------------------
+Ran 2 tests in 2.837s
+
+FAILED (failures=16)

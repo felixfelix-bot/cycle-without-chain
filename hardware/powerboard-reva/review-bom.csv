@@ -1,0 +1,258 @@
+reference,value,footprint,sheet
+U1,DRV8353SRTAT,,gen-driver
+C1,47n 100V X7R,,gen-driver
+C2,1u 16V X7R,,gen-driver
+C3,1u 16V X7R,,gen-driver
+C4,1u 10V X7R,,gen-driver
+C5,100n 25V X7R,,gen-driver
+C6,10u 25V X7R,,gen-driver
+C7,100n 10V X7R,,gen-driver
+R1,100k,,gen-driver
+R2,10k,,gen-driver
+R3,10k,,gen-driver
+R4,10k,,gen-driver
+Q1,CSD19532Q5B,Package_TO_SOT_SMD:TDSON-8-1,gen-bridge
+R5,4R7 provisional,,gen-bridge
+R6,100k G-S,,gen-bridge
+Q2,CSD19532Q5B,Package_TO_SOT_SMD:TDSON-8-1,gen-bridge
+R7,4R7 provisional,,gen-bridge
+R8,100k G-S,,gen-bridge
+R9,2m 1% 3W WSLP2512,Resistor_SMD:R_2512_6332Metric,gen-bridge
+C8,1u 100V X7R provisional,,gen-bridge
+Q3,CSD19532Q5B,Package_TO_SOT_SMD:TDSON-8-1,gen-bridge
+R10,4R7 provisional,,gen-bridge
+R11,100k G-S,,gen-bridge
+Q4,CSD19532Q5B,Package_TO_SOT_SMD:TDSON-8-1,gen-bridge
+R12,4R7 provisional,,gen-bridge
+R13,100k G-S,,gen-bridge
+R14,2m 1% 3W WSLP2512,Resistor_SMD:R_2512_6332Metric,gen-bridge
+C9,1u 100V X7R provisional,,gen-bridge
+Q5,CSD19532Q5B,Package_TO_SOT_SMD:TDSON-8-1,gen-bridge
+R15,4R7 provisional,,gen-bridge
+R16,100k G-S,,gen-bridge
+Q6,CSD19532Q5B,Package_TO_SOT_SMD:TDSON-8-1,gen-bridge
+R17,4R7 provisional,,gen-bridge
+R18,100k G-S,,gen-bridge
+R19,2m 1% 3W WSLP2512,Resistor_SMD:R_2512_6332Metric,gen-bridge
+C10,1u 100V X7R provisional,,gen-bridge
+U2,DRV8353SRTAT,,hub-driver
+C11,47n 100V X7R,,hub-driver
+C12,1u 16V X7R,,hub-driver
+C13,1u 16V X7R,,hub-driver
+C14,1u 10V X7R,,hub-driver
+C15,100n 25V X7R,,hub-driver
+C16,10u 25V X7R,,hub-driver
+C17,100n 10V X7R,,hub-driver
+R20,100k,,hub-driver
+R21,10k,,hub-driver
+R22,10k,,hub-driver
+R23,10k,,hub-driver
+Q7,CSD19532Q5B,Package_TO_SOT_SMD:TDSON-8-1,hub-bridge
+R24,4R7 provisional,,hub-bridge
+R25,100k G-S,,hub-bridge
+Q8,CSD19532Q5B,Package_TO_SOT_SMD:TDSON-8-1,hub-bridge
+R26,4R7 provisional,,hub-bridge
+R27,100k G-S,,hub-bridge
+R28,2m 1% 3W WSLP2512,Resistor_SMD:R_2512_6332Metric,hub-bridge
+C18,1u 100V X7R provisional,,hub-bridge
+Q9,CSD19532Q5B,Package_TO_SOT_SMD:TDSON-8-1,hub-bridge
+R29,4R7 provisional,,hub-bridge
+R30,100k G-S,,hub-bridge
+Q10,CSD19532Q5B,Package_TO_SOT_SMD:TDSON-8-1,hub-bridge
+R31,4R7 provisional,,hub-bridge
+R32,100k G-S,,hub-bridge
+R33,2m 1% 3W WSLP2512,Resistor_SMD:R_2512_6332Metric,hub-bridge
+C19,1u 100V X7R provisional,,hub-bridge
+Q11,CSD19532Q5B,Package_TO_SOT_SMD:TDSON-8-1,hub-bridge
+R34,4R7 provisional,,hub-bridge
+R35,100k G-S,,hub-bridge
+Q12,CSD19532Q5B,Package_TO_SOT_SMD:TDSON-8-1,hub-bridge
+R36,4R7 provisional,,hub-bridge
+R37,100k G-S,,hub-bridge
+R38,2m 1% 3W WSLP2512,Resistor_SMD:R_2512_6332Metric,hub-bridge
+C20,1u 100V X7R provisional,,hub-bridge
+J1,BUS_TEST_ONLY_NOT_SOURCE_INPUT,,external-boundaries
+J2,MCU_SUPPLY_EXT,,external-boundaries
+J3,GEN_MACHINE_PHASES,,external-boundaries
+J4,HUB_MACHINE_PHASES,,external-boundaries
+J5,SAFETY_BRAKE_LOOP_NC,,external-boundaries
+C21,100u 100V provisional,,external-boundaries
+U3,R-78HB12-0.5,,aux-supply
+U4,TLV76033DBZR,Package_TO_SOT_SMD:SOT-23,aux-supply
+C22,3.3u 100V GRM32ER72A335KA35L,Capacitor_SMD:C_1210_3225Metric,aux-supply
+C23,10u 25V GRM21BR61E106KA73L,Capacitor_SMD:C_0805_2012Metric,aux-supply
+C24,1u 25V GRM21BR71E105KA99L,Capacitor_SMD:C_0805_2012Metric,aux-supply
+R39,1k 1% CRCW08051K00FKEA,Resistor_SMD:R_0805_2012Metric,aux-supply
+U5,LM4040AIM3-2.5/NOPB,Package_TO_SOT_SMD:SOT-23,aux-supply
+R40,4k7 1% CRCW08054K70FKEA,Resistor_SMD:R_0805_2012Metric,aux-supply
+C25,100n 25V GRM21BR71E104KA01L,Capacitor_SMD:C_0805_2012Metric,aux-supply
+U6,LM339BIDR,Package_SO:SOIC-14_3.9x8.7mm_P1.27mm,protection-comparators
+R41,112k 0.1% ERA-6AEB1123V,Resistor_SMD:R_0805_2012Metric,protection-comparators
+R42,113k 0.1% ERA-6AEB1133V,Resistor_SMD:R_0805_2012Metric,protection-comparators
+R43,10k 0.1% ERA-6AEB103V,Resistor_SMD:R_0805_2012Metric,protection-comparators
+R44,330k 0.1% ERA-6AEB334V,Resistor_SMD:R_0805_2012Metric,protection-comparators
+R45,1k 1% CRCW08051K00FKEA,Resistor_SMD:R_0805_2012Metric,protection-comparators
+R46,30k 0.1% ERA-6AEB303V,Resistor_SMD:R_0805_2012Metric,protection-comparators
+R47,10k 0.1% ERA-6AEB103V,Resistor_SMD:R_0805_2012Metric,protection-comparators
+R48,2k 0.1% ERA-6AEB202V,Resistor_SMD:R_0805_2012Metric,protection-comparators
+R49,10k 0.1% ERA-6AEB103V,Resistor_SMD:R_0805_2012Metric,protection-comparators
+R50,10k 1% CRCW080510K0FKEA,Resistor_SMD:R_0805_2012Metric,protection-comparators
+R51,4k7 1% CRCW08054K70FKEA,Resistor_SMD:R_0805_2012Metric,protection-comparators
+C26,100p C0G GRM21A5C1H101JA01D,Capacitor_SMD:C_0805_2012Metric,protection-comparators
+C27,100n 25V GRM21BR71E104KA01L,Capacitor_SMD:C_0805_2012Metric,protection-comparators
+U7,SN74LVC1G74DCUR,Package_SO:VSSOP-8_2.3x2mm_P0.5mm,fault-latch
+U8,SN74LVC1G74DCUR,Package_SO:VSSOP-8_2.3x2mm_P0.5mm,fault-latch
+U9,TPS3823-33DBVR,Package_TO_SOT_SMD:SOT-23-5,fault-latch
+R52,10k 1% CRCW080510K0FKEA,Resistor_SMD:R_0805_2012Metric,fault-latch
+R53,10k 1% CRCW080510K0FKEA,Resistor_SMD:R_0805_2012Metric,fault-latch
+R54,1k 1% CRCW08051K00FKEA,Resistor_SMD:R_0805_2012Metric,fault-latch
+R55,10k 1% CRCW080510K0FKEA,Resistor_SMD:R_0805_2012Metric,fault-latch
+C28,10n 5% C0G GRM21A5C1H103JA01D,Capacitor_SMD:C_0805_2012Metric,fault-latch
+R56,10k 1% CRCW080510K0FKEA,Resistor_SMD:R_0805_2012Metric,fault-latch
+R57,10k 1% CRCW080510K0FKEA,Resistor_SMD:R_0805_2012Metric,fault-latch
+R58,100k CRCW0805100KFKEA,Resistor_SMD:R_0805_2012Metric,fault-latch
+R59,100k CRCW0805100KFKEA,Resistor_SMD:R_0805_2012Metric,fault-latch
+R60,1k 1% CRCW08051K00FKEA,Resistor_SMD:R_0805_2012Metric,fault-latch
+R61,1k 1% CRCW08051K00FKEA,Resistor_SMD:R_0805_2012Metric,fault-latch
+C29,100n 25V GRM21BR71E104KA01L,Capacitor_SMD:C_0805_2012Metric,fault-latch
+C30,100n 25V GRM21BR71E104KA01L,Capacitor_SMD:C_0805_2012Metric,fault-latch
+C31,100n 25V GRM21BR71E104KA01L,Capacitor_SMD:C_0805_2012Metric,fault-latch
+U11,SN74LVC3G17DCUR,Package_SO:VSSOP-8_2.3x2mm_P0.5mm,fault-interfaces
+U12,SN74LVC3G17DCUR,Package_SO:VSSOP-8_2.3x2mm_P0.5mm,fault-interfaces
+U13,SN74LVC1G11DBVR,Package_TO_SOT_SMD:SOT-23-6,fault-interfaces
+U14,SN74LVC1G11DBVR,Package_TO_SOT_SMD:SOT-23-6,fault-interfaces
+U15,SN74LVC1G04DBVR,Package_TO_SOT_SMD:SOT-23-5,fault-interfaces
+U16,SN74LVC1G11DBVR,Package_TO_SOT_SMD:SOT-23-6,fault-interfaces
+C32,100n 25V GRM21BR71E104KA01L,Capacitor_SMD:C_0805_2012Metric,fault-interfaces
+C33,100n 25V GRM21BR71E104KA01L,Capacitor_SMD:C_0805_2012Metric,fault-interfaces
+C34,100n 25V GRM21BR71E104KA01L,Capacitor_SMD:C_0805_2012Metric,fault-interfaces
+C35,100n 25V GRM21BR71E104KA01L,Capacitor_SMD:C_0805_2012Metric,fault-interfaces
+C36,100n 25V GRM21BR71E104KA01L,Capacitor_SMD:C_0805_2012Metric,fault-interfaces
+C37,100n 25V GRM21BR71E104KA01L,Capacitor_SMD:C_0805_2012Metric,fault-interfaces
+U10,UCC27511DBVR,Package_TO_SOT_SMD:SOT-23-6,brake-chopper
+Q13,CSD19532Q5B,Package_TO_SOT_SMD:TDSON-8-1,brake-chopper
+R62,10R CRCW080510R0FKEA,Resistor_SMD:R_0805_2012Metric,brake-chopper
+R63,2R2 CRCW08052R20FKEA,Resistor_SMD:R_0805_2012Metric,brake-chopper
+R64,10k CRCW080510K0FKEA,Resistor_SMD:R_0805_2012Metric,brake-chopper
+C38,1u 25V GRM21BR71E105KA99L,Capacitor_SMD:C_0805_2012Metric,brake-chopper
+C39,100n 25V GRM21BR71E104KA01L,Capacitor_SMD:C_0805_2012Metric,brake-chopper
+J6,EXTERNAL_DUMP_RESISTOR,,brake-chopper
+U17,STM32G474VET6,Package_QFP:LQFP-100_14x14mm_P0.5mm,mcu-core
+J7,SWD_3V3_TARGET_REFERENCE,,mcu-core
+R65,10k NRST,Resistor_SMD:R_0603_1608Metric,mcu-core
+C40,100n NRST,Capacitor_SMD:C_0603_1608Metric,mcu-core
+R66,10k BOOT0,Resistor_SMD:R_0603_1608Metric,mcu-core
+J8,RESET_BUTTON_NORMALLY_OPEN,,mcu-core
+C41,100n 10V X7R pin24,Capacitor_SMD:C_0603_1608Metric,mcu-power
+C42,100n 10V X7R pin49,Capacitor_SMD:C_0603_1608Metric,mcu-power
+C43,100n 10V X7R pin64,Capacitor_SMD:C_0603_1608Metric,mcu-power
+C44,100n 10V X7R pin75,Capacitor_SMD:C_0603_1608Metric,mcu-power
+C45,100n 10V X7R pin100,Capacitor_SMD:C_0603_1608Metric,mcu-power
+C46,100n 10V X7R pin6,Capacitor_SMD:C_0603_1608Metric,mcu-power
+C47,4u7 10V X7R bulk,Capacitor_SMD:C_0603_1608Metric,mcu-power
+R67,0R analog supply link,Resistor_SMD:R_0603_1608Metric,mcu-power
+C48,100n 10V X7R,Capacitor_SMD:C_0603_1608Metric,mcu-power
+C49,1u 10V X7R,Capacitor_SMD:C_0603_1608Metric,mcu-power
+R68,0R analog supply link,Resistor_SMD:R_0603_1608Metric,mcu-power
+C50,100n 10V X7R,Capacitor_SMD:C_0603_1608Metric,mcu-power
+C51,1u 10V X7R,Capacitor_SMD:C_0603_1608Metric,mcu-power
+R69,100R 1%,Resistor_SMD:R_0603_1608Metric,mcu-analog
+C52,1n C0G,Capacitor_SMD:C_0603_1608Metric,mcu-analog
+R70,100R 1%,Resistor_SMD:R_0603_1608Metric,mcu-analog
+C53,1n C0G,Capacitor_SMD:C_0603_1608Metric,mcu-analog
+R71,100R 1%,Resistor_SMD:R_0603_1608Metric,mcu-analog
+C54,1n C0G,Capacitor_SMD:C_0603_1608Metric,mcu-analog
+R72,100R 1%,Resistor_SMD:R_0603_1608Metric,mcu-analog
+C55,1n C0G,Capacitor_SMD:C_0603_1608Metric,mcu-analog
+R73,100R 1%,Resistor_SMD:R_0603_1608Metric,mcu-analog
+C56,1n C0G,Capacitor_SMD:C_0603_1608Metric,mcu-analog
+R74,100R 1%,Resistor_SMD:R_0603_1608Metric,mcu-analog
+C57,1n C0G,Capacitor_SMD:C_0603_1608Metric,mcu-analog
+R75,10k brake sense,Resistor_SMD:R_0603_1608Metric,mcu-analog
+R76,100k brake default,Resistor_SMD:R_0603_1608Metric,mcu-analog
+C58,1n brake filter,Capacitor_SMD:C_0603_1608Metric,mcu-analog
+J9,GEN_HALL_3V3_ONLY,,mcu-sensors
+R77,10k Hall pullup,Resistor_SMD:R_0603_1608Metric,mcu-sensors
+R78,1k Hall series,Resistor_SMD:R_0603_1608Metric,mcu-sensors
+C59,1n Hall filter,Capacitor_SMD:C_0603_1608Metric,mcu-sensors
+R79,10k Hall pullup,Resistor_SMD:R_0603_1608Metric,mcu-sensors
+R80,1k Hall series,Resistor_SMD:R_0603_1608Metric,mcu-sensors
+C60,1n Hall filter,Capacitor_SMD:C_0603_1608Metric,mcu-sensors
+R81,10k Hall pullup,Resistor_SMD:R_0603_1608Metric,mcu-sensors
+R82,1k Hall series,Resistor_SMD:R_0603_1608Metric,mcu-sensors
+C61,1n Hall filter,Capacitor_SMD:C_0603_1608Metric,mcu-sensors
+J10,HUB_HALL_3V3_ONLY,,mcu-sensors
+R83,10k Hall pullup,Resistor_SMD:R_0603_1608Metric,mcu-sensors
+R84,1k Hall series,Resistor_SMD:R_0603_1608Metric,mcu-sensors
+C62,1n Hall filter,Capacitor_SMD:C_0603_1608Metric,mcu-sensors
+R85,10k Hall pullup,Resistor_SMD:R_0603_1608Metric,mcu-sensors
+R86,1k Hall series,Resistor_SMD:R_0603_1608Metric,mcu-sensors
+C63,1n Hall filter,Capacitor_SMD:C_0603_1608Metric,mcu-sensors
+R87,10k Hall pullup,Resistor_SMD:R_0603_1608Metric,mcu-sensors
+R88,1k Hall series,Resistor_SMD:R_0603_1608Metric,mcu-sensors
+C64,1n Hall filter,Capacitor_SMD:C_0603_1608Metric,mcu-sensors
+J11,OPTIONAL_ENCODER_3V3_ONLY,,mcu-sensors
+R89,10k encoder pullup,Resistor_SMD:R_0603_1608Metric,mcu-sensors
+R90,1k encoder series,Resistor_SMD:R_0603_1608Metric,mcu-sensors
+C65,1n encoder filter,Capacitor_SMD:C_0603_1608Metric,mcu-sensors
+R91,10k encoder pullup,Resistor_SMD:R_0603_1608Metric,mcu-sensors
+R92,1k encoder series,Resistor_SMD:R_0603_1608Metric,mcu-sensors
+C66,1n encoder filter,Capacitor_SMD:C_0603_1608Metric,mcu-sensors
+U18,TLV3202IDR,Package_SO:SOIC-8_3.9x4.9mm_P1.27mm,gen-fast-oc
+C67,100n X7R 25V,Capacitor_SMD:C_0805_2012Metric,gen-fast-oc
+R93,100k 1% open SO bias,Resistor_SMD:R_0805_2012Metric,gen-fast-oc
+Q14,2N7002,Package_TO_SOT_SMD:SOT-23,gen-fast-oc
+R94,100k 1% gate default,Resistor_SMD:R_0805_2012Metric,gen-fast-oc
+Q15,2N7002,Package_TO_SOT_SMD:SOT-23,gen-fast-oc
+R95,100k 1% gate default,Resistor_SMD:R_0805_2012Metric,gen-fast-oc
+U19,TLV3202IDR,Package_SO:SOIC-8_3.9x4.9mm_P1.27mm,gen-fast-oc
+C68,100n X7R 25V,Capacitor_SMD:C_0805_2012Metric,gen-fast-oc
+R96,100k 1% open SO bias,Resistor_SMD:R_0805_2012Metric,gen-fast-oc
+Q16,2N7002,Package_TO_SOT_SMD:SOT-23,gen-fast-oc
+R97,100k 1% gate default,Resistor_SMD:R_0805_2012Metric,gen-fast-oc
+Q17,2N7002,Package_TO_SOT_SMD:SOT-23,gen-fast-oc
+R98,100k 1% gate default,Resistor_SMD:R_0805_2012Metric,gen-fast-oc
+U20,TLV3202IDR,Package_SO:SOIC-8_3.9x4.9mm_P1.27mm,gen-fast-oc
+C69,100n X7R 25V,Capacitor_SMD:C_0805_2012Metric,gen-fast-oc
+R99,100k 1% open SO bias,Resistor_SMD:R_0805_2012Metric,gen-fast-oc
+Q18,2N7002,Package_TO_SOT_SMD:SOT-23,gen-fast-oc
+R100,100k 1% gate default,Resistor_SMD:R_0805_2012Metric,gen-fast-oc
+Q19,2N7002,Package_TO_SOT_SMD:SOT-23,gen-fast-oc
+R101,100k 1% gate default,Resistor_SMD:R_0805_2012Metric,gen-fast-oc
+U21,TLV3202IDR,Package_SO:SOIC-8_3.9x4.9mm_P1.27mm,hub-fast-oc
+C70,100n X7R 25V,Capacitor_SMD:C_0805_2012Metric,hub-fast-oc
+R102,100k 1% open SO bias,Resistor_SMD:R_0805_2012Metric,hub-fast-oc
+Q20,2N7002,Package_TO_SOT_SMD:SOT-23,hub-fast-oc
+R103,100k 1% gate default,Resistor_SMD:R_0805_2012Metric,hub-fast-oc
+Q21,2N7002,Package_TO_SOT_SMD:SOT-23,hub-fast-oc
+R104,100k 1% gate default,Resistor_SMD:R_0805_2012Metric,hub-fast-oc
+U22,TLV3202IDR,Package_SO:SOIC-8_3.9x4.9mm_P1.27mm,hub-fast-oc
+C71,100n X7R 25V,Capacitor_SMD:C_0805_2012Metric,hub-fast-oc
+R105,100k 1% open SO bias,Resistor_SMD:R_0805_2012Metric,hub-fast-oc
+Q22,2N7002,Package_TO_SOT_SMD:SOT-23,hub-fast-oc
+R106,100k 1% gate default,Resistor_SMD:R_0805_2012Metric,hub-fast-oc
+Q23,2N7002,Package_TO_SOT_SMD:SOT-23,hub-fast-oc
+R107,100k 1% gate default,Resistor_SMD:R_0805_2012Metric,hub-fast-oc
+U23,TLV3202IDR,Package_SO:SOIC-8_3.9x4.9mm_P1.27mm,hub-fast-oc
+C72,100n X7R 25V,Capacitor_SMD:C_0805_2012Metric,hub-fast-oc
+R108,100k 1% open SO bias,Resistor_SMD:R_0805_2012Metric,hub-fast-oc
+Q24,2N7002,Package_TO_SOT_SMD:SOT-23,hub-fast-oc
+R109,100k 1% gate default,Resistor_SMD:R_0805_2012Metric,hub-fast-oc
+Q25,2N7002,Package_TO_SOT_SMD:SOT-23,hub-fast-oc
+R110,100k 1% gate default,Resistor_SMD:R_0805_2012Metric,hub-fast-oc
+R111,28k7 0.1%,Resistor_SMD:R_0805_2012Metric,fast-oc-reference
+R112,10k 0.1%,Resistor_SMD:R_0805_2012Metric,fast-oc-reference
+R113,10k 0.1%,Resistor_SMD:R_0805_2012Metric,fast-oc-reference
+R114,28k7 0.1%,Resistor_SMD:R_0805_2012Metric,fast-oc-reference
+R115,4k7 1%,Resistor_SMD:R_0805_2012Metric,fast-oc-reference
+J40,Anderson 992G1 SB50 keyed SOURCE,,dc-entry
+F1,KLKD020CN 20A 600VDC candidate AT SOURCE,,dc-entry
+J41,SB50 992G1 removable MAIN jumper DEAD ONLY,,dc-entry
+J42,SB50 992G1 removable PRECHARGE jumper,,dc-entry
+R116,100R 1% RH050100R0FE02,,dc-entry
+R117,2m 1% WSLP2512R0020FEA Kelvin,,dc-entry
+D20,STPS30100ST reverse clamp ONLY not reverse blocker,,dc-entry
+C73,470u 100V UHE2A471MHD +/-20%,,dc-entry
+C74,470u 100V UHE2A471MHD +/-20%,,dc-entry
+R118,10k 1% RH02510K00FE02 always-on bleed,,dc-entry
+J43,Kelvin BUS measurement isolated instrument ONLY,,dc-entry

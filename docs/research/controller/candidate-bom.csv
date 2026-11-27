@@ -1,0 +1,46 @@
+block,candidate_mpn,quantity_estimate,status,role_or_requirement,source,unresolved
+MCU,STM32G474RE,1,manufacturer page verified via proxy,Dual current loops and supervisory control,https://www.st.com/en/microcontrollers-microprocessors/stm32g474re.html,Exact package temperature suffix pin mux errata timing proof
+Gate drivers,DRV8353SRTAR,2,manufacturer datasheet verified,SPI triple half bridge with bidirectional low-side CSAs,https://www.ti.com/lit/ds/symlink/drv8353.pdf,VM 9-75V distinct from VDRAIN 7-100V; split supply sequencing and thermal
+Bridge MOSFETs,CSD19536KCS,12,manufacturer datasheet verified,100V TO220 2.7mohm max at 10V and 25C,https://www.ti.com/lit/ds/symlink/csd19536kcs.pdf,Not necessarily minimum loss at 150W; switching and heatsink tests
+MOSFET alternate,IPP023N10N5,0,unverified deferred,100V silicon alternative candidate only,https://www.infineon.com/assets/row/public/documents/24/49/infineon-ipp023n10n5-ds-en.pdf,Manufacturer returned empty 202; no parameters accepted
+Phase shunts,TBD,6,estimate,2mohm provisional Kelvin low-side shunts,design-envelope.md,RMS pulse power TCR tolerance package
+Battery current amplifier,INA240A1,1,manufacturer datasheet verified,Bidirectional 20V per V amplifier with 80V CM upper operating limit,https://www.ti.com/lit/ds/symlink/ina240.pdf,Exact order suffix and transient protection
+Battery shunt,TBD,1,estimate,2mohm provisional Kelvin shunt for net battery energy,design-envelope.md,Power rating and full scale
+Current amplifier rejected alternative,INA293,0,manufacturer datasheet verified but unsuitable direct replacement,110V CM but unidirectional only,https://www.ti.com/lit/ds/symlink/ina293.pdf,Need genuinely bidirectional option if raising voltage
+Bus ADC divider,TBD,1 chain,estimate,3x100kohm top plus 10kohm bottom provisional,design-envelope.md,Precision working voltage acquisition RC buffer clamps diagnostics
+Independent OV divider,TBD,1 chain,unresolved,Separate divider not shared single-point failure with ADC,design-envelope.md,Threshold tolerances open circuit analysis
+OV comparator,TLV1811,1 or more,manufacturer datasheet verified,2.4-40V supply push-pull comparator on regulated rail,https://www.ti.com/lit/ds/symlink/tlv1811.pdf,Order suffix external reference hysteresis latch and drive chain
+Open drain comparator alternative,TLV1821,0 optional,manufacturer family datasheet verified,Fault combining alternative,https://www.ti.com/lit/ds/symlink/tlv1811.pdf,Logic polarity default state
+Voltage reference,TBD,1 or more,unresolved,Independent precision OV reference,design-envelope.md,Accuracy drift brownout behavior
+Fault latch and logic,TBD,TBD,unresolved,Hardware faults disable both bridge enables independent of MCU,design-envelope.md,Fail safe polarity reset rules and response time
+Fast phase trip,TBD,2 sets,unresolved,Shunt based fast hardware OC in addition to VDS OCP,design-envelope.md,Threshold blanking propagation and independent shutdown
+External watchdog supervisor,TBD,1,unresolved,Default off if firmware stalled or supply bad,design-envelope.md,Timing and rail sequencing
+Auxiliary bus buck,LM5164,1,manufacturer datasheet verified,6-100V input 1A class synchronous buck to 12V,https://www.ti.com/lit/ds/symlink/lm5164.pdf,Exact order suffix and complete power stage design
+Buck magnetics and feedback,TBD,1 set,unresolved,Inductor input output caps RON feedback ripple network,https://www.ti.com/lit/ds/symlink/lm5164.pdf,Saturation ripple stability efficiency thermal
+5V regulator,TBD,1,unresolved,Efficient stepdown for sensors and logic supply,design-envelope.md,Load inventory and sleep current
+3V3 regulator,TBD,1 or more,unresolved,MCU digital and quiet analog rails,design-envelope.md,LDO versus buck loss filtering sequencing
+Gate supply capacitors,TBD,2 sets,manufacturer topology verified,DRV charge pump flying reservoir VGLS and VM bypass,https://www.ti.com/lit/ds/symlink/drv8353.pdf,Voltage derating layout and exact values per chosen configuration
+Gate passives,TBD,12 sets,unresolved,Gate resistors pulldowns optional split turnon off and clamps,design-envelope.md,Double pulse tuning
+DC link bulk capacitors,TBD,TBD,unresolved,100V candidates with measured ripple current and lifetime margin,design-envelope.md,Capacitance ripple ESR mechanical support
+Bridge local ceramics,TBD,2 sets,unresolved,Low ESL local commutation caps,design-envelope.md,DC bias effective capacitance voltage derating
+Snubbers and surge TVS,TBD,TBD,unresolved,Short transient suppression only,design-envelope.md,Measured ringing energy and actual clamp current voltage
+Dump switch,TBD,1 or more,unresolved,100V minimum candidate chopper switch not linear regulator,design-envelope.md,SOA fault current switching thermal and drive
+Dump gate driver,TBD,1,unresolved,Autonomous hardware OV chopper independent of MCU PWM kill,design-envelope.md,Supply from inverter bus and startup fail safe behavior
+Dump resistor,TBD,1 external assembly,estimate,Example 7.2ohm for 500W at 60V with duty control,design-envelope.md,Actual downhill power continuous pulse energy heatsink guard thermal cutoff
+Dump temperature and continuity sensing,TBD,1 set,unresolved,Detect hot or open dump and trigger alternate safe response,design-envelope.md,Failure strategy when energy input persists
+Battery fuse and holder,TBD,1,unresolved,DC interrupt rating matched to pack fault current,design-envelope.md,Time current coordination mounting service access
+Precharge resistor and bypass,TBD,1 set,unresolved,Limit capacitor inrush and detect bypass stuck state,design-envelope.md,Energy pulse rating contactor or MOSFET implementation
+Reverse polarity and blocking,TBD,1 set,unresolved,Protected bidirectional battery interface as required,design-envelope.md,Back to back switches SOA regen compatibility
+Service disconnect,TBD,1,unresolved,Rated DC isolation not arbitrary connector pull under load,design-envelope.md,Safe discharge and machine diode paths
+Generator isolation or safe limiting,TBD,1 set,unresolved,PWM off does not block body diode rectification,design-envelope.md,Worst case EMF inductive interruption crank reaction torque
+Bus bleeder discharge monitor,TBD,1 set,unresolved,Service discharge residual voltage indication,design-envelope.md,Timeout power and failure detection
+Angle sensor inputs,TBD,2 sets,unresolved,Generator and motor Hall encoder interface filtering protection,design-envelope.md,Machine selection pin count low speed accuracy
+Machine and bridge thermal sensors,TBD,4 or more,unresolved,NTCs or digital sensors for derating and trip,design-envelope.md,Attachment insulation calibration
+Brake cadence torque wheel inputs,TBD,1 set,unresolved,Brake cutoff and rider control sensors,design-envelope.md,Redundancy plausibility and local road requirements
+Communications transceiver,TBD,0 or 1,unresolved,Optional protected CAN UART interface to BMS or display,design-envelope.md,Isolation grounding ESD connector selection
+Programming reset clock decoupling,TBD,1 set,unresolved,SWD reset boot crystal if needed and MCU bypass,design-envelope.md,ST package reference circuit and connector safety
+Power connectors and harness,TBD,1 set,unresolved,Two 3phase ports battery dump and auxiliary interfaces,design-envelope.md,DC ratings seal strain relief keyed polarity interlocks
+PCB heatsink enclosure,TBD,1 assembly,unresolved,Custom board no dev boards insulated heatsink weather protection,design-envelope.md,Copper stackup clearances thermal vibration ingress and live drain tabs
+Generator and traction motor,TBD,2,unselected,PM machine candidates require measured maps,design-envelope.md,Kt Ke R L pole count speed efficiency temperature torque
+Reversible mechanical interfaces,TBD,1 set,unselected,Bolt on crank gear and padded generator clamps no drilling welding,design-envelope.md,Villiger dimensions frame crush loads reaction torque guards
+Battery BMS charger,TBD,1 external set,unselected,48V class pack with known charge acceptance and disconnect behavior,design-envelope.md,Chemistry series count charge limits certifications regen behavior

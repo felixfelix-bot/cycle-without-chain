@@ -1,0 +1,2558 @@
+                                                                                                                                                                       INA240
+                                                                                                                      SBOS662C – JULY 2016 – REVISED DECEMBER 2021
+
+     INA240 –4-V to 80-V, Bidirectional, Ultra-Precise Current Sense Amplifier With
+                               Enhanced PWM Rejection
+
+1 Features                                                             3 Description
+•   Enhanced PWM Rejection                                             The INA240 device is a voltage-output, current-sense
+•   Excellent CMRR:                                                    amplifier with enhanced PWM rejection that can
+    – 132-dB DC CMRR                                                   sense drops across shunt resistors over a wide
+    – 93-dB AC CMRR at 50 kHz                                          common-mode voltage range from –4 V to 80 V,
+•   Wide Common-Mode Range: –4 V to 80 V                               independent of the supply voltage. The negative
+•   Accuracy:                                                          common-mode voltage allows the device to operate
+    – Gain:                                                            below ground, accommodating the flyback period
+       • Gain Error: 0.20% (Maximum)                                   of typical solenoid applications. Enhanced PWM
+       • Gain Drift: 2.5 ppm/°C (Maximum)                              rejection provides high levels of suppression for large
+    – Offset:                                                          common-mode transients (ΔV/Δt) in systems that use
+                                                                       pulse width modulation (PWM) signals (such as motor
+       • Offset Voltage: ±25 μV (Maximum)
+                                                                       drives and solenoid control systems). This feature
+       • Offset Drift: 250 nV/°C (Maximum)
+                                                                       allows for accurate current measurements without
+•   Available Gains:
+                                                                       large transients and associated recovery ripple on the
+    – INA240A1: 20 V/V                                                 output voltage.
+    – INA240A2: 50 V/V
+    – INA240A3: 100 V/V                                                This device operates from a single 2.7-V to 5.5-V
+    – INA240A4: 200 V/V                                                power supply, drawing a maximum of 2.4 mA of
+•   Quiescent Current: 2.4 mA (Maximum)                                supply current. Four fixed gains are available: 20 V/V,
+                                                                       50 V/V, 100 V/V, and 200 V/V. The low offset of the
+2 Applications                                                         zero-drift architecture enables current sensing with
+•   Motor Controls                                                     maximum drops across the shunt as low as 10-mV
+•   Solenoid and Valve Controls                                        full-scale. All versions are specified over the extended
+•   Power Management                                                   operating temperature range (–40°C to +125°C), and
+•   Actuator Controls                                                  are offered in an 8-pin TSSOP and 8-pin SOIC
+•   Pressure Regulators                                                packages.
+•   Telecom Equipment                                                                                                  Device Information(1)
+                                                                             PART NUMBER                                      PACKAGE                 BODY SIZE (NOM)
+                                                                                                                         TSSOP (8)                   3.00 mm × 4.40 mm
+                                               Supply                  INA240
+                                           (2.7 V to 5.5 V)                                                              SOIC (8)                    4.90 mm × 3.91 mm
+
+                                                                       (1)                            For all available packages, see the package option
+                                                                                                      addendum at the end of the data sheet.
+                                    IN±
+
+                                                                                                               270                                               3.5
+                                                                                                              270
+                                                                              Common-Mode StepDDDDDDDDDDDDD
+
+
+
+
+                                                     +        OUT
+                                    IN+                                                                       Y1
+                                                                                                               240                                               3
+                                                                                                                                                                         DDDDDDDDDDDDDINA240 Output
+
+
+
+                                                              REF2
+                                                                                                              240
+                                                                                                               210
+                                                                                                              210                                                2.5
+                                                              REF1                                            180
+                                                                                                               180
+                                                                                                              150                                                2
+                                                                                                              150                                                1.5
+                                                                                                                                                Common-Mode Step
+                                                                                                              120                                                1
+                                                                                                                                                INA240 OUT
+                   Typical Application                                                                         90                                                0.5
+                                                                                                               60                                                03.50
+                                                                                                                                                                    Y1
+                                                                                                               30                                                -0.53
+                                                                                                                                                                   2.5
+                                                                                                                0                                                -1 2
+                                                                                                                                                                   1.5
+                                                                                                               -30                                               -1.5
+                                                                                                                              Time (2 µs/div)
+                                                                                                                                                                D004
+
+
+                                                                                                                     Enhanced PWM Rejection
+
+
+
+
+     An IMPORTANT NOTICE at the end of this data sheet addresses availability, warranty, changes, use in safety-critical applications,
+     intellectual property matters and other important disclaimers. PRODUCTION DATA.
+INA240
+SBOS662C – JULY 2016 – REVISED DECEMBER 2021                                                                                                                     www.ti.com
+
+
+                                                                        Table of Contents
+1 Features............................................................................1   9 Application and Implementation.................................. 18
+2 Applications..................................................................... 1       9.1 Application Information............................................. 18
+3 Description.......................................................................1       9.2 Typical Applications.................................................. 20
+4 Revision History.............................................................. 2          9.3 What to Do and What Not to Do............................... 23
+5 Device Comparison......................................................... 3            10 Power Supply Recommendations..............................23
+6 Pin Configuration and Functions...................................3                       10.1 Power Supply Decoupling.......................................23
+7 Specifications.................................................................. 4      11 Layout........................................................................... 24
+  7.1 Absolute Maximum Ratings........................................ 4                    11.1 Layout Guidelines................................................... 24
+  7.2 ESD Ratings............................................................... 4          11.2 Layout Example...................................................... 24
+  7.3 Recommended Operating Conditions.........................4                          12 Device and Documentation Support..........................26
+  7.4 Thermal Information....................................................4              12.1 Documentation Support.......................................... 26
+  7.5 Electrical Characteristics.............................................5              12.2 Receiving Notification of Documentation Updates..26
+  7.6 Typical Characteristics................................................ 6             12.3 Support Resources................................................. 26
+8 Detailed Description......................................................10              12.4 Trademarks............................................................. 26
+  8.1 Overview................................................................... 10        12.5 Electrostatic Discharge Caution..............................26
+  8.2 Functional Block Diagram......................................... 10                  12.6 Glossary..................................................................26
+  8.3 Feature Description...................................................10            13 Mechanical, Packaging, and Orderable
+  8.4 Device Functional Modes..........................................12                   Information.................................................................... 26
+
+
+
+4 Revision History
+NOTE: Page numbers for previous revisions may differ from page numbers in the current version.
+Changes from Revision B (October 2017) to Revision C (December 2021)                                                                Page
+• Changed D (SOIC) package size from: 4.00 mm × 3.91 mm to: 4.90 mm × 3.91 mm....................................... 1
+• Added text or leave unconnected. to the NC pin description..............................................................................3
+
+Changes from Revision A (October 2016) to Revision B (October 2017)                                                                                        Page
+• Added D (SOIC) package to Device Information table ...................................................................................... 1
+• Added Description (cont.) section ......................................................................................................................1
+• Added preview label to 8-pin TSSOP package...................................................................................................1
+• Added D (SOIC) pinout diagram and table to Pin Configuration and Functions section ................................... 3
+• Changed y-axis values in Figure 7-15 ............................................................................................................... 6
+• Added Figure 11-2 ........................................................................................................................................... 24
+
+Changes from Revision * (July 2016) to Revision A (October 2016)                                                          Page
+• Changed document status from Product Preview to Production Data ...............................................................1
+
+
+
+
+2       Submit Document Feedback                                                                                            Copyright © 2021 Texas Instruments Incorporated
+
+                                                                       Product Folder Links: INA240
+                                                                                                                                            INA240
+www.ti.com                                                                                          SBOS662C – JULY 2016 – REVISED DECEMBER 2021
+
+
+5 Device Comparison
+                                                        Table 5-1. Device Comparison
+                                  PRODUCT                                                                   GAIN (V/V)
+                                  INA240A1                                                                       20
+                                  INA240A2                                                                       50
+                                  INA240A3                                                                       100
+                                  INA240A4                                                                       200
+
+
+6 Pin Configuration and Functions
+
+
+        NC          1                                   8            OUT                    IN±         1                  8        IN+
+
+        IN+         2                                   7            REF1                  GND          2                  7        REF1
+
+        IN±         3                                   6            REF2                  REF2         3                  6        VS
+
+       GND          4                                   5            VS                      NC         4                  5        OUT
+
+
+
+                 Not to scale                                                                         Not to scale
+       NC- no internal connection                                                  NC- no internal connection
+   Figure 6-1. INA240 PW Package 8-Pin TSSOP Top                              Figure 6-2. INA240 D Package 8-Pin SOIC Top View
+                        View
+
+                                                             Table 6-1. Pin Functions
+                  PIN
+                 PW               D               I/O                                             DESCRIPTION
+ NAME
+               (TSSOP)          (SOIC)
+ GND               4              2          Analog         Ground
+ IN–               3              1       Analog input Connect to load side of shunt resistor
+ IN+               2              8       Analog input Connect to supply side of shunt resistor
+ NC                1              4               —         Reserved. Connect to ground or leave floating
+                                             Analog
+ OUT               8              5                         Output voltage
+                                             output
+                                                            Reference 1 voltage. Connect to 0 V to VS; see the Adjusting the Output Midpoint With
+ REF1              7              7       Analog input
+                                                            the Reference Pins section for connection options
+                                                            Reference 2 voltage. Connect to 0 V to VS; see the Adjusting the Output Midpoint With
+ REF2              6              3       Analog input
+                                                            the Reference Pins section for connection options
+ VS                5              6               —         Power supply, 2.7 V to 5.5 V
+
+
+
+
+Copyright © 2021 Texas Instruments Incorporated                                                                        Submit Document Feedback      3
+                                                              Product Folder Links: INA240
+INA240
+SBOS662C – JULY 2016 – REVISED DECEMBER 2021                                                                                                www.ti.com
+
+
+7 Specifications
+7.1 Absolute Maximum Ratings
+over operating free-air temperature range (unless otherwise noted)(1)
+                                                                                                             MIN             MAX              UNIT
+    Supply voltage                                                                                                             6                V
+                                                      Differential (VIN+) – (VIN–)                           –80              80
+    Analog inputs, VIN+, VIN– (2)                                                                                                               V
+                                                      Common-mode                                            –6               90
+    REF1, REF2, NC inputs                                                                               GND – 0.3          VS + 0.3             V
+    Output                                                                                              GND – 0.3          VS + 0.3             V
+    Operating free-air temperature, TA                                                                       –55             150               °C
+    Junction temperature, TJ                                                                                                 150               °C
+    Storage temperature, Tstg                                                                                –65             150               °C
+
+(1)        Stresses beyond those listed under Absolute Maximum Ratings may cause permanent damage to the device. These are stress
+           ratings only, which do not imply functional operation of the device at these or any other conditions beyond those indicated under
+           Recommended Operating Conditions. Exposure to absolute-maximum-rated conditions for extended periods may affect device
+           reliability.
+(2)        VIN+ and VIN– are the voltages at the IN+ and IN– pins, respectively.
+
+7.2 ESD Ratings
+                                                                                                                                    VALUE       UNIT
+                                                 Human-body model (HBM), per ANSI/ESDA/JEDEC JS-001(1)                              ±2000
+    V(ESD)      Electrostatic discharge                                                                                                             V
+                                                 Charged-device model (CDM), per JEDEC specification JESD22-C101(2)                 ±1000
+
+(1)        JEDEC document JEP155 states that 500-V HBM allows safe manufacturing with a standard ESD control process.
+(2)        JEDEC document JEP157 states that 250-V CDM allows safe manufacturing with a standard ESD control process.
+
+7.3 Recommended Operating Conditions
+over operating free-air temperature range (unless otherwise noted)
+                                                                                                      MIN           NOM             MAX       UNIT
+    VCM              Common-mode input voltage                                                         –4                              80       V
+    VS               Operating supply voltage                                                          2.7                            5.5       V
+    TA               Operating free-air temperature                                                   –40                             125       °C
+
+
+7.4 Thermal Information
+                                                                                                             INA240
+                                    THERMAL METRIC(1)                                      PW (TSSOP)                    D (SOIC)              UNIT
+                                                                                              8 PINS                      8 PINS
+    RθJA          Junction-to-ambient thermal resistance                                       149.1                       113.5               °C/W
+    RθJC(top)     Junction-to-case (top) thermal resistance                                    33.2                         51.9               °C/W
+    RθJB          Junction-to-board thermal resistance                                         78.4                         57.8               °C/W
+    ψJT           Junction-to-top characterization parameter                                    1.5                         10.2               °C/W
+    ψJB           Junction-to-board characterization parameter                                 76.4                         56.9               °C/W
+
+(1)        For more information about traditional and new thermal metrics, see the Semiconductor and IC Package Thermal Metrics application
+           report.
+
+
+
+
+4          Submit Document Feedback                                                                          Copyright © 2021 Texas Instruments Incorporated
+
+                                                               Product Folder Links: INA240
+                                                                                                                                              INA240
+www.ti.com                                                                                             SBOS662C – JULY 2016 – REVISED DECEMBER 2021
+
+
+7.5 Electrical Characteristics
+at TA = 25 °C, VS = 5 V, VSENSE = VIN+ – VIN–, VCM = 12 V, and VREF1 = VREF2 = VS / 2 (unless otherwise noted)
+                       PARAMETER                                      TEST CONDITIONS                        MIN          TYP         MAX      UNIT
+ INPUT
+                                                            VIN+ = –4 V to 80 V, VSENSE = 0 mV
+ VCM            Common-mode input range                                                                       –4                        80      V
+                                                            TA = – 40°C to 125°C
+                                                            VIN+ = –4 V to 80 V, VSENSE = 0 mV
+                                                                                                             120          132
+ CMRR           Common-mode rejection ratio                 TA = –40°C to 125°C                                                                 dB
+                                                            f = 50 kHz                                                     93
+ VOS            Offset voltage, input-referred              VSENSE = 0 mV                                                  ±5          ±25      µV
+ dVOS/dT        Offset voltage drift                        VSENSE = 0 mV, TA = –40°C to 125°C                            ±50         ±250    nV/°C
+                                                            VS = 2.7 V to 5.5 V, VSENSE = 0 mV
+ PSRR           Power-supply rejection ratio                                                                               ±1          ±10     µV/V
+                                                            TA = –40°C to 125°C
+ IB             Input bias current                          IB+, IB–, VSENSE = 0 mV                                        90                   µA
+                Reference input range                                                                          0                        VS      V
+ OUTPUT
+                                                            INA240A1                                                       20
+                                                            INA240A2                                                       50
+ G              Gain                                                                                                                           V/V
+                                                            INA240A3                                                      100
+                                                            INA240A4                                                      200
+                                                            GND + 50 mV ≤ VOUT ≤ VS – 200 mV                           ±0.05%       ±0.20%
+                Gain error
+                                                            TA = –40°C to 125°C                                           ±0.5         ±2.5 ppm/°C
+                Non-linearity error                         GND + 10 mV ≤ VOUT ≤ VS – 200 mV                           ±0.01%
+                                                            VOUT = | (VREF1 – VREF2) | / 2 at VSENSE
+                Reference divider accuracy                                                                              0.02%         0.1%
+                                                            = 0 mV, TA = –40°C to 125°C
+                                                            INA240A1                                                       20
+                Reference voltage rejection ratio
+ RVRR                                                       INA240A3                                                        5                  µV/V
+                (input-referred)
+                                                            INA240A2, INA240A4                                              2
+                Maximum capacitive load                     No sustained oscillation                                        1                   nF
+ VOLTAGE OUTPUT(2)
+                                                            RL = 10 kΩ to GND
+                Swing to VS power-supply rail                                                                        VS – 0.05     VS – 0.2     V
+                                                            TA = –40°C to 125°C
+                                                            RL = 10 kΩ to GND, VSENSE = 0 mV
+                Swing to GND                                VREF1 = VREF2 = 0 V, TA = –40°C to                        VGND + 1    VGND + 10     mV
+                                                            125°C
+ FREQUENCY RESPONSE
+                                                            All gains, –3-dB bandwidth                                    400
+ BW             Bandwidth                                                                                                                      kHz
+                                                            All gains, 2% THD+N(1)                                        100
+
+                Settling time - output settles to 0.5% of   INA240A1                                                       9.6
+                                                                                                                                                µs
+                final value                                 INA240A4                                                       9.8
+ SR             Slew rate                                                                                                   2                  V/µs
+ NOISE (INPUT REFERRED)
+                Voltage noise density                                                                                      40                 nV/√ Hz
+ POWER SUPPLY
+ VS             Operating voltage range                     TA = –40°C to 125°C                               2.7                       5.5     V
+                                                            VSENSE = 0 mV                                                  1.8          2.4
+ IQ             Quiescent current                                                                                                               mA
+                                                            IQ vs temperature, TA = –40°C to 125°C                                      2.6
+ TEMPERATURE RANGE
+                Specified range                                                                              –40                       125      °C
+
+(1)    See the Input Signal Bandwidth section for more details.
+(2)    See Figure 7-13.
+
+
+
+
+Copyright © 2021 Texas Instruments Incorporated                                                                     Submit Document Feedback            5
+                                                               Product Folder Links: INA240
+INA240
+SBOS662C – JULY 2016 – REVISED DECEMBER 2021                                                                                                                         www.ti.com
+
+7.6 Typical Characteristics
+at TA = 25°C, VS = 5 V, VCM = 12 V, and VREF = VS / 2 (unless otherwise noted)
+
+                                                                                                           50
+                                                                                                           40
+                                                                                                           30
+                                                                                                           20
+
+
+
+
+                                                                                     Oﬀset Voltage (ɥV)
+                                                                                                           10
+     Population
+
+
+
+
+                                                                                                             0
+                                                                                                           -10
+                                                                                                           -20
+                                                                                                           -30
+                                                                                                           -40
+                                                                                                           -50
+                                                                                                             -50    -25   0       25      50    75    100    125   150    175
+                   -7.5
+
+                   -4.5
+
+                   -1.5
+                    -15
+                  -13.5
+                    -12
+                  -10.5
+                     -9
+
+                     -6
+
+                     -3
+
+                      0
+                    1.5
+                      3
+                    4.5
+                      6
+                    7.5
+                      9
+                   10.5
+                     12
+                   13.5
+                     15
+                                                                                                                                       Temperature (°C)
+
+                                     VOS (PV)                      D001                                                       .
+                                       All gains                                                                 Figure 7-2. Offset Voltage vs Temperature
+          Figure 7-1. Input Offset Voltage Production Distribution
+                                                                                                          0.4
+
+                                                                                                          0.3
+
+                                                                                                          0.2
+                                                                              CMRR ( ɥV/V)
+     Population
+
+
+
+
+                                                                                                          0.1
+
+                                                                                                            0
+
+                                                                                                          -0.1
+
+                                                                                                          -0.2
+
+                                                                                                          -0.3
+                                                                                                             -50   -25    0       25      50    75     100   125    150    175
+                   -0.5
+
+                   -0.4
+
+                   -0.3
+
+                   -0.2
+
+                   -0.1
+                  -0.45
+
+                  -0.35
+
+                  -0.25
+
+                  -0.15
+
+                  -0.05
+                      0
+                   0.05
+                    0.1
+                   0.15
+                    0.2
+                   0.25
+                    0.3
+                   0.35
+                    0.4
+                   0.45
+                    0.5
+
+
+
+
+                                                                                                                                       Temperature (°C)
+                                                                   D003
+
+                                    CMR (PV/V)                                                                                .
+
+                                       All gains                             Figure 7-4. Common-Mode Rejection Ratio vs Temperature
+
+    Figure 7-3. Common-Mode Rejection Production Distribution
+     Population
+
+
+
+
+                                                                              Population
+
+                                                                                                            -0.2
+
+
+
+
+                                                                                                            -0.1
+                   -0.15
+                  -0.135
+                   -0.12
+                  -0.105
+                   -0.09
+                  -0.075
+                   -0.06
+                  -0.045
+                   -0.03
+                  -0.015
+                       0
+                   0.015
+                    0.03
+                   0.045
+                    0.06
+                   0.075
+                    0.09
+                   0.105
+                    0.12
+                   0.135
+                    0.15
+
+
+
+
+                                                                                                           -0.18
+                                                                                                           -0.16
+                                                                                                           -0.14
+                                                                                                           -0.12
+
+                                                                                                           -0.08
+                                                                                                           -0.06
+                                                                                                           -0.04
+                                                                                                           -0.02
+                                                                                                               0
+                                                                                                            0.02
+                                                                                                            0.04
+                                                                                                            0.06
+                                                                                                            0.08
+                                                                                                             0.1
+                                                                                                            0.12
+                                                                                                            0.14
+                                                                                                            0.16
+                                                                                                            0.18
+                                                                                                             0.2
+
+
+
+
+                                                                   D501                                                                                                   D502
+
+                                   Gain Error (%)                                                                                  Gain Error (%)
+                                      INA240A1                                                                                           INA240A2
+                  Figure 7-5. Gain Error Production Distribution                                             Figure 7-6. Gain Error Production Distribution
+
+
+6             Submit Document Feedback                                                                                             Copyright © 2021 Texas Instruments Incorporated
+
+                                                            Product Folder Links: INA240
+                                                                                                                                                                                          INA240
+www.ti.com                                                                                                                                      SBOS662C – JULY 2016 – REVISED DECEMBER 2021
+
+
+7.6 Typical Characteristics (continued)
+at TA = 25°C, VS = 5 V, VCM = 12 V, and VREF = VS / 2 (unless otherwise noted)
+                      Population
+
+
+
+
+                                                                                                                    Population
+                                      -0.2
+
+
+
+
+                                      -0.1
+                                     -0.18
+                                     -0.16
+                                     -0.14
+                                     -0.12
+
+                                     -0.08
+                                     -0.06
+                                     -0.04
+                                     -0.02
+                                         0
+                                      0.02
+                                      0.04
+                                      0.06
+                                      0.08
+                                       0.1
+                                      0.12
+                                      0.14
+                                      0.16
+                                      0.18
+                                       0.2
+
+
+
+
+                                                                                                                                    -0.2
+
+
+
+
+                                                                                                                                    -0.1
+                                                                                                                                   -0.18
+                                                                                                                                   -0.16
+                                                                                                                                   -0.14
+                                                                                                                                   -0.12
+
+                                                                                                                                   -0.08
+                                                                                                                                   -0.06
+                                                                                                                                   -0.04
+                                                                                                                                   -0.02
+                                                                                                                                       0
+                                                                                                                                    0.02
+                                                                                                                                    0.04
+                                                                                                                                    0.06
+                                                                                                                                    0.08
+                                                                                                                                     0.1
+                                                                                                                                    0.12
+                                                                                                                                    0.14
+                                                                                                                                    0.16
+                                                                                                                                    0.18
+                                                                                                                                     0.2
+                                                                                                      D503
+                                                                 Gain Error (%)
+                                                                                                                                                                                          D504
+                                                                      INA240A3                                                                          Gain Error (%)
+                                                                                     .
+                                                                                                                                                             INA240A4
+                                     Figure 7-7. Gain Error Production Distribution
+                                                                                                                                      Figure 7-8. Gain Error Production Distribution
+                                                                                                                                 60
+                             100                                                                                                                   INA240A4           INA240A3
+                                                                                                                                 50
+                                                               INA240A3
+                                   75
+                                                                                                                                 40
+                                   50
+                                                                                  INA240A4
+                                                                                                                  Gain (dB)
+    Gain Error (m%)
+
+
+
+
+                                                                                                                                 30
+                                   25
+
+                                    0                                                                                            20
+                                                                                                                                                   INA240A2           INA240A1
+                                   -25                       INA240A2                                                            10
+
+                                   -50                                                                                            0
+
+                                   -75                                         INA240A1
+                                                                                                                                 -10
+                                                                                                                                    10       100       1k        10k      100k     1M      10M
+                          -100
+                                                                                                                                                            Frequency (Hz)
+                             -50              -25        0      25      50    75    100    125     150   175
+                                                                     Temperature (°C)                                                      VCM = 0 V                     VDIF = 10-mVPP sine
+                                             Figure 7-9. Gain Error vs Temperature
+                                                                                                                                             Figure 7-10. Gain vs Frequency
+                             140                                                                                                 150
+
+
+                                                                                                                                 135
+                             120
+
+                                                                                                                                 120
+                                                                                                                   CMRR (dB)
+        PSRR (dB)
+
+
+
+
+                             100
+                                                                                                                                 105
+                                   80
+                                                                                                                                  90
+
+                                   60
+                                                                                                                                  75
+
+
+                                   40                                                                                             60
+                                         1          10          100         1k       10k     100k        1M                            1      10       100         1k       10k    100k        1M
+                                                                      Frequency (Hz)                                                                         Frequency (Hz)
+              Figure 7-11. Power-Supply Rejection Ratio vs Frequency                                              Figure 7-12. Common-Mode Rejection Ratio vs Frequency
+
+
+
+
+Copyright © 2021 Texas Instruments Incorporated                                                                                                                   Submit Document Feedback          7
+                                                                                                 Product Folder Links: INA240
+INA240
+SBOS662C – JULY 2016 – REVISED DECEMBER 2021                                                                                                                                                                                               www.ti.com
+
+7.6 Typical Characteristics (continued)
+at TA = 25°C, VS = 5 V, VCM = 12 V, and VREF = VS / 2 (unless otherwise noted)
+
+                                               VS                                                                                                                    240
+                                                                                                                   25qC
+                                                                                                                   125qC
+                                                                                                                   -40qC                                             200
+         Output Voltage Swing (V)
+
+
+
+
+                                          VS - 1
+
+
+
+
+                                                                                                                                  Input Bias Current ( PA)
+                                                                                                                                                                     160
+
+                                          VS - 2                                                                                                                     120
+                                        GND + 3
+                                                                                                                                                                      80
+                                        GND + 2
+                                                                                                                                                                      40
+                                        GND + 1
+                                                                                                                                                                          0
+                                           GND
+                                                    0         1           2        3        4        5         6           7                                         -40
+                                                                               Output Current (mA)                         D010                                        -10          0      10       20  30   40   50    60          70     80    90
+                                                                      .                                                                                                                             Common-Mode Voltage (V)                       D011
+
+                                        Figure 7-13. Output Voltage Swing vs Output Current                                                                                                                     VS = 5 V
+                                                                                                                                              Figure 7-14. Input Bias Current vs Common-Mode Voltage
+                                        200                                                                                                                          100
+                                                                                                                                                                        95
+                                        160
+                                                                                                                                                                        90
+    Input Bias Current (PA)
+
+
+
+
+                                                                                                                                           Input Bias Current (ɥA)
+
+
+
+                                                                                                                                                                        85
+                                        120
+                                                                                                                                                                        80
+                                         80                                                                                                                             75
+                                                                                                                                                                        70
+                                         40
+                                                                                                                                                                        65
+                                                                                                                                                                        60
+                                          0
+                                                                                                                                                                        55
+                                        -40                                                                                                                             50
+                                          -10           0     10      20  30   40   50    60              70       80   90                                               -50         -25        0        25   50    75     100     125     150   175
+                                                                      Common-Mode Voltage (V)                              D012
+                                                                                                                                                                                                           Temperature (°C)
+
+                                                                                  VS = 0 V                                                                                                          .
+                  Figure 7-15. Input Bias Current vs Common-Mode Voltage                                                                                                       Figure 7-16. Input Bias Current vs Temperature
+
+                                           2                                                                                                                         100
+
+                                         1.8
+                                         1.6
+               Quiescent Current (mA)
+
+
+
+
+                                                                                                                                                      Voltage Noise (nV/—Hz)
+
+
+
+
+                                         1.4                                                         VS= 2.7-V
+                                                                                                                                                          Refered-to-Input
+
+
+
+
+                                         1.2                                            VS= 3.3-V
+
+                                           1                                  VS= 5-V
+                                         0.8
+                                         0.6
+                                         0.4
+                                         0.2
+                                           0                                                                                                                         10
+                                           -50          -25       0       25   50     75    100          125    150     175                                                    1        10              100         1k       10k    100k         1M
+                                                                            Temperature (°C)                                                                                                                  Frequency (Hz)
+                                               Figure 7-17. Quiescent Current vs Temperature                                                                 Figure 7-18. Input-Referred Voltage Noise vs Frequency
+
+
+
+
+8                                       Submit Document Feedback                                                                                                                                          Copyright © 2021 Texas Instruments Incorporated
+
+                                                                                                               Product Folder Links: INA240
+                                                                                                                                                                                                                                  INA240
+www.ti.com                                                                                                                                                                           SBOS662C – JULY 2016 – REVISED DECEMBER 2021
+
+
+7.6 Typical Characteristics (continued)
+at TA = 25°C, VS = 5 V, VCM = 12 V, and VREF = VS / 2 (unless otherwise noted)
+
+
+                                                                                                                                                                                             2-VPP Output Signal
+
+
+
+
+                                                                                                                                Output Voltage
+                                                                                                                                  (0.5 V/div)
+    Voltage Noise (200 nV/div)
+         Referred-to-Input
+
+
+
+
+                                                                                                                                                                         0
+
+
+                                                                                                                                                                                              10-mVPP Input Signal
+
+
+
+
+                                                                                                                                    Input Voltage
+                                                                                                                                      (5 mV/div)
+                                                                                                                                                                         0
+
+                                                                    Time (1 s/div)                                                                                                           Time (10 Ps/div)
+                                                                                                              D016                                                                                                                  D017
+
+                                              VS = ±2.5 V              VCM = 0 V                  VDIF = 0 V                                                                 VREF1 = VREF2 = 0 V                10-mVPP input step
+                                           VREF1 = VREF2 = 0 V       Input referred                                                                                                   .
+                                                 Figure 7-19. 0.1-Hz to 10-Hz Voltage Noise                                                                                         Figure 7-20. Step Response
+    Common-Mode Input SignalDDDDDDDDDDDD
+
+
+
+
+                                                                                                                                Common-Mode Input SignalDDDDDDDDDDDD
+                                   240                                                                  3.5                                                    240                                                            3.5
+                                 240                                                                                                                         240
+                                 Y1210                                                                  3                                                    Y1210                                                            3
+                                 240                                                                                                                         240
+                                 210
+                                   180                                                                  2.5                                                  210
+                                                                                                                                                               180                                                            2.5
+                                 180                                                                                                                         180
+                                 150
+                                   150                                                                  2                                                    150
+                                                                                                                                                               150                                                            2
+                                                                                                                INA240 Output
+
+
+
+
+                                                                                                                                                                                                                                     INA240 Output
+                                           120                                                          1.5                                                            120                                                    1.5
+                                                                                                                                                                                                     Common-Mode Input Signal
+                                           90                                                       13.5                                                               90                            INA240 Output            13.5
+                                                                                                     Y1                                                                                                                        Y1
+                                           60                                                       0.5
+                                                                                                     3                                                                 60                                                     0.5
+                                                                                                                                                                                                                               3
+                                                                                                     2.5                                                                                                                       2.5
+                                           30                                                       02                                                                 30                                                     02
+                                                                                                     1.5
+                                                                           Common-Mode Input Signal -0.5                                                                                                                       1.5
+                                            0                                                        1                                                                  0                                                     -0.5
+                                                                                                                                                                                                                               1
+                                                                           INA240 Output
+                                                                                                     1                                                                                                                         1
+                                           -30                                                      -1                                                                 -30                                                    -1
+                                                                 Time (0.25 Ps/div)                                                                                                        Time (0.25 Ps/div)
+                                                                                                       D021                                                                                                                  D022
+
+                                                                     Rising edge                                                                                                              Falling edge
+                                Figure 7-21. Common-Mode Voltage Transient Response                                                                         Figure 7-22. Common-Mode Voltage Transient Response
+                                                                             (1.5 V/div)
+                                                                               Output
+
+
+
+
+                                                                                              0
+                                                                             Supply Voltage
+                                                                               (2.5 V/div)
+
+
+
+
+                                                                                              0
+
+
+                                                                                                                    Time (2 Ps/div)
+                                                                                                                                                                                           D019
+
+                                                                                                              VREF1 = VREF2 = 0 V
+                                                                                                  Figure 7-23. Start-Up Response
+
+
+
+
+Copyright © 2021 Texas Instruments Incorporated                                                                                                                                                      Submit Document Feedback                        9
+                                                                                                   Product Folder Links: INA240
+INA240
+SBOS662C – JULY 2016 – REVISED DECEMBER 2021                                                                        www.ti.com
+
+
+8 Detailed Description
+8.1 Overview
+The INA240 is a current-sense amplifier that offers a wide common-mode range, precision, zero-drift topology,
+excellent common-mode rejection ratio (CMRR), and features enhanced pulse width modulation (PWM)
+rejection. Enhanced PWM rejection reduces the effect of common-mode transients on the output signal that
+are associated with PWM signals. Multiple gain versions are available to allow for the optimization of the desired
+full-scale output voltage based on the target current range expected in the application.
+8.2 Functional Block Diagram
+                                                                   VS
+
+
+
+
+                                  IN±                                ±
+                                           PWM
+                                                                                    OUT
+                                  IN+     Rejection                  +       50 k
+                                                                                    REF2
+                                                                             50 k
+                                                                                    REF1
+
+
+
+                                                                  GND
+
+8.3 Feature Description
+8.3.1 Amplifier Input Signal
+The INA240 is designed to handle large common-mode transients over a wide voltage range. Input signals from
+current measurement applications for linear and PWM applications can be connected to the amplifier to provide
+a highly accurate output, with minimal common-mode transient artifacts.
+8.3.1.1 Enhanced PWM Rejection Operation
+The enhanced PWM rejection feature of the INA240 provides increased attenuation of large common-mode
+ΔV/Δt transients. Large ΔV/Δt common-mode transients associated with PWM signals are employed in
+applications such as motor or solenoid drive and switching power supplies. Traditionally, large ΔV/Δt common-
+mode transitions are handled strictly by increasing the amplifier signal bandwidth, which can increase chip size,
+complexity and ultimately cost. The INA240 is designed with high common-mode rejection techniques to reduce
+large ΔV/Δt transients before the system is disturbed as a result of these large signals. The high AC CMRR, in
+conjunction with signal bandwidth, allows the INA240 to provide minimal output transients and ringing compared
+with standard circuit approaches.
+8.3.1.2 Input Signal Bandwidth
+The INA240 input signal, which represents the current being measured, is accurately measured with minimal
+disturbance from large ΔV/Δt common-mode transients as previously described. For PWM signals typically
+associated with motors, solenoids, and other switching applications, the current being monitored varies at a
+significantly slower rate than the faster PWM frequency.
+The INA240 bandwidth is defined by the –3-dB bandwidth of the current-sense amplifier inside the device; see
+the Electrical Characteristics table. The device bandwidth provides fast throughput and fast response required
+for the rapid detection and processing of overcurrent events. Without the higher bandwidth, protection circuitry
+may not have adequate response time and damage may occur to the monitored application or circuit.
+
+
+
+
+10    Submit Document Feedback                                                       Copyright © 2021 Texas Instruments Incorporated
+
+                                                  Product Folder Links: INA240
+                                                                                                                                         INA240
+www.ti.com                                                                                        SBOS662C – JULY 2016 – REVISED DECEMBER 2021
+
+Figure 8-1 shows the performance profile of the device over frequency. Harmonic distortion increases at the
+upper end of the amplifier bandwidth with no adverse change in detection of overcurrent events. However,
+increased distortion at the highest frequencies must be considered when the measured current bandwidth
+begins to approach the INA240 bandwidth.
+For applications requiring distortion sensitive signals, Figure 8-1 provides information to show that there is
+an optimal frequency performance range for the amplifier. The full amplifier bandwidth is always available for
+fast overcurrent events at the same time that the lower frequency signals are amplified at a low distortion
+level. The output signal accuracy is reduced for frequencies closer to the maximum bandwidth. Individual
+requirements determine the acceptable limits of distortion for high-frequency, current-sensing applications.
+Testing and evaluation in the end application or circuit is required to determine the acceptance criteria and
+to validate the performance levels meet the system specifications.
+                                                 10%
+
+
+
+
+                                                  1%
+                                        THD+N
+
+
+
+
+                                                0.1%
+
+
+
+
+                                                                                              90% FS Input
+                                                0.01%
+                                                        1   10     100         1k       10k    100k      1M
+                                                                         Frequency (Hz)                      D006
+
+
+                                                  Figure 8-1. Performance Over Frequency
+
+8.3.2 Selecting the Sense Resistor (RSENSE)
+The INA240 determines the current magnitude from measuring the differential voltage developed across a
+resistor. This resistor is referred to as a current-sensing resistor or a current-shunt resistor. The flexible design of
+the device allows a wide input signal range across this current-sensing resistor.
+The current-sensing resistor is ideally chosen solely based on the full-scale current to be measured, the
+full-scale input range of the circuitry following the device, and the device gain selected. The minimum current-
+sensing resistor is a design-based decision in order to maximize the input range of the signal chain circuitry.
+Full-scale output signals that are not maximized to the full input range of the system circuitry limit the ability of
+the system to exercise the full dynamic range of system control.
+Two important factors to consider when finalizing the current-sensing resistor value are: the required current
+measurement accuracy and the maximum power dissipation across the resistor. A larger resistor voltage
+provides for a more accurate measurement, but increases the power dissipation in the resistor. The increased
+power dissipation generates heat, which reduces the sense resistor accuracy because of the temperature
+coefficient. The voltage signal measurement uncertainty is reduced when the input signal gets larger because
+any fixed errors become a smaller percentage of the measured signal. The design trade-off to improve
+measurement accuracy increases the current-sensing resistor value. The increased resistance value results
+in an increased power dissipation in the system which can additionally decrease the overall system accuracy.
+Based on these relationships, the measurement accuracy is inversely proportional to both the resistance value
+and power dissipation contributed by the current-shunt selection.
+By increasing the current-shunt resistor, the differential voltage is increased across the resistor. Larger input
+differential voltages require a smaller amplifier gain to achieve a full-scale amplifier output voltage. Smaller
+current-shunt resistors are desired but require large amplifier gain settings. The larger gain settings often have
+increased error and noise parameters, which are not attractive for precision designs. Historically, the design
+goals for high-performance measurements forced designers to accept selecting larger current-sense resistors
+and the lower gain amplifier settings. The INA240 provides 100-V/V and 200-V/V gain options that offer the
+
+Copyright © 2021 Texas Instruments Incorporated                                                                     Submit Document Feedback   11
+                                                            Product Folder Links: INA240
+INA240
+SBOS662C – JULY 2016 – REVISED DECEMBER 2021                                                                                              www.ti.com
+
+high-gain setting and maintains high-performance levels with offset values below 25 µV. These devices allow for
+the use of lower shunt resistor values to achieve lower power dissipation and still meet high system performance
+specifications.
+Table 8-1 shows an example of the different results obtained from using two different gain versions of the
+INA240. From the table data, the higher gain device allows a smaller current-shunt resistor and decreased
+power dissipation in the element. The Calculating Total Error section provides information on the error
+calculations that must be considered in addition to the gain and current-shunt value when designing with the
+INA240.
+                                       Table 8-1. RSENSE Selection and Power Dissipation(1)
+                                                                                                                              RESULTS
+                                  PARAMETER                                               EQUATION
+                                                                                                                   INA240A1            INA240A4
+                                       Gain                                                    —                     20 V/V             200 V/V
+ VDIFF                          Ideal maximum differential input voltage             VDIFF = VOUT / Gain            150 mV               15 mV
+ RSENSE                         Current-sense resistor value                        RSENSE = VDIFF / IMAX            15 mΩ               1.5 mΩ
+ PRSENSE                        Current-sense resistor power dissipation                 RSENSE × IMAX 2             1.5 W               0.15 W
+
+(1)      Full-scale current = 10 A, and full-scale output voltage = 3 V.
+
+8.4 Device Functional Modes
+8.4.1 Adjusting the Output Midpoint With the Reference Pins
+Figure 8-2 shows a test circuit for reference-divider accuracy. The INA240 output is configurable to allow for
+unidirectional or bidirectional operation.
+                                                                            VS
+
+
+
+
+                                                                            VS
+
+
+                                              IN±
+                                                                   ±              OUT
+                                                                   +
+                                              IN+                                 REF2
+
+                                                                                  REF1
+
+                                                               GND
+
+
+
+
+                                     Figure 8-2. Test Circuit For Reference Divider Accuracy
+
+                                                                           Note
+         Do not connect the REF1 pin or the REF2 pin to any voltage source lower than GND or higher than
+         VS.
+
+The output voltage is set by applying a voltage or voltages to the reference voltage inputs, REF1 and REF2. The
+reference inputs are connected to an internal gain network. There is no operational difference between the two
+reference pins.
+8.4.2 Reference Pin Connections for Unidirectional Current Measurements
+Unidirectional operation allows current measurements through a resistive shunt in one direction. For
+unidirectional operation, connect the device reference pins together and then to the negative rail (see the
+Ground Referenced Output section) or the positive rail (see the VS Referenced Output section). The required
+differential input polarity depends on the output voltage setting. The amplifier output moves away from the
+referenced rail proportional to the current passing through the external shunt resistor. If the amplifier reference
+pins are connected to the positive rail, then the input polarity must be negative to move the amplifier output down
+
+12       Submit Document Feedback                                                                          Copyright © 2021 Texas Instruments Incorporated
+
+                                                            Product Folder Links: INA240
+                                                                                                                             INA240
+www.ti.com                                                                               SBOS662C – JULY 2016 – REVISED DECEMBER 2021
+
+(towards ground). If the amplifier reference pins are connected at ground, then the input polarity must be positive
+to move the amplifier output up (towards supply).
+The following sections describe how to configure the output for unidirectional operation cases.
+8.4.2.1 Ground Referenced Output
+When using the INA240 in a unidirectional mode with a ground referenced output, both reference inputs are
+connected to ground; this configuration takes the output to ground when there is a 0-V differential at the input (as
+Figure 8-3 shows).
+                                                                            VS
+
+
+
+
+                                                                            VS
+
+
+                                                    IN±
+                                                                       ±           OUT
+                                                                       +
+                                                   IN+                            REF2
+
+                                                                                  REF1
+
+                                                                 GND
+
+
+
+
+                                                  Figure 8-3. Ground Referenced Output
+
+8.4.2.2 VS Referenced Output
+Unidirectional mode with a VS referenced output is configured by connecting both reference pins to the positive
+supply. Use this configuration for circuits that require power-up and stabilization of the amplifier output signal and
+other control circuitry before power is applied to the load (as shown in Figure 8-4).
+                                                                           VS
+
+
+
+
+                                                                           VS
+
+
+                                                  IN±
+                                                                   ±             OUT
+                                                                   +
+                                                  IN+                            REF2
+
+                                                                                 REF1
+
+                                                               GND
+
+
+
+
+                                                    Figure 8-4. VS Referenced Output
+
+8.4.3 Reference Pin Connections for Bidirectional Current Measurements
+Bidirectional operation allows the INA240 to measure currents through a resistive shunt in two directions.
+For this operation case, the output voltage can be set anywhere within the reference input limits. A common
+configuration is to set the reference inputs at half-scale for equal range in both directions. However, the
+reference inputs can be set to a voltage other than half-scale when the bidirectional current is non-symmetrical.
+
+
+
+
+Copyright © 2021 Texas Instruments Incorporated                                                       Submit Document Feedback      13
+                                                          Product Folder Links: INA240
+INA240
+SBOS662C – JULY 2016 – REVISED DECEMBER 2021                                                                                       www.ti.com
+
+8.4.3.1 Output Set to External Reference Voltage
+Connecting both pins together and then to a reference voltage results in an output voltage equal to the reference
+voltage for the condition of shorted input pins or a 0-V differential input; this configuration is shown in Figure 8-5.
+The output voltage decreases below the reference voltage when the IN+ pin is negative relative to the IN– pin
+and increases when the IN+ pin is positive relative to the IN– pin. This technique is the most accurate way to
+bias the output to a precise voltage.
+                                                                   VS
+
+
+
+
+                                                                   VS
+
+
+                                     IN±
+                                                       ±                OUT
+                                                       +
+                                     IN+                                REF2            REF5025
+                                                                                          2.5-V
+                                                                        REF1            Reference
+
+                                                    GND
+
+
+
+                                                     Copyright © 2016, Texas Instruments Incorporated
+
+                                           Figure 8-5. External Reference Output
+
+8.4.3.2 Output Set to Midsupply Voltage
+By connecting one reference pin to VS and the other to the GND pin, the output is set at half of the supply
+when there is no differential input, as shown in Figure 8-6. This method creates a ratiometric offset to the supply
+voltage, where the output voltage remains at VS / 2 for 0 V applied to the inputs.
+                                                          VS
+
+
+
+
+                                                          VS
+
+
+                                       IN±
+                                                               ±            OUT
+                                                                                           Output
+                                                               +
+                                       IN+                                 REF2
+
+                                                                           REF1
+
+                                                       GND
+
+
+
+
+                                           Figure 8-6. Midsupply Voltage Output
+
+8.4.3.3 Output Set to Mid-External Reference
+In this case, an external reference is divided by two by connecting one REF pin to ground and the other REF pin
+to the reference, as shown in Figure 8-7.
+
+
+
+
+14    Submit Document Feedback                                                                      Copyright © 2021 Texas Instruments Incorporated
+
+                                                  Product Folder Links: INA240
+                                                                                                                                         INA240
+www.ti.com                                                                                         SBOS662C – JULY 2016 – REVISED DECEMBER 2021
+
+                                                                       VS
+
+
+
+
+                                                                       VS
+
+
+                                             IN±
+                                                              ±                OUT
+                                                              +
+                                             IN+                              REF2             REF5025
+                                                                                                 2.5-V
+                                                                              REF1             Reference
+
+                                                          GND
+
+
+
+                                                            Copyright © 2016, Texas Instruments Incorporated
+
+                                              Figure 8-7. Mid-External Reference Output
+
+8.4.3.4 Output Set Using Resistor Divider
+The INA240 REF1 and REF2 pins allow for the midpoint of the output voltage to be adjusted for system
+circuitry connections to analog to digital converters (ADCs) or other amplifiers. The REF pins are designed to
+be connected directly to supply, ground, or a low-impedance reference voltage. The REF pins can be connected
+together and biased using a resistor divider to achieve a custom output voltage. If the amplifier is used in this
+configuration, as shown in Figure 8-8, use the output as a differential signal with respect to the resistor divider
+voltage. Use of the amplifier output as a single-ended signal in this configuration is not recommended because
+the internal impedance shifts can adversely affect device performance specifications.
+                                                             VS
+
+
+
+
+                                                             VS
+                                                                                              R1
+
+                                   IN±
+                                                     ±               OUT
+                                                                                                               TO ADC+
+                                                     +                                                         TO ADC±
+                                   IN+                              REF2
+
+                                                                    REF1
+                                                                                              R2
+                                                   GND
+
+
+
+
+                                  Figure 8-8. Setting the Reference Using a Resistor Divider
+
+8.4.4 Calculating Total Error
+The INA240 electrical specifications (see the Electrical Characteristics table) include typical individual errors
+terms (such as gain error, offset error, and nonlinearity error). Total error, including all of these individual error
+components, is not specified in the Electrical Characteristics table. In order to accurately calculate the expected
+error of the device, the device operating conditions must first be known. Some current-shunt monitors specify a
+total error in the product data sheet. However, this total error term is accurate under only one particular set of
+operating conditions. Specifying the total error at this point has limited value because any deviation from these
+specific operating conditions no longer yields the same total error value. This section discusses the individual
+error sources and how the device total error value can be calculated from the combination of these errors for
+specific conditions.
+Two examples are provided in Table 8-2 and Table 8-3 that detail how different operating conditions can affect
+the total error calculations. Typical and maximum calculations are shown as well to provide the user more
+information on how much error variance is present from device to device.
+
+Copyright © 2021 Texas Instruments Incorporated                                                                     Submit Document Feedback   15
+                                                         Product Folder Links: INA240
+INA240
+SBOS662C – JULY 2016 – REVISED DECEMBER 2021                                                                                           www.ti.com
+
+8.4.4.1 Error Sources
+The typical error sources that have the largest effect on the total error of the device are gain error, nonlinearity,
+common-mode rejection ratio, and input offset voltage error. For the INA240, an additional error source (referred
+to as the reference voltage rejection ratio) is also included in the total error value.
+8.4.4.2 Reference Voltage Rejection Ratio Error
+Reference voltage rejection ratio refers to the amount of error induced by applying a reference voltage to the
+INA240 that deviates from the mid-point of the device supply voltage.
+8.4.4.2.1 Total Error Example 1
+                                       Table 8-2. Total Error Calculation: Example 1(1)
+              TERM                   SYMBOL                                         EQUATION                             TYPICAL VALUE
+ Initial input offset voltage           VOS                                                —                                    5 µV
+
+ Added input offset voltage                                                   1
+                                                                                           ´ (VCM - 12V)
+ because of common-mode               VOS_CM                                           (                                        0 µV
+ voltage
+                                                                         (   CMRR_dB
+                                                                               20
+                                                                    10
+ Added input offset voltage
+ because of reference                 VOS_REF                            RVRR × |VS / 2 – VREF|                                 0 µV
+ voltage
+
+ Total input offset voltage           VOS_Total                   (VOS)2 + (VOS_CM)2 + (VOS_REF)2                               5 µV
+
+
+ Error from input offset                                                       VOS_Total
+                                     Error_VOS                                                                                 0.05%
+ voltage                                                                       VSENSE ´ 100
+ Gain error                         Error_Gain                                             —                                   0.05%
+ Nonlinearity error                  Error_Lin                                             —                                   0.01%
+
+
+ Total error                             —
+                                                          (Error_VOS)2 + (Error_Gain)2 + (Error_Lin)2                          0.07%
+
+
+(1)    The data for Table 8-2 was taken with the INA240A4, VS = 5 V, VCM = 12 V, VREF1 = VREF2 = VS / 2, and VSENSE = 10 mV.
+
+8.4.4.2.2 Total Error Example 2
+                                       Table 8-3. Total Error Calculation: Example 2(1)
+              TERM                   SYMBOL                                         EQUATION                             TYPICAL VALUE
+ Initial input offset voltage           VOS                                                —                                    5 µV
+
+ Added input offset voltage                                                   1
+                                                                                           ´ (VCM - 12V)
+ because of common-mode               VOS_CM                                           (                                      12.1 µV
+ voltage
+                                                                         (   CMRR_dB
+                                                                               20
+                                                                    10
+ Added input offset voltage
+ because of reference                 VOS_REF                            RVRR × |VS / 2 – VREF|                                 5 µV
+ voltage
+
+ Total input offset voltage           VOS_Total                   (VOS)2 + (VOS_CM)2 + (VOS_REF)2                              14 µV
+
+
+ Error from input offset                                                       VOS_Total
+                                     Error_VOS                                                                                 0.14%
+ voltage                                                                       VSENSE ´ 100
+ Gain error                         Error_Gain                                             —                                   0.05%
+ Nonlinearity error                  Error_Lin                                             —                                   0.01%
+
+
+
+
+16     Submit Document Feedback                                                                       Copyright © 2021 Texas Instruments Incorporated
+
+                                                       Product Folder Links: INA240
+                                                                                                                                INA240
+www.ti.com                                                                                SBOS662C – JULY 2016 – REVISED DECEMBER 2021
+
+                                  Table 8-3. Total Error Calculation: Example 2(1) (continued)
+            TERM                         SYMBOL                              EQUATION                              TYPICAL VALUE
+
+
+ Total error                                 —
+                                                          (Error_VOS)2 + (Error_Gain)2 + (Error_Lin)2                   0.15%
+
+
+(1)    The data for Table 8-3 was taken with the INA240A4, VS = 5 V, VCM = 60 V, VREF1 = VREF2 = 0 V, and VSENSE = 10 mV.
+
+
+
+
+Copyright © 2021 Texas Instruments Incorporated                                                          Submit Document Feedback    17
+                                                      Product Folder Links: INA240
+INA240
+SBOS662C – JULY 2016 – REVISED DECEMBER 2021                                                                           www.ti.com
+
+
+9 Application and Implementation
+                                                                Note
+      Information in the following applications sections is not part of the TI component specification,
+      and TI does not warrant its accuracy or completeness. TI’s customers are responsible for
+      determining suitability of components for their purposes, as well as validating and testing their design
+      implementation to confirm system functionality.
+
+9.1 Application Information
+The INA240 measures the voltage developed as current flows across the current-sensing resistor. The device
+provides reference pins to configure operation as either unidirectional or bidirectional output swing. When using
+the INA240 for inline motor current sense, the device is commonly configured for bidirectional operation.
+9.1.1 Input Filtering
+
+                                                                Note
+      Input filters are not required for accurate measurements using the INA240, and use of filters in this
+      location is not recommended. If filter components are used on the input of the amplifier, follow the
+      guidelines in this section to minimize the effects on performance.
+
+Based strictly on user design requirements, external filtering of the current signal may be desired. The initial
+location that can be considered for the filter is at the output of the current amplifier. Although placing the filter
+at the output satisfies the filtering requirements, this location changes the low output impedance measured by
+any circuitry connected to the output voltage pin. The other location for filter placement is at the current amplifier
+input pins. This location satisfies the filtering requirement also, however the components must be carefully
+selected to minimally impact device performance. Figure 9-1 shows a filter placed at the inputs pins.
+                                                                              VS
+
+
+
+
+                                 RS            IN±
+
+                                                                                    t
+                     R                                   Bias                                         OUT
+                                                                                    +
+                                 RS                                                            REF2
+                                               IN+
+
+                                                                                               REF1
+
+
+
+                                                                              GND
+
+                                               Figure 9-1. Filter at Input Pins
+
+External series resistance provide a source of additional measurement error, so keep the value of these series
+resistors to 10-Ω or less to reduce loss of accuracy. The internal bias network shown in Figure 9-1 creates a
+mismatch in input bias currents (see Figure 9-2) when a differential voltage is applied between the input pins.
+If additional external series filter resistors are added to the circuit, a mismatch is created in the voltage drop
+across the filter resistors. This voltage is a differential error voltage in the shunt resistor voltage. In addition to the
+absolute resistor value, mismatch resulting from resistor tolerance can significantly impact the error because this
+value is calculated based on the actual measured resistance.
+
+
+
+
+18    Submit Document Feedback                                                          Copyright © 2021 Texas Instruments Incorporated
+
+                                                     Product Folder Links: INA240
+                                                                                                                                                              INA240
+www.ti.com                                                                                                                SBOS662C – JULY 2016 – REVISED DECEMBER 2021
+
+                                                                     250
+                                                                                       IB+
+                                                                     200
+
+
+
+
+                                           Input Bias Current (PA)
+                                                                     150
+
+                                                                     100
+                                                                                                               IB-
+                                                                      50
+
+                                                                       0
+
+                                                                      -50
+
+                                                                     -100
+                                                                            0    0.2          0.4          0.6          0.8       1
+                                                                                       Differential Input Voltage (V)
+
+                                  Figure 9-2. Input Bias Current vs Differential Input Voltage
+
+The measurement error expected from the additional external filter resistors can be calculated using Equation 1,
+where the gain error factor is calculated using Equation 2.
+
+      Gain Error (%) = 100 - (100 ´ Gain Error Factor)                                                                                                        (1)
+
+The gain error factor, shown in Equation 1, can be calculated to determine the gain error introduced by the
+additional external series resistance. Equation 1 calculates the deviation of the shunt voltage resulting from the
+attenuation and imbalance created by the added external filter resistance. Table 9-1 provides the gain error
+factor and gain error for several resistor values.
+
+                                            3000
+      Gain Error Factor
+                                          RS 3000                                                                                                             (2)
+
+Where:
+•    RS is the external filter resistance value
+                        Table 9-1. Gain Error Factor and Gain Error For External Input Resistors
+         EXTERNAL RESISTANCE (Ω)                                                  GAIN ERROR FACTOR                                     GAIN ERROR (%)
+                         5                                                                   0.998                                            0.17
+                        10                                                                   0.997                                            0.33
+                        100                                                                  0.968                                            3.23
+
+
+
+
+Copyright © 2021 Texas Instruments Incorporated                                                                                        Submit Document Feedback      19
+                                                                                Product Folder Links: INA240
+INA240
+SBOS662C – JULY 2016 – REVISED DECEMBER 2021                                                                                 www.ti.com
+
+9.2 Typical Applications
+The INA240 offers advantages for multiple applications including the following:
+• High common-mode range and excellent CMRR enables direct inline sensing
+• Ultra-low offset and drift eliminates the necessity of calibration
+• Wide supply range enables a direct interface with most microprocessors
+Two specific applications are provided and include more detailed information.
+9.2.1 Inline Motor Current-Sense Application
+                                                                                                   5V
+
+                                     40 V                                                       VS
+                                                                                      IN+
+                                                                                                                     OUT
+                                                                                                 INA240
+                                                                                      IN±                     REF2
+                                                                                                              REF1
+                                                                                              GND
+
+
+
+                                                                      100 PŸ
+
+
+
+
+                                                                          Copyright © 2016, Texas Instruments Incorporated
+
+                                     Figure 9-3. Inline Motor Application Circuit
+
+9.2.1.1 Design Requirements
+Inline current sensing has many advantages in motor control, from torque ripple reduction to real-time motor
+health monitoring. However, the full-scale PWM voltage requirements for inline current measurements provide
+challenges to accurately measure the current. Switching frequencies in the 50-kHz to 100-kHz range create
+higher ΔV/Δt signal transitions that must be addressed to obtain accurate inline current measurements.
+With a superior common-mode rejection capability, high precision, and a high common-mode specification, the
+INA240 provides performance for a wide range of common-mode voltages.
+9.2.1.2 Detailed Design Procedure
+For this application, the INA240 measures current in the drive circuitry of a 36-V, 4000-RPM motor.
+To demonstrate the performance of the device, the INA240A1 with a gain of 20 V/V was selected for this design
+and powered from a 5-V supply.
+Using the information in the Adjusting the Output Midpoint With the Reference Pins section, the reference point
+is set to midscale by splitting the supply with REF1 connected to ground and REF2 connected to supply. This
+configuration allows for bipolar current measurements. Alternatively, the reference pins can be tied together and
+driven with an external precision reference.
+The current-sensing resistor is sized so that the output of the INA240 is not saturated. A value of 100-mΩ was
+selected to maintain the analog input within the device limits.
+
+
+20    Submit Document Feedback                                                              Copyright © 2021 Texas Instruments Incorporated
+
+                                               Product Folder Links: INA240
+                                                                                                                                  INA240
+www.ti.com                                                                                SBOS662C – JULY 2016 – REVISED DECEMBER 2021
+
+
+9.2.1.3 Application Curve
+                                 270                                                                                         3.5
+
+                                 240                                                                                         3
+
+
+
+
+                                                                                                                                    INA240A1 Output
+                                 210                                                                                         2.5
+
+                                 180                                                                                         2
+
+                                 150                                                                                         1.5
+                                                                                                           Input Signal
+                                                                                                           INA240A1 Output
+                                 120                                                                                         1
+      Common-Mode Input Signal
+
+
+
+
+                                  90                                                                                         0.5
+
+                                  60                                                                                         0
+
+                                  30                                                                                         -0.5
+
+                                   0                                                                                         -1
+
+                                 -30                                                                                         -1.5
+                                                                  Time (25 s/div)
+
+
+                                                                                                                                                      C005
+
+
+
+                                       Figure 9-4. Inline Motor Current-Sense Input and Output Signals
+
+
+
+
+Copyright © 2021 Texas Instruments Incorporated                                                        Submit Document Feedback                              21
+                                                           Product Folder Links: INA240
+INA240
+SBOS662C – JULY 2016 – REVISED DECEMBER 2021                                                                                                                                              www.ti.com
+
+9.2.2 Solenoid Drive Current-Sense Application
+                                                                                          12 V
+
+
+
+                                                                               Control                                    5V
+
+                                                                                                                      VS
+                                                                                                       IN+
+                                                                                                                                          OUT
+                                                                                              10 m                    INA240
+                                                                                                       IN±                     REF2
+                                                                                                                               REF1
+                                                                                                                  GND
+
+
+
+
+                                                                                         Copyright © 2016, Texas Instruments Incorporated
+
+                                                                          Figure 9-5. Solenoid Drive Application Circuit
+
+9.2.2.1 Design Requirements
+Challenges exist in solenoid drive current sensing that are similar to those in motor inline current sensing. In
+certain topologies, the current-sensing amplifier is exposed to the full-scale PWM voltage between ground and
+supply. The INA240 is well suited for this type of application.
+9.2.2.2 Detailed Design Procedure
+For this application, the INA240 measures current in the driver circuit of a 24-V, 500-mA water valve.
+To demonstrate the performance of the device, the INA240A4 with a gain of 200 V/V was selected for this design
+and powered from a 5-V supply.
+Using the information in the Adjusting the Output Midpoint With the Reference Pins section, the reference
+point is set to midscale by splitting the supply with REF1 connected to ground and REF2 connected to supply.
+Alternatively, the reference pins can be tied together and driven with an external precision reference.
+A value of 10 mΩ was selected to maintain the analog input within the device limits.
+9.2.2.3 Application Curve
+                                                                          66                                                                           6
+                                                                          2
+                                                                          Y
+                                                                          60                                                                           5
+                                                                          2
+                                  Common-Mode Input SignalDDDDDDDDDDDDD
+
+
+
+
+                                                                          2
+                                                                          54                                                                           4
+                                                                          1
+                                                                                                                                                             DDDDDDDDDDDDDINA240 Output
+
+
+
+
+                                                                          1
+                                                                          48
+                                                                          1                                                                            3
+
+                                                                          42                                                                           2
+
+                                                                          36                                                   Common-Mode Input Signal 1
+                                                                                                                               INA240 Output
+                                                                          30                                                                            0
+
+                                                                          24                                                                           -1
+
+                                                                          18                                                                           -2
+
+                                                                          12                                                                            3.50
+                                                                                                                                                       -3
+                                                                                                                                                        3.50
+                                                                          6                                                                            -4 Y1
+                                                                                                                                                           3
+                                                                                                                                                         2.5
+                                                                          0                                                                            -5
+                                                                                                                                                           2
+                                                                                                                                                         1.5
+                                                                          -6                                                                           -6
+                                                                                                       Time (20 ms/div)
+                                                                                                                                                      D020
+
+
+
+                       Figure 9-6. Solenoid Drive Current Sense Input and Output Signals
+
+
+
+
+22    Submit Document Feedback                                                                                                                         Copyright © 2021 Texas Instruments Incorporated
+
+                                                                                           Product Folder Links: INA240
+                                                                                                                                        INA240
+www.ti.com                                                                                 SBOS662C – JULY 2016 – REVISED DECEMBER 2021
+
+
+9.3 What to Do and What Not to Do
+9.3.1 High-Precision Applications
+For high-precision applications, verify accuracy and stability of the amplifier by:
+• Providing a precision reference connected to REF1 and REF2
+• Optimizing the layout of the power and sensing path of the sense resistor (see the Layout section)
+• Providing adequate bypass capacitance on the supply pin (see the Power Supply Decoupling section)
+9.3.2 Kelvin Connection from the Current-Sense Resistor
+To provide accurate current measurements, verify the routing between the current-sense resistor and the
+amplifier uses a Kelvin connection. Use the information provided in Figure 9-7 and the Connection to the
+Current-Sense Resistor section during device layout.
+
+                                 RSHUNT                                                                   RSHUNT
+                          4
+
+                                3
+
+                                      2
+
+                                            1
+
+
+
+
+                                                                                                   4
+
+                                                                                                         3
+
+                                                                                                               2
+
+                                                                                                                     1
+                                INA240                                                                   INA240
+                          5
+
+
+
+
+                                                                                                   5
+                                6
+
+                                      7
+
+                                            8
+
+
+
+
+                                                                                                         6
+
+                                                                                                               7
+
+                                                                                                                     8
+                                   DO                                                                     '21¶7
+                  Kelvin Connection from Shunt Resistor                                  Non-Kelvin Connection from Shunt Resistor
+
+                                                                                                 Copyright © 2016, Texas Instruments Incorporated
+
+                                            Figure 9-7. Shunt Connections to the INA240
+
+10 Power Supply Recommendations
+The INA240 series makes accurate measurements beyond the connected power-supply voltage (VS) because
+the inputs (IN+ and IN–) operate anywhere between –4 V and 80 V independent of VS. For example, the VS
+power supply equals 5 V and the common-mode voltage of the measured shunt can be as high as 80 V.
+Although the common-mode voltage of the input can be beyond the supply voltage, the output voltage range of
+the INA240 series is constrained to the supply voltage.
+10.1 Power Supply Decoupling
+Place the power-supply bypass capacitor as close as possible to the supply and ground pins. TI recommends a
+bypass capacitor value of 0.1 μF. Additional decoupling capacitance can be added to compensate for noisy or
+high-impedance power supplies.
+
+
+
+
+Copyright © 2021 Texas Instruments Incorporated                                                              Submit Document Feedback               23
+                                                          Product Folder Links: INA240
+INA240
+SBOS662C – JULY 2016 – REVISED DECEMBER 2021                                                                                      www.ti.com
+
+
+11 Layout
+11.1 Layout Guidelines
+11.1.1 Connection to the Current-Sense Resistor
+Poor routing of the current-sensing resistor can result in additional resistance between the input pins of the
+amplifier. Any additional high-current carrying impedance can cause significant measurement errors because the
+current resistor has a very-low-ohmic value. Use a Kelvin or 4-wire connection to connect to the device input
+pins. This connection technique ensures that only the current-sensing resistor impedance is detected between
+the input pins.
+11.2 Layout Example
+
+                                                            RSHUNT
+
+                                                                                                                     Power
+             Load
+                                                                                                                     Supply
+
+
+
+
+                           VIA to                                                         VIA to
+                           Ground                                                         Ground
+                           Plane                                                          Plane
+                                                 4
+
+
+                                                          3
+
+
+                                                                     2
+
+
+                                                                         1
+
+                                                GND       IN±    IN+     NC
+
+
+                             CBYPASS
+                                                           INA240
+
+
+
+                                                VS       REF2   REF1     OUT
+                                                 5
+
+
+                                                          6
+
+
+                                                                     7
+
+
+                                                                         8
+
+
+
+
+                                                                                       Output Voltage
+                                                                VIA to
+                                                                Ground
+                                                                Plane
+                                               Supply
+                                               Voltage
+                                                                               Copyright © 2016, Texas Instruments Incorporated
+
+                                 Figure 11-1. Recommended TSSOP Package Layout
+
+
+
+
+24    Submit Document Feedback                                                                     Copyright © 2021 Texas Instruments Incorporated
+
+                                                 Product Folder Links: INA240
+                                                                                                                         INA240
+www.ti.com                                                                          SBOS662C – JULY 2016 – REVISED DECEMBER 2021
+
+                                                                                                          Power Supply
+              Load
+                                                               RSHUNT
+
+
+
+
+                                                    1    IN-             IN+    8
+
+                                   VIA to                                REF1
+                                                    2   GnD                     7
+                                   Ground
+                                                                                         VIA to
+                                    Plane
+                                                    3   REF2               Vs   6        Power
+                                                               CBYPASS                   Supply
+                                                    4   NC                OUT   5
+                                    VIA to
+                                                               INA240
+                                    Ground
+                                     Plane
+
+                                        Figure 11-2. Recommended SOIC Package Layout
+
+
+
+
+Copyright © 2021 Texas Instruments Incorporated                                                   Submit Document Feedback     25
+                                                    Product Folder Links: INA240
+INA240
+SBOS662C – JULY 2016 – REVISED DECEMBER 2021                                                                                  www.ti.com
+
+
+12 Device and Documentation Support
+12.1 Documentation Support
+12.1.1 Related Documentation
+For related documentation see the following:
+• Texas Instruments, INA240EVM User's Guide
+• Texas Instruments, Motor Control Application Report
+• Texas Instruments, 48-V Three-Phase Inverter With Shunt-Based In-Line Motor Phase Current Sensing
+   Reference Design
+12.2 Receiving Notification of Documentation Updates
+To receive notification of documentation updates, navigate to the device product folder on ti.com. Click on
+Subscribe to updates to register and receive a weekly digest of any product information that has changed. For
+change details, review the revision history included in any revised document.
+12.3 Support Resources
+TI E2E™ support forums are an engineer's go-to source for fast, verified answers and design help — straight
+from the experts. Search existing answers or ask your own question to get the quick design help you need.
+Linked content is provided "AS IS" by the respective contributors. They do not constitute TI specifications and do
+not necessarily reflect TI's views; see TI's Terms of Use.
+12.4 Trademarks
+TI E2E™ is a trademark of Texas Instruments.
+All trademarks are the property of their respective owners.
+12.5 Electrostatic Discharge Caution
+                This integrated circuit can be damaged by ESD. Texas Instruments recommends that all integrated circuits be handled
+                with appropriate precautions. Failure to observe proper handling and installation procedures can cause damage.
+                ESD damage can range from subtle performance degradation to complete device failure. Precision integrated circuits may
+                be more susceptible to damage because very small parametric changes could cause the device not to meet its published
+                specifications.
+
+
+12.6 Glossary
+ TI Glossary         This glossary lists and explains terms, acronyms, and definitions.
+
+13 Mechanical, Packaging, and Orderable Information
+The following pages include mechanical, packaging, and orderable information. This information is the most
+current data available for the designated devices. This data is subject to change without notice and revision of
+this document. For browser-based versions of this data sheet, refer to the left-hand navigation.
+
+
+
+
+26    Submit Document Feedback                                                                 Copyright © 2021 Texas Instruments Incorporated
+
+                                                    Product Folder Links: INA240
+                                                                                                                                 PACKAGE OPTION ADDENDUM
+
+  www.ti.com                                                                                                                                                     4-Nov-2026
+
+
+
+
+PACKAGING INFORMATION
+
+ Orderable part number   Status     Material type   Package | Pins   Package qty | Carrier    RoHS      Lead finish/       MSL rating/        Op temp (°C)   Part marking
+                            (1)          (2)                                                   (3)      Ball material      Peak reflow                            (6)
+                                                                                                             (4)                (5)
+
+        INA240A1D         Active     Production      SOIC (D) | 8         75 | TUBE            Yes        NIPDAU        Level-2-260C-1 YEAR    -40 to 125      I240A1
+      INA240A1D.A         Active     Production      SOIC (D) | 8         75 | TUBE            Yes        NIPDAU        Level-2-260C-1 YEAR    -40 to 125      I240A1
+       INA240A1DR         Active     Production      SOIC (D) | 8     2500 | LARGE T&R         Yes        NIPDAU        Level-2-260C-1 YEAR    -40 to 125      I240A1
+      INA240A1DR.A        Active     Production      SOIC (D) | 8     2500 | LARGE T&R         Yes        NIPDAU        Level-2-260C-1 YEAR    -40 to 125      I240A1
+     INA240A1DRG4         Active     Production      SOIC (D) | 8     2500 | LARGE T&R         Yes        NIPDAU        Level-2-260C-1 YEAR    -40 to 125      I240A1
+    INA240A1DRG4.A        Active     Production      SOIC (D) | 8     2500 | LARGE T&R         Yes        NIPDAU        Level-2-260C-1 YEAR    -40 to 125      I240A1
+      INA240A1PWR         Active     Production     TSSOP (PW) | 8    2000 | LARGE T&R         Yes        NIPDAU        Level-2-260C-1 YEAR    -40 to 125      I240A1
+     INA240A1PWR.A        Active     Production     TSSOP (PW) | 8    2000 | LARGE T&R         Yes        NIPDAU        Level-2-260C-1 YEAR    -40 to 125      I240A1
+    INA240A1PWRG4         Active     Production     TSSOP (PW) | 8    2000 | LARGE T&R         Yes        NIPDAU        Level-2-260C-1 YEAR    -40 to 125      I240A1
+   INA240A1PWRG4.A        Active     Production     TSSOP (PW) | 8    2000 | LARGE T&R         Yes        NIPDAU        Level-2-260C-1 YEAR    -40 to 125      I240A1
+       INA240A2DR         Active     Production      SOIC (D) | 8     2500 | LARGE T&R         Yes        NIPDAU        Level-2-260C-1 YEAR    -40 to 125      I240A2
+      INA240A2DR.A        Active     Production      SOIC (D) | 8     2500 | LARGE T&R         Yes        NIPDAU        Level-2-260C-1 YEAR    -40 to 125      I240A2
+     INA240A2DRG4         Active     Production      SOIC (D) | 8     2500 | LARGE T&R         Yes        NIPDAU        Level-2-260C-1 YEAR    -40 to 125      I240A2
+    INA240A2DRG4.A        Active     Production      SOIC (D) | 8     2500 | LARGE T&R         Yes        NIPDAU        Level-2-260C-1 YEAR    -40 to 125      I240A2
+       INA240A2PW        Obsolete    Production     TSSOP (PW) | 8             -                -          Call TI            Call TI          -40 to 125      I240A2
+      INA240A2PWR         Active     Production     TSSOP (PW) | 8    2000 | LARGE T&R         Yes        NIPDAU        Level-2-260C-1 YEAR    -40 to 125      I240A2
+     INA240A2PWR.A        Active     Production     TSSOP (PW) | 8    2000 | LARGE T&R         Yes        NIPDAU        Level-2-260C-1 YEAR    -40 to 125      I240A2
+    INA240A2PWRG4         Active     Production     TSSOP (PW) | 8    2000 | LARGE T&R         Yes        NIPDAU        Level-2-260C-1 YEAR    -40 to 125      I240A2
+   INA240A2PWRG4.A        Active     Production     TSSOP (PW) | 8    2000 | LARGE T&R         Yes        NIPDAU        Level-2-260C-1 YEAR    -40 to 125      I240A2
+        INA240A3D         Active     Production      SOIC (D) | 8         75 | TUBE            Yes        NIPDAU        Level-2-260C-1 YEAR    -40 to 125      I240A3
+      INA240A3D.A         Active     Production      SOIC (D) | 8         75 | TUBE            Yes        NIPDAU        Level-2-260C-1 YEAR    -40 to 125      I240A3
+       INA240A3DR         Active     Production      SOIC (D) | 8     2500 | LARGE T&R         Yes        NIPDAU        Level-2-260C-1 YEAR    -40 to 125      I240A3
+      INA240A3DR.A        Active     Production      SOIC (D) | 8     2500 | LARGE T&R         Yes        NIPDAU        Level-2-260C-1 YEAR    -40 to 125      I240A3
+     INA240A3DRG4         Active     Production      SOIC (D) | 8     2500 | LARGE T&R         Yes        NIPDAU        Level-2-260C-1 YEAR    -40 to 125      I240A3
+    INA240A3DRG4.A        Active     Production      SOIC (D) | 8     2500 | LARGE T&R         Yes        NIPDAU        Level-2-260C-1 YEAR    -40 to 125      I240A3
+      INA240A3PWR         Active     Production     TSSOP (PW) | 8    2000 | LARGE T&R         Yes        NIPDAU        Level-2-260C-1 YEAR    -40 to 125      I240A3
+     INA240A3PWR.A        Active     Production     TSSOP (PW) | 8    2000 | LARGE T&R         Yes        NIPDAU        Level-2-260C-1 YEAR    -40 to 125      I240A3
+    INA240A3PWRG4         Active     Production     TSSOP (PW) | 8    2000 | LARGE T&R         Yes        NIPDAU        Level-2-260C-1 YEAR    -40 to 125      I240A3
+   INA240A3PWRG4.A        Active     Production     TSSOP (PW) | 8    2000 | LARGE T&R         Yes        NIPDAU        Level-2-260C-1 YEAR    -40 to 125      I240A3
+
+
+                                                                                      Addendum-Page 1
+                                                                                                                                                                      PACKAGE OPTION ADDENDUM
+
+       www.ti.com                                                                                                                                                                                                    4-Nov-2026
+
+
+
+
+       Orderable part number          Status     Material type      Package | Pins      Package qty | Carrier        RoHS             Lead finish/              MSL rating/               Op temp (°C)          Part marking
+                                        (1)            (2)                                                             (3)            Ball material             Peak reflow                                           (6)
+                                                                                                                                            (4)                      (5)
+
+             INA240A4D               Obsolete     Production            SOIC (D) | 8               -                    -                 Call TI                  Call TI                 -40 to 125              I240A4
+            INA240A4DR                Active      Production            SOIC (D) | 8     2500 | LARGE T&R             Yes                NIPDAU           Level-2-260C-1 YEAR              -40 to 125              I240A4
+           INA240A4DR.A               Active      Production            SOIC (D) | 8     2500 | LARGE T&R             Yes                NIPDAU           Level-2-260C-1 YEAR              -40 to 125              I240A4
+            INA240A4PW               Obsolete     Production        TSSOP (PW) | 8                 -                    -                 Call TI                  Call TI                 -40 to 125              I240A4
+           INA240A4PWR                Active      Production        TSSOP (PW) | 8       2000 | LARGE T&R             Yes                NIPDAU           Level-2-260C-1 YEAR              -40 to 125              I240A4
+          INA240A4PWR.A               Active      Production        TSSOP (PW) | 8       2000 | LARGE T&R             Yes                NIPDAU           Level-2-260C-1 YEAR              -40 to 125              I240A4
+          INA240A4PWRG4               Active      Production        TSSOP (PW) | 8       2000 | LARGE T&R             Yes                NIPDAU           Level-2-260C-1 YEAR              -40 to 125              I240A4
+         INA240A4PWRG4.A              Active      Production        TSSOP (PW) | 8       2000 | LARGE T&R             Yes                NIPDAU           Level-2-260C-1 YEAR              -40 to 125              I240A4
+
+(1)
+      Status: For more details on status, see our product life cycle.
+
+(2)
+   Material type: When designated, preproduction parts are prototypes/experimental devices, and are not yet approved or released for full production. Testing and final process, including without limitation quality assurance,
+reliability performance testing, and/or process qualification, may not yet be complete, and this item is subject to further changes or possible discontinuation. If available for ordering, purchases will be subject to an additional
+waiver at checkout, and are intended for early internal evaluation purposes only. These items are sold without warranties of any kind.
+
+(3)
+      RoHS values: Yes, No, RoHS Exempt. See the TI RoHS Statement for additional information and value definition.
+
+(4)
+   Lead finish/Ball material: Parts may have multiple material finish options. Finish options are separated by a vertical ruled line. Lead finish/Ball material values may wrap to two lines if the finish value exceeds the maximum
+column width.
+
+(5)
+  MSL rating/Peak reflow: The moisture sensitivity level ratings and peak solder (reflow) temperatures. In the event that a part has multiple moisture sensitivity ratings, only the lowest level per JEDEC standards is shown.
+Refer to the shipping label for the actual reflow temperature that will be used to mount the part to the printed circuit board.
+
+(6)
+      Part marking: There may be an additional marking, which relates to the logo, the lot trace code information, or the environmental category of the part.
+
+Multiple part markings will be inside parentheses. Only one part marking contained in parentheses and separated by a "~" will appear on a part. If a line is indented then it is a continuation of the previous line and the two
+combined represent the entire part marking for that device.
+
+Important Information and Disclaimer:The information provided on this page represents TI's knowledge and belief as of the date that it is provided. TI bases its knowledge and belief on information provided by third parties, and
+makes no representation or warranty as to the accuracy of such information. Efforts are underway to better integrate information from third parties. TI has taken and continues to take reasonable steps to provide representative
+and accurate information but may not have conducted destructive testing or chemical analysis on incoming materials and chemicals. TI and TI suppliers consider certain information to be proprietary, and thus CAS numbers
+and other limited information may not be available for release.
+
+In no event shall TI's liability arising out of such information exceed the total purchase price of the TI part(s) at issue in this document sold by TI to Customer on an annual basis.
+
+
+
+                                                                                                          Addendum-Page 2
+                                                                                                                          PACKAGE OPTION ADDENDUM
+
+   www.ti.com                                                                                                                               4-Nov-2026
+
+
+
+
+OTHER QUALIFIED VERSIONS OF INA240 :
+
+• Automotive : INA240-Q1
+
+NOTE: Qualified Version Definitions:
+
+       • Automotive - Q100 devices qualified for high-reliability automotive applications targeting zero defects
+
+
+
+
+                                                                                                        Addendum-Page 3
+                                                                              PACKAGE MATERIALS INFORMATION
+
+www.ti.com                                                                                                                                   10-Aug-2026
+
+
+
+TAPE AND REEL INFORMATION
+
+       REEL DIMENSIONS                                                                     TAPE DIMENSIONS
+                                                                                      K0       P1
+
+
+
+                                                                                                                     B0 W
+                                        Reel
+                                      Diameter
+                                                                                   Cavity           A0
+                                                               A0   Dimension designed to accommodate the component width
+                                                               B0   Dimension designed to accommodate the component length
+                                                               K0   Dimension designed to accommodate the component thickness
+                                                               W    Overall width of the carrier tape
+                                                               P1   Pitch between successive cavity centers
+
+
+                                       Reel Width (W1)
+                              QUADRANT ASSIGNMENTS FOR PIN 1 ORIENTATION IN TAPE
+
+                                                                                                    Sprocket Holes
+
+
+                                                 Q1       Q2          Q1    Q2
+
+                                                 Q3       Q4          Q3    Q4                  User Direction of Feed
+
+
+
+                                                           Pocket Quadrants
+
+
+*All dimensions are nominal
+             Device           Package Package Pins             SPQ       Reel   Reel   A0                  B0         K0     P1     W     Pin1
+                               Type Drawing                            Diameter Width (mm)                (mm)       (mm)   (mm)   (mm) Quadrant
+                                                                         (mm) W1 (mm)
+       INA240A1DR              SOIC       D           8        2500        330.0        12.4        6.4    5.2       2.1    8.0    12.0    Q1
+     INA240A1DRG4              SOIC       D           8        2500        330.0        12.4        6.4    5.2       2.1    8.0    12.0    Q1
+      INA240A1PWR             TSSOP      PW           8        2000        330.0        12.4        7.0    3.6       1.6    8.0    12.0    Q1
+    INA240A1PWRG4             TSSOP      PW           8        2000        330.0        12.4        7.0    3.6       1.6    8.0    12.0    Q1
+       INA240A2DR              SOIC       D           8        2500        330.0        12.4        6.4    5.2       2.1    8.0    12.0    Q1
+     INA240A2DRG4              SOIC       D           8        2500        330.0        12.4        6.4    5.2       2.1    8.0    12.0    Q1
+      INA240A2PWR             TSSOP      PW           8        2000        330.0        12.4        7.0    3.6       1.6    8.0    12.0    Q1
+    INA240A2PWRG4             TSSOP      PW           8        2000        330.0        12.4        7.0    3.6       1.6    8.0    12.0    Q1
+       INA240A3DR              SOIC       D           8        2500        330.0        12.4        6.4    5.2       2.1    8.0    12.0    Q1
+     INA240A3DRG4              SOIC       D           8        2500        330.0        12.4        6.4    5.2       2.1    8.0    12.0    Q1
+      INA240A3PWR             TSSOP      PW           8        2000        330.0        12.4        7.0    3.6       1.6    8.0    12.0    Q1
+    INA240A3PWRG4             TSSOP      PW           8        2000        330.0        12.4        7.0    3.6       1.6    8.0    12.0    Q1
+       INA240A4DR              SOIC       D           8        2500        330.0        12.4        6.4    5.2       2.1    8.0    12.0    Q1
+      INA240A4PWR             TSSOP      PW           8        2000        330.0        12.4        7.0    3.6       1.6    8.0    12.0    Q1
+    INA240A4PWRG4             TSSOP      PW           8        2000        330.0        12.4        7.0    3.6       1.6    8.0    12.0    Q1
+
+
+
+
+                                                                     Pack Materials-Page 1
+                                                                PACKAGE MATERIALS INFORMATION
+
+www.ti.com                                                                                                              10-Aug-2026
+
+
+
+ TAPE AND REEL BOX DIMENSIONS
+
+
+
+
+                                                               Width (mm)
+                                                                              H
+                      W
+
+
+
+
+                                                          L
+
+
+
+
+*All dimensions are nominal
+             Device           Package Type   Package Drawing   Pins         SPQ    Length (mm)   Width (mm)   Height (mm)
+       INA240A1DR                SOIC              D            8           2500      353.0        353.0         32.0
+      INA240A1DRG4               SOIC              D            8           2500      353.0        353.0         32.0
+      INA240A1PWR               TSSOP              PW           8           2000      353.0        353.0         32.0
+     INA240A1PWRG4              TSSOP              PW           8           2000      353.0        353.0         32.0
+       INA240A2DR                SOIC              D            8           2500      353.0        353.0         32.0
+      INA240A2DRG4               SOIC              D            8           2500      353.0        353.0         32.0
+      INA240A2PWR               TSSOP              PW           8           2000      353.0        353.0         32.0
+     INA240A2PWRG4              TSSOP              PW           8           2000      353.0        353.0         32.0
+       INA240A3DR                SOIC              D            8           2500      353.0        353.0         32.0
+      INA240A3DRG4               SOIC              D            8           2500      353.0        353.0         32.0
+      INA240A3PWR               TSSOP              PW           8           2000      353.0        353.0         32.0
+     INA240A3PWRG4              TSSOP              PW           8           2000      353.0        353.0         32.0
+       INA240A4DR                SOIC              D            8           2500      353.0        353.0         32.0
+      INA240A4PWR               TSSOP              PW           8           2000      353.0        353.0         32.0
+     INA240A4PWRG4              TSSOP              PW           8           2000      353.0        353.0         32.0
+
+
+
+
+                                                        Pack Materials-Page 2
+                                                                 PACKAGE MATERIALS INFORMATION
+
+www.ti.com                                                                                                   10-Aug-2026
+
+
+
+TUBE
+
+       T - Tube
+        height                                                     L - Tube length
+
+
+                      W - Tube
+                       width
+
+
+         B - Alignment groove width
+
+*All dimensions are nominal
+             Device           Package Name   Package Type   Pins       SPQ     L (mm)   W (mm)   T (µm)   B (mm)
+        INA240A1D                  D            SOIC         8          75      507       8      3940      4.32
+       INA240A1D.A                 D            SOIC         8          75      507       8      3940      4.32
+        INA240A3D                  D            SOIC         8          75      507       8      3940      4.32
+       INA240A3D.A                 D            SOIC         8          75      507       8      3940      4.32
+
+
+
+
+                                                       Pack Materials-Page 3
+                                                                                                                  PACKAGE OUTLINE
+D0008A                                                           SCALE 2.800
+                                                                                                          SOIC - 1.75 mm max height
+                                                                                                              SMALL OUTLINE INTEGRATED CIRCUIT
+
+
+
+                                                                                                                                        C
+
+                                                                                                                     SEATING PLANE
+                                      .228-.244 TYP
+                                      [5.80-6.19]
+                                                                                                                             .004 [0.1] C
+         A                                    PIN 1 ID AREA
+                                                                                           6X .050
+                                                                                              [1.27]
+                                                                               8
+                   1
+
+
+
+
+     .189-.197                                                                              2X
+     [4.81-5.00]                                                                          .150
+       NOTE 3                                                                             [3.81]
+
+
+                                                                                                               4X (0 -15 )
+
+                   4
+                                                                               5
+                                                                                           8X .012-.020
+                       B                .150-.157                                             [0.31-0.51]
+                                                                                                                                    .069 MAX
+                                        [3.81-3.98]                                       .010 [0.25]     C A B                      [1.75]
+                                          NOTE 4
+
+
+
+
+                                                                                            .005-.010 TYP
+                                                                                            [0.13-0.25]
+
+
+                                        4X (0 -15 )
+
+                       SEE DETAIL A
+                                                                                     .010
+                                                                                     [0.25]
+
+
+
+
+                                                                                                                                        .004-.010
+                                                                                   0 -8                                                 [0.11-0.25]
+                                                                                          .016-.050
+                                                                                          [0.41-1.27]                        DETAIL A
+                                                                                                            (.041)           TYPICAL
+                                                                                                            [1.04]
+
+                                                                                                                                     4214825/C 02/2019
+
+NOTES:
+
+1. Linear dimensions are in inches [millimeters]. Dimensions in parenthesis are for reference only. Controlling dimensions are in inches.
+   Dimensioning and tolerancing per ASME Y14.5M.
+2. This drawing is subject to change without notice.
+3. This dimension does not include mold flash, protrusions, or gate burrs. Mold flash, protrusions, or gate burrs shall not
+   exceed .006 [0.15] per side.
+4. This dimension does not include interlead flash.
+5. Reference JEDEC registration MS-012, variation AA.
+
+
+
+
+                                                                        www.ti.com
+                                                                              EXAMPLE BOARD LAYOUT
+D0008A                                                                                  SOIC - 1.75 mm max height
+                                                                                           SMALL OUTLINE INTEGRATED CIRCUIT
+
+
+
+
+                                8X (.061 )
+                                    [1.55]
+                                                               SYMM                        SEE
+                                                                                           DETAILS
+                                             1
+                                                                                       8
+
+                             8X (.024)
+                                 [0.6]                                                      SYMM
+
+
+
+                                                                                             (R.002 ) TYP
+                                                                                               [0.05]
+                                                                                       5
+                                             4
+                         6X (.050 )
+                             [1.27]
+                                                               (.213)
+                                                                [5.4]
+
+                                                   LAND PATTERN EXAMPLE
+                                                     EXPOSED METAL SHOWN
+                                                           SCALE:8X
+
+
+
+
+                                                 SOLDER MASK            SOLDER MASK
+                     METAL                                                                                  METAL UNDER
+                                                 OPENING                    OPENING                         SOLDER MASK
+
+
+           EXPOSED
+             METAL                                                      EXPOSED
+                                                                          METAL
+                                      .0028 MAX                                              .0028 MIN
+                                      [0.07]                                                 [0.07]
+                                      ALL AROUND                                             ALL AROUND
+
+                           NON SOLDER MASK                                                 SOLDER MASK
+                               DEFINED                                                       DEFINED
+
+
+                                                      SOLDER MASK DETAILS
+
+
+
+
+                                                                                                               4214825/C 02/2019
+
+NOTES: (continued)
+
+6. Publication IPC-7351 may have alternate designs.
+7. Solder mask tolerances between and around signal pads can vary based on board fabrication site.
+
+
+
+
+                                                                www.ti.com
+                                                                              EXAMPLE STENCIL DESIGN
+D0008A                                                                                   SOIC - 1.75 mm max height
+                                                                                            SMALL OUTLINE INTEGRATED CIRCUIT
+
+
+
+
+                                   8X (.061 )
+                                       [1.55]                       SYMM
+
+                                                 1
+                                                                                             8
+
+                                 8X (.024)
+                                     [0.6]                                                       SYMM
+
+
+
+
+                                                                                                   (R.002 ) TYP
+                                                                                             5       [0.05]
+                                                 4
+                             6X (.050 )
+                                 [1.27]
+                                                                    (.213)
+                                                                     [5.4]
+
+
+                                                       SOLDER PASTE EXAMPLE
+                                                BASED ON .005 INCH [0.125 MM] THICK STENCIL
+                                                                 SCALE:8X
+
+
+
+
+                                                                                                                  4214825/C 02/2019
+
+NOTES: (continued)
+
+8. Laser cutting apertures with trapezoidal walls and rounded corners may offer better paste release. IPC-7525 may have alternate
+   design recommendations.
+9. Board assembly site may have different recommendations for stencil design.
+
+
+
+
+                                                                 www.ti.com
+                                                                                                            PACKAGE OUTLINE
+PW0008A                                                         SCALE 2.800
+                                                                                                      TSSOP - 1.2 mm max height
+                                                                                                                    SMALL OUTLINE PACKAGE
+
+
+
+
+                                                                                                                             C
+                                        6.6                                                                SEATING PLANE
+                                            TYP
+                                        6.2
+
+           A                                  PIN 1 ID                                                                0.1 C
+                                              AREA
+                                                                                           6X 0.65
+                                                                                8
+                  1
+
+          3.1                                                                           2X
+          2.9
+         NOTE 3                                                                        1.95
+
+                  4
+                                                                                5
+                                                                                           0.30
+                                                                                      8X
+                                                                                           0.19
+                                          4.5                                                                              1.2 MAX
+                      B                                                                     0.1      C A    B
+                                          4.3
+                                        NOTE 4
+
+
+
+
+                                                                                      (0.15) TYP
+                                    SEE DETAIL A
+
+
+
+
+                                                                                      0.25
+                                                                               GAGE PLANE
+
+
+
+
+                                                                                                                   0.75                   0.15
+                                                                                    0 -8                                                  0.05
+                                                                                                                   0.50
+
+                                                                                                                  DETAIL A
+                                                                                                                   TYPICAL
+
+
+                                                                                                                                 4221848/A 02/2015
+
+NOTES:
+
+1. All linear dimensions are in millimeters. Any dimensions in parenthesis are for reference only. Dimensioning and tolerancing
+   per ASME Y14.5M.
+2. This drawing is subject to change without notice.
+3. This dimension does not include mold flash, protrusions, or gate burrs. Mold flash, protrusions, or gate burrs shall not
+   exceed 0.15 mm per side.
+4. This dimension does not include interlead flash. Interlead flash shall not exceed 0.25 mm per side.
+5. Reference JEDEC registration MO-153, variation AA.
+
+
+
+
+                                                                              www.ti.com
+                                                                                EXAMPLE BOARD LAYOUT
+PW0008A                                                                                 TSSOP - 1.2 mm max height
+                                                                                                        SMALL OUTLINE PACKAGE
+
+
+
+
+                                             8X (1.5)
+                        8X (0.45)                                SYMM
+                                                                                                     (R0.05)
+                                         1                                                           TYP
+                                                                                                8
+
+                                                                                                     SYMM
+
+
+                            6X (0.65)
+                                                                                                5
+                                         4
+
+
+                                                                  (5.8)
+
+
+                                                        LAND PATTERN EXAMPLE
+                                                              SCALE:10X
+
+
+
+
+                SOLDER MASK                                               METAL UNDER                   SOLDER MASK
+                                                  METAL                                                 OPENING
+                OPENING                                                   SOLDER MASK
+
+
+
+
+                                        0.05 MAX                                            0.05 MIN
+                                        ALL AROUND                                          ALL AROUND
+
+                             NON SOLDER MASK                                            SOLDER MASK
+                                 DEFINED                                                  DEFINED
+
+                                                        SOLDER MASK DETAILS
+                                                             NOT TO SCALE
+
+
+
+
+                                                                                                               4221848/A 02/2015
+NOTES: (continued)
+
+6. Publication IPC-7351 may have alternate designs.
+7. Solder mask tolerances between and around signal pads can vary based on board fabrication site.
+
+
+
+
+                                                                www.ti.com
+                                                                               EXAMPLE STENCIL DESIGN
+PW0008A                                                                                 TSSOP - 1.2 mm max height
+                                                                                                         SMALL OUTLINE PACKAGE
+
+
+
+
+                                           8X (1.5)
+                                                                 SYMM                                (R0.05) TYP
+                         8X (0.45)
+                                       1
+                                                                                                 8
+
+                                                                                                     SYMM
+
+
+                           6X (0.65)
+                                                                                                 5
+                                       4
+
+                                                                  (5.8)
+
+
+
+                                                      SOLDER PASTE EXAMPLE
+                                                  BASED ON 0.125 mm THICK STENCIL
+                                                             SCALE:10X
+
+
+
+
+                                                                                                                   4221848/A 02/2015
+NOTES: (continued)
+
+8. Laser cutting apertures with trapezoidal walls and rounded corners may offer better paste release. IPC-7525 may have alternate
+   design recommendations.
+9. Board assembly site may have different recommendations for stencil design.
+
+
+
+
+                                                                 www.ti.com
+                                         IMPORTANT NOTICE AND DISCLAIMER
+TI PROVIDES TECHNICAL AND RELIABILITY DATA (INCLUDING DATASHEETS), DESIGN RESOURCES (INCLUDING REFERENCE
+DESIGNS), APPLICATION OR OTHER DESIGN ADVICE, WEB TOOLS, SAFETY INFORMATION, AND OTHER RESOURCES “AS IS”
+AND WITH ALL FAULTS, AND DISCLAIMS ALL WARRANTIES, EXPRESS AND IMPLIED, INCLUDING WITHOUT LIMITATION ANY
+IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT OF THIRD
+PARTY INTELLECTUAL PROPERTY RIGHTS.
+These resources are intended for skilled developers designing with TI products. You are solely responsible for (1) selecting the appropriate
+TI products for your application, (2) designing, validating and testing your application, and (3) ensuring your application meets applicable
+standards, and any other safety, security, regulatory or other requirements.
+These resources are subject to change without notice. TI grants you permission to use these resources only for development of an
+application that uses the TI products described in the resource. Other reproduction and display of these resources is prohibited. No license
+is granted to any other TI intellectual property right or to any third party intellectual property right. TI disclaims responsibility for, and you fully
+indemnify TI and its representatives against any claims, damages, costs, losses, and liabilities arising out of your use of these resources.
+TI’s products are provided subject to TI’s Terms of Sale, TI’s General Quality Guidelines, or other applicable terms available either on
+ti.com or provided in conjunction with such TI products. TI’s provision of these resources does not expand or otherwise alter TI’s applicable
+warranties or warranty disclaimers for TI products. Unless TI explicitly designates a product as custom or customer-specified, TI products
+are standard, catalog, general purpose devices.
+TI objects to and rejects any additional or different terms you may propose.
+IMPORTANT NOTICE
+
+                                                Copyright © 2026, Texas Instruments Incorporated
+                                                                Last updated 10/2025
+

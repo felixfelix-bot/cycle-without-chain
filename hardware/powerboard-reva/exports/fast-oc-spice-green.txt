@@ -1,0 +1,9 @@
+test_all_six_inputs_both_polarities_latch_despite_stuck_mcu (test_fast_oc_spice.FastOCSpice.test_all_six_inputs_both_polarities_latch_despite_stuck_mcu) ... ok
+test_inside_provisional_window_does_not_trip (test_fast_oc_spice.FastOCSpice.test_inside_provisional_window_does_not_trip) ... ok
+test_model_explicitly_excludes_short_pulse_and_vendor_qualification (test_fast_oc_spice.FastOCSpice.test_model_explicitly_excludes_short_pulse_and_vendor_qualification) ... ok
+test_resolved_one_microsecond_pulse_latches_in_ideal_model_only (test_fast_oc_spice.FastOCSpice.test_resolved_one_microsecond_pulse_latches_in_ideal_model_only) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 52.634s
+
+OK

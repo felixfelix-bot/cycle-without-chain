@@ -1,0 +1,33 @@
+signal,gpio,lqfp100_pin,function,af,source,constraint
+GEN_U_L,PE8,39,TIM1_CH1N,2,DS12288r5 T12 pp62; T13 p77,6PWM candidate
+GEN_U_H,PE9,40,TIM1_CH1,2,DS12288r5 T12 pp62; T13 p77,6PWM candidate
+GEN_V_L,PE10,41,TIM1_CH2N,2,DS12288r5 T12 pp62; T13 p77,6PWM candidate
+GEN_V_H,PE11,42,TIM1_CH2,2,DS12288r5 T12 pp62; T13 p77,6PWM candidate
+GEN_W_L,PE12,43,TIM1_CH3N,2,DS12288r5 T12 pp62; T13 p77,6PWM candidate
+GEN_W_H,PE13,44,TIM1_CH3,2,DS12288r5 T12 pp62; T13 p77,6PWM candidate
+HUB_U_H,PC6,65,TIM8_CH1,4,DS12288r5 T12 pp60-65; T13 pp73-75,6PWM candidate
+HUB_V_H,PC7,66,TIM8_CH2,4,DS12288r5 T12 pp60-65; T13 pp73-75,6PWM candidate
+HUB_W_H,PC8,67,TIM8_CH3,4,DS12288r5 T12 pp60-65; T13 pp73-75,6PWM candidate
+HUB_U_L,PA7,29,TIM8_CH1N,4,DS12288r5 T12 pp60-65; T13 pp73-75,6PWM candidate
+HUB_V_L,PB0,32,TIM8_CH2N,4,DS12288r5 T12 pp60-65; T13 pp73-75,6PWM candidate
+HUB_W_L,PB1,33,TIM8_CH3N,4,DS12288r5 T12 pp60-65; T13 pp73-75,6PWM candidate
+GEN_IU,PA0,20,ADC1_IN1,analog,DS12288r5 T12 pp59-60,Three sequential injected ranks per bridge; not simultaneous phase samples
+GEN_IV,PA1,21,ADC1_IN2,analog,DS12288r5 T12 pp59-60,Three sequential injected ranks per bridge; not simultaneous phase samples
+GEN_IW,PA2,22,ADC1_IN3,analog,DS12288r5 T12 pp59-60,Three sequential injected ranks per bridge; not simultaneous phase samples
+HUB_IU,PC0,15,ADC2_IN6,analog,DS12288r5 T12 pp59-60,Three sequential injected ranks per bridge; not simultaneous phase samples
+HUB_IV,PC1,16,ADC2_IN7,analog,DS12288r5 T12 pp59-60,Three sequential injected ranks per bridge; not simultaneous phase samples
+HUB_IW,PC2,17,ADC2_IN8,analog,DS12288r5 T12 pp59-60,Three sequential injected ranks per bridge; not simultaneous phase samples
+FAULT_TO_TIM1,PE15,46,TIM1_BKIN,2,DS12288r5 T12 p63; T13 p77,Hardware fault fanout also gates driver ENABLE
+FAULT_TO_TIM8,PD2,84,TIM8_BKIN,4,DS12288r5 T12 p69; T13 p76,Same hardware fault net
+DRV_SCK,PA5,27,SPI1_SCK,5,DS12288r5 T12 pp60/70; T13 pp73-74,Shared driver register SPI; not control-loop critical
+DRV_MISO,PA6,28,SPI1_MISO,5,DS12288r5 T12 pp60/70; T13 pp73-74,Shared driver register SPI; not control-loop critical
+DRV_MOSI,PB5,92,SPI1_MOSI,5,DS12288r5 T12 pp60/70; T13 pp73-74,Shared driver register SPI; not control-loop critical
+GEN_CS_N,PD15,62,GPIO,none,DS12288r5 T12 pp63-64,External pull/default required
+HUB_CS_N,PE14,45,GPIO,none,DS12288r5 T12 pp63-64,External pull/default required
+BRAKE_SENSE,PD14,61,GPIO,none,DS12288r5 T12 pp63-64,External pull/default required
+GEN_HALL_1,PD8,55,GPIO/EXTI8,none,DS12288r5 T12 p64,Edge timestamps; separate from PWM cadence
+GEN_HALL_2,PD9,56,GPIO/EXTI9,none,DS12288r5 T12 p64,Edge timestamps; separate from PWM cadence
+GEN_HALL_3,PD10,57,GPIO/EXTI10,none,DS12288r5 T12 p64,Edge timestamps; separate from PWM cadence
+HUB_HALL_1,PD11,58,GPIO/EXTI11,none,DS12288r5 T12 p64,Edge timestamps; separate from PWM cadence
+HUB_HALL_2,PD12,59,GPIO/EXTI12,none,DS12288r5 T12 p64,Edge timestamps; separate from PWM cadence
+HUB_HALL_3,PD13,60,GPIO/EXTI13,none,DS12288r5 T12 p64,Edge timestamps; separate from PWM cadence
